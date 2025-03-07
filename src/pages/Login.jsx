@@ -152,7 +152,7 @@ const Login = () => {
                     <div className="col d-flex justify-content-center">
                       <Button
                         type="submit"
-                        className="btn w-100 fw-bold sign-in-btn"
+                        className="btn-primary w-100 fw-bold sign-in-btn"
                         label="Login"
                       />
                     </div>

@@ -227,7 +227,7 @@ export default function EntertainerDetails() {
                           Entertainer Name:
                         </p>
                         <p className="profile-font fw-semibold mb-0">
-                          Performance Role:
+                          Category:
                         </p>
                         <p className="profile-font fw-semibold">
                           Pricing(per hour):
@@ -236,10 +236,10 @@ export default function EntertainerDetails() {
                       <div className="col-md-3">
                         <p className="profile-font mb-0">{entertainer.name}</p>
                         <p className="profile-font mb-0">
-                          {entertainer.performanceRole}
+                          Rs.{entertainer.category}
                         </p>
                         <p className="profile-font">
-                          Rs.{entertainer.pricePerEvent}
+                          {entertainer.pricePerEvent}
                         </p>
                       </div>
                     </div>

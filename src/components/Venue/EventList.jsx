@@ -60,7 +60,7 @@ export default function EventList() {
         </div>
         <div className="div">
           <Button
-            className="btn venue-btn profile-font"
+            className="btn venue-btn btn-sm profile-font"
             label="Add Events"
             onClick={handleClick}
           />

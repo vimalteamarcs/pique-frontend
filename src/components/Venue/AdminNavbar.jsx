@@ -138,7 +138,7 @@ export default function AdminNavbar() {
               <img
                 src={`${
                   import.meta.env.VITE_BASE
-                }assets/images/Icon ion-menu.svg`}
+                }assets/pique/image/Icon ion-menu.svg`}
                 alt="Menu"
               />
             </div>
@@ -198,7 +198,7 @@ export default function AdminNavbar() {
                     <img
                       src={`${
                         import.meta.env.VITE_BASE
-                      }assets/images/Icon ion-menu.svg`}
+                      }assets/pique/image/Icon ion-menu.svg`}
                       alt="Menu"
                     />
                   </div>

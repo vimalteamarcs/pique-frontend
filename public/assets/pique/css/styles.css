@@ -1332,10 +1332,14 @@ body {
 
 
 .custom-card-text{
-  font-size: 12px !important;
+  font-size: smaller;
   margin-top: 0%;
 }
-
+.card-rounded{
+  /* border-radius: 15px; */
+  /* width: 16em; */
+  border: none;
+}
 
 .container-fluid{
   width: 100%;
@@ -1393,8 +1397,8 @@ body {
 
 .modal-dialog {
   position: fixed;
-  top: 17%;
-  /* left: 25%; */
+  top: 7%;
+  left: 25%;
   transform: translate(-50%, -50%);
   width: 90%; 
   max-width: 600px; 
@@ -1590,56 +1594,56 @@ body {
   border: none;
 }
 
-/* .btn-nav-venue {
-  background-color: #FFD4C5;
-  border-radius: 25px;
-  font-size: small;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 5px 12px;
-} */
+.btn-nav-venue {
+  background-color: #FFD4C5 !important;
+  border-radius: 25px !important;
+  font-size: small !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 5px 12px !important;
+}
 
-/* .btn-nav-venue:hover,
+.btn-nav-venue:hover,
 .btn-nav-venue:focus,
 .btn-nav-venue:active {
   background-color: #FFD4C5 !important;
   color: inherit !important;
   border: none !important;
   box-shadow: none !important;
-} */
+}
 
-/* .btn-nav-venue::after {
+.btn-nav-venue::after {
   display: none !important;
-} */
+}
 
-/* .nav-bars {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background: #EAB4A1;
-  padding: 5px;
-} */
+.nav-bars {
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50% !important;
+  background: #EAB4A1 !important;
+  padding: 5px !important;
+}
 
 .menu-icon {
-  width: 15px;
-  height: 15px;
-  object-fit: contain;
+  width: 15px !important;
+  height: 15px !important;
+  object-fit: contain !important;
 }
 
 .custom-drop-menu {
-  background-color: white;
-  border-radius: 10px;
-  border: none;
-  padding: 6px;
+  background-color: white !important;
+  border-radius: 10px !important;
+  border: none !important;
+  padding: 4px !important;
 }
 
 .custom-drop-item {
-  padding: 15px !important ;
+  padding: 12px !important;
   font-size: 12px !important;
 }
 
@@ -1670,9 +1674,9 @@ body {
 }
 
 .venue-btn{
-  background-color:  #ff6600 !important;
-  color: white !important;
-  border-radius: 9px !important;
+  background-color:  #ff6600;
+  color: white;
+  border-radius: 9px;
 }
 
 .venue-btn:hover{
@@ -1972,14 +1976,14 @@ body {
 }
 
 .btn-nav-venue {
-  background-color: #FFD4C5 !important;
-  border-radius: 25px !important;
-  font-size: small !important;
-  cursor: pointer !important;
-  display: flex !important;
-  align-items: center !important;
-  gap: 4px !important;
-  padding: 5px 12px !important;
+  background-color: #FFD4C5;
+  border-radius: 25px;
+  font-size: small;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 5px 12px;
 }
 
 .btn-nav-venue:hover,
@@ -2164,7 +2168,7 @@ body {
 .card-rounded {
   /* border-radius: 15px; */
   /* width: 16em; */
-  border: none !important;
+  border: none;
 }
 
 .card-img {
@@ -2239,10 +2243,10 @@ body {
 }
 
 .custom-drop-menu {
-  background-color: white !important;
-  border-radius: 10px !important;
-  border: none !important;
-  padding: 6px !important;
+  background-color: white;
+  border-radius: 10px;
+  border: none;
+  padding: 6px;
 }
 
 /* Individual dropdown items */
@@ -2788,7 +2792,7 @@ body {
 .event-modal{
   position: fixed;
   top: 45%;
-  left: 20%;
+  left: 50%;
   transform: translate(-50%, -50%);
   width: 90%; 
   max-width: 600px; 

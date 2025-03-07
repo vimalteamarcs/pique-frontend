@@ -26,16 +26,7 @@ const EntertainerCard = ({ entertainer }) => {
   
     <div className="col-lg-3 col-md-4 col-sm-6 col-12 mb-4">
       <div className="card card-rounded mb-3 rounded-4 overflow-hidden" onClick={handleCardClick} style={{ cursor: "pointer" }}>
-        <button className="favorite-btn position-absolute top-1 me-3 end-0 m-2 border-0 bg-transparent" onClick={toggleFavorite} style={{
-            zIndex: 10, // Ensures button stays above other elements
-            backgroundColor: "rgba(0, 0, 0, 0.4)", // Slight background for visibility
-            borderRadius: "50%",
-            width: "35px",
-            height: "35px",
-            display: "flex",
-            alignItems: "center",
-            justifyContent: "center",
-          }}>
+        <button className="favorite-btn position-absolute top-1 me-3 end-0 m-2 border-0 bg-transparent" onClick={toggleFavorite}>
           <i className={`bi ${isFavorited ? "bi-heart-fill text-danger" : "bi-heart text-light"}`} style={{ fontSize: "1.2rem" }}></i>
         </button>
         <img

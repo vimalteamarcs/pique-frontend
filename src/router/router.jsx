@@ -58,12 +58,12 @@ import Login from "../pages/Login";
 import AllInvoices from "../Admin/Sidebarpages/invoice/AllInvoices";
 import Viewinvoice from "../Admin/Sidebarpages/invoice/Viewinvoice";
 import ReportPage from "../Admin/Sidebarpages/Report/ReportPage";
-import AddLocation from "../pages/Venue/AddLocation";
-import ContactPerson from "../../../../../pique-project/pique-project/src/pages/Venue/ContactPerson";
-import WishlistPage from "../../../../../pique-project/pique-project/src/pages/Venue/WishlistPage";
-import Events from "../../../../../pique-project/pique-project/src/pages/Venue/Events";
+import ContactPerson from "../pages/Venue/ContactPerson";
+import WishlistPage from "../pages/Venue/WishlistPage";
+import Events from "../pages/Venue/Events";
 import VenueList from "../pages/Venue/VenueList";
-import AddEvents from "../../../../../pique-project/pique-project/src/pages/Venue/AddEvents";
+import AddLocation from "../pages/Venue/AddLocation";
+import AddEvents from "../pages/Venue/AddEvents";
 const basename = import.meta.env.VITE_BASE || "/P/";
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -97,6 +97,7 @@ const router = createBrowserRouter(
         <Route path='/venue/wishlist' element={<WishlistPage/>}/>
         <Route path='/venue/events' element={<Events/>}/>
         <Route path='/venue/locations' element={<VenueList/>}/>
+        <Route path="/venue/addlocation" element={<AddLocation/>}/>
         <Route path='/venue/addevents' element={<AddEvents/>}/>
       </Route>
 

@@ -47,7 +47,7 @@ export default function UpdateBookingModal({ booking, onClose, refreshBookings }
     <>
 
     <div className="modal fade show d-block" tabIndex="-1" role="dialog">
-      <div className="modal-dialog booking-modal" role="document">
+      <div className="modal-dialog" role="document">
         <div className="modal-content p-1">
           <div className="modal-header">
             <h6 className="modal-title">Update Show Date & Time</h6>

@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="33" height="32" viewBox="0 0 33 32">
+  <g id="Group_11071" data-name="Group 11071" transform="translate(-173.955 -0.414)">
+    <rect id="Rectangle_4403" data-name="Rectangle 4403" width="33" height="32" rx="5" transform="translate(173.955 0.414)" fill="rgba(246,205,98,0.28)"/>
+    <path id="Icon_fa-regular-calendar-check" data-name="Icon fa-regular-calendar-check" d="M4.5,0a.842.842,0,0,1,.844.844V2.25h5.063V.844a.844.844,0,0,1,1.688,0V2.25H13.5A2.252,2.252,0,0,1,15.75,4.5V15.75A2.252,2.252,0,0,1,13.5,18H2.25A2.252,2.252,0,0,1,0,15.75V4.5A2.252,2.252,0,0,1,2.25,2.25H3.656V.844A.842.842,0,0,1,4.5,0Zm9.563,6.75H1.688v9a.564.564,0,0,0,.563.563H13.5a.564.564,0,0,0,.563-.562Zm-2.5,3.691L7.629,14.379a.84.84,0,0,1-1.192,0l-2.25-2.25a.843.843,0,0,1,1.192-1.192l1.652,1.652,3.34-3.34a.843.843,0,1,1,1.192,1.192Z" transform="translate(182.581 7.414)" fill="#f6cd62"/>
+  </g>
+</svg>
