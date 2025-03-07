@@ -263,7 +263,7 @@ export default function AllUserCopy() {
           <button
             className="btn btn-primary float-end gap-2"
             onClick={() => {
-              navigate("/adduser");
+              navigate("/admin/adduser");
             }}
           >
             <i className="bi bi-plus"></i> Add User
