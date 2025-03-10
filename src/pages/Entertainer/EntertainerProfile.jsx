@@ -15,7 +15,9 @@ import EnterProfileContainer from "../../components/Entertainer/EnterProfileCont
 export default function Profile() {
   const token = localStorage.getItem("token");
   const userId = localStorage.getItem("userId");
-
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+  const [countries, setCountries] = useState([]);
   const [formData, setFormData] = useState({
     name: "",
     category: null,
@@ -33,6 +35,9 @@ export default function Profile() {
     image: [],
     video: [],
     headshot: null,
+    country: 0,
+    state: 0,
+    city: 0
   });
   const [categories, setCategories] = useState([]);
   const [subcategories, setSubcategories] = useState([]);
@@ -160,62 +165,18 @@ export default function Profile() {
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
+    if (name === "country") {
+      setStates([]);
+      setCities([]);
+      fetchStates(value);
+    }
+
+    if (name === "state") {
+      setCities([]);
+      fetchCities(value);
+    }
     setTempLink(value);
   };
-
-  //   const handleCategoryChange = async (selectedValue) => {
-  //     console.log("handleCategoryChange triggered"); // Check if function is being called
-  //     console.log("Selected Category ID:", selectedValue);
-
-  //   setFormData((prev) => ({
-  //     ...prev,
-  //     category: selectedValue,
-  //     specific_category: "",
-  //   }));
-
-  //   try {
-  //     const response = await axios.get(
-  //       `${import.meta.env.VITE_API_URL}entertainers/categories/subcategories?id=${selectedValue}`,
-  //       {
-  //         headers: {
-  //           Authorization: `Bearer ${token}`,
-  //         },
-  //       }
-  //     );
-
-  //     console.log("Categories from API:", response.data.categories);
-
-  //     if (response.data && Array.isArray(response.data.categories)) {
-  //       const filteredSubcategories = response.data.categories.filter(
-  //         (sub) => sub.parentId === Number(selectedValue)
-  //       );
-
-  //       console.log("Filtered Subcategories:", filteredSubcategories);
-
-  //       setSubcategories(
-  //         filteredSubcategories.map((sub) => ({
-  //           value: sub.id,
-  //           label: sub.name,
-  //         }))
-  //       );
-  //     // if (response.data && response.data.categories && Array.isArray(response.data.categories)) {
-  //     //   setSubcategories(
-  //     //     response.data.categories.map((sub) => ({
-  //     //       value: sub.id,
-  //     //       label: sub.name,
-  //     //     }))
-  //     //   );
-  //     } else {
-  //       console.error("No subcategory found:", response.data);
-  //       setSubcategories([]);
-  //       toast.error("No subcategories found for the selected category");
-  //     }
-  //   } catch (error) {
-  //     console.error("Error fetching subcategories:", error);
-  //     setSubcategories([]);
-  //     toast.error("Failed to fetch subcategories.");
-  //   }
-  // };
 
   const handleCategoryChange = async (selectedValue) => {
     console.log("handleCategoryChange triggered:", selectedValue);
@@ -259,27 +220,6 @@ export default function Profile() {
       ...prev,
       specific_category: selectedValue,
     }));
-  };
-
-  const handleDeleteImage = (index) => {
-    setImage((prev) => {
-      const updatedImages = prev.filter((_, i) => i !== index);
-      setFormData((prevData) => ({ ...prevData, image: updatedImages }));
-      return updatedImages;
-    });
-  };
-
-  const handleDeleteVideo = (index) => {
-    setVideo((prev) => {
-      const updatedVideos = prev.filter((_, i) => i !== index);
-      setFormData((prevData) => ({ ...prevData, video: updatedVideos }));
-      return updatedVideos;
-    });
-  };
-
-  const handleDeleteHeadshot = () => {
-    setHeadshot(null);
-    setFormData((prevData) => ({ ...prevData, headshot: "" }));
   };
 
   const fetchMedia = async () => {
@@ -364,116 +304,6 @@ export default function Profile() {
 
     return newErrors;
   };
-
-  // const mediaUpload = async (e) => {
-  //   e.preventDefault();
-  //   const token = localStorage.getItem("token");
-  
-  //   try {
-  //     if (!headshot && image.length === 0 && video.length === 0) {
-  //       toast.error("Please select media to upload.");
-  //       return;
-  //     }
-  
-  //     setUploading(true); 
-  
-  //     let updatedHeadshotUrl = null; 
-  
-  //     if (media.length > 0) {
-  //       await Promise.all(
-  //         media.map(async (item) => {
-  //           if (
-  //             (item.type === "headshot" && !headshot) ||
-  //             (item.type === "image" && image.length === 0) ||
-  //             (item.type === "video" && video.length === 0)
-  //           ) {
-  //             return; 
-  //           }
-  
-  //           const updateFormData = new FormData();
-  //           if (item.type === "headshot" && headshot) {
-  //             updateFormData.append("headshot", headshot);
-  //           } else if (item.type === "image" && image.length > 0) {
-  //             image.forEach((img) => updateFormData.append("image", img)); 
-  //           } else if (item.type === "video" && video.length > 0) {
-  //             video.forEach((vid) => updateFormData.append("video", vid));
-  //           }
-  
-  //           try {
-  //             const updateResponse = await axios.put(
-  //               `${import.meta.env.VITE_API_URL}media/${item.id}`,
-  //               updateFormData,
-  //               {
-  //                 headers: {
-  //                   Authorization: `Bearer ${token}`,
-  //                 },
-  //               }
-  //             );
-  
-  //             if (item.type === "headshot") {
-  //               updatedHeadshotUrl = updateResponse.data.headshotUrl;
-  //             }
-  //           } catch (err) {
-  //             console.error(`Failed to update ${item.type}:`, err.response?.data || err);
-  //             toast.error(`Failed to update ${item.type}.`);
-  //           }
-  //         })
-  //       );
-  
-  //       toast.success("Media updated successfully!");
-  //     }
-  
-  //     if (headshot || image.length > 0 || video.length > 0) {
-  //       const mediaFormData = new FormData();
-  //       if (headshot) mediaFormData.append("headshot", headshot);
-  //       image.forEach((img) => mediaFormData.append("image", img));
-  //       video.forEach((vid) => mediaFormData.append("video", vid));
-  
-  //       try {
-  //         const mediaUploadResponse = await axios.post(
-  //           `${import.meta.env.VITE_API_URL}media/uploads`,
-  //           mediaFormData,
-  //           {
-  //             headers: {
-  //               Authorization: `Bearer ${token}`,
-  //             },
-  //           }
-  //         );
-  
-  //         if (mediaUploadResponse.status === 201) {
-  //           const { headshotUrl, imagesUrls, videosUrls } = mediaUploadResponse.data;
-  //           updatedHeadshotUrl = headshotUrl;
-  
-  //           setFormData((prev) => ({
-  //             ...prev,
-  //             headshot: headshotUrl || prev.headshot,
-  //             image: imagesUrls || prev.image,
-  //             video: videosUrls || prev.video,
-  //           }));
-  
-  //           toast.success("Media uploaded successfully!");
-  //         }
-  //       } catch (error) {
-  //         console.error("Error uploading new media:", error.response?.data || error);
-  //         toast.error(error.response?.data?.message || "Failed to upload media.");
-  //       }
-  //     }
-  
-  //     await fetchMedia(); 
-  
-  //     if (updatedHeadshotUrl) {
-  //       setFormData((prev) => ({
-  //         ...prev,
-  //         headshot: updatedHeadshotUrl,
-  //       }));
-  //     }
-  //   } catch (error) {
-  //     console.error("Error in mediaUpload:", error.response?.data || error);
-  //     toast.error(error.response?.data?.message || "Failed to process media.");
-  //   } finally {
-  //     setUploading(false); 
-  //   }
-  // };
   
   const mediaUpload = async (e) => {
     e.preventDefault();
@@ -581,21 +411,75 @@ export default function Profile() {
       setUploading(false);
     }
   };
-  
-  
-  
-  
-  
 
+  useEffect(() => {
+    fetchCountries();
+  }, []);
+
+  const fetchCountries = async () => {
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}location/countries`
+      );
+
+      console.log("API Response:", response.data); // Debugging line
+
+      if (Array.isArray(response.data)) {
+        setCountries(response.data.map((c) => ({ label: c.name, value: c.id })));
+      } else if (response.data && Array.isArray(response.data.countries)) {
+        // If the data is wrapped in an object
+        setCountries(response.data.countries.map((c) => ({ label: c.name, value: c.id })));
+      } else {
+        console.error("Unexpected API response format:", response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching countries:", error);
+    }
+  };
+
+  const fetchStates = async (countryId) => {
+    if (!countryId) return;
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}location/states?countryId=${countryId}`
+      );
+      console.log("States API Response:", response.data);
+
+      if (Array.isArray(response.data)) {
+        setStates(response.data.map((s) => ({ label: s.name, value: s.id })));
+      } else if (response.data && Array.isArray(response.data.states)) {
+        setStates(response.data.states.map((s) => ({ label: s.name, value: s.id })));
+      } else {
+        console.error("Unexpected API response format for states:", response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching states:", error);
+    }
+  };
+
+  const fetchCities = async (stateId) => {
+    if (!stateId) return;
+    try {
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}location/cities?stateId=${stateId}`
+      );
+      console.log("Cities API Response:", response.data);
+
+      if (Array.isArray(response.data)) {
+        setCities(response.data.map((c) => ({ label: c.name, value: c.id })));
+      } else if (response.data && Array.isArray(response.data.cities)) {
+        setCities(response.data.cities.map((c) => ({ label: c.name, value: c.id })));
+      } else {
+        console.error("Unexpected API response format for cities:", response.data);
+      }
+    } catch (error) {
+      console.error("Error fetching cities:", error);
+    }
+  };
+ 
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("data", formData);
-
-    // const validationErrors = validateForm();
-    // if (Object.keys(validationErrors).length > 0) {
-    //   setErrors(validationErrors);
-    //   return;
-    // }
 
     const userData = {};
     const entertainerData = {
@@ -610,6 +494,9 @@ export default function Profile() {
       vaccinated: formData.vaccinated,
       pricePerEvent: Number(formData.pricePerEvent) || null,
       socialLinks: formData.socialLinks,
+      country: formData.country,
+      state: formData.state,
+      city: formData.city,
       status: localStorage.getItem("status"),
     };
 
@@ -676,6 +563,9 @@ export default function Profile() {
                 headshot={headshot}
                 setHeadshot={setHeadshot} 
                 categories={categories}
+                countries={countries}
+                states={states}
+                cities={cities}
                 subcategories={subcategories}
                 performanceRole={performanceRole}
                 options={options}

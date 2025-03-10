@@ -53,20 +53,21 @@ export default function AdminSideBar() {
             <i className="fa-solid fa-users me-2 mt-2"></i>Manage User
           </NavLink>
           {/* user */}
-          <NavLink className={`nav-link  dropdown `}>
-            <div
-              className=" dropdown-toggle "
+          <div className={`  dropdown `}>
+            <button
+              className=" nav-link dropdown-toggle "
               id="settingsDropdown1"
               role="button"
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
               <i className="fa-solid fa-users me-2"></i> User
-            </div>
+            </button>
             <ul
               className="dropdown-menu px-5"
               aria-labelledby="settingsDropdown1"
             >
+              <li>
               <NavLink
                 to="/admin/allusercopy?role=venue"
                 className={({ isActive }) =>
@@ -77,7 +78,8 @@ export default function AdminSideBar() {
               >
                 <i className="fa-solid fa-lock me-2"></i>Venue
               </NavLink>
-
+              </li>
+              <li>
               <NavLink
                 to="/admin/allusercopy?role=entertainer"
                 className={({ isActive }) =>
@@ -88,8 +90,9 @@ export default function AdminSideBar() {
               >
                 <i className="fa-solid fa-user-shield me-2"></i>Entertainer
               </NavLink>
+              </li>
             </ul>
-          </NavLink>
+          </div>
 
 
           <NavLink
@@ -132,7 +135,7 @@ export default function AdminSideBar() {
           </NavLink>
 
           {/* setting */}
-          <NavLink
+          {/* <NavLink
             className={({ isActive }) =>
               `nav-link  dropdown ${isActive ? " fw-bold " : ""}`
             }
@@ -180,7 +183,43 @@ export default function AdminSideBar() {
                 </NavLink>
               </li>
             </ul>
-          </NavLink>
+          </NavLink> */}
+
+          {/* Settings Dropdown - Fixed */}
+<div className="dropdown">
+  <button
+    className="nav-link dropdown-toggle"
+    id="settingsDropdown"
+    role="button"
+    data-bs-toggle="dropdown"
+    aria-expanded="false"
+  >
+    <i className="fa-solid fa-cog me-2"></i>Settings
+  </button>
+  <ul className="dropdown-menu" aria-labelledby="settingsDropdown">
+    <li>
+      <NavLink to="/admin/manageisallowed" className="dropdown-item">
+        <i className="fa-solid fa-lock me-2"></i>Manage Allowed Countries
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to="/admin/createadminrole" className="dropdown-item">
+        <i className="fa-solid fa-user-shield me-2"></i>Add Role
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to="/admin/createadminuser" className="dropdown-item">
+        <i className="fa-solid fa-user-plus me-2"></i>Add User
+      </NavLink>
+    </li>
+    <li>
+      <NavLink to="/admin/createcategory" className="dropdown-item">
+        <i className="fa-solid fa-plus me-2"></i>Create Category
+      </NavLink>
+    </li>
+  </ul>
+</div>
+
         </div>
       </nav>
     </div>

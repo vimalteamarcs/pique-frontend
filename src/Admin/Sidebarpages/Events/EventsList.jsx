@@ -61,14 +61,20 @@ const EventsList = () => {
     navigate("/admin/editevent", { state: record });
   };
   const deleteEvent = async (id) => {
+    const token = localStorage.getItem('token');
     try {
       const response = await axios.delete(
-        `${import.meta.env.VITE_API_URL}${DELETE_EVENT}${id}`
+        `${import.meta.env.VITE_API_URL}${DELETE_EVENT}${id}`,
+        {
+          headers: { Authorization: `Bearer ${token}` },
+        }
       );
       if (response.status === 200) {
         toast.success(`Event has been deleted successfully.`, {
           autoClose: 1000,
-        });
+        },
+      setFlag(!flag))
+        
       }
     } catch (error) {
       console.error(
@@ -80,7 +86,7 @@ const EventsList = () => {
   const handleDelete = async (record) => {
     console.log("Delete event:", record);
     deleteEvent(record.id);
-    setFlag(!flag);
+    
   };
 
   const handleView = (record) => {

@@ -147,7 +147,12 @@ const router = createBrowserRouter(
       <Route path="*" element={<PageNotFound />} />
     </>
   ),
-  { basename }
+  { basename,
+    future: {
+      v7_relativeSplatPath: true,
+      v7_startTransition: true, // ✅ Fixes the warning
+    },
+   }
 );
 
 export default router;

@@ -192,7 +192,7 @@ export default function VenueTable({
           <>
             <div className="modal-backdrop fade show"></div>
             <div className="modal fade show d-block" tabIndex="-1">
-              <div className="modal-dialog ">
+              <div className="modal-dialog event-modal">
                 <div className="modal-content pt-0 ps-2">
                   <div className="modal-header">
                     <p className="modal-title fw-semibold">Edit Details</p>

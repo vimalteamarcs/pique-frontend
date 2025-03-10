@@ -25,7 +25,12 @@ const ViewEventDetails = () => {
     const fetchEventDetails = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}${GET_EVENTBY_ID}${eventDta.id}`
+          `${import.meta.env.VITE_API_URL}${GET_EVENTBY_ID}${eventDta.id}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
         setEvent(response.data);
       } catch (err) {
@@ -38,7 +43,12 @@ const ViewEventDetails = () => {
         const response = await axios.get(
           `${import.meta.env.VITE_API_URL}${GETBOOKING_BYEVENT_ID}${
             eventDta.id
-          }`
+          }`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
         setBooking(response.data);
       } catch (err) {

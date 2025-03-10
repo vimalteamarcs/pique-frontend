@@ -21,6 +21,7 @@ export default function EntertainerDetails() {
   const [specialNotes, setSpecialNotes] = useState("");
   const [events, setEvents] = useState([]);
   const [selectedEvent, setSelectedEvent] = useState("");
+  
 
   useEffect(() => {
     const fetchEntertainerDetails = async () => {
@@ -227,7 +228,7 @@ export default function EntertainerDetails() {
                           Entertainer Name:
                         </p>
                         <p className="profile-font fw-semibold mb-0">
-                          Category:
+                          Performance Role:
                         </p>
                         <p className="profile-font fw-semibold">
                           Pricing(per hour):
@@ -236,10 +237,10 @@ export default function EntertainerDetails() {
                       <div className="col-md-3">
                         <p className="profile-font mb-0">{entertainer.name}</p>
                         <p className="profile-font mb-0">
-                          Rs.{entertainer.category}
+                          {entertainer.performanceRole}
                         </p>
                         <p className="profile-font">
-                          {entertainer.pricePerEvent}
+                          Rs. {entertainer.pricePerEvent}
                         </p>
                       </div>
                     </div>

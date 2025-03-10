@@ -51,7 +51,7 @@ export default function AllEntertainer() {
             },
           }
         );
-
+       console.log(response.data)
         setEntertainers(response.data.entertainers || []);
         setTotalCount(response.data.totalCount || 0);
       } catch (err) {

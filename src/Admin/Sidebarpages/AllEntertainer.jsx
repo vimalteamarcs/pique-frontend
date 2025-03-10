@@ -67,14 +67,22 @@ export default function AllEntertainer() {
   };
 
   const handleDelete = async (record) => {
-    console.log(`Delete entertainer with id: ${record.id}`);
+    console.log(`Delete entertainer with id: ${record.user.id}`);
+    const value = {
+      id: Number(record.user.id),
+      status: "inactive",
+    }
+    console.log("value to send", value)
     // Implement the delete logic here
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}${CHANGE_STATUS_ENT}`,
+        `${import.meta.env.VITE_API_URL}${CHANGE_STATUS_ENT}`, value,
+        // {
+        //   id: [Number(record.id)],
+        //   status: 'inactive',
+        // },
         {
-          id: record.id,
-          status: "inactive",
+          headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
         }
       );
 

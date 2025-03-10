@@ -89,7 +89,12 @@ const CreateEvent = () => {
 
     try {
       const response = await axios.get(
-        `${import.meta.env.VITE_API_URL}${SEARCH_EVENT}${query}`
+        `${import.meta.env.VITE_API_URL}${SEARCH_EVENT}${query}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       setVenueSuggestions(response.data); // Adjust response format if needed
     } catch (error) {
@@ -127,7 +132,11 @@ const CreateEvent = () => {
       // Call POST API with form data
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}${CREATE_EVENT}`,
-        formData
+        formData,{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
 
       if (response) {
@@ -152,15 +161,14 @@ const CreateEvent = () => {
   return (
     <DashLayout>
       <ToastContainer />
-      <div className={`container d-flex justify-content-end  `}>
-        <div className="modal-dialog">
-          <div className="modal-content p-3">
+      <div className={`container p-5  `}>
+
             <div>
               <button
                 onClick={() => navigate(-1)}
-                className="btn btn-primary d-flex justify-content-end float-end mb-4"
+                className="btn btn-primary d-flex justify-content-between float-start mb-4 btn-sm"
               >
-                <i className="fa fa-close"></i>
+                <i className="fa-solid fa-arrow-left"></i>
               </button>
               <h4 className="text-center mb-2">Create Event</h4>
 
@@ -169,8 +177,9 @@ const CreateEvent = () => {
               {error && <div className="alert alert-danger">{error}</div>}
 
               <form onSubmit={handleSubmit}>
+              <div className="row mb-3 w-100">
+
                 {venue ? (
-                  <div className="row mb-3 p-0 m-0">
                     <div className="col-12 col-md-6">
                       <label htmlFor="title" className="form-label">
                         Event Name
@@ -190,9 +199,8 @@ const CreateEvent = () => {
                         <div className="invalid-feedback">{errors.title}</div>
                       )}
                     </div>
-                  </div>
                 ) : (
-                  <div className="row mb-3">
+                  <>
                     <div className="col-12 col-md-6">
                       <label htmlFor="title" className="form-label">
                         Event Name
@@ -253,8 +261,9 @@ const CreateEvent = () => {
                         </ul>
                       )}
                     </div>
-                  </div>
+                    </>
                 )}
+                </div>
 
                 <div className="row mb-3">
                   <div className="col-12 col-md-6">
@@ -358,8 +367,7 @@ const CreateEvent = () => {
               </form>
             </div>
           </div>
-        </div>
-      </div>
+     
     </DashLayout>
   );
 };

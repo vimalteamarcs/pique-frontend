@@ -123,8 +123,8 @@ const Signup = () => {
             key={formData.role}
               src={
                 formData.role === "venue"
-                  ? "../../assets/pique/image/venueregister.png"
-                  : "../../assets/pique/image/entertainerRegister.png"
+                  ? "./../assets/pique/image/venueregister.png"
+                  : "./../assets/pique/image/entertainerRegister.png"
               }
               className="image-fluid"
               style={{width:"90%", height:"90%"}}
@@ -135,7 +135,7 @@ const Signup = () => {
           <div className="col-md-6 col-sm-12">
             <div className="row d-flex justify-content-center">
               <img
-                src="../../assets/pique/image/logo.png"
+                src="./../assets/pique/image/logo.png"
                 className="w-auto mt-3"
                 style={{ height: "40px" }}
               />

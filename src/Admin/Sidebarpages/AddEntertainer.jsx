@@ -287,8 +287,12 @@ export default function Profile() {
 
     const payload = {
       ...formData,
+      category:Number(formData.category),
+      specific_category: Number(formData.specific_category),
       pricePerEvent: Number(formData.pricePerEvent), // Ensure it's a number
     };
+
+    // console.log("entertainer details",payload)
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}${CREATE_ENTERTAINER}`,

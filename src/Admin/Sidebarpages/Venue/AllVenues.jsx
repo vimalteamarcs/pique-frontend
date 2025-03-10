@@ -76,7 +76,12 @@ export default function AllVenues() {
 
     try {
       const response = await axios.delete(
-        `${import.meta.env.VITE_API_URL}${DELETE_VENUE}${record.id}`
+        `${import.meta.env.VITE_API_URL}${DELETE_VENUE}${record.id}`,
+        {
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       console.log("Venue deleted successfully:", response.data);
       setSuccessMessage("Venue deleted successfully!");

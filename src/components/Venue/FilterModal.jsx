@@ -65,7 +65,7 @@ export default function FilterModal({
           aria-labelledby="exampleModalLabel"
           aria-hidden="true"
         >
-          <div className="modal-dialog ">
+          <div className="modal-dialog filter-modal">
             <div className="modal-content px-2">
               <div className="modal-header">
                 <h6 className="modal-title">Filters</h6>

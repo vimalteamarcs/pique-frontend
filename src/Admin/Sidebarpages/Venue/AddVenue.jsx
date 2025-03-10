@@ -20,7 +20,7 @@ export default function AddVenue() {
   const location = useLocation();
   const navigate = useNavigate();
   let data = location.state;
-  //console.log(data);
+  console.log(data);
 
   const [formData, setFormData] = useState({
     userId: data.id ? data.id : "",
@@ -40,7 +40,7 @@ export default function AddVenue() {
     websiteUrl: "",
     timings: "",
     bookingPolicies: "",
-    isParent: true,
+    // isParent: true,
   });
 
   useEffect(() => {
@@ -172,8 +172,10 @@ export default function AddVenue() {
 
     const token = localStorage.getItem("token");
 
-    const parentId = null;
-    const finaldata = { ...formData, parentId, userId: data.id };
+    // const parentId = null;
+    const finaldata = { ...formData, 
+      // parentId, 
+      userId: data.id };
     console.log("Final data:", finaldata, data.id);
     try {
       const response = await axios.post(
@@ -205,7 +207,7 @@ export default function AddVenue() {
         websiteUrl: "",
         timings: "",
         bookingPolicies: "",
-        isParent: true,
+        // isParent: true,
       });
       toast.success("Venue added successfully!", {
         autoClose: 1000, // Close after 1 second

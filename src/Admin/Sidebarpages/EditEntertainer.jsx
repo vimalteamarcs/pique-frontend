@@ -524,7 +524,7 @@ export default function EditEntertainer() {
     <>
       <DashLayout title="Profile" description="View and manage your profile">
         <div className="container-fluid d-flex flex-column min-vh-100 mt-5">
-          <Spinner show={loading} />
+          {/* <Spinner show={loading} /> */}
           <ToastContainer />
           <div className="row">
             <div className="col-md-12">

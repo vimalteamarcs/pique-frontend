@@ -1192,7 +1192,7 @@ body {
 }
 
 .sign-in-btn {
-  background: linear-gradient(to right, #ff512f, #1e3cff);
+  background: linear-gradient(to right, #ff512f, #1e3cff) !important;
   color: white;
   border: none;
   padding: 10px 20px;
@@ -1204,13 +1204,13 @@ body {
 }
 
 .sign-in-btn:hover {
-  background: black;
-  color: white;
+  background: black !important;
+  color: white !important;
 }
 
 .role-container {
   border-radius: 8px;
-  border: 1px solid blue;
+  border: 1px solid blue !important;
 
 }
 
@@ -1235,11 +1235,11 @@ body {
 }
 
 .role-btn.venue.active {
-  color: red;
+  color: red !important;
 }
 
 .role-btn.entertainer.active {
-  color: blue;
+  color: blue !important;
 }
 
 .role-indicator {
@@ -1305,9 +1305,9 @@ body {
   font-size: small;
 }
 
-.sign-up-page {
+/* .sign-up-page {
   background: url(../image/homeBG.jpg);
-}
+} */
 
 .search-bar {
   /* border-radius: 20px; */
@@ -1335,11 +1335,7 @@ body {
   font-size: smaller;
   margin-top: 0%;
 }
-.card-rounded{
-  /* border-radius: 15px; */
-  /* width: 16em; */
-  border: none;
-}
+
 
 .container-fluid{
   width: 100%;
@@ -1674,9 +1670,9 @@ body {
 }
 
 .venue-btn{
-  background-color:  #ff6600;
-  color: white;
-  border-radius: 9px;
+  background-color:  #ff6600 !important;
+  color: white !important;
+  border-radius: 9px !important;
 }
 
 .venue-btn:hover{
@@ -2000,14 +1996,14 @@ body {
 }
 
 .btn-nav-enter {
-  background-color: #C5EAFF;
-  border-radius: 25px;
-  font-size: small;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  padding: 5px 12px;
+  background-color: #C5EAFF !important;
+  border-radius: 25px !important;
+  font-size: small !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  padding: 5px 12px !important;
 }
 
 .btn-nav-enter:hover,
@@ -2621,13 +2617,13 @@ body {
 /* Indicator Position */
 .venue-selected .role-indicator {
   left: 5px;
-  border: 1px solid red;
+  border: 2px solid red !important;
   background-color: white !important;
 }
 
 .entertainer-selected .role-indicator {
   left: 50%;
-  border: 1px solid blue;
+  border: 2px solid blue !important;
   background-color: white !important;
 
 }
@@ -2657,13 +2653,13 @@ body {
 }
 
 .enter-btn {
-  font-size: 12px;
-  background-color: #000E6F;
+  font-size: 12px !important;
+  background-color: #000E6F !important;
 }
 
 .enter-btn:hover {
-  font-size: 12px;
-  background-color: #000E6F;
+  font-size: 12px !important;
+  background-color: #000E6F !important;
 }
 
 .earned-dollars {
@@ -2792,7 +2788,18 @@ body {
 .event-modal{
   position: fixed;
   top: 45%;
-  left: 50%;
+  /* left: 50%; */
+  right: 60%;
+  transform: translate(-50%, -50%);
+  width: 90%; 
+  max-width: 600px; 
+} 
+
+.filter-modal{
+  position: fixed;
+  /* top: 45%; */
+  left: 6%;
+  right: 80%;
   transform: translate(-50%, -50%);
   width: 90%; 
   max-width: 600px; 

@@ -17,7 +17,12 @@ const ReportPage = () => {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}${GET_REPORT}`
+          `${import.meta.env.VITE_API_URL}${GET_REPORT}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
         setReportData(response.data);
         setFilteredData(response.data); // Initially set to full data
