@@ -4,6 +4,7 @@ import DashLayout from "../../DashLayout";
 import Spinner from "../../../components/Spinner";
 import * as XLSX from "xlsx";
 import { CURRENCY_SIGN, GET_REPORT } from "../../../../constants";
+import { useNavigate } from "react-router-dom";
 
 const ReportPage = () => {
   const [reportData, setReportData] = useState([]);
@@ -12,6 +13,7 @@ const ReportPage = () => {
   const [error, setError] = useState(null);
   const [dateFilter, setDateFilter] = useState("");
   const [monthFilter, setMonthFilter] = useState("");
+  const navigate = useNavigate()
 
   useEffect(() => {
     const fetchData = async () => {
@@ -115,11 +117,19 @@ const ReportPage = () => {
 
   return (
     <DashLayout>
+      
       {loading ? (
         <Spinner />
       ) : (
         <>
-          <div className="container-fluid">
+          <div className="container-fluid profile-font">
+          <p
+            className="profile-font mb-3 mt-3"
+            onClick={() => navigate('/admin/allentertainer')}
+            style={{cursor: 'pointer'}}
+          >
+            &lt; Back 
+          </p>
             {/* Date Filter Input */}
             <div className="d-flex justify-content-between my-3">
               <div className="d-flex ">

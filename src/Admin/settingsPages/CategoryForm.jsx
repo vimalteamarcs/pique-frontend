@@ -9,6 +9,7 @@ import {
   UPDATE_CATEGORY,
 } from "../../../constants";
 import CategoryModal from "../../components/CategoryModal";
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 
 const CategoryForm = () => {
   const [isMainCategory, setIsMainCategory] = useState(true);
@@ -177,12 +178,18 @@ const CategoryForm = () => {
   };
 
   return (
-    <DashLayout>
-      <div className="container mt-4">
+    <>
+    <DashLayout/>
+            <div className="container-fluid d-flex flex-column min-vh-100">
+              <div className="d-flex mt-0">
+                <div className="dash-sidebar-container">
+                  <AdminSideBar />
+                </div>
+                <div className="dash-profile-container">
         <div className="row justify-content-center">
           <div className="col-md-12">
-            <div className="card shadow-sm p-4">
-              <div className="card-body">
+            <div className="div">
+              <div className="profile-font">
                 {error && (
                   <div
                     className="alert alert-danger alert-dismissible fade show"
@@ -218,7 +225,7 @@ const CategoryForm = () => {
                   onSubmit={handlemainSubmit}
                   className="mb-3 w-75 d-flex align-items-center"
                 >
-                  <label htmlFor="name" className="form-label col-md-3 fw-bold">
+                  <label htmlFor="name" className="form-label  col-md-3 fw-bold">
                     Main Category Name
                   </label>
 
@@ -234,7 +241,7 @@ const CategoryForm = () => {
                     />
                   </div>
 
-                  <button type="submit" className="btn btn-primary">
+                  <button type="submit" className="btn btn-dark btn-sm">
                     ADD
                   </button>
                 </form>
@@ -249,7 +256,7 @@ const CategoryForm = () => {
                 {/* Sub Category Creation Form */}
                 <div className="row">
                   <div className="col-md-4">
-                    <h5 className="mt-5">Main Categories</h5>
+                    <p className="mt-5 profile-font fw-semibold">Main Categories</p>
                     <div
                       className="list-group  overflow-auto"
                       style={{
@@ -396,8 +403,10 @@ const CategoryForm = () => {
             </div>
           </div>
         </div>
+        </div>
+        </div>
       </div>
-    </DashLayout>
+    </>
   );
 };
 

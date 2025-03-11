@@ -4,6 +4,7 @@ import DashLayout from "../DashLayout";
 import CustomTable from "../../components/CustomTable";
 import { ALL_ENTERTAINERS, CHANGE_STATUS_ENT } from "../../../constants";
 import { useNavigate } from "react-router-dom";
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 
 export default function AllEntertainer() {
   const navigate = useNavigate();
@@ -148,13 +149,20 @@ export default function AllEntertainer() {
   ];
 
   return (
-    <DashLayout>
-      <h5 className="text-secondary text-center mb-4">Entertainers Details</h5>
+    <>
+    <DashLayout/>
+            <div className="container-fluid d-flex flex-column min-vh-100">
+              <div className="d-flex mt-0">
+                <div className="dash-sidebar-container">
+                  <AdminSideBar />
+                </div>
+                <div className="dash-profile-container">
+      <p className="profile-font fw-semibold">ENTERTAINERS DETAILS</p><hr/>
 
       {error ? (
         <div className="alert alert-danger">{error}</div>
       ) : (
-        <div className="m-2">
+        <div className="m-2 profile-font">
           <CustomTable
             data={entertainers}
             columns={columns}
@@ -183,6 +191,9 @@ export default function AllEntertainer() {
           />
         </div>
       )}
-    </DashLayout>
+      </div>
+      </div>
+      </div>
+      </>
   );
 }

@@ -8,6 +8,7 @@ import {
   CHANGE_ISALLOWED,
   SEARCH_COUNTRIES,
 } from "../../../constants";
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 
 const API_URL = import.meta.env.VITE_API_URL;
 
@@ -92,14 +93,20 @@ export default function ManageAllowedCountries() {
   };
 
   return (
-    <DashLayout>
+    <>
+    <DashLayout/>
       {/* Toast Container */}
       <ToastContainer position="top-right" autoClose={3000} />
 
-      <div className="container mt-4">
-        <div className="card shadow-sm p-4">
+            <div className="container-fluid d-flex flex-column min-vh-100">
+              <div className="d-flex mt-0">
+                <div className="dash-sidebar-container">
+                  <AdminSideBar />
+                </div>
+                <div className="dash-profile-container">
+        <div className="div profile-font">
           <div className="card-body">
-            <h5>Allowed Countries</h5>
+            <p className="fw-semibold">ALLOWED COUNTRIES</p><hr/>
             {/* Country Search Input */}
             <div className="mb-3 position-relative">
               <label className="fw-bold">Search Country</label>
@@ -137,7 +144,7 @@ export default function ManageAllowedCountries() {
                   )}
                 </div>
                 <button
-                  className="btn btn-primary col-md-2 col-sm-12 mx-3 px-1"
+                  className="btn btn-dark btn-sm col-md-2 col-sm-12 mx-3 px-1"
                   onClick={handleAllowCountry}
                 >
                   Add
@@ -150,23 +157,23 @@ export default function ManageAllowedCountries() {
             {/* Allowed Countries List */}
 
             <div
-              className=" d-flex  flex-wrap overflow-auto"
+              className=" d-flex  flex-wrap overflow-auto profile-font"
               style={{
                 maxHeight: "200px",
                 scrollbarWidth: "thin",
-                scrollbarColor: "#ccc transparent",
+                // scrollbarColor: "#ccc transparent",
               }}
             >
               {allowedCountries.map((country) => (
                 <div key={country.id} className="mb-3">
                   <div
-                    className=""
+                    className=" profile-font"
                     style={{
                       width: "fit-content",
                       position: "relative",
                     }}
                   >
-                    <div className="card-body p-2">
+                    <div className="card-body p-2 profile-font">
                       <button
                         type="button"
                         className="btn btn-outline-primary text-capitalize position-relative"
@@ -202,7 +209,9 @@ export default function ManageAllowedCountries() {
             </div>
           </div>
         </div>
+        </div>
+        </div>
       </div>
-    </DashLayout>
+    </>
   );
 }

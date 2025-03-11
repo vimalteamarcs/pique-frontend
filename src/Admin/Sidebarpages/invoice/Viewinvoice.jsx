@@ -169,6 +169,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import html2canvas from "html2canvas";
 import jsPDF from "jspdf";
+import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
 export default function Viewinvoice() {
   const navigate = useNavigate();
@@ -196,31 +197,39 @@ export default function Viewinvoice() {
   };
 
   return (
-    <DashLayout>
-      <div className="">
-        <div className="px-2 d-flex justify-content-between align-items-center mb-3">
-          <h4 className="fw-bold">INVOICE: {invoicedata.invoice_number}</h4>
-          <button className="btn btn-outline-dark" onClick={handleDownloadPDF}>
+    <>
+    <DashLayout/>
+            <div className="container-fluid d-flex flex-column min-vh-100">
+              <div className="d-flex mt-0">
+                <div className="dash-sidebar-container">
+                  <AdminSideBar />
+                </div>
+                <div className="dash-profile-container">
+                  <div className="d-flex justify-content-between">
+                  <p className="fw-semibold profile-font mt-2">INVOICE: {invoicedata.invoice_number}</p>
+          <button className="btn btn-outline-dark btn-sm" onClick={handleDownloadPDF}>
             Download <i className="bi bi-download"></i>
           </button>
-        </div>
-        <div className="px-2">
-          <button
-            className="btn btn-outline-dark mb-3"
+                  </div><hr/>
+
+        <div className="">
+          <p
+            className="profile-font mb-3"
             onClick={() => navigate(-1)}
+            style={{cursor: 'pointer'}}
           >
             &lt; Back to Invoice List
-          </button>
+          </p>
         </div>
-      </div>
+      
 
       <ToastContainer />
       <div
         className="card p-3"
-        style={{ maxHeight: "400px", overflowY: "auto" }}
+        // style={{ maxHeight: "400px", overflowY: "auto" }}
       >
         {invoicedata ? (
-          <div className="invoice-container">
+          <div className="invoice-container profile-font">
             <div className="border p-3 bg-light">
               <h3 className="m-0" style={{ color: "darkblue" }}>
                 Invoice
@@ -236,7 +245,7 @@ export default function Viewinvoice() {
                     </small>
                   </p>
                 </div>
-                <div className="col-3">
+                <div className="col-3 text-start">
                   <small>
                     Email: {invoicedata.email}
                     <br />
@@ -330,6 +339,9 @@ export default function Viewinvoice() {
           <div className="alert alert-danger">No invoice data available</div>
         )}
       </div>
-    </DashLayout>
+      </div>
+      </div>
+      </div>
+    </>
   );
 }

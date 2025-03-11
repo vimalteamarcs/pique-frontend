@@ -72,24 +72,6 @@ export default function VenueDashNavbar() {
                   </p>
                 </ul>
 
-                {/* <div className="d-flex align-items-center ">
-                  <p className="mt-3 modal-font" style={{cursor:"pointer"}} onClick={() => navigate("/venue/profile")}>Add your Residence<i className="fa-solid fa-globe me-2 ms-2 fs-6"></i></p>
-                  <Button
-                    className="btn shadow-none border-0 p-0"
-                    data-bs-toggle="offcanvas"
-                    data-bs-target="#offcanvasRight"
-                    aria-controls="offcanvasRight"
-                  >
-                    <img
-                      src={`${imagePath}userpic.jpg`}
-                      alt="User"
-                      className="rounded-circle"
-                      style={{ width: "50px", height: "50px" }}
-                    />
-                    <i className="fa-solid fa-caret-down"></i>
-                  </Button>
-                </div> */}
-
                 <div className="d-flex align-items-center">
                   <NavLink className="nav-btn" to="/">
                     <img src={`${imagePath}plusIcon.svg`} />

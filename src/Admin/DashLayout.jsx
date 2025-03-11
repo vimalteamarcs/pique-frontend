@@ -13,8 +13,8 @@ export default function DashLayout({ children }) {
           content="View and manage your Admin details."
         />
       </Helmet>
-      <div className="container-fluid position-relative  d-flex m-0 p-0 w-100">
-        <AdminSideBar />
+      <div className="container-fluid d-flex m-0 p-0 w-100">
+        {/* <AdminSideBar /> */}
 
         {/* <!-- Content Start --> */}
         <div className="content">
@@ -23,9 +23,9 @@ export default function DashLayout({ children }) {
           {/* <!-- Navbar End --> */}
           <div className="row">
             <div
-              className="col-12 mt-4"
+              className="col-12 rounded-3"
               style={{
-                background: "#F8F8F8 0% 0% no-repeat padding-box",
+                background: "#F8F8F8 0% 0% no-repeat padding-box ",
                 opacity: "1",
               }}
             >

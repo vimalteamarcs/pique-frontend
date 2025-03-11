@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios"; // Make sure axios is imported
 import DashLayout from "../DashLayout";
 import { CREATE_ROLE, GET_CAPABILITIES } from "../../../constants";
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 
 export default function Create_Admin_Role() {
   // State for storing capabilities and role form data
@@ -98,15 +99,21 @@ export default function Create_Admin_Role() {
   };
 
   return (
-    <DashLayout
-      children={
+    <>
+    <DashLayout/>
+      children={      <div className="container-fluid d-flex flex-column min-vh-100">
+              <div className="d-flex mt-0">
+                <div className="dash-sidebar-container">
+                  <AdminSideBar />
+                </div>
+                <div className="dash-profile-container">
         <form className="container" onSubmit={handleSubmit}>
           <div className="row d-flex">
-            <h2 className="fw-bold mt-5">Register Admin Role</h2>
+            <p className="fw-semibold profile-font">REGISTER ADMIN ROLE</p>
           </div>
           {/* Role */}
-          <div className="row mx-4 my-2">
-            <label className="text-start fw-bold">Role</label>
+          <div className="row my-2">
+            <label className="text-start fw-semibold profile-font">Role</label>
             <div className=" col-md-6 col-sm-12">
               <input
                 type="text"
@@ -124,8 +131,8 @@ export default function Create_Admin_Role() {
           <br />
           <br />
           {/* Permissions */}
-          <div className="row mx-4 my-2">
-            <label className="fw-bold">Permissions</label>
+          <div className="row my-2">
+            <label className="fw-semibold profile-font">Permissions</label>
             <div className="col d-flex flex-wrap">
               {capabilities?.map((capability) => (
                 <div key={capability.id} className="form-check me-3">
@@ -152,13 +159,17 @@ export default function Create_Admin_Role() {
           <br />
           <br />
           {/* Submit Button */}
-          <div className="row mx-4 my-2">
-            <button type="submit" className="btn btn-primary">
+          <div className="row my-2">
+            <button type="submit" className="btn btn-dark float-start w-25">
               Create Role
             </button>
           </div>
         </form>
+        </div>
+        </div>
+        </div>
       }
-    />
+    
+    </>
   );
 }

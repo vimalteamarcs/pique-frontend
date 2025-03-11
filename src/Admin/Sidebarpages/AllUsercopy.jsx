@@ -6,6 +6,7 @@ import CustomTable from "../../components/CustomTable";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 export default function AllUserCopy() {
   const navigate = useNavigate();
   const [userdata, setuserdata] = useState([]);
@@ -215,9 +216,17 @@ export default function AllUserCopy() {
     }
   };
   return (
-    <DashLayout>
+    <>
+    <DashLayout/>
       <ToastContainer />
-      <h5 className="text-secondary text-center mb-4">Users Details</h5>
+      <div className="container-fluid d-flex flex-column min-vh-100">
+              <div className="d-flex mt-0">
+                <div className="dash-sidebar-container">
+                  <AdminSideBar />
+                </div>
+                <div className="dash-profile-container">
+      <p className="profile-font fw-semibold">USERS DETAILS</p>
+      <hr/>
       {error ? (
         <div className="alert alert-danger">{error}</div>
       ) : (
@@ -261,7 +270,7 @@ export default function AllUserCopy() {
             </button> */}
 
           <button
-            className="btn btn-primary float-end gap-2"
+            className="btn btn-outline-dark btn-sm float-end gap-2"
             onClick={() => {
               navigate("/admin/adduser");
             }}
@@ -289,6 +298,9 @@ export default function AllUserCopy() {
           />
         </div>
       )}
-    </DashLayout>
+      </div>
+      </div>
+      </div>
+      </>
   );
 }

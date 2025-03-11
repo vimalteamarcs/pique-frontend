@@ -10,6 +10,7 @@ import {
 } from "../../../../constants";
 import { LinkOutlined, EyeOutlined, GlobalOutlined } from "@ant-design/icons";
 import { Button } from "antd";
+import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
 export default function ViewVenue() {
   const location = useLocation();
@@ -141,11 +142,17 @@ export default function ViewVenue() {
   });
 
   return (
-    <DashLayout>
-      <div className="container mt-4">
+    <>
+    <DashLayout/>
+     <div className="container-fluid d-flex flex-column min-vh-100">
+             <div className="d-flex mt-0">
+               <div className="dash-sidebar-container">
+                 <AdminSideBar />
+               </div>
+               <div className="dash-profile-container">
         <button
           onClick={() => navigate(-1)}
-          className="btn btn-primary d-flex align-items-center mb-4"
+          className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
         >
           <i className="fa fa-arrow-left" style={{ marginRight: "8px" }}></i>
         </button>
@@ -154,10 +161,10 @@ export default function ViewVenue() {
           // User details section
           <>
             <div className="container">
-              <h3 className="  text-start my-3">User Details</h3>
-
+              <p className="profile-font fw-semibold">USER DETAILS</p>
+              <hr/>
               <button
-                className=" btn btn-primary float-end gap-2"
+                className=" btn btn-outline-dark btn-sm float-end gap-2"
                 onClick={() => {
                   navigate("/admin/addvenue", { state: user });
                 }}
@@ -165,7 +172,7 @@ export default function ViewVenue() {
                 <i className="bi bi-plus"></i> Add Venue
               </button>
             </div>
-            <div className="container">
+            <div className="container profile-font">
               <div className="mb-3 col-md-6 col-sm-12">
                 <p>
                   <strong>Name:</strong> {user?.name || ""}
@@ -198,6 +205,7 @@ export default function ViewVenue() {
                 </p>
               </div>
             </div>
+            <hr/>
             <>
               {loading && <p>Loading venues...</p>}
               {error && <p className="text-danger">{error}</p>}
@@ -213,14 +221,14 @@ export default function ViewVenue() {
                 filteredVenues.length > 0 && (
                   <div className="container-fluid">
                     <div className="row">
-                      <h3 className="text-start my-3">Venues Locations</h3>
+                      <p className="profile-font fw-semibold">VENUES LOCATIONS</p>
                     </div>
                     <div className="row">
                       {/* Search Input */}
                       <div className="mb-3">
                         <input
                           type="text"
-                          className="form-control w-25"
+                          className="form-control w-25 rounded-3"
                           placeholder="Search Venues"
                           value={searchTerm}
                           onChange={(e) => setSearchTerm(e.target.value)}
@@ -230,8 +238,8 @@ export default function ViewVenue() {
                     <div className="row">
                       <div className="col-12">
                         {/* Remove overflow hidden, allow horizontal scroll */}
-                        <div className="table-responsive">
-                          <table className="table table-bordered">
+                        <div className="table-responsive profile-font">
+                          <table className="table table-responsive">
                             <thead>
                               <tr className="text-nowrap">
                                 <th>Venue Name</th>
@@ -310,7 +318,9 @@ export default function ViewVenue() {
           ""
         )}
       </div>
-    </DashLayout>
+      </div>
+      </div>
+      </>
   );
 }
 //</div> (

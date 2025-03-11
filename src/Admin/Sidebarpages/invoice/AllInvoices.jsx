@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import DashLayout from "../../DashLayout";
 import CustomTable from "../../../components/CustomTable";
 import { DELETE_INVOICE, GET_ALL_INVOICES } from "../../../../constants";
+import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
 const AllInvoices = () => {
   const navigate = useNavigate();
@@ -98,7 +99,14 @@ const AllInvoices = () => {
   ];
 
   return (
-    <DashLayout>
+    <>
+    <DashLayout/>
+            <div className="container-fluid d-flex flex-column min-vh-100">
+              <div className="d-flex mt-0">
+                <div className="dash-sidebar-container">
+                  <AdminSideBar />
+                </div>
+                <div className="dash-profile-container">
       <h5 className="text-secondary text-center mb-4">All Invoices</h5>
       <ToastContainer />
       {error ? (
@@ -121,7 +129,10 @@ const AllInvoices = () => {
           }}
         />
       )}
-    </DashLayout>
+      </div>
+      </div>
+      </div>
+    </>
   );
 };
 

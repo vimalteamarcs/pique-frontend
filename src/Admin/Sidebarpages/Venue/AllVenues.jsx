@@ -4,6 +4,7 @@ import DashLayout from "../../DashLayout";
 import { ALL_VENUE, DELETE_VENUE } from "../../../../constants";
 import CustomTable from "../../../components/CustomTable";
 import { useNavigate } from "react-router-dom";
+import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
 export default function AllVenues() {
   const [venuedata, setVenuedata] = useState([]);
@@ -143,8 +144,15 @@ export default function AllVenues() {
   ];
 
   return (
-    <DashLayout>
-      <h5 className="text-secondary text-center mb-4">Venues Details</h5>
+    <>
+    <DashLayout/>
+            <div className="container-fluid d-flex flex-column min-vh-100">
+              <div className="d-flex mt-0">
+                <div className="dash-sidebar-container">
+                  <AdminSideBar />
+                </div>
+                <div className="dash-profile-container">
+      <p className="profile-font fw-semibold">VENUES DETAILS</p><hr/>
       {successMessage && (
         <div className="alert alert-danger d-flex align-items-center mt-2">
           <span className="badge bg-danger me-2">{successMessage}</span>
@@ -179,6 +187,9 @@ export default function AllVenues() {
           />
         </div>
       )}
-    </DashLayout>
+      </div>
+      </div>
+      </div>
+    </>
   );
 }

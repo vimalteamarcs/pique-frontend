@@ -7,6 +7,7 @@ import axios from "axios";
 import DashLayout from "../../DashLayout";
 import { toast, ToastContainer } from "react-toastify";
 import { CREATE_USER, CREATE_VENUE, UPLOAD_MEDIA } from "../../../../constants";
+import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
 export default function AddVenue() {
   const [states, setStates] = useState([]);
@@ -270,25 +271,30 @@ export default function AddVenue() {
 
   return (
     <>
-      <DashLayout>
+      <DashLayout/>
         <ToastContainer />
-        <div className="container-fluid d-flex flex-column min-vh-100 mt-5">
-          <div className="row mt-4">
+        <div className="container-fluid d-flex flex-column min-vh-100">
+                <div className="d-flex mt-0">
+                  <div className="dash-sidebar-container">
+                    <AdminSideBar />
+                  </div>
+                  <div className="dash-profile-container">
+          <div className="row">
             <div className="col-md-12">
-              <div className="d-flex">
+              
                 <button
                   onClick={() => navigate(-1)}
-                  className="btn btn-primary d-flex align-items-center mb-1 m-2"
+                  className="btn btn-outline-dark btn-sm d-flex align-items-center mb-1 m-2"
                 >
                   <i
                     className="fa fa-arrow-left"
                     style={{ marginRight: "8px" }}
                   ></i>
                 </button>
-                <h5 className="text-secondary text-center mb-3 col">
-                  Venue Details
-                </h5>
-              </div>
+                <p className="profile-font fw-semibold mt-3">
+                  VENUE DETAILS
+                </p><hr/>
+              
               {Object.keys(errors).length > 0 && (
                 <div className="alert alert-danger">
                   <strong>Please fill out all required fields:</strong>
@@ -299,15 +305,15 @@ export default function AddVenue() {
                   </ul>
                 </div>
               )}
-              <div className="justify-content-center">
-                <div className="card col-md-11 shadow-lg p-5">
-                  <div className="card-body text-center">
+              <div className="justify-content-center scrollable-container">
+                <div className="col-md-12">
+                  <div className="text-center">
                     <form onSubmit={handleSubmit}>
-                      <h4 className="text-start text-primary">
+                      <p className="profile-font fw-semibold text-start text-muted">
                         General Information
-                      </h4>
-                      <hr className="fw-bold" />
-                      <div className="row">
+                      </p><hr/>
+                      {/* <hr className="fw-bold" /> */}
+                      <div className="row profile-font">
                         <div className="col-md-4 text-start">
                           <label htmlFor="name" className="fw-bold">
                             Name*
@@ -358,11 +364,11 @@ export default function AddVenue() {
                           )}
                         </div>
                       </div>
-                      <h4 className="text-start mt-4 text-primary">
+                      <p className="text-start profile-font fw-semibold text-muted mt-3 mb-0">
                         Address Details
-                      </h4>
-                      <hr className="fw-bold" />
-                      <div className="row mb-3 mt-4">
+                      </p><hr/>
+                      {/* <hr className="fw-bold" /> */}
+                      <div className="row mb-3 mt-3 profile-font">
                         <div className="col-md-4 text-start">
                           <label htmlFor="country" className="fw-bold">
                             Country*
@@ -413,7 +419,7 @@ export default function AddVenue() {
                           )}
                         </div>
                       </div>
-                      <div className="row mb-3 mt-4">
+                      <div className="row mb-3 mt-2 profile-font">
                         <div className="col-md-4 text-start">
                           <label htmlFor="addressLine1" className="fw-bold">
                             Address Line 1*
@@ -468,7 +474,7 @@ export default function AddVenue() {
                         </div>
                       </div>
 
-                      <div className="row mb-3 mt-4">
+                      <div className="row mb-3 mt-2 profile-font">
                         <div className="col-md-4 text-start">
                           <label htmlFor="location" className="fw-bold">
                             Description*
@@ -511,11 +517,11 @@ export default function AddVenue() {
                           />
                         </div>
                       </div>
-                      <h4 className="text-start text-primary mt-4">
+                      <p className="text-start profile-font fw-semibold text-muted mt-4">
                         Venue Information
-                      </h4>
+                      </p>
                       <hr className="fw-bold" />
-                      <div className="row mb-3 mt-4">
+                      <div className="row mb-3 mt-2 profile-font">
                         <div className="col-md-4 text-start">
                           <label htmlFor="amenities" className="fw-bold">
                             Amenities*
@@ -553,7 +559,7 @@ export default function AddVenue() {
                         </div>
                       </div>
 
-                      <div className="row ">
+                      <div className="row profile-font">
                         <div className="col-md-12 text-start">
                           <label htmlFor="bookingPolicies" className="fw-bold">
                             Booking Policies*
@@ -569,23 +575,23 @@ export default function AddVenue() {
 
                       <Button
                         type="submit"
-                        className="btn-primary mt-3 w-25 fw-semibold"
+                        className="btn-outline-dark mt-3 float-start mb-5 fw-semibold"
                         label="Submit"
                       />
                     </form>
                   </div>
                 </div>
                 {formSubmitted && (
-                  <div className="card col-md-11 shadow-lg p-5">
-                    <div className="card-body ">
+                  <div className="card col-md-12 p-3">
+                    <div className="">
                       <form onSubmit={mediaUpload}>
-                        <h4 className="text-start text-primary">
-                          Media Upload
-                        </h4>
+                        <p className="profile-font fw-semibold">
+                          MEDIA UPLOADS
+                        </p>
                         <hr className="mb-4" />
 
                         {/* Image Upload */}
-                        <div className="row mt-4">
+                        <div className="row mt-4 profile-font">
                           <div className="col-md-12 col-sm-12">
                             <label className="fw-bold">Image Upload</label>
                             <Input
@@ -623,7 +629,7 @@ export default function AddVenue() {
                         </div>
 
                         {/* Video Upload */}
-                        <div className="row mt-4">
+                        <div className="row mt-4 profile-font">
                           <div className="col-md-12 col-sm-12">
                             <label className="fw-bold">Video Upload</label>
                             <Input
@@ -665,7 +671,7 @@ export default function AddVenue() {
                           <div className="col d-flex justify-content-center">
                             <Button
                               type="submit"
-                              className="btn-primary w-25 fw-bold"
+                              className="btn-outline-dark float-start fw-semibold"
                               label="Upload Media"
                               disabled={!formSubmitted}
                             />
@@ -679,7 +685,8 @@ export default function AddVenue() {
             </div>
           </div>
         </div>
-      </DashLayout>
+        </div>
+        </div>
     </>
   );
 }

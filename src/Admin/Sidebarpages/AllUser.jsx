@@ -6,6 +6,7 @@ import CustomTable from "../../components/CustomTable";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 export default function AllUser() {
   const navigate = useNavigate();
   const [userdata, setuserdata] = useState([]);
@@ -210,9 +211,15 @@ export default function AllUser() {
     }
   };
   return (
-    <DashLayout>
+    <>
+    <DashLayout/>
       <ToastContainer />
-      <h5 className="text-secondary text-center mb-4">Users Details</h5>
+      <div className="container-fluid d-flex flex-column min-vh-100">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container">
       {error ? (
         <div className="alert alert-danger">{error}</div>
       ) : (
@@ -284,6 +291,9 @@ export default function AllUser() {
           />
         </div>
       )}
-    </DashLayout>
+      </div>
+      </div>
+      </div>
+      </>
   );
 }

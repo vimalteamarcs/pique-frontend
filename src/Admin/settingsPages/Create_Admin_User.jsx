@@ -7,6 +7,7 @@ import Input from "../../components/Input";
 import { Helmet } from "react-helmet-async";
 import DashLayout from "../DashLayout";
 import { CREATE_ADMIN_USER, GET_ROLES } from "../../../constants";
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 
 const Create_Admin_User = () => {
   const navigate = useNavigate();
@@ -139,7 +140,8 @@ const Create_Admin_User = () => {
   };
 
   return (
-    <DashLayout
+    <>
+    <DashLayout/>
       children={
         <>
           <Helmet>
@@ -150,12 +152,17 @@ const Create_Admin_User = () => {
             />
           </Helmet>
 
-          <div className="container min-vh-100 mt-3">
+                <div className="container-fluid d-flex flex-column min-vh-100">
+                  <div className="d-flex mt-0">
+                    <div className="dash-sidebar-container">
+                      <AdminSideBar />
+                    </div>
+                    <div className="dash-profile-container">
             <div className="row d-flex">
-              <h2 className="fw-bold mt-5">Register Admin User</h2>
+              <p className="fw-semibold profile-font">REGISTER ADMIN USER</p><hr/>
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="profile-font">
               <div className="row">
                 {/* Name */}
                 <div className="col-md-6 col-sm-12">
@@ -287,14 +294,16 @@ const Create_Admin_User = () => {
               {/* Submit Button */}
               <Button
                 type="submit"
-                className="btn-primary text-white"
+                className="btn-dark mt-3 btn-sm text-white"
                 label="Create User"
               />
             </form>
+            </div>
+            </div>
           </div>
         </>
       }
-    />
+    </>
   );
 };
 

@@ -16,6 +16,7 @@ import {
 } from "../../../constants";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 
 export default function EditVenue() {
   const [media, setMedia] = useState([]);
@@ -282,24 +283,29 @@ export default function EditVenue() {
   };
 
   return (
-    <DashLayout>
-      <>
-        <div className="conatiner mt-1">
+    <>
+    <DashLayout/>
+             <div className="container-fluid d-flex flex-column min-vh-100">
+               <div className="d-flex mt-0">
+                 <div className="dash-sidebar-container">
+                   <AdminSideBar />
+                 </div>
+                 <div className="dash-profile-container">
           <div className=" mt-1">
-            <div className="d-flex">
+            
               <button
                 onClick={() => navigate(-1)}
-                className="btn btn-primary d-flex align-items-center mb-1 m-2"
+                className="btn btn-outline-dark btn-sm d-flex align-items-center mb-1 m-2"
               >
                 <i
                   className="fa fa-arrow-left"
                   style={{ marginRight: "8px" }}
                 ></i>
               </button>
-              <h5 className="text-secondary text-center mb-3 col">
-                Update Venue Details
-              </h5>
-            </div>
+              <p className="profile-font fw-semibold col mt-3">
+                UPDATE VENUE DETAILS
+              </p><hr/>
+          
 
             {Object.keys(errors).length > 0 && (
               <div className="alert alert-danger">
@@ -312,12 +318,12 @@ export default function EditVenue() {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="conatiner m-1 p-1">
-              <div className="row card shadow-lg  p-2 text-start ">
-                <h5 className=" text-primary">General Information</h5>
+            <form onSubmit={handleSubmit} className="conatiner m-1 profile-font scrollable-container">
+              <div className="row text-start ">
+                <h5 className=" profile-font fw-semibold text-muted">General Information</h5>
                 <hr className="fw-bold" />
-                <div className="row mb-3 mt-1">
-                  <div className="col-md-4 p-2 ">
+                <div className="row mb-3">
+                  <div className="col-md-4 ">
                     <label htmlFor="name" className="fw-bold">
                       Name
                     </label>
@@ -364,12 +370,12 @@ export default function EditVenue() {
                   </div>
                 </div>
               </div>
-              <div className="row card shadow-lg  p-2 text-start ">
-                <h5 className="text-start mt-2 text-primary">
+              <div className="row text-start ">
+                <p className="text-start mt-2 profile-font fw-semibold text-muted">
                   Address Details
-                </h5>
+                </p>
                 <hr className="fw-bold" />
-                <div className="row mb-3 mt-2">
+                <div className="row mb-3">
                   <div className="col-md-4 text-start">
                     <label htmlFor="country" className="fw-bold">
                       Country
@@ -515,10 +521,10 @@ export default function EditVenue() {
                   </div>
                 </div>
               </div>
-              <div className="row card shadow-lg  p-2 pb-4 text-start ">
-                <h5 className="text-start text-primary mt-2">
+              <div className="row pb-4 text-start ">
+                <p className="text-start text-muted profile-font fw-semibold mt-2">
                   Venue Information
-                </h5>
+                </p>
                 <hr className="fw-bold" />
                 <div className=" row mb-3 mt-2">
                   <div className="col-md-4 text-start">
@@ -576,22 +582,22 @@ export default function EditVenue() {
               <div className="row d-flex justify-content-center my-3">
                 <Button
                   type="submit"
-                  className="btn-primary  float-center  w-25 fw-semibold"
+                  className="btn btn-outline-dark  float-start w-25 fw-semibold"
                   label="Submit"
                 />
               </div>
             </form>
             <div className="d-flex justify-content-center mb-5">
-              <div className="card shadow-lg col-11 border-0 rounded p-4">
+              <div className=" col-12 border-0">
                 <div className="card-body">
-                  <h5 className="text-start text-primary mt-2">
+                  <p className="text-start text-muted profile-font fw-semibold mt-2">
                     Media Uploads
-                  </h5>
+                  </p>
                   <hr className="mb-4" />
 
                   <div className="row mt-4">
                     <div className="col-md-12 col-sm-12">
-                      <label className="fw-bold">Image Upload</label>
+                      <label className="fw-bold profile-font">Image Upload</label>
                       <input
                         type="file"
                         accept="image/*"
@@ -627,8 +633,10 @@ export default function EditVenue() {
             </div>
           </div>
         </div>
-      </>
+        </div>
+        </div>
       <ToastContainer />
-    </DashLayout>
+      </>
+
   );
 }

@@ -4,6 +4,7 @@ import { useLocation, useNavigate } from "react-router-dom";
 import DashLayout from "../../DashLayout";
 import { UPDATE_EVENT } from "../../../../constants";
 import { toast, ToastContainer } from "react-toastify";
+import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
 const EditEvent = () => {
   const location = useLocation();
@@ -74,20 +75,28 @@ const EditEvent = () => {
   };
 
   return (
-    <DashLayout>
+    <>
+    <DashLayout/>
       <ToastContainer />
-      <div className="container">
+           <div className="container-fluid d-flex flex-column min-vh-100">
+             <div className="d-flex mt-0">
+               <div className="dash-sidebar-container">
+                 <AdminSideBar />
+               </div>
+               <div className="dash-profile-container">
         <button
           onClick={() => navigate(-1)}
-          className="btn btn-primary float-end mb-4"
+          className="btn btn-outline-dark btn-sm float-end mb-4"
         >
           <i className="fa fa-close"></i>
         </button>
-        <h4 className="text-center mb-2">Edit Event</h4>
+        <p className="profile-font fw-semibold mb-2">EDIT EVENT</p>
+        <hr/>
+        <p className="fw-semibold profile-font text-muted">GENERAL INFORMATION</p>
         <form onSubmit={handleSubmit}>
           <div className="row mb-3">
-            <div className="col-12">
-              <label className="form-label">Event Name</label>
+            <div className="col-md-6">
+              <label className="form-label profile-font fw-semibold mb-0">Event Name</label>
               <input
                 type="text"
                 className={`form-control ${errors.title ? "is-invalid" : ""}`}
@@ -99,10 +108,8 @@ const EditEvent = () => {
                 <div className="invalid-feedback">{errors.title}</div>
               )}
             </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-12">
-              <label className="form-label">Location</label>
+            <div className="col-md-6">
+              <label className="form-label profile-font fw-semibold mb-0">Location</label>
               <input
                 type="text"
                 className={`form-control ${
@@ -117,9 +124,10 @@ const EditEvent = () => {
               )}
             </div>
           </div>
+         
           <div className="row mb-3">
             <div className="col-12 col-md-6">
-              <label className="form-label">Start Date and Time</label>
+              <label className="form-label profile-font fw-semibold mb-0">Start Date and Time</label>
               <input
                 type="datetime-local"
                 className={`form-control ${
@@ -134,7 +142,7 @@ const EditEvent = () => {
               )}
             </div>
             <div className="col-12 col-md-6">
-              <label className="form-label">End Date and Time</label>
+              <label className="form-label profile-font fw-semibold mb-0">End Date and Time</label>
               <input
                 type="datetime-local"
                 className={`form-control ${errors.endTime ? "is-invalid" : ""}`}
@@ -149,7 +157,7 @@ const EditEvent = () => {
           </div>
           <div className="row mb-3">
             <div className="col-12">
-              <label className="form-label">Description</label>
+              <label className="form-label profile-font fw-semibold mb-0">Description</label>
               <textarea
                 className="form-control"
                 name="description"
@@ -158,12 +166,14 @@ const EditEvent = () => {
               />
             </div>
           </div>
-          <button type="submit" className="btn btn-primary d-flex mx-auto">
+          <button type="submit" className="btn btn-outline-dark float-start btn-sm d-flex mx-auto">
             Update Event
           </button>
         </form>
       </div>
-    </DashLayout>
+      </div>
+      </div>
+      </>
   );
 };
 

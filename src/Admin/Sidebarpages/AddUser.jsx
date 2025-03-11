@@ -5,6 +5,7 @@ import DashLayout from "../DashLayout";
 import { CREATE_USER } from "../../../constants";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 
 export default function AddUser() {
   const navigate = useNavigate();
@@ -67,61 +68,86 @@ export default function AddUser() {
   };
 
   return (
-    <DashLayout>
+    <>
+      <DashLayout />
       <ToastContainer />
-      <div className="container mt-4">
-        <button
-          onClick={() => navigate(-1)}
-          className="btn btn-primary d-flex align-items-center mb-4"
-        >
-          <i className="fa fa-arrow-left" style={{ marginRight: "8px" }}></i>
-        </button>
-        <h3 className="text-center my-3">Create User</h3>
-        <form onSubmit={handleSubmit} className="row">
-          <div className="mb-3 col-md-6 col-sm-12">
-            <label className="form-label">Name</label>
-            <input
-              type="text"
-              className={`form-control ${errors.name ? "is-invalid" : ""}`}
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-            {errors.name && <div className="text-danger">{errors.name}</div>}
+      <div className="container-fluid d-flex flex-column min-vh-100">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
           </div>
+          <div className="dash-profile-container">
+            <button
+              onClick={() => navigate(-1)}
+              className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
+            >
+              {/* <i className="fa fa-arrow-left" style={{ marginRight: "8px" }}></i> */}{" "}
+              BACK
+            </button>
+            <p className="profile-font fw-semibold">CREATE USER</p>
+            <hr />
+            <form onSubmit={handleSubmit}>
+              <div className="row">
+                <div className="mb-3 col-md-6 col-sm-12">
+                  <label className="form-label profile-font fw-semibold mb-0">
+                    Name
+                  </label>
+                  <input
+                    type="text"
+                    className={`form-control ${
+                      errors.name ? "is-invalid" : ""
+                    }`}
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                  {errors.name && (
+                    <div className="text-danger">{errors.name}</div>
+                  )}
+                </div>
 
-          <div className="mb-3 col-md-6 col-sm-12">
-            <label className="form-label">Email</label>
-            <input
-              type="email"
-              className={`form-control ${errors.email ? "is-invalid" : ""}`}
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            {errors.email && <div className="text-danger">{errors.email}</div>}
-          </div>
+                <div className="mb-3 col-md-6 col-sm-12">
+                  <label className="form-label profile-font fw-semibold mb-0">
+                    Email
+                  </label>
+                  <input
+                    type="email"
+                    className={`form-control ${
+                      errors.email ? "is-invalid" : ""
+                    }`}
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                  {errors.email && (
+                    <div className="text-danger">{errors.email}</div>
+                  )}
+                </div>
+              </div>
 
-          <div className="mb-3 col-md-6 col-sm-12">
-            <label className="form-label">Phone Number</label>
-            <input
-              type="text"
-              className={`form-control ${
-                errors.phoneNumber ? "is-invalid" : ""
-              }`}
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              required
-            />
-            {errors.phoneNumber && (
-              <div className="text-danger">{errors.phoneNumber}</div>
-            )}
-          </div>
+              <div className="row">
+                <div className="mb-3 col-md-6 col-sm-12">
+                  <label className="form-label fw-semibold profile-font mb-0">
+                    Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    className={`form-control ${
+                      errors.phoneNumber ? "is-invalid" : ""
+                    }`}
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    required
+                  />
+                  {errors.phoneNumber && (
+                    <div className="text-danger">{errors.phoneNumber}</div>
+                  )}
+                </div>
 
-          {/* <div className="mb-3 col-md-6 col-sm-12">
+                {/* <div className="mb-3 col-md-6 col-sm-12">
             <label className="form-label">Password</label>
             <input
               type="password"
@@ -132,48 +158,60 @@ export default function AddUser() {
               required
             />
           </div> */}
-          <div className="mb-3 col-md-6 col-sm-12">
-            <label className="form-label text-start fw-bold">Password</label>
-            <div className=" position-relative d-flex justify-content-between">
-              <input
-                type={showPassword ? "text" : "password"}
-                placeholder="Enter password"
-                name="password"
-                value={formData.password}
-                onChange={handleChange}
-                className="form-control"
-              />
+                <div className="mb-3 col-md-6 col-sm-12">
+                  <label className="form-label profile-font fw-semibold mb-0">
+                    Password
+                  </label>
+                  <div className=" position-relative d-flex justify-content-between">
+                    <input
+                      type={showPassword ? "text" : "password"}
+                      placeholder="Enter password"
+                      name="password"
+                      value={formData.password}
+                      onChange={handleChange}
+                      className="form-control"
+                    />
+
+                    <button
+                      type="button"
+                      className="btn position-absolute top-50 end-10 translate-middle-y border-0 bg-transparent "
+                      onClick={() => setShowPassword(!showPassword)}
+                      style={{ right: "10px" }} // Adjust right space to move button inside
+                    >
+                      <i
+                        className={
+                          showPassword ? "fas fa-eye-slash" : "fas fa-eye"
+                        }
+                      ></i>
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div className="mb-3 col-md-6 col-sm-12">
+                <label className="form-label fw-semibold profile-font mb-0">
+                  Role
+                </label>
+                <select
+                  className="form-control"
+                  name="role"
+                  value={formData.role}
+                  onChange={handleChange}
+                >
+                  <option value="venue">Venue</option>
+                  <option value="entertainer">Entertainer</option>
+                </select>
+              </div>
 
               <button
-                type="button"
-                className="btn position-absolute top-50 end-10 translate-middle-y border-0 bg-transparent "
-                onClick={() => setShowPassword(!showPassword)}
-                style={{ right: "10px" }} // Adjust right space to move button inside
+                type="submit"
+                className="btn btn-outline-dark btn-sm float-start"
               >
-                <i
-                  className={showPassword ? "fas fa-eye-slash" : "fas fa-eye"}
-                ></i>
+                Create User
               </button>
-            </div>
+            </form>
           </div>
-          <div className="mb-3 col-md-6 col-sm-12">
-            <label className="form-label">Role</label>
-            <select
-              className="form-control"
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
-            >
-              <option value="venue">Venue</option>
-              <option value="entertainer">Entertainer</option>
-            </select>
-          </div>
-
-          <button type="submit" className="btn btn-primary">
-            Create User
-          </button>
-        </form>
+        </div>
       </div>
-    </DashLayout>
+    </>
   );
 }

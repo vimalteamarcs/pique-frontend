@@ -6,6 +6,7 @@ import "react-toastify/dist/ReactToastify.css";
 import DashLayout from "../../DashLayout";
 import CustomTable from "../../../components/CustomTable";
 import { DELETE_EVENT, GET_ALL_EVENTS } from "../../../../constants";
+import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
 const EventsList = () => {
   const navigate = useNavigate();
@@ -61,7 +62,7 @@ const EventsList = () => {
     navigate("/admin/editevent", { state: record });
   };
   const deleteEvent = async (id) => {
-    const token = localStorage.getItem('token');
+    const token = localStorage.getItem("token");
     try {
       const response = await axios.delete(
         `${import.meta.env.VITE_API_URL}${DELETE_EVENT}${id}`,
@@ -70,11 +71,13 @@ const EventsList = () => {
         }
       );
       if (response.status === 200) {
-        toast.success(`Event has been deleted successfully.`, {
-          autoClose: 1000,
-        },
-      setFlag(!flag))
-        
+        toast.success(
+          `Event has been deleted successfully.`,
+          {
+            autoClose: 1000,
+          },
+          setFlag(!flag)
+        );
       }
     } catch (error) {
       console.error(
@@ -86,7 +89,6 @@ const EventsList = () => {
   const handleDelete = async (record) => {
     console.log("Delete event:", record);
     deleteEvent(record.id);
-    
   };
 
   const handleView = (record) => {
@@ -160,42 +162,64 @@ const EventsList = () => {
   ];
 
   return (
-    <DashLayout>
-      <h5 className="text-secondary text-center mb-4">Events List</h5>
+    <>
+      <DashLayout />
+      {/* <h5 className="text-secondary text-center mb-4">Events List</h5> */}
       <ToastContainer />
-      <button
-        onClick={() => navigate("/admin/createevent")}
-        className="btn btn-primary float-end d-flex align-items-center mb-4 m-2"
-      >
-        <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
-        Create Event
-      </button>
-      {error ? (
-        <div className="alert alert-danger">{error}</div>
-      ) : (
-        <div className="table">
-          <div className="table overflow-scroll">
-            <CustomTable
-              data={events}
-              columns={columns}
-              onView={handleView}
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-              loading={loading}
-              pagination={pagination}
-              onTableChange={(pagination) => {
-                fetchEvents(pagination.current, pagination.pageSize, search);
-              }}
-              search={search}
-              onSearchChange={(value) => {
-                setSearch(value);
-                fetchEvents(1, pagination.pageSize, value);
-              }}
-            />
+      <div className="container-fluid d-flex flex-column min-vh-100">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container mb-0">
+            <div className="d-flex justify-content-between">
+              <p className="fs-6 fw-bold mb-0 mt-3">EVENTS</p>
+              <button
+                onClick={() => navigate("/admin/createevent")}
+                className="btn btn-outline-dark icon-font float-end d-flex align-items-center m-2 btn-sm"
+              >
+                <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
+                Create Event
+              </button>
+            </div>
+            {error ? (
+              <div
+                className="alert alert-danger"
+                style={{ borderRadius: "10px" }}
+              >
+                {error}
+              </div>
+            ) : (
+              <div className="table" style={{ borderRadius: "10px" }}>
+                <div className="table table-responsive">
+                  <CustomTable
+                    data={events}
+                    columns={columns}
+                    onView={handleView}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                    loading={loading}
+                    pagination={pagination}
+                    onTableChange={(pagination) => {
+                      fetchEvents(
+                        pagination.current,
+                        pagination.pageSize,
+                        search
+                      );
+                    }}
+                    search={search}
+                    onSearchChange={(value) => {
+                      setSearch(value);
+                      fetchEvents(1, pagination.pageSize, value);
+                    }}
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </div>
-      )}
-    </DashLayout>
+      </div>
+    </>
   );
 };
 

@@ -329,7 +329,7 @@ body {
 }
 
 .right-box .timeline::before {
-  left: 486px;
+  left: 467px;
 }
 
 .paraTxt {
@@ -2836,4 +2836,16 @@ body {
   font-size: 12px;
   font-weight: bold;
   color: white;
+}
+
+.admin-btn {
+  background-color: "#E0E0E0" !important;
+  border-radius: "50px" !important;
+  font-size: "small" !important;
+  cursor: "pointer" !important;
+  display: "flex" !important;
+  align-items: "center" !important;
+  gap: "4px" !important;
+  height: "46px" !important;
+  width: "109px" !important;
 }

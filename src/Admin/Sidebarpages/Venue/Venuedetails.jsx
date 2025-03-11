@@ -8,6 +8,7 @@ import {
   GET_MEDIA_BYID,
   GET_STATES,
 } from "../../../../constants";
+import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
 const Venuedetails = () => {
   const token = localStorage.getItem("token");
@@ -109,13 +110,19 @@ const Venuedetails = () => {
   }, [venue]);
 
   return (
-    <DashLayout>
-      <div className="container mt-4">
+    <>
+    <DashLayout/>
+            <div className="container-fluid d-flex flex-column min-vh-100">
+              <div className="d-flex mt-0">
+                <div className="dash-sidebar-container">
+                  <AdminSideBar />
+                </div>
+                <div className="dash-profile-container">
         <div className="d-flex justify-content-between">
           {" "}
           <button
             onClick={() => navigate(-1)}
-            className=" btn btn-primary d-flex align-items-center mb-4"
+            className=" btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
           >
             <i className="fa fa-arrow-left" style={{ marginRight: "8px" }}></i>
           </button>
@@ -125,14 +132,14 @@ const Venuedetails = () => {
                 onClick={() =>
                   navigate("/admin/addvenuelocation", { state: venue })
                 }
-                className="btn btn-primary d-flex align-items-center mb-4"
+                className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
               >
                 <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
                 Add Location
               </button>
               <button
                 onClick={() => navigate("/admin/createevent", { state: venue })}
-                className="btn btn-primary d-flex align-items-center mb-4"
+                className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
               >
                 <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
                 Create Event
@@ -140,8 +147,8 @@ const Venuedetails = () => {
             </>
           ) : null}
         </div>
-        <h3 className="mb-4">Venue Details</h3>
-        <div className="row">
+        <p className="profile-font fw-semibold">VENUE DETAILS</p><hr/>
+        <div className="row profile-font fw-semibold scrollable-container">
           <div className="col-md-6 col-sm-12">
             <div className="mb-3">
               <label className="form-label">Name:</label>
@@ -209,6 +216,7 @@ const Venuedetails = () => {
                 className="form-control"
                 value={venueData.description || ""}
                 disabled
+                rows="1"
               />
             </div>
           </div>
@@ -244,6 +252,7 @@ const Venuedetails = () => {
                 className="form-control"
                 value={venueData.bookingPolicies || ""}
                 disabled
+                rows="1"
               />
             </div>
           </div>
@@ -287,6 +296,7 @@ const Venuedetails = () => {
                 className="form-control"
                 value={venueData.amenities || ""}
                 disabled
+                rows="1"
               />
             </div>
           </div>
@@ -379,7 +389,9 @@ const Venuedetails = () => {
           </div>
         )}
       </div>
-    </DashLayout>
+      </div>
+      </div>
+      </>
   );
 };
 

@@ -11,6 +11,7 @@ import {
   GET_COUNTRIES,
   GET_STATES,
 } from "../../../constants";
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 
 export default function AddLocation() {
   const token = localStorage.getItem("token");
@@ -161,12 +162,18 @@ export default function AddLocation() {
   };
 
   return (
-    <DashLayout>
-      <div className="container mt-4">
-        <h2>Add Locations for {venue.name}</h2>
-        <form onSubmit={handleSubmit}>
+    <>
+    <DashLayout/>
+            <div className="container-fluid d-flex flex-column min-vh-100">
+              <div className="d-flex mt-0">
+                <div className="dash-sidebar-container">
+                  <AdminSideBar />
+                </div>
+                <div className="dash-profile-container">
+        <p className="profile-font fw-semibold">ADD LOCATIONS FOR {venue.name}</p><hr/>
+        <form onSubmit={handleSubmit} className="profile-font">
           {locations.map((loc, index) => (
-            <div key={index} className="mb-3 border p-3 rounded">
+            <div key={index} className="mb-3">
               <label className="form-label">Address Line 1</label>
               <input
                 type="text"
@@ -244,17 +251,19 @@ export default function AddLocation() {
           ))}
           <button
             type="button"
-            className="btn btn-secondary"
+            className="btn btn-secondary btn-sm"
             onClick={handleAddLocation}
           >
             Add Another Location
           </button>
-          <button type="submit" className="btn btn-primary ms-2">
+          <button type="submit" className="btn btn-dark btn-sm ms-2">
             Submit
           </button>
         </form>
         <ToastContainer />
       </div>
-    </DashLayout>
+      </div>
+      </div>
+    </>
   );
 }

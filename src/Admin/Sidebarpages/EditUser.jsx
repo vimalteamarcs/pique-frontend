@@ -5,7 +5,7 @@ import DashLayout from "../DashLayout";
 import { UPDATE_USER } from "../../../constants";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 
 export default function EditUser() {
   const location = useLocation();
@@ -19,8 +19,7 @@ export default function EditUser() {
     email: user?.email || "",
     phoneNumber: user?.phoneNumber || "",
     role: user?.role || "venue",
-    status: user?.status || "pending"
-    
+    status: user?.status || "pending",
   });
 
   const [errors, setErrors] = useState({});
@@ -72,7 +71,6 @@ export default function EditUser() {
         phoneNumber: formData.phoneNumber,
         role: formData.role,
         status: formData.status,
-        
       },
     };
 
@@ -98,99 +96,134 @@ export default function EditUser() {
   };
 
   return (
-    <DashLayout>
+    <>
+      <DashLayout />
       <ToastContainer />
-      <div className="container mt-4">
-        <button
-          onClick={() => navigate(-1)}
-          className="btn btn-primary d-flex align-items-center mb-4"
-        >
-          <i className="fa fa-arrow-left" style={{ marginRight: "8px" }}></i>
-        </button>
-
-        <h3 className="text-center my-3">Update User Details</h3>
-        <form onSubmit={handleSubmit} className="row">
-          <div className="mb-3 col-md-6 col-sm-12">
-            <label className="form-label">Name</label>
-            <input
-              type="text"
-              className={`form-control ${errors.name ? "is-invalid" : ""}`}
-              name="name"
-              value={formData.name}
-              onChange={handleChange}
-              required
-            />
-            {errors.name && <div className="text-danger">{errors.name}</div>}
+      <div className="container-fluid d-flex flex-column min-vh-100">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
           </div>
-
-          <div className="mb-3 col-md-6 col-sm-12">
-            <label className="form-label">Email</label>
-            <input
-              type="email"
-              className={`form-control ${errors.email ? "is-invalid" : ""}`}
-              name="email"
-              value={formData.email}
-              onChange={handleChange}
-              required
-            />
-            {errors.email && <div className="text-danger">{errors.email}</div>}
-          </div>
-
-          <div className="mb-3 col-md-6 col-sm-12">
-            <label className="form-label">Phone Number</label>
-            <input
-              type="text"
-              className={`form-control ${
-                errors.phoneNumber ? "is-invalid" : ""
-              }`}
-              name="phoneNumber"
-              value={formData.phoneNumber}
-              onChange={handleChange}
-              required
-            />
-            {errors.phoneNumber && (
-              <div className="text-danger">{errors.phoneNumber}</div>
-            )}
-          </div>
-
-          <div className="mb-3 col-md-6 col-sm-12">
-            <label className="form-label">Role</label>
-            <select
-              className={`form-control ${errors.role ? "is-invalid" : ""}`}
-              name="role"
-              value={formData.role}
-              onChange={handleChange}
+          <div className="dash-profile-container">
+            <button
+              onClick={() => navigate(-1)}
+              className="btn btn-primary d-flex align-items-center mb-4"
             >
-              <option value="venue">Venue</option>
-              <option value="entertainer">Entertainer</option>
-            </select>
-            {errors.role && <div className="text-danger">{errors.role}</div>}
+              <i
+                className="fa fa-arrow-left"
+                style={{ marginRight: "8px" }}
+              ></i>
+            </button>
+
+            <p className="profile-font fw-semibold">UPDATE USER DETAILS</p>
+            <hr />
+            <form onSubmit={handleSubmit}>
+              <div className="row profile-font">
+                <div className="mb-3 col-md-6 col-sm-12">
+                  <label className="form-label fw-semibold mb-0">Name</label>
+                  <input
+                    type="text"
+                    className={`form-control ${
+                      errors.name ? "is-invalid" : ""
+                    }`}
+                    name="name"
+                    value={formData.name}
+                    onChange={handleChange}
+                    required
+                  />
+                  {errors.name && (
+                    <div className="text-danger">{errors.name}</div>
+                  )}
+                </div>
+
+                <div className="mb-3 col-md-6 col-sm-12">
+                  <label className="form-label fw-semibold mb-0">Email</label>
+                  <input
+                    type="email"
+                    className={`form-control ${
+                      errors.email ? "is-invalid" : ""
+                    }`}
+                    name="email"
+                    value={formData.email}
+                    onChange={handleChange}
+                    required
+                  />
+                  {errors.email && (
+                    <div className="text-danger">{errors.email}</div>
+                  )}
+                </div>
+              </div>
+
+              <div className="row profile-font">
+                <div className="mb-3 col-md-6 col-sm-12">
+                  <label className="form-label fw-semibold mb-0">
+                    Phone Number
+                  </label>
+                  <input
+                    type="text"
+                    className={`form-control ${
+                      errors.phoneNumber ? "is-invalid" : ""
+                    }`}
+                    name="phoneNumber"
+                    value={formData.phoneNumber}
+                    onChange={handleChange}
+                    required
+                  />
+                  {errors.phoneNumber && (
+                    <div className="text-danger">{errors.phoneNumber}</div>
+                  )}
+                </div>
+
+                <div className="mb-3 col-md-6 col-sm-12">
+                  <label className="form-label fw-semibold mb-0">Role</label>
+                  <select
+                    className={`form-control ${
+                      errors.role ? "is-invalid" : ""
+                    }`}
+                    name="role"
+                    value={formData.role}
+                    onChange={handleChange}
+                  >
+                    <option value="venue">Venue</option>
+                    <option value="entertainer">Entertainer</option>
+                  </select>
+                  {errors.role && (
+                    <div className="text-danger">{errors.role}</div>
+                  )}
+                </div>
+              </div>
+
+              <div className="row profile-font">
+                <div className="mb-3 col-md-6 col-sm-12">
+                  <label className="form-label fw-semibold mb-0">Status</label>
+                  <select
+                    className={`form-control ${
+                      errors.status ? "is-invalid" : ""
+                    }`}
+                    name="status"
+                    value={formData.status}
+                    onChange={handleChange}
+                  >
+                    <option value="active">Active</option>
+                    <option value="inactive">Inactive</option>
+                    <option value="pending">Pending</option>
+                  </select>
+                  {errors.status && (
+                    <div className="text-danger">{errors.status}</div>
+                  )}
+                </div>
+              </div>
+
+              <button
+                type="submit"
+                className="btn btn-outline-dark flost-start btn-sm"
+              >
+                Update User
+              </button>
+            </form>
           </div>
-
-          <div className="mb-3 col-md-6 col-sm-12">
-            <label className="form-label">Status</label>
-            <select
-              className={`form-control ${errors.status ? "is-invalid" : ""}`}
-              name="status"
-              value={formData.status}
-              onChange={handleChange}
-            >
-              <option value="active">Active</option>
-              <option value="inactive">Inactive</option>
-              <option value="pending">Pending</option>
-            </select>
-            {errors.status && (
-              <div className="text-danger">{errors.status}</div>
-            )}
-          </div>
-
-          
-
-          <button type="submit" className="btn btn-primary">
-            Update User
-          </button>
-        </form>
+        </div>
       </div>
-    </DashLayout>
+    </>
   );
 }

@@ -72,9 +72,9 @@ export default function CustomTable({
   });
 
   return (
-    <div>
+    <div style={{borderRadius:"10px", padding:"0px"}}>
       {/* Search Input */}
-      <div style={{ marginBottom: 16 }}>
+      <div style={{ marginBottom: 16, borderRadius: "10px" }}>
         <Input
           placeholder="Search..."
           value={search}
@@ -92,7 +92,7 @@ export default function CustomTable({
         loading={loading}
         onChange={onTableChange} // Triggered on pagination or sorting
         rowKey="id"
-        bordered
+        style={{padding:'0px'}}
       />
     </div>
   );

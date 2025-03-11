@@ -15,6 +15,7 @@ import {
 } from "../../../constants";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import AdminSideBar from "../../components/Venue/AdminSideBar";
 
 export default function Profile() {
   const token = localStorage.getItem("token");
@@ -317,34 +318,40 @@ export default function Profile() {
 
   return (
     <>
-      <DashLayout title="Profile" description="View and manage your profile">
-        <div className="container-fluid d-flex flex-column min-vh-100 mt-5">
-          <ToastContainer />
-          <div className="row">
+      <DashLayout title="Profile" description="View and manage your profile"/>
+      <ToastContainer />
+
+              <div className="container-fluid d-flex flex-column min-vh-100">
+                <div className="d-flex mt-0">
+                  <div className="dash-sidebar-container">
+                    <AdminSideBar />
+                  </div>
+                  <div className="dash-profile-container">
+          <div className="row profile-font">
             <div className="col-md-12">
               <button
                 onClick={() => navigate(-1)}
-                className="btn btn-primary d-flex align-items-center mb-1 m-2"
+                className="btn btn-outline-dark btn-sm d-flex align-items-center mb-1 m-2"
               >
                 <i
                   className="fa fa-arrow-left"
                   style={{ marginRight: "8px" }}
                 ></i>
               </button>
-              <h2 className="text-secondary text-center">Profile</h2>
+              <p className="profile-font fw-semibold mt-3">PROFILE</p><hr/>
             </div>
-            <div className="row justify-content-center mb-4">
+            <div className="row justify-content-center mb-4 scrollable-container">
               <form onSubmit={handleSubmit} style={{ display: `${showform}` }}>
                 <div className="d-flex justify-content-center">
-                  <div className="card shadow-lg col-11 border-0 rounded p-4">
-                    <div className="card-body">
-                      <h5 className="text-start text-primary">
+                  <div className=" col-12 border-0 rounded">
+                    <div className="div">
+                      <p className="profile-font fw-semibold text-muted">
                         Entertainer Details
-                      </h5>
+                      </p>
                       <hr className="mb-4" />
                       <div className="row mb-3">
                         <div className="col-md-4">
-                          <label className="fw-medium">Entertainer Name</label>
+                          <label className="fw-semibold profile-font">Entertainer Name</label>
                           <Input
                             type="text"
                             name="name"
@@ -357,7 +364,7 @@ export default function Profile() {
                           )}
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-medium">
+                          <label className="fw-semibold profile-font">
                             Entertainer Main Category
                           </label>
                           <Select
@@ -368,7 +375,7 @@ export default function Profile() {
                           />
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-medium">
+                          <label className="fw-semibold profile-font">
                             Entertainer Sub Category
                           </label>
                           <Select
@@ -383,17 +390,18 @@ export default function Profile() {
 
                       <div className="row mb-3">
                         <div className="col-md-4">
-                          <label className="fw-medium">Bio</label>
+                          <label className="fw-semibold profile-font">Bio</label>
                           <textarea
                             className="form-control"
                             name="bio"
                             value={formData.bio}
+                            rows="2"
                             onChange={handleInputChange}
                             placeholder="Describe your business"
                           />
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-medium">Contact Number 1</label>
+                          <label className="fw-semibold profile-font">Contact Number 1</label>
                           <Input
                             type="text"
                             name="phone1"
@@ -406,7 +414,7 @@ export default function Profile() {
                           )}
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-medium">Contact Number 2</label>
+                          <label className="fw-semibold profile-font">Contact Number 2</label>
                           <Input
                             type="text"
                             name="phone2"
@@ -419,7 +427,7 @@ export default function Profile() {
 
                       <div className="row mb-3">
                         <div className="col-md-4">
-                          <label className="fw-medium">Performance Role</label>
+                          <label className="fw-semibold profile-font">Performance Role</label>
                           <Select
                             name="performanceRole"
                             options={performanceRole}
@@ -434,7 +442,7 @@ export default function Profile() {
                           )}
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-medium">Availability?</label>
+                          <label className="fw-semibold profile-font">Availability?</label>
                           <RadioButton
                             name="availability"
                             options={options}
@@ -448,7 +456,7 @@ export default function Profile() {
                           )}
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-medium">Price Per Event</label>
+                          <label className="fw-semibold profile-font">Price Per Event</label>
                           <Input
                             type="number"
                             name="pricePerEvent"
@@ -460,7 +468,7 @@ export default function Profile() {
                       </div>
                       <div className="row mb-3">
                         <div className="col-md-4">
-                          <label className="fw-medium">Vaccinated?</label>
+                          <label className="fw-semibold profile-font">Vaccinated?</label>
                           <RadioButton
                             name="vaccinated"
                             options={options}
@@ -474,10 +482,10 @@ export default function Profile() {
                           )}
                         </div>
                       </div>
-                      <h5 className="text-start text-primary mt-2">Links</h5>
+                      <p className="text-start text-muted profile-font fw-semibold mt-2">Links</p>
                       <hr className="mb-4" />
                       <div className="row mb-3">
-                        <label className="fw-medium">Social Media Link</label>
+                        <label className="fw-semibold profile-font">Social Media Link</label>
                         <div className="col-md-6 col-sm-12">
                           <Input
                             type="text"
@@ -489,10 +497,10 @@ export default function Profile() {
                         </div>
                       </div>
                       <div className="row ">
-                        <div className="col d-flex justify-content-center">
+                        <div className="col d-flex ">
                           <Button
                             type="submit"
-                            className="btn-primary w-25 fw-bold"
+                            className="btn-outline-dark float-start "
                             label={isEditing ? "Update" : "Submit"}
                           />
                         </div>
@@ -634,8 +642,9 @@ export default function Profile() {
               </form>
             </div>
           </div>
+          </div>
+          </div>
         </div>
-      </DashLayout>
     </>
   );
 }
