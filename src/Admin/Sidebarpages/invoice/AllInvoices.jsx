@@ -94,7 +94,25 @@ const AllInvoices = () => {
       dataIndex: "total_with_tax",
       key: "total_with_tax",
     },
-    { title: "Status", dataIndex: "status", key: "status" },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+      render: (status) => {
+        const normalizedStatus = status?.toString().trim().toLowerCase();
+        let statusClass = "badge bg-warning text-dark"; 
+  
+        if (normalizedStatus === "paid") {
+          statusClass = "badge bg-success";
+        } else if (normalizedStatus === "pending") {
+          statusClass = "badge bg-secondary";
+        } else if (normalizedStatus === "overdue") {
+          statusClass = "badge bg-danger";
+        }
+  
+        return <span className={statusClass}>{status}</span>;
+      },
+    },
     { title: "Actions", key: "actions", actions: true },
   ];
 
