@@ -318,7 +318,7 @@ export default function EditVenue() {
               </div>
             )}
 
-            <form onSubmit={handleSubmit} className="conatiner m-1 profile-font scrollable-container">
+            <form onSubmit={handleSubmit} className="conatiner m-1 profile-font scrollable-container event-form p-3">
               <div className="row text-start ">
                 <h5 className=" profile-font fw-semibold text-muted">General Information</h5>
                 <hr className="fw-bold" />

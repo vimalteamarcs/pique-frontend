@@ -36,6 +36,8 @@ const AdminLogin = () => {
     console.log(formData);
 
     try {
+      console.log(`${import.meta.env.VITE_API_URL}${ADMIN_LOGIN}`);
+
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}${ADMIN_LOGIN}`,
         formData

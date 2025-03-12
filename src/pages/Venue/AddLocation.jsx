@@ -171,7 +171,7 @@ export default function AddLocation() {
                 </div>
                 <div className="dash-profile-container">
         <p className="profile-font fw-semibold">ADD LOCATIONS FOR {venue.name}</p><hr/>
-        <form onSubmit={handleSubmit} className="profile-font">
+        <form onSubmit={handleSubmit} className="profile-font event-form pt-2 pb-2">
           {locations.map((loc, index) => (
             <div key={index} className="mb-3">
               <label className="form-label">Address Line 1</label>

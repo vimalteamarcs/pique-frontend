@@ -172,14 +172,14 @@ const CreateEvent = () => {
           </div>
           <div className="dash-profile-container">
             <div className="d-flex justify-content-between">
-            <p className="fs-6 fw-semibold">EVENTS</p>
-            <button
+              <p className="fs-6 fw-semibold">EVENTS</p>
+              <button
                 onClick={() => navigate(-1)}
                 className="btn btn-outline-dark d-flex justify-content-between float-start mb-4 btn-sm"
               >
-                 GO BACK TO LIST
+                GO BACK TO LIST
               </button>
-              </div>
+            </div>
             <div className="div event-form">
               <p className="profile-font fw-semibold mt-3">Create Event</p>
               <hr />
@@ -189,8 +189,8 @@ const CreateEvent = () => {
                 GENERAL INFORMATION
               </p>
               <form onSubmit={handleSubmit}>
-              {venue ? (
-                <div className="row mt-2">
+                {venue ? (
+                  <div className="row mt-2">
                     <div className="col-md-6">
                       <label htmlFor="title" className="form-label">
                         Event Name
@@ -210,77 +210,89 @@ const CreateEvent = () => {
                         <div className="invalid-feedback">{errors.title}</div>
                       )}
                     </div>
-                    </div>
+                  </div>
                 ) : (
                   <>
-                  <div className="row mb-3">
-                    <div className="col-md-6">
-                      <label htmlFor="title" className="form-label profile-font fw-semibold mb-0">
-                        Event Name
-                      </label>
-                      <Input
-                        type="text"
-                        className={`form-control profile-font${
-                          errors.title ? "is-invalid" : ""
-                        }`}
-                        placeholder="Enter event name"
-                        id="title"
-                        name="title"
-                        value={formData.title}
-                        onChange={handleInputChange}
-                      />
-                      {errors.title && (
-                        <div className="invalid-feedback">{errors.title}</div>
-                      )}
-                    </div>
-                    <div className="col-md-6 position-relative">
-                      <label htmlFor="venueId" className="form-label profile-font fw-semibold mb-0">
-                        Select Venue
-                      </label>
-                      <input
-                        type="text"
-                        className={`form-control ${
-                          errors.venueId ? "is-invalid" : ""
-                        }`}
-                        placeholder="Enter venue name"
-                        id="venueId"
-                        name="venueId"
-                        value={venueQuery}
-                        onChange={handleVenueChange}
-                      />
-                      {errors.venueId && (
-                        <div className="invalid-feedback">{errors.venueId}</div>
-                      )}
-
-                      {venueSuggestions.length > 0 && (
-                        <ul
-                          className="list-group position-absolute w-100 mt-1"
-                          style={{ zIndex: 10 }}
+                    <div className="row mb-3">
+                      <div className="col-md-6">
+                        <label
+                          htmlFor="title"
+                          className="form-label profile-font fw-semibold mb-0"
                         >
-                          {venueSuggestions.map((venue) => (
-                            <li
-                              key={venue.id}
-                              className="list-group-item list-group-item-action"
-                              onClick={() => handleSelectVenue(venue)}
-                              style={{ cursor: "pointer" }}
-                            >
-                              {venue.name}
-                              <p style={{ fontSize: "0.675rem" }}>
-                                {venue.addressLine1 + " " + venue.addressLine2}
-                              </p>
-                            </li>
-                          ))}
-                        </ul>
-                      )}
+                          Event Name
+                        </label>
+                        <Input
+                          type="text"
+                          className={`form-control profile-font${
+                            errors.title ? "is-invalid" : ""
+                          }`}
+                          placeholder="Enter event name"
+                          id="title"
+                          name="title"
+                          value={formData.title}
+                          onChange={handleInputChange}
+                        />
+                        {errors.title && (
+                          <div className="invalid-feedback">{errors.title}</div>
+                        )}
+                      </div>
+                      <div className="col-md-6 position-relative">
+                        <label
+                          htmlFor="venueId"
+                          className="form-label profile-font fw-semibold mb-0"
+                        >
+                          Select Venue
+                        </label>
+                        <input
+                          type="text"
+                          className={`form-control ${
+                            errors.venueId ? "is-invalid" : ""
+                          }`}
+                          placeholder="Enter venue name"
+                          id="venueId"
+                          name="venueId"
+                          value={venueQuery}
+                          onChange={handleVenueChange}
+                        />
+                        {errors.venueId && (
+                          <div className="invalid-feedback">
+                            {errors.venueId}
+                          </div>
+                        )}
+
+                        {venueSuggestions.length > 0 && (
+                          <ul
+                            className="list-group position-absolute w-100 mt-1"
+                            style={{ zIndex: 10 }}
+                          >
+                            {venueSuggestions.map((venue) => (
+                              <li
+                                key={venue.id}
+                                className="list-group-item list-group-item-action"
+                                onClick={() => handleSelectVenue(venue)}
+                                style={{ cursor: "pointer" }}
+                              >
+                                {venue.name}
+                                <p style={{ fontSize: "0.675rem" }}>
+                                  {venue.addressLine1 +
+                                    " " +
+                                    venue.addressLine2}
+                                </p>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
                     </div>
-                    </div>
-                    </>
+                  </>
                 )}
-               
 
                 <div className="row mb-3">
                   <div className="col-md-6">
-                    <label htmlFor="location" className="form-label profile-font fw-semibold mb-0">
+                    <label
+                      htmlFor="location"
+                      className="form-label profile-font fw-semibold mb-0"
+                    >
                       Location
                     </label>
                     <textarea
@@ -300,7 +312,10 @@ const CreateEvent = () => {
                   </div>
 
                   <div className="col-md-6">
-                    <label htmlFor="recurring" className="form-label profile-font fw-semibold mb-0">
+                    <label
+                      htmlFor="recurring"
+                      className="form-label profile-font fw-semibold mb-0"
+                    >
                       Recurring
                     </label>
                     <select
@@ -310,17 +325,28 @@ const CreateEvent = () => {
                       value={formData.recurring}
                       onChange={handleInputChange}
                     >
-                      <option value="none" className="profile-font">None</option>
-                      <option value="daily" className="profile-font">Daily</option>
-                      <option value="weekly" className="profile-font">Weekly</option>
-                      <option value="monthly" className="profile-font">Monthly</option>
+                      <option value="none" className="profile-font">
+                        None
+                      </option>
+                      <option value="daily" className="profile-font">
+                        Daily
+                      </option>
+                      <option value="weekly" className="profile-font">
+                        Weekly
+                      </option>
+                      <option value="monthly" className="profile-font">
+                        Monthly
+                      </option>
                     </select>
                   </div>
                 </div>
 
                 <div className="row mb-3">
                   <div className="col-12 col-md-6">
-                    <label htmlFor="startTime" className="form-label profile-font fw-semibold mb-0">
+                    <label
+                      htmlFor="startTime"
+                      className="form-label profile-font fw-semibold mb-0"
+                    >
                       Start Date and Time
                     </label>
                     <input
@@ -339,7 +365,10 @@ const CreateEvent = () => {
                   </div>
 
                   <div className="col-12 col-md-6">
-                    <label htmlFor="endTime" className="form-label profile-font fw-semibold mb-0">
+                    <label
+                      htmlFor="endTime"
+                      className="form-label profile-font fw-semibold mb-0"
+                    >
                       End Date and Time
                     </label>
                     <input
@@ -358,23 +387,27 @@ const CreateEvent = () => {
                   </div>
                 </div>
 
-                <div className="mb-3">
-                  <label htmlFor="description" className="form-label profile-font fw-semibold mb-0">
-                    Description
-                  </label>
-                  <textarea
-                    className="form-control"
-                    id="description"
-                    name="description"
-                    value={formData.description}
-                    onChange={handleInputChange}
-                    rows="2"
-                  />
+                <div className="row mb-3">
+                  <div className="col-md-12">
+                    <label
+                      htmlFor="description"
+                      className="form-label profile-font fw-semibold mb-0"
+                    >
+                      Description
+                    </label>
+                    <textarea
+                      className="form-control"
+                      id="description"
+                      name="description"
+                      value={formData.description}
+                      onChange={handleInputChange}
+                      rows="2"
+                    />
+                  </div>
                 </div>
-
                 <button
                   type="submit"
-                  className="btn btn-outline-dark btn-sm mb-1 d-flex float-start mx-auto"
+                  className="btn btn-outline-dark btn-sm float-start mt-3"
                 >
                   Create Event
                 </button>

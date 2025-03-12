@@ -92,6 +92,7 @@ const EditEvent = () => {
         </button>
         <p className="profile-font fw-semibold mb-2">EDIT EVENT</p>
         <hr/>
+        <div className="event-form">
         <p className="fw-semibold profile-font text-muted">GENERAL INFORMATION</p>
         <form onSubmit={handleSubmit}>
           <div className="row mb-3">
@@ -166,10 +167,11 @@ const EditEvent = () => {
               />
             </div>
           </div>
-          <button type="submit" className="btn btn-outline-dark float-start btn-sm d-flex mx-auto">
+          <button type="submit" className="btn btn-outline-dark float-start btn-sm d-flex mx-auto mt-3">
             Update Event
           </button>
         </form>
+        </div>
       </div>
       </div>
       </div>

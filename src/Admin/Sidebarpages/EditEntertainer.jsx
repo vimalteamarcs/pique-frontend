@@ -545,7 +545,7 @@ export default function EditEntertainer() {
               </button>
               <p className="profile-font fw-semibold mt-3">PROFILE</p><hr/>
             </div>
-            <div className="row justify-content-center mb-4 scrollable-container">
+            <div className="row justify-content-center mb-4 scrollable-container event-form pt-2 m-1">
               <form onSubmit={handleSubmit}>
                 <div className="d-flex justify-content-center">
                   <div className="col-12 border-0">

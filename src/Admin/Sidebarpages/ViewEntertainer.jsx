@@ -156,7 +156,7 @@ export default function ViewEntertainer() {
             {/* Conditional rendering for entertainers */}
             {user?.role ? (
               <>
-                <div className="row align-items-center">
+                <div className="row align-items-center event-form">
                   <div className="col text-start mt-3">
                     <p className="profile-font fw-semibold ">USER DETAILS</p>
                     <hr />
@@ -179,7 +179,7 @@ export default function ViewEntertainer() {
                   </div>
                 </div>
 
-                <div className="row profile-font">
+                <div className="row profile-font event-form pt-3 mb-2">
                   <div className="mb-3 col-md-6 col-sm-12">
                     <p>
                       <strong>Name:</strong> {user?.name || " "}

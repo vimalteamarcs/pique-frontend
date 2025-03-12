@@ -5,6 +5,7 @@ import Spinner from "../../../components/Spinner";
 import * as XLSX from "xlsx";
 import { CURRENCY_SIGN, GET_REPORT } from "../../../../constants";
 import { useNavigate } from "react-router-dom";
+import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
 const ReportPage = () => {
   const [reportData, setReportData] = useState([]);
@@ -12,8 +13,22 @@ const ReportPage = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [dateFilter, setDateFilter] = useState("");
-  const [monthFilter, setMonthFilter] = useState("");
-  const navigate = useNavigate()
+  const [monthFilter, setMonthFilter] = useState(new Date().toISOString().slice(0, 7));
+
+useEffect(() => {
+  if (!monthFilter) {
+    setFilteredData(reportData);
+    return;
+  }
+
+  const filtered = reportData.filter((event) => {
+    const eventMonth = new Date(event.startTime).toISOString().slice(0, 7);
+    return eventMonth === monthFilter;
+  });
+
+  setFilteredData(filtered);
+}, [reportData, monthFilter]);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -79,9 +94,8 @@ const ReportPage = () => {
           Time: new Date(event.startTime).toLocaleTimeString(),
           "Entertainer Name": booking.entertainer?.name || "",
           Location: event.venue
-            ? `${event.venue.name || " "}, ${event.venue.addressLine1 || ""} ${
-                event.venue.addressLine2 || ""
-              }`
+            ? `${event.venue.name || " "}, ${event.venue.addressLine1 || ""} ${event.venue.addressLine2 || ""
+            }`
             : " ",
           "Inv Amt.": invoice.total_amount || "0",
           "Count Amt.": booking.count || " ",
@@ -89,9 +103,9 @@ const ReportPage = () => {
             booking.status === "confirmed"
               ? booking.isAcceptedDate
                 ? new Date(booking.isAcceptedDate).toLocaleDateString("en-US", {
-                    month: "2-digit",
-                    day: "2-digit",
-                  })
+                  month: "2-digit",
+                  day: "2-digit",
+                })
                 : ""
               : "",
           "Invoice Paid Amt.":
@@ -116,128 +130,146 @@ const ReportPage = () => {
   if (error) return <p>{error}</p>;
 
   return (
-    <DashLayout>
-      
-      {loading ? (
-        <Spinner />
-      ) : (
-        <>
-          <div className="container-fluid profile-font">
-          <p
-            className="profile-font mb-3 mt-3"
-            onClick={() => navigate('/admin/allentertainer')}
-            style={{cursor: 'pointer'}}
-          >
-            &lt; Back 
-          </p>
-            {/* Date Filter Input */}
-            <div className="d-flex justify-content-between my-3">
-              <div className="d-flex ">
-                <div>
-                  <label className="me-2 fw-bold">Filter by Date</label>
-                  <br />
-                  <input
-                    type="date"
-                    className="form-control w-auto me-2"
-                    value={dateFilter}
-                    onChange={handleDateFilter}
-                  />
-                </div>
-                <div>
-                  <label className="me-2 fw-bold">By Month:</label>
-                  <br />
-                  <input
-                    type="month"
-                    className="form-control w-auto"
-                    value={monthFilter}
-                    onChange={handleMonthFilter}
-                  />
-                </div>
-              </div>
-              <button className="btn btn-success" onClick={exportToExcel}>
-                Download Excel
-              </button>
-            </div>
+    <>
+      <div className="container-fluid d-flex flex-column min-vh-100">
+  {/* Fixed Navbar */}
+  <div className="position-fixed w-100 bg-white" >
+    <DashLayout />
+  </div>
 
-            <div className="table-responsive w-100">
-              <table className="table table-bordered table-striped">
-                <thead>
-                  <tr>
-                    <th className="text-nowrap m-2"> Date</th>
-                    <th className="text-nowrap m-2"> Time</th>
-                    <th className="text-nowrap m-2">Entertainer Name</th>
-                    <th className="text-nowrap m-2">Location</th>
-                    <th className="text-nowrap m-2">Inv Amt.</th>
-                    <th className="text-nowrap m-2">Count Amt.</th>
-                    <th className="text-nowrap m-2">Confirmation</th>
-                    <th className="text-nowrap m-2">Invoice Paid Amt.</th>
-                    <th className="text-nowrap m-2">Invoice Status</th>
-                    <th className="text-nowrap m-2">Chk#</th>
-                    <th className="text-nowrap m-2">Data Dep</th>
-                    <th className="text-nowrap m-2">Cord Paid Amt.</th>
-                    <th className="text-nowrap m-2">My Chk#</th>
-                    <th className="text-nowrap m-2">Date Sent</th>
-                    <th className="text-nowrap m-2">Entertainer Status</th>
-                    <th className="text-nowrap m-2">Venue Status</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {filteredData.map((event, index) =>
-                    event.bookings.map((booking, bIndex) =>
-                      booking.invoices.map((invoice, iIndex) => (
-                        <tr key={`${index}-${bIndex}-${iIndex}`}>
-                          <td>
-                            {new Date(event.startTime).toLocaleDateString()}
-                          </td>
-                          <td>
-                            {new Date(event.startTime).toLocaleTimeString()}
-                          </td>
-                          <td>{booking.entertainer?.name || " "}</td>
-                          <td>
-                            {event.venue
-                              ? `${event.venue.name || " "}, ${
-                                  event.venue.addressLine1 || ""
-                                } ${event.venue.addressLine2 || ""}`
-                              : " "}
-                          </td>
-                          <td>{CURRENCY_SIGN + invoice.total_amount || "0"}</td>
-                          <td>{booking.count || " "}</td>
-                          <td>
-                            {booking.status === "confirmed"
-                              ? booking.isAcceptedDate
-                                ? new Date(
-                                    booking.isAcceptedDate
-                                  ).toLocaleDateString("en-US", {
-                                    month: "2-digit",
-                                    day: "2-digit",
-                                  })
-                                : ""
-                              : ""}
-                          </td>
-                          <td>
-                            {invoice.status === "confirmed"
-                              ? CURRENCY_SIGN +invoice.total_with_tax 
-                              : CURRENCY_SIGN + 0}
-                          </td>
-                          <td>{invoice.status || " "}</td>
-                          <td>{invoice.invoice_number || " "}</td>
-                          <td>{invoice.payment_date || " "}</td>
-                          <td>{CURRENCY_SIGN}{invoice.total_with_tax || "0"}</td>
-                          <td>{invoice.check_number || " "}</td>
-                          <td>{invoice.issue_date || " "}</td>
-                          <td>{booking?.isAccepted || " "}</td>
-                          <td>{booking.status || " "}</td>
-                        </tr>
-                      ))
-                    )
-                  )}
-                </tbody>
-              </table>
+  <div className="d-flex mt-5">
+    {/* Fixed Sidebar */}
+    <div className="dash-sidebar-container position-fixed vh-100 mt-4" style={{ width: "250px", zIndex: 1040 }}>
+      <AdminSideBar />
+    </div>
+
+    {/* Main Content Section - Pushed to Right */}
+    <div className="dash-profile-container flex-grow-1" style={{ marginLeft: "250px" }}>
+            {loading ? (
+              <div className="d-flex justify-content-center my-5">
+              <div className="spinner-grow text-dark" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
             </div>
+            ) : (
+              <>
+               
+                <div className="profile-font">
+                  <div className="div mt-2">
+                  
+                  </div>
+                
+                 
+                  <div className="d-flex justify-content-between my-3">
+                    <div className="d-flex ">
+                      <div>
+                        <label className="me-2 fw-bold">Filter by Date</label>
+                        <br />
+                        <input
+                          type="date"
+                          className="form-control w-auto me-2"
+                          value={dateFilter}
+                          onChange={handleDateFilter}
+                        />
+                      </div>
+                      <div>
+                        <label className="me-2 fw-bold">By Month:</label>
+                        <br />
+                        <input
+                          type="month"
+                          className="form-control w-auto"
+                          value={monthFilter}
+                          onChange={handleMonthFilter}
+                        />
+                      </div>
+                      <button className="btn btn-success btn-sm h-50 mt-4 ms-3" onClick={exportToExcel}>
+                      Download Excel
+                    </button>
+                    </div>
+                   
+                  </div>
+
+                  <div className="table-responsive w-100">
+                    <table className="table table-bordered table-striped">
+                      <thead>
+                        <tr>
+                          <th className="text-nowrap m-2"> Date</th>
+                          <th className="text-nowrap m-2"> Time</th>
+                          <th className="text-nowrap m-2">Entertainer Name</th>
+                          <th className="text-nowrap m-2">Location</th>
+                          <th className="text-nowrap m-2">Inv Amt.</th>
+                          <th className="text-nowrap m-2">Count Amt.</th>
+                          <th className="text-nowrap m-2">Confirmation</th>
+                          <th className="text-nowrap m-2">Invoice Paid Amt.</th>
+                          <th className="text-nowrap m-2">Invoice Status</th>
+                          <th className="text-nowrap m-2">Chk#</th>
+                          <th className="text-nowrap m-2">Data Dep</th>
+                          <th className="text-nowrap m-2">Cord Paid Amt.</th>
+                          <th className="text-nowrap m-2">My Chk#</th>
+                          <th className="text-nowrap m-2">Date Sent</th>
+                          <th className="text-nowrap m-2">Entertainer Status</th>
+                          <th className="text-nowrap m-2">Venue Status</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {filteredData.map((event, index) =>
+                          event.bookings.map((booking, bIndex) =>
+                            booking.invoices.map((invoice, iIndex) => (
+                              <tr key={`${index}-${bIndex}-${iIndex}`}>
+                                <td>
+                                  {new Date(event.startTime).toLocaleDateString()}
+                                </td>
+                                <td>
+                                  {new Date(event.startTime).toLocaleTimeString()}
+                                </td>
+                                <td>{booking.entertainer?.name || " "}</td>
+                                <td>
+                                  {event.venue
+                                    ? `${event.venue.name || " "}, ${event.venue.addressLine1 || ""
+                                    } ${event.venue.addressLine2 || ""}`
+                                    : " "}
+                                </td>
+                                <td>{CURRENCY_SIGN + invoice.total_amount || "0"}</td>
+                                <td>{booking.count || " "}</td>
+                                <td>
+                                  {booking.status === "confirmed"
+                                    ? booking.isAcceptedDate
+                                      ? new Date(
+                                        booking.isAcceptedDate
+                                      ).toLocaleDateString("en-US", {
+                                        month: "2-digit",
+                                        day: "2-digit",
+                                      })
+                                      : ""
+                                    : ""}
+                                </td>
+                                <td>
+                                  {invoice.status === "confirmed"
+                                    ? CURRENCY_SIGN + invoice.total_with_tax
+                                    : CURRENCY_SIGN + 0}
+                                </td>
+                                <td>{invoice.status || " "}</td>
+                                <td>{invoice.invoice_number || " "}</td>
+                                <td>{invoice.payment_date || " "}</td>
+                                <td>{CURRENCY_SIGN}{invoice.total_with_tax || "0"}</td>
+                                <td>{invoice.check_number || " "}</td>
+                                <td>{invoice.issue_date || " "}</td>
+                                <td>{booking?.isAccepted || " "}</td>
+                                <td>{booking.status || " "}</td>
+                              </tr>
+                            ))
+                          )
+                        )}
+                      </tbody>
+                    </table>
+                  </div>
+                </div>
+              </>
+            )}
           </div>
-        </>
-      )}
-    </DashLayout>
+        </div>
+      </div>
+    </>
   );
 };
 

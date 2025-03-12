@@ -176,7 +176,7 @@ export default function ManageAllowedCountries() {
                     <div className="card-body p-2 profile-font">
                       <button
                         type="button"
-                        className="btn btn-outline-primary text-capitalize position-relative"
+                        className="btn btn-outline-dark btn-sm text-capitalize position-relative"
                         style={{ paddingRight: "30px" }}
                         data-bs-toggle="modal"
                         data-bs-target="#exampleModal"

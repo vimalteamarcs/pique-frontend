@@ -47,10 +47,20 @@ const CategoryForm = () => {
       );
       setMainCategories(response.data);
       //console.log(response);
+      if (response.data.length > 0) {
+        setMainCategoryId(response.data[0].id);
+      }
     } catch (err) {
       setError("Failed to fetch main categories");
     }
   };
+
+  useEffect(() => {
+    if (mainCategoryId) {
+      fetchSubCategories();
+    }
+  }, [mainCategoryId]);
+  
   // Fetch main categories and subcategories
   useEffect(() => {
     console.log(isMainCategory);
@@ -330,7 +340,7 @@ const CategoryForm = () => {
                             required
                             style={{ width: "250px" }}
                           />
-                          <button type="submit" className="btn btn-primary">
+                          <button type="submit" className="btn btn-dark btn-sm">
                             ADD
                           </button>
                         </form>
@@ -341,7 +351,7 @@ const CategoryForm = () => {
                     <div className="row">
                       {subCategories.length > 0 && (
                         <div className="">
-                          <h5>Subcategories</h5>
+                          <p className="profile-font fw-semibold">Subcategories</p>
                           <div
                             className=" d-flex  flex-wrap overflow-auto"
                             style={{
@@ -362,7 +372,7 @@ const CategoryForm = () => {
                                   <div className="card-body p-2">
                                     <button
                                       type="button"
-                                      className="btn btn-outline-primary text-capitalize position-relative"
+                                      className="btn btn-outline-dark btn-sm text-capitalize position-relative"
                                       style={{ paddingRight: "30px" }}
                                       data-bs-toggle="custom-modal"
                                       data-bs-target="#emodal"

@@ -147,17 +147,30 @@ const EventsList = () => {
       title: "Status",
       dataIndex: "status",
       key: "status",
-      render: (status) => (
-        <span
-          style={{ fontSize: "8px" }}
-          className={`badge text-uppercase ${
-            status === "pending" ? "bg-pending" : "bg-success"
-          }`}
-        >
-          {status}
-        </span>
-      ),
+      render: (status) => {
+        let badgeClass = "";
+    
+        if (status === "unpublished") {
+          badgeClass = "bg-unpublished";
+        } else if (status === "confirmed") {
+          badgeClass = "bg-confirmed";
+        } else if (status === "cancelled") {
+          badgeClass = "bg-cancelled";
+        } else {
+          badgeClass = "bg-success";
+        }
+    
+        return (
+          <span
+            style={{ fontSize: "10px" }}
+            className={`badge text-uppercase text-black ${badgeClass}`}
+          >
+            {status}
+          </span>
+        );
+      },
     },
+    
     { title: "Actions", key: "actions", actions: true },
   ];
 

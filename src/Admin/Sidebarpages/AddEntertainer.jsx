@@ -340,7 +340,7 @@ export default function Profile() {
               </button>
               <p className="profile-font fw-semibold mt-3">PROFILE</p><hr/>
             </div>
-            <div className="row justify-content-center mb-4 scrollable-container">
+            <div className="row justify-content-center mb-4 scrollable-container event-form pt-2 ms-1 mb-2">
               <form onSubmit={handleSubmit} style={{ display: `${showform}` }}>
                 <div className="d-flex justify-content-center">
                   <div className=" col-12 border-0 rounded">

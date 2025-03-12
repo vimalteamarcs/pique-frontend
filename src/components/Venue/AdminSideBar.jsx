@@ -19,7 +19,7 @@ const isUserEntertainerActive = location.pathname.startsWith("/admin/allusercopy
 
 
     const isUserActive = 
-    location.pathname.startsWith("/admin/allusercopy?role=venue") ||
+    location.pathname.startsWith("/admin/allusercopy") ||
     location.pathname.startsWith("/admin/adduser") ||
     location.pathname.startsWith("/admin/viewvenue") ||
     location.pathname.startsWith("/admin/edituser");
@@ -73,22 +73,22 @@ const isUserEntertainerActive = location.pathname.startsWith("/admin/allusercopy
                 <p className="mb-0 profile-font ms-2">Users</p>
               </div>
             </button>
-            <ul className="dropdown-menu px-3" aria-labelledby="usersDropdown" data-bs-auto-close="true">
+            <ul className="dropdown-menu" aria-labelledby="usersDropdown" data-bs-auto-close="true">
               <li>
                 <NavLink
                   to="/admin/allusercopy?role=venue"
                   className={({ isActive }) =>
-                    `dropdown-item dropdown-item-text ${isUserVenueActive && location.search.includes("role=venue") ? "dash-active-link fw-semibold" : ""}`
+                    `dropdown-item dropdown-item-text ${isActive? " fw-semibold" : ""}`
                   }
                 >
-                  <i className="fa-solid fa-lock me-2"></i> Venue
+                  <i className="fa-solid fa-lock me-3"></i> Venue
                 </NavLink>
               </li>
               <li>
                 <NavLink
                   to="/admin/allusercopy?role=entertainer"
                   className={({ isActive }) =>
-                    `dropdown-item dropdown-item-text ${isUserEntertainerActive && location.search.includes("role=entertainer") ? "dash-active-link fw-semibold" : ""}`
+                    `dropdown-item dropdown-item-text  ${isActive  ? " fw-semibold" : ""}`
                   }
                 >
                   <i className="fa-solid fa-user-shield me-2"></i> Entertainer
@@ -153,22 +153,28 @@ const isUserEntertainerActive = location.pathname.startsWith("/admin/allusercopy
             </button>
             <ul className="dropdown-menu" aria-labelledby="settingsDropdown" data-bs-auto-close="true">
               <li>
-                <NavLink to="/admin/manageisallowed" className="dropdown-item">
+                <NavLink to="/admin/manageisallowed" className={({ isActive }) =>
+                    `dropdown-item dropdown-item-text ${isActive  ? " fw-bold" : ""}`
+                  }>
                   <i className="fa-solid fa-lock me-2"></i> Manage Allowed Countries
                 </NavLink>
+                
               </li>
-              <li>
-                <NavLink to="/admin/createadminrole" className="dropdown-item">
+              {/* <li>
+                <NavLink to="/admin/createadminrole" className={({ isActive }) =>
+                    `dropdown-item dropdown-item-text ${isActive  ? " fw-bold" : ""}`}>
                   <i className="fa-solid fa-user-shield me-2"></i> Add Role
                 </NavLink>
               </li>
               <li>
-                <NavLink to="/admin/createadminuser" className="dropdown-item">
+                <NavLink to="/admin/createadminuser" className={({ isActive }) =>
+                    `dropdown-item dropdown-item-text ${isActive  ? " fw-bold" : ""}`}>
                   <i className="fa-solid fa-user-plus me-2"></i> Add User
                 </NavLink>
-              </li>
+              </li> */}
               <li>
-                <NavLink to="/admin/createcategory" className="dropdown-item">
+                <NavLink to="/admin/createcategory" className={({ isActive }) =>
+                    `dropdown-item dropdown-item-text ${isActive  ? " fw-bold" : ""}`}>
                   <i className="fa-solid fa-plus me-2"></i> Create Category
                 </NavLink>
               </li>

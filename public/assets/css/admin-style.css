@@ -326,8 +326,22 @@ html {
   font-size: var(--bs-body-fontsize);
 }
 
-.bg-pending {
-  background-color: #f17c44;
+.bg-unpublished {
+  background-color: #EAEAEA;
+  border-radius: 19px;
+  color: black;
+}
+
+.bg-cancelled {
+  background-color: #FFB276;
+  border-radius: 19px;
+  color: black;
+}
+
+.bg-confirmed {
+  background-color: #B8FFD3;
+  border: 1px solid #B8FFD3;
+  border-radius: 19px;
 }
 
 #root {
@@ -510,3 +524,37 @@ html {
     padding-right: 12px !important;
   }
   
+.total-user{
+  background: #EBF5FF !important;
+  border-radius: 7px !important;
+  height: 103px !important;
+}
+
+.total-bookings{
+  background: #F4EDFF !important;
+  border-radius: 7px !important;
+  height: 103px !important;
+}
+
+.total-entertainers{
+  background: #E9FFFA !important;
+  border-radius: 7px !important;
+  height: 103px !important; 
+}
+
+.total-venues{
+  background: #FFF4EE !important;
+  border-radius: 7px !important;
+  height: 103px !important;
+}
+
+.event-details{
+  background: #FAFAFA;
+  border-radius: 8px;
+}
+
+.revenue-earning{
+  width: 670px;
+height: 271px;
+}
+

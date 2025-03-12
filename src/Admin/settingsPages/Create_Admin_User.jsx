@@ -37,7 +37,12 @@ const Create_Admin_User = () => {
     const fetchRoles = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}${GET_ROLES}`
+          `${import.meta.env.VITE_API_URL}${GET_ROLES}`,
+          {
+            headers: {
+              Authorization: `Bearer ${localStorage.getItem("token")}`,
+            },
+          }
         );
         console.log(response.data);
 
@@ -116,8 +121,12 @@ const Create_Admin_User = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}${CREATE_ADMIN_USER}`,
-        formData
+        `${import.meta.env.VITE_API_URL}${CREATE_ADMIN_USER}`, 
+        formData,{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        },
       );
 
       if (response.status === 201) {
@@ -141,8 +150,8 @@ const Create_Admin_User = () => {
 
   return (
     <>
-    <DashLayout/>
-      children={
+      <DashLayout />
+      {
         <>
           <Helmet>
             <title>Create Admin User</title>
@@ -152,153 +161,153 @@ const Create_Admin_User = () => {
             />
           </Helmet>
 
-                <div className="container-fluid d-flex flex-column min-vh-100">
-                  <div className="d-flex mt-0">
-                    <div className="dash-sidebar-container">
-                      <AdminSideBar />
+          <div className="container-fluid d-flex flex-column min-vh-100">
+            <div className="d-flex mt-0">
+              <div className="dash-sidebar-container">
+                <AdminSideBar />
+              </div>
+              <div className="dash-profile-container">
+                <div className="row d-flex">
+                  <p className="fw-semibold profile-font">REGISTER ADMIN USER</p><hr />
+                </div>
+
+                <form onSubmit={handleSubmit} className="profile-font">
+                  <div className="row">
+                    {/* Name */}
+                    <div className="col-md-6 col-sm-12">
+                      <label className="text-start fw-bold">Name</label>
+                      <Input
+                        type="text"
+                        placeholder="Enter user name"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                      />
+                      {errors.name && (
+                        <p className="text-danger text-start">{errors.name}</p>
+                      )}
                     </div>
-                    <div className="dash-profile-container">
-            <div className="row d-flex">
-              <p className="fw-semibold profile-font">REGISTER ADMIN USER</p><hr/>
-            </div>
 
-            <form onSubmit={handleSubmit} className="profile-font">
-              <div className="row">
-                {/* Name */}
-                <div className="col-md-6 col-sm-12">
-                  <label className="text-start fw-bold">Name</label>
-                  <Input
-                    type="text"
-                    placeholder="Enter user name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                  />
-                  {errors.name && (
-                    <p className="text-danger text-start">{errors.name}</p>
-                  )}
-                </div>
-
-                {/* Email */}
-                <div className="col-md-6 col-sm-12">
-                  <label className="text-start fw-bold">Email</label>
-                  <Input
-                    type="email"
-                    placeholder="Enter email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                  />
-                  {errors.email && (
-                    <p className="text-danger text-start">{errors.email}</p>
-                  )}
-                </div>
-              </div>
-              <div className="row">
-                {/* Contact */}
-                <div className="col-md-6 col-sm-12">
-                  <label className="text-start fw-bold">Contact</label>
-                  <Input
-                    type="text"
-                    placeholder="Enter contact number"
-                    name="contact"
-                    value={formData.contact}
-                    onChange={handleChange}
-                  />
-                  {errors.contact && (
-                    <p className="text-danger text-start">{errors.contact}</p>
-                  )}
-                </div>
-                {/* Role Dropdown */}
-                <div className="col-md-6 col-sm-12">
-                  <label className="text-start fw-bold">Role</label>
-                  <select
-                    name="role"
-                    value={formData.role}
-                    onChange={handleChange}
-                    className="form-control"
-                  >
-                    <option value="">Select Role</option>
-                    {roles.map((role, index) => (
-                      <option key={index} value={role.id}>
-                        {role.role_name}
-                      </option>
-                    ))}
-                  </select>
-                  {errors.role && (
-                    <p className="text-danger text-start">{errors.role}</p>
-                  )}
-                </div>
-                {/* Password */}
-                <div className="col-md-6 col-sm-12">
-                  <label className="text-start fw-bold">Password</label>
-                  <div className="position-relative">
-                    <Input
-                      type={showPassword ? "text" : "password"}
-                      placeholder="Enter password"
-                      name="password"
-                      value={formData.password}
-                      onChange={handleChange}
-                    />
-                    <button
-                      type="button"
-                      className="btn  btn-sm position-absolute top-50 end-0 translate-middle-y"
-                      onClick={() => setShowPassword(!showPassword)}
-                    >
-                      <i
-                        className={
-                          showPassword ? "fas fa-eye-slash" : "fas fa-eye"
-                        }
-                      ></i>
-                    </button>
+                    {/* Email */}
+                    <div className="col-md-6 col-sm-12">
+                      <label className="text-start fw-bold">Email</label>
+                      <Input
+                        type="email"
+                        placeholder="Enter email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                      />
+                      {errors.email && (
+                        <p className="text-danger text-start">{errors.email}</p>
+                      )}
+                    </div>
                   </div>
-                  {errors.password && (
-                    <p className="text-danger text-start">{errors.password}</p>
-                  )}
-                </div>
-                {/* Confirm Password */}
-                <div className="col-md-6 col-sm-12">
-                  <label className="text-start fw-bold">Confirm Password</label>
-                  <div className="position-relative">
-                    <Input
-                      type={showConfirmPassword ? "text" : "password"}
-                      placeholder="Confirm password"
-                      name="confirmPassword"
-                      value={formData.confirmPassword}
-                      onChange={handleChange}
-                    />
-                    <button
-                      type="button"
-                      className="btn  btn-sm position-absolute top-50 end-0 translate-middle-y"
-                      onClick={() =>
-                        setShowConfirmPassword(!showConfirmPassword)
-                      }
-                    >
-                      <i
-                        className={
-                          showConfirmPassword
-                            ? "fas fa-eye-slash"
-                            : "fas fa-eye"
-                        }
-                      ></i>
-                    </button>
+                  <div className="row">
+                    {/* Contact */}
+                    <div className="col-md-6 col-sm-12">
+                      <label className="text-start fw-bold">Contact</label>
+                      <Input
+                        type="text"
+                        placeholder="Enter contact number"
+                        name="contact"
+                        value={formData.contact}
+                        onChange={handleChange}
+                      />
+                      {errors.contact && (
+                        <p className="text-danger text-start">{errors.contact}</p>
+                      )}
+                    </div>
+                    {/* Role Dropdown */}
+                    <div className="col-md-6 col-sm-12">
+                      <label className="text-start fw-bold">Role</label>
+                      <select
+                        name="role"
+                        value={formData.role}
+                        onChange={handleChange}
+                        className="form-control"
+                      >
+                        <option value="">Select Role</option>
+                        {roles.map((role, index) => (
+                          <option key={index} value={role.id}>
+                            {role.role_name}
+                          </option>
+                        ))}
+                      </select>
+                      {errors.role && (
+                        <p className="text-danger text-start">{errors.role}</p>
+                      )}
+                    </div>
+                    {/* Password */}
+                    <div className="col-md-6 col-sm-12">
+                      <label className="text-start fw-bold">Password</label>
+                      <div className="position-relative">
+                        <Input
+                          type={showPassword ? "text" : "password"}
+                          placeholder="Enter password"
+                          name="password"
+                          value={formData.password}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          className="btn  btn-sm position-absolute top-50 end-0 translate-middle-y"
+                          onClick={() => setShowPassword(!showPassword)}
+                        >
+                          <i
+                            className={
+                              showPassword ? "fas fa-eye-slash" : "fas fa-eye"
+                            }
+                          ></i>
+                        </button>
+                      </div>
+                      {errors.password && (
+                        <p className="text-danger text-start">{errors.password}</p>
+                      )}
+                    </div>
+                    {/* Confirm Password */}
+                    <div className="col-md-6 col-sm-12">
+                      <label className="text-start fw-bold">Confirm Password</label>
+                      <div className="position-relative">
+                        <Input
+                          type={showConfirmPassword ? "text" : "password"}
+                          placeholder="Confirm password"
+                          name="confirmPassword"
+                          value={formData.confirmPassword}
+                          onChange={handleChange}
+                        />
+                        <button
+                          type="button"
+                          className="btn  btn-sm position-absolute top-50 end-0 translate-middle-y"
+                          onClick={() =>
+                            setShowConfirmPassword(!showConfirmPassword)
+                          }
+                        >
+                          <i
+                            className={
+                              showConfirmPassword
+                                ? "fas fa-eye-slash"
+                                : "fas fa-eye"
+                            }
+                          ></i>
+                        </button>
+                      </div>
+                      {errors.confirmPassword && (
+                        <p className="text-danger text-start">
+                          {errors.confirmPassword}
+                        </p>
+                      )}
+                    </div>
                   </div>
-                  {errors.confirmPassword && (
-                    <p className="text-danger text-start">
-                      {errors.confirmPassword}
-                    </p>
-                  )}
-                </div>
-              </div>
 
-              {/* Submit Button */}
-              <Button
-                type="submit"
-                className="btn-dark mt-3 btn-sm text-white"
-                label="Create User"
-              />
-            </form>
-            </div>
+                  {/* Submit Button */}
+                  <Button
+                    type="submit"
+                    className="btn-dark mt-3 btn-sm text-white"
+                    label="Create User"
+                  />
+                </form>
+              </div>
             </div>
           </div>
         </>

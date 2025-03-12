@@ -9,7 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { CREATE_USER, CREATE_VENUE, UPLOAD_MEDIA } from "../../../../constants";
 import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
-export default function AddVenue() {
+export default function  AddVenue() {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [countries, setCountries] = useState([]);
@@ -305,7 +305,7 @@ export default function AddVenue() {
                   </ul>
                 </div>
               )}
-              <div className="justify-content-center scrollable-container">
+              <div className="justify-content-center scrollable-container event-form pt-2">
                 <div className="col-md-12">
                   <div className="text-center">
                     <form onSubmit={handleSubmit}>
@@ -668,7 +668,7 @@ export default function AddVenue() {
 
                         {/* Submit Button */}
                         <div className="row mt-4">
-                          <div className="col d-flex justify-content-center">
+                          <div className="col ">
                             <Button
                               type="submit"
                               className="btn-outline-dark float-start fw-semibold"

@@ -29,9 +29,9 @@ const CREATE_USER="admin/users/create";
 const GET_VENUE_BY_USER="admin/venue/venuebyId/";
 
 const ADMIN_LOGIN="admin/auth/login";
-const CREATE_ADMIN_USER="admin/auth/createadminuser";
+const CREATE_ADMIN_USER="admin/adminuser/createadminuser";
 
-const CREATE_ROLE="admin/adminuser/createrole";
+const CREATE_ROLE="admin//createrole";
 const GET_CAPABILITIES="admin/adminuser/capabilities";
 const GET_ROLES="admin/adminuser/roles";
 

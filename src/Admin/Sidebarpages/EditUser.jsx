@@ -107,7 +107,7 @@ export default function EditUser() {
           <div className="dash-profile-container">
             <button
               onClick={() => navigate(-1)}
-              className="btn btn-primary d-flex align-items-center mb-4"
+              className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
             >
               <i
                 className="fa fa-arrow-left"
@@ -117,7 +117,7 @@ export default function EditUser() {
 
             <p className="profile-font fw-semibold">UPDATE USER DETAILS</p>
             <hr />
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} className="event-form pt-2 pb-3">
               <div className="row profile-font">
                 <div className="mb-3 col-md-6 col-sm-12">
                   <label className="form-label fw-semibold mb-0">Name</label>

@@ -148,7 +148,7 @@ const Venuedetails = () => {
           ) : null}
         </div>
         <p className="profile-font fw-semibold">VENUE DETAILS</p><hr/>
-        <div className="row profile-font fw-semibold scrollable-container">
+        <div className="row profile-font fw-semibold scrollable-container event-form pt-2">
           <div className="col-md-6 col-sm-12">
             <div className="mb-3">
               <label className="form-label">Name:</label>
