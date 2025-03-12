@@ -74,7 +74,7 @@ export default function CustomTable({
   return (
     <div style={{borderRadius:"10px", padding:"0px"}}>
       {/* Search Input */}
-      <div style={{ marginBottom: 16, borderRadius: "10px" }}>
+      <div style={{ marginBottom: 16, borderRadius: "10px" }} className="d-flex justify-content-between">
         <Input
           placeholder="Search..."
           value={search}
