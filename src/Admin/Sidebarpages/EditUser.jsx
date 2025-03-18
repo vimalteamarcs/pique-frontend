@@ -99,7 +99,7 @@ export default function EditUser() {
     <>
       <DashLayout />
       <ToastContainer />
-      <div className="container-fluid d-flex flex-column min-vh-100">
+      <div className="container-fluid w-100 p-0">
         <div className="d-flex mt-0">
           <div className="dash-sidebar-container">
             <AdminSideBar />
@@ -120,12 +120,11 @@ export default function EditUser() {
             <form onSubmit={handleSubmit} className="event-form pt-2 pb-3">
               <div className="row profile-font">
                 <div className="mb-3 col-md-6 col-sm-12">
-                  <label className="form-label fw-semibold mb-0">Name</label>
+                  <label className="form-label fw-medium mb-0">Name</label>
                   <input
                     type="text"
-                    className={`form-control ${
-                      errors.name ? "is-invalid" : ""
-                    }`}
+                    className={`custom-form-event ps-3${errors.name ? "is-invalid" : ""
+                      }`}
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
@@ -137,12 +136,11 @@ export default function EditUser() {
                 </div>
 
                 <div className="mb-3 col-md-6 col-sm-12">
-                  <label className="form-label fw-semibold mb-0">Email</label>
+                  <label className="form-label fw-medium mb-0">Email</label>
                   <input
                     type="email"
-                    className={`form-control ${
-                      errors.email ? "is-invalid" : ""
-                    }`}
+                    className={`custom-form-event ps-3${errors.email ? "is-invalid" : ""
+                      }`}
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
@@ -156,14 +154,13 @@ export default function EditUser() {
 
               <div className="row profile-font">
                 <div className="mb-3 col-md-6 col-sm-12">
-                  <label className="form-label fw-semibold mb-0">
+                  <label className="form-label fw-medium mb-0">
                     Phone Number
                   </label>
                   <input
                     type="text"
-                    className={`form-control ${
-                      errors.phoneNumber ? "is-invalid" : ""
-                    }`}
+                    className={`custom-form-event ps-3 ${errors.phoneNumber ? "is-invalid" : ""
+                      }`}
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleChange}
@@ -175,11 +172,10 @@ export default function EditUser() {
                 </div>
 
                 <div className="mb-3 col-md-6 col-sm-12">
-                  <label className="form-label fw-semibold mb-0">Role</label>
+                  <label className="form-label fw-medium mb-0">Role</label>
                   <select
-                    className={`form-control ${
-                      errors.role ? "is-invalid" : ""
-                    }`}
+                    className={`custom-form-event custom-select ps-3${errors.role ? "is-invalid" : ""
+                      }`}
                     name="role"
                     value={formData.role}
                     onChange={handleChange}
@@ -195,11 +191,10 @@ export default function EditUser() {
 
               <div className="row profile-font">
                 <div className="mb-3 col-md-6 col-sm-12">
-                  <label className="form-label fw-semibold mb-0">Status</label>
+                  <label className="form-label fw-medium mb-0">Status</label>
                   <select
-                    className={`form-control ${
-                      errors.status ? "is-invalid" : ""
-                    }`}
+                    className={`custom-form-event custom-select ps-3 ${errors.status ? "is-invalid" : ""
+                      }`}
                     name="status"
                     value={formData.status}
                     onChange={handleChange}
@@ -216,7 +211,7 @@ export default function EditUser() {
 
               <button
                 type="submit"
-                className="btn btn-outline-dark flost-start btn-sm"
+                className="btn btn-dark rounded-3 flost-start" style={{fontSize:"12px"}}
               >
                 Update User
               </button>

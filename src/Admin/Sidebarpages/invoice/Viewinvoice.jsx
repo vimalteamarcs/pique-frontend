@@ -198,149 +198,148 @@ export default function Viewinvoice() {
 
   return (
     <>
-    <DashLayout/>
-            <div className="container-fluid d-flex flex-column min-vh-100">
-              <div className="d-flex mt-0">
-                <div className="dash-sidebar-container">
-                  <AdminSideBar />
-                </div>
-                <div className="dash-profile-container">
-                  <div className="d-flex justify-content-between">
-                  <p className="fw-semibold profile-font mt-2">INVOICE: {invoicedata.invoice_number}</p>
-          <button className="btn btn-outline-dark btn-sm" onClick={handleDownloadPDF}>
-            Download <i className="bi bi-download"></i>
-          </button>
-                  </div><hr/>
-
-        <div className="">
-          <p
-            className="profile-font mb-3"
-            onClick={() => navigate(-1)}
-            style={{cursor: 'pointer'}}
-          >
-            &lt; Back to Invoice List
-          </p>
-        </div>
-      
-
-      <ToastContainer />
-      <div
-        className="card p-3"
-        // style={{ maxHeight: "400px", overflowY: "auto" }}
-      >
-        {invoicedata ? (
-          <div className="invoice-container profile-font">
-            <div className="border p-3 bg-light">
-              <h3 className="m-0" style={{ color: "darkblue" }}>
-                Invoice
-              </h3>
-              <div className="row align-items-center">
-                <div className="col-3">
-                  <p className="text-wrap mb-0">
-                    {invoicedata.name}
-                    <br />
-                    <small>
-                      {invoicedata.addressLine1}, {invoicedata.addressLine2},{" "}
-                      {invoicedata.zipCode}
-                    </small>
-                  </p>
-                </div>
-                <div className="col-3 text-start">
-                  <small>
-                    Email: {invoicedata.email}
-                    <br />
-                    Mobile: {invoicedata.phone}
-                  </small>
-                </div>
-                <div className="col-6 text-end">
-                  <img
-                    src={`${
-                      import.meta.env.VITE_BASE
-                    }assets/images/piquelogo.png`}
-                    alt="logo"
-                    className="img"
-                  />
-                </div>
-              </div>
-              <br />
-              <br />
-              <div className="row">
-                <div className="col">
-                  <h5 className="fw-bold" style={{ color: "darkblue" }}>
-                    {invoicedata.event_name}
-                  </h5>
-                  <h6 className="fw-bold">Bill to</h6>
-                  <p>
-                    {invoicedata.entertainer_name} <br /> {invoicedata.name}
-                  </p>
-                </div>
-                <div className="col text-end">
-                  <h6 className="fw-bold">Ship to</h6>
-                  <p>
-                    {invoicedata.entertainer_name} <br /> {invoicedata.name}
-                  </p>
-                </div>
-              </div>
-            </div>
-
-            <div className="border p-3 my-3">
-              <h6 className="fw-bold">Invoice details</h6>
-              <p>Invoice no.: {invoicedata.invoice_number}</p>
-              <p>
-                Invoice date:{" "}
-                {new Date(invoicedata.issue_date).toLocaleDateString()}
-              </p>
-              <p>
-                Due date: {new Date(invoicedata.due_date).toLocaleDateString()}
-              </p>
-            </div>
-
-            <table className="table">
-              <thead className="table-light">
-                <tr>
-                  <th>#</th>
-                  <th>Date</th>
-                  <th>Product or service</th>
-                  <th>Qty</th>
-                  <th>Tax Rate</th>
-                  <th>Tax Amount</th>
-                  <th>Amount</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>1</td>
-                  <td>
-                    {new Date(invoicedata.issue_date).toLocaleDateString()}
-                  </td>
-                  <td>
-                    <strong className="text-warp">
-                      {invoicedata.event_name}
-                    </strong>
-                  </td>
-                  <td>1</td>
-                  <td>{invoicedata.tax_rate}%</td>
-                  <td>${invoicedata.tax_amount}</td>
-                  <td>${invoicedata.total_amount}</td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div className="text-end">
-              <h5 className="fw-bold">Total: ${invoicedata.total_with_tax}</h5>
-            </div>
-
-            <p className="mt-3 text-muted">
-              Thank you for your business. Checks can be mailed to my company
-              address, or I am happy to set up direct deposit with ACH payments.
-            </p>
+      <DashLayout />
+      <div className="container-fluid w-100 p-0">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
           </div>
-        ) : (
-          <div className="alert alert-danger">No invoice data available</div>
-        )}
-      </div>
-      </div>
-      </div>
+          <div className="dash-profile-container">
+            <div className="d-flex justify-content-between">
+              <p className="fw-semibold profile-font mt-2">INVOICE: {invoicedata.invoice_number}</p>
+              <button className="btn btn-outline-dark btn-sm" onClick={handleDownloadPDF}>
+                Download <i className="bi bi-download"></i>
+              </button>
+            </div><hr />
+
+            <div className="">
+              <p
+                className="profile-font mb-3"
+                onClick={() => navigate(-1)}
+                style={{ cursor: 'pointer' }}
+              >
+                &lt; Back to Invoice List
+              </p>
+            </div>
+
+
+            <ToastContainer />
+            <div
+              className="card p-3"
+            // style={{ maxHeight: "400px", overflowY: "auto" }}
+            >
+              {invoicedata ? (
+                <div className="invoice-container profile-font">
+                  <div className="border p-3 bg-light">
+                    <h3 className="m-0" style={{ color: "darkblue" }}>
+                      Invoice
+                    </h3>
+                    <div className="row align-items-center">
+                      <div className="col-3">
+                        <p className="text-wrap mb-0">
+                          {invoicedata.name}
+                          <br />
+                          <small>
+                            {invoicedata.addressLine1}, {invoicedata.addressLine2},{" "}
+                            {invoicedata.zipCode}
+                          </small>
+                        </p>
+                      </div>
+                      <div className="col-3 text-start">
+                        <small>
+                          Email: {invoicedata.email}
+                          <br />
+                          Mobile: {invoicedata.phone}
+                        </small>
+                      </div>
+                      <div className="col-6 text-end">
+                        <img
+                          src={`${import.meta.env.VITE_BASE
+                            }assets/images/piquelogo.png`}
+                          alt="logo"
+                          className="img"
+                        />
+                      </div>
+                    </div>
+                    <br />
+                    <br />
+                    <div className="row">
+                      <div className="col">
+                        <h5 className="fw-bold" style={{ color: "darkblue" }}>
+                          {invoicedata.event_name}
+                        </h5>
+                        <h6 className="fw-bold">Bill to</h6>
+                        <p>
+                          {invoicedata.entertainer_name} <br /> {invoicedata.name}
+                        </p>
+                      </div>
+                      <div className="col text-end">
+                        <h6 className="fw-bold">Ship to</h6>
+                        <p>
+                          {invoicedata.entertainer_name} <br /> {invoicedata.name}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="border p-3 my-3">
+                    <h6 className="fw-bold">Invoice details</h6>
+                    <p>Invoice no.: {invoicedata.invoice_number}</p>
+                    <p>
+                      Invoice date:{" "}
+                      {new Date(invoicedata.issue_date).toLocaleDateString()}
+                    </p>
+                    <p>
+                      Due date: {new Date(invoicedata.due_date).toLocaleDateString()}
+                    </p>
+                  </div>
+
+                  <table className="table">
+                    <thead className="table-light">
+                      <tr>
+                        <th>#</th>
+                        <th>Date</th>
+                        <th>Product or service</th>
+                        <th>Qty</th>
+                        <th>Tax Rate</th>
+                        <th>Tax Amount</th>
+                        <th>Amount</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>1</td>
+                        <td>
+                          {new Date(invoicedata.issue_date).toLocaleDateString()}
+                        </td>
+                        <td>
+                          <strong className="text-warp">
+                            {invoicedata.event_name}
+                          </strong>
+                        </td>
+                        <td>1</td>
+                        <td>{invoicedata.tax_rate}%</td>
+                        <td>${invoicedata.tax_amount}</td>
+                        <td>${invoicedata.total_amount}</td>
+                      </tr>
+                    </tbody>
+                  </table>
+
+                  <div className="text-end">
+                    <h5 className="fw-bold">Total: ${invoicedata.total_with_tax}</h5>
+                  </div>
+
+                  <p className="mt-3 text-muted">
+                    Thank you for your business. Checks can be mailed to my company
+                    address, or I am happy to set up direct deposit with ACH payments.
+                  </p>
+                </div>
+              ) : (
+                <div className="alert alert-danger">No invoice data available</div>
+              )}
+            </div>
+          </div>
+        </div>
       </div>
     </>
   );

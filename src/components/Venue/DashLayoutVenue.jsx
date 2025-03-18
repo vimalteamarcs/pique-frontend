@@ -12,10 +12,10 @@ export default function DashLayoutVenue({ title, description, children }) {
             </Helmet>
             {/* <div className=" p-0"> */}
                 {/* <VenueDashSidebar /> */}
-                <div className="container-fluid">
+                {/* <div className="container-fluid"> */}
                     <VenueDashNavbar/>
                     {children}
-                </div>
+                {/* </div> */}
             {/* </div> */}
         </>
   )

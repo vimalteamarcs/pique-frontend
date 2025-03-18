@@ -321,7 +321,7 @@ export default function Profile() {
       <DashLayout title="Profile" description="View and manage your profile"/>
       <ToastContainer />
 
-              <div className="container-fluid d-flex flex-column min-vh-100">
+              <div className="container-fluid w-100 p-0">
                 <div className="d-flex mt-0">
                   <div className="dash-sidebar-container">
                     <AdminSideBar />

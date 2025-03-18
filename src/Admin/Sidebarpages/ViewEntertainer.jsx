@@ -133,8 +133,8 @@ export default function ViewEntertainer() {
 
   return (
     <>
-    <DashLayout/>
-      <div className="container-fluid d-flex flex-column min-vh-100">
+      <DashLayout />
+      <div className="container-fluid w-100 p-0">
         <div className="d-flex mt-0">
           <div className="dash-sidebar-container">
             <AdminSideBar />
@@ -151,12 +151,12 @@ export default function ViewEntertainer() {
             </button>
 
             {loading && <p>Loading data...</p>}
-            {error && <p className="text-danger">{error}</p>}
+            {error && <p className="text-danger profile-font">{error}</p>}
 
             {/* Conditional rendering for entertainers */}
             {user?.role ? (
-              <>
-                <div className="row align-items-center event-form">
+              <div className="event-form mt-2 mb-2">
+                <div className="row align-items-center">
                   <div className="col text-start mt-3">
                     <p className="profile-font fw-semibold ">USER DETAILS</p>
                     <hr />
@@ -338,7 +338,7 @@ export default function ViewEntertainer() {
                     ))}
                   </div>
                 )}
-              </>
+              </div>
             ) : (
               <>
                 {entertainers.length === 0 ? (
@@ -375,7 +375,7 @@ export default function ViewEntertainer() {
                       </div>
                     </div>
                     {entertainers.map((entertainer) => (
-                      <div key={entertainer.id} className="col-12 profile-font">
+                      <div key={entertainer.id} className="col-12 profile-font event-form">
                         <div className="row mt-3">
                           <div className="mb-3 col-md-6 col-sm-12">
                             <p>

@@ -9,7 +9,7 @@ import { toast, ToastContainer } from "react-toastify";
 import { CREATE_USER, CREATE_VENUE, UPLOAD_MEDIA } from "../../../../constants";
 import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
-export default function  AddVenue() {
+export default function AddVenue() {
   const [states, setStates] = useState([]);
   const [cities, setCities] = useState([]);
   const [countries, setCountries] = useState([]);
@@ -125,8 +125,8 @@ export default function  AddVenue() {
       [name]: ["city", "state", "country"].includes(name)
         ? Number(value)
         : name === "amenities"
-        ? value.split(",")
-        : value,
+          ? value.split(",")
+          : value,
     }));
 
     if (name === "country") {
@@ -174,9 +174,11 @@ export default function  AddVenue() {
     const token = localStorage.getItem("token");
 
     // const parentId = null;
-    const finaldata = { ...formData, 
+    const finaldata = {
+      ...formData,
       // parentId, 
-      userId: data.id };
+      userId: data.id
+    };
     console.log("Final data:", finaldata, data.id);
     try {
       const response = await axios.post(
@@ -271,17 +273,17 @@ export default function  AddVenue() {
 
   return (
     <>
-      <DashLayout/>
-        <ToastContainer />
-        <div className="container-fluid d-flex flex-column min-vh-100">
-                <div className="d-flex mt-0">
-                  <div className="dash-sidebar-container">
-                    <AdminSideBar />
-                  </div>
-                  <div className="dash-profile-container">
-          <div className="row">
-            <div className="col-md-12">
-              
+      <DashLayout />
+      <ToastContainer />
+      <div className="container-fluid w-100 p-0">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container">
+            <div className="row">
+              <div className="col-md-12">
+
                 <button
                   onClick={() => navigate(-1)}
                   className="btn btn-outline-dark btn-sm d-flex align-items-center mb-1 m-2"
@@ -293,400 +295,400 @@ export default function  AddVenue() {
                 </button>
                 <p className="profile-font fw-semibold mt-3">
                   VENUE DETAILS
-                </p><hr/>
-              
-              {Object.keys(errors).length > 0 && (
-                <div className="alert alert-danger">
-                  <strong>Please fill out all required fields:</strong>
-                  <ul>
-                    {Object.keys(errors).map((field) => (
-                      <li key={field}>{errors[field]}</li>
-                    ))}
-                  </ul>
-                </div>
-              )}
-              <div className="justify-content-center scrollable-container event-form pt-2">
-                <div className="col-md-12">
-                  <div className="text-center">
-                    <form onSubmit={handleSubmit}>
-                      <p className="profile-font fw-semibold text-start text-muted">
-                        General Information
-                      </p><hr/>
-                      {/* <hr className="fw-bold" /> */}
-                      <div className="row profile-font">
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="name" className="fw-bold">
-                            Name*
-                          </label>
-                          <Input
-                            type="text"
-                            name="name"
-                            placeholder="Enter name"
-                            value={formData.name}
-                            onChange={handleChange}
-                          />
-                          {errors.name && (
-                            <small className="text-danger">{errors.name}</small>
-                          )}
-                        </div>
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="phone" className="fw-bold">
-                            Phone*
-                          </label>
-                          <Input
-                            type="text"
-                            name="phone"
-                            placeholder="Enter your phone number"
-                            value={formData.phone}
-                            onChange={handleChange}
-                          />
-                          {errors.phone && (
-                            <small className="text-danger">
-                              {errors.phone}
-                            </small>
-                          )}
-                        </div>
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="email" className="fw-bold">
-                            Email*
-                          </label>
-                          <Input
-                            type="email"
-                            name="email"
-                            placeholder="Enter your email address"
-                            value={formData.email}
-                            onChange={handleChange}
-                          />
-                          {errors.email && (
-                            <small className="text-danger">
-                              {errors.email}
-                            </small>
-                          )}
-                        </div>
-                      </div>
-                      <p className="text-start profile-font fw-semibold text-muted mt-3 mb-0">
-                        Address Details
-                      </p><hr/>
-                      {/* <hr className="fw-bold" /> */}
-                      <div className="row mb-3 mt-3 profile-font">
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="country" className="fw-bold">
-                            Country*
-                          </label>
-                          <Select
-                            name="country"
-                            options={countries}
-                            value={formData.country}
-                            onChange={handleChange}
-                            defaultOption="Select Country"
-                          />
-                          {errors.country && (
-                            <small className="text-danger">
-                              {errors.country}
-                            </small>
-                          )}
-                        </div>
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="state" className="fw-bold">
-                            State*
-                          </label>
-                          <Select
-                            name="state"
-                            options={states}
-                            value={formData.state}
-                            onChange={handleChange}
-                            defaultOption="Select State"
-                          />
-                          {errors.state && (
-                            <small className="text-danger">
-                              {errors.state}
-                            </small>
-                          )}
-                        </div>
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="city" className="fw-bold">
-                            City*
-                          </label>
-                          <Select
-                            name="city"
-                            options={cities}
-                            value={formData.city}
-                            onChange={handleChange}
-                            defaultOption="Select City"
-                          />
-                          {errors.city && (
-                            <small className="text-danger">{errors.city}</small>
-                          )}
-                        </div>
-                      </div>
-                      <div className="row mb-3 mt-2 profile-font">
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="addressLine1" className="fw-bold">
-                            Address Line 1*
-                          </label>
-                          <Input
-                            type="text"
-                            name="addressLine1"
-                            placeholder="Address Line 1"
-                            value={formData.addressLine1}
-                            onChange={handleChange}
-                          />
-                          {errors.addressLine1 && (
-                            <small className="text-danger">
-                              {errors.addressLine1}
-                            </small>
-                          )}
-                        </div>
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="addressLine2" className="fw-bold">
-                            Address Line 2*
-                          </label>
-                          <Input
-                            type="text"
-                            name="addressLine2"
-                            placeholder="Address Line 2"
-                            value={formData.addressLine2}
-                            onChange={handleChange}
-                          />
-                          {errors.addressLine2 && (
-                            <small className="text-danger">
-                              {errors.addressLine2}
-                            </small>
-                          )}
-                        </div>
+                </p><hr />
 
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="zipCode" className="fw-bold">
-                            Zip Code*
-                          </label>
-                          <Input
-                            type="text"
-                            name="zipCode"
-                            placeholder="Enter your zip code"
-                            value={formData.zipCode}
-                            onChange={handleChange}
-                          />
-                          {errors.zipCode && (
-                            <small className="text-danger">
-                              {errors.zipCode}
-                            </small>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="row mb-3 mt-2 profile-font">
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="location" className="fw-bold">
-                            Description*
-                          </label>
-                          <Input
-                            type="text"
-                            name="description"
-                            placeholder="Describe your venue"
-                            value={formData.description}
-                            onChange={handleChange}
-                          />
-                          {errors.description && (
-                            <small className="text-danger">
-                              {errors.description}
-                            </small>
-                          )}
-                        </div>
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="lat" className="fw-bold">
-                            Latitude*
-                          </label>
-                          <Input
-                            type="text"
-                            name="lat"
-                            placeholder=" "
-                            value={formData.lat}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="long" className="fw-bold">
-                            Longitude*
-                          </label>
-                          <Input
-                            type="text"
-                            name="long"
-                            placeholder=""
-                            value={formData.long}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-                      <p className="text-start profile-font fw-semibold text-muted mt-4">
-                        Venue Information
-                      </p>
-                      <hr className="fw-bold" />
-                      <div className="row mb-3 mt-2 profile-font">
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="amenities" className="fw-bold">
-                            Amenities*
-                          </label>
-                          <Input
-                            type="text"
-                            name="amenities"
-                            placeholder="List your amenities"
-                            value={formData.amenities}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="websiteUrl" className="fw-bold">
-                            Website URL*
-                          </label>
-                          <Input
-                            type="text"
-                            name="websiteUrl"
-                            placeholder="Enter your website URL"
-                            value={formData.websiteUrl}
-                            onChange={handleChange}
-                          />
-                        </div>
-                        <div className="col-md-4 text-start">
-                          <label htmlFor="timings" className="fw-bold">
-                            Timings*
-                          </label>
-                          <Input
-                            type="time"
-                            name="timings"
-                            value={formData.timings}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-
-                      <div className="row profile-font">
-                        <div className="col-md-12 text-start">
-                          <label htmlFor="bookingPolicies" className="fw-bold">
-                            Booking Policies*
-                          </label>
-                          <Input
-                            type="text"
-                            name="bookingPolicies"
-                            value={formData.bookingPolicies}
-                            onChange={handleChange}
-                          />
-                        </div>
-                      </div>
-
-                      <Button
-                        type="submit"
-                        className="btn-outline-dark mt-3 float-start mb-5 fw-semibold"
-                        label="Submit"
-                      />
-                    </form>
+                {Object.keys(errors).length > 0 && (
+                  <div className="alert alert-danger">
+                    <strong>Please fill out all required fields:</strong>
+                    <ul>
+                      {Object.keys(errors).map((field) => (
+                        <li key={field}>{errors[field]}</li>
+                      ))}
+                    </ul>
                   </div>
-                </div>
-                {formSubmitted && (
-                  <div className="card col-md-12 p-3">
-                    <div className="">
-                      <form onSubmit={mediaUpload}>
-                        <p className="profile-font fw-semibold">
-                          MEDIA UPLOADS
+                )}
+                <div className="justify-content-center scrollable-container event-form pt-2">
+                  <div className="col-md-12">
+                    <div className="text-center">
+                      <form onSubmit={handleSubmit}>
+                        <p className="profile-font fw-semibold text-start text-muted">
+                          General Information
+                        </p><hr />
+                        {/* <hr className="fw-bold" /> */}
+                        <div className="row profile-font">
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="name" className="fw-bold">
+                              Name*
+                            </label>
+                            <Input
+                              type="text"
+                              name="name"
+                              placeholder="Enter name"
+                              value={formData.name}
+                              onChange={handleChange}
+                            />
+                            {errors.name && (
+                              <small className="text-danger">{errors.name}</small>
+                            )}
+                          </div>
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="phone" className="fw-bold">
+                              Phone*
+                            </label>
+                            <Input
+                              type="text"
+                              name="phone"
+                              placeholder="Enter your phone number"
+                              value={formData.phone}
+                              onChange={handleChange}
+                            />
+                            {errors.phone && (
+                              <small className="text-danger">
+                                {errors.phone}
+                              </small>
+                            )}
+                          </div>
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="email" className="fw-bold">
+                              Email*
+                            </label>
+                            <Input
+                              type="email"
+                              name="email"
+                              placeholder="Enter your email address"
+                              value={formData.email}
+                              onChange={handleChange}
+                            />
+                            {errors.email && (
+                              <small className="text-danger">
+                                {errors.email}
+                              </small>
+                            )}
+                          </div>
+                        </div>
+                        <p className="text-start profile-font fw-semibold text-muted mt-3 mb-0">
+                          Address Details
+                        </p><hr />
+                        {/* <hr className="fw-bold" /> */}
+                        <div className="row mb-3 mt-3 profile-font">
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="country" className="fw-bold">
+                              Country*
+                            </label>
+                            <Select
+                              name="country"
+                              options={countries}
+                              value={formData.country}
+                              onChange={handleChange}
+                              defaultOption="Select Country"
+                            />
+                            {errors.country && (
+                              <small className="text-danger">
+                                {errors.country}
+                              </small>
+                            )}
+                          </div>
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="state" className="fw-bold">
+                              State*
+                            </label>
+                            <Select
+                              name="state"
+                              options={states}
+                              value={formData.state}
+                              onChange={handleChange}
+                              defaultOption="Select State"
+                            />
+                            {errors.state && (
+                              <small className="text-danger">
+                                {errors.state}
+                              </small>
+                            )}
+                          </div>
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="city" className="fw-bold">
+                              City*
+                            </label>
+                            <Select
+                              name="city"
+                              options={cities}
+                              value={formData.city}
+                              onChange={handleChange}
+                              defaultOption="Select City"
+                            />
+                            {errors.city && (
+                              <small className="text-danger">{errors.city}</small>
+                            )}
+                          </div>
+                        </div>
+                        <div className="row mb-3 mt-2 profile-font">
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="addressLine1" className="fw-bold">
+                              Address Line 1*
+                            </label>
+                            <Input
+                              type="text"
+                              name="addressLine1"
+                              placeholder="Address Line 1"
+                              value={formData.addressLine1}
+                              onChange={handleChange}
+                            />
+                            {errors.addressLine1 && (
+                              <small className="text-danger">
+                                {errors.addressLine1}
+                              </small>
+                            )}
+                          </div>
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="addressLine2" className="fw-bold">
+                              Address Line 2*
+                            </label>
+                            <Input
+                              type="text"
+                              name="addressLine2"
+                              placeholder="Address Line 2"
+                              value={formData.addressLine2}
+                              onChange={handleChange}
+                            />
+                            {errors.addressLine2 && (
+                              <small className="text-danger">
+                                {errors.addressLine2}
+                              </small>
+                            )}
+                          </div>
+
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="zipCode" className="fw-bold">
+                              Zip Code*
+                            </label>
+                            <Input
+                              type="text"
+                              name="zipCode"
+                              placeholder="Enter your zip code"
+                              value={formData.zipCode}
+                              onChange={handleChange}
+                            />
+                            {errors.zipCode && (
+                              <small className="text-danger">
+                                {errors.zipCode}
+                              </small>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="row mb-3 mt-2 profile-font">
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="location" className="fw-bold">
+                              Description*
+                            </label>
+                            <Input
+                              type="text"
+                              name="description"
+                              placeholder="Describe your venue"
+                              value={formData.description}
+                              onChange={handleChange}
+                            />
+                            {errors.description && (
+                              <small className="text-danger">
+                                {errors.description}
+                              </small>
+                            )}
+                          </div>
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="lat" className="fw-bold">
+                              Latitude*
+                            </label>
+                            <Input
+                              type="text"
+                              name="lat"
+                              placeholder=" "
+                              value={formData.lat}
+                              onChange={handleChange}
+                            />
+                          </div>
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="long" className="fw-bold">
+                              Longitude*
+                            </label>
+                            <Input
+                              type="text"
+                              name="long"
+                              placeholder=""
+                              value={formData.long}
+                              onChange={handleChange}
+                            />
+                          </div>
+                        </div>
+                        <p className="text-start profile-font fw-semibold text-muted mt-4">
+                          Venue Information
                         </p>
-                        <hr className="mb-4" />
-
-                        {/* Image Upload */}
-                        <div className="row mt-4 profile-font">
-                          <div className="col-md-12 col-sm-12">
-                            <label className="fw-bold">Image Upload</label>
+                        <hr className="fw-bold" />
+                        <div className="row mb-3 mt-2 profile-font">
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="amenities" className="fw-bold">
+                              Amenities*
+                            </label>
                             <Input
-                              type="file"
-                              name="images"
-                              accept="image/*"
-                              multiple
-                              onChange={(e) => handleFileChange(e, "images")}
+                              type="text"
+                              name="amenities"
+                              placeholder="List your amenities"
+                              value={formData.amenities}
+                              onChange={handleChange}
                             />
-                            {images.length > 0 && (
-                              <div className="d-flex flex-wrap gap-3">
-                                {images.map((file, index) => (
-                                  <div
-                                    key={index}
-                                    className="position-relative p-2"
-                                  >
-                                    <img
-                                      src={URL.createObjectURL(file)}
-                                      alt={`Uploaded image ${index}`}
-                                      className="media-image rounded"
-                                      style={{ height: "90px", width: "90px" }}
-                                    />
-                                    <Button
-                                      type="button"
-                                      className="btn btn-link position-absolute"
-                                      onClick={() => handleDeleteImage(index)}
-                                    >
-                                      <i className="fa-solid fa-trash-can text-primary"></i>
-                                    </Button>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
                           </div>
-                        </div>
-
-                        {/* Video Upload */}
-                        <div className="row mt-4 profile-font">
-                          <div className="col-md-12 col-sm-12">
-                            <label className="fw-bold">Video Upload</label>
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="websiteUrl" className="fw-bold">
+                              Website URL*
+                            </label>
                             <Input
-                              type="file"
-                              name="videos"
-                              accept="video/*"
-                              multiple
-                              onChange={(e) => handleFileChange(e, "videos")}
+                              type="text"
+                              name="websiteUrl"
+                              placeholder="Enter your website URL"
+                              value={formData.websiteUrl}
+                              onChange={handleChange}
                             />
-                            {videos.length > 0 && (
-                              <div className="d-flex flex-wrap gap-3">
-                                {videos.map((file, index) => (
-                                  <div
-                                    key={index}
-                                    className="position-relative p-2"
-                                  >
-                                    <video
-                                      src={URL.createObjectURL(file)} // Preview the video
-                                      controls
-                                      className="media-video rounded"
-                                      style={{ height: "90px", width: "90px" }}
-                                    />
-                                    <Button
-                                      type="button"
-                                      className="btn btn-link position-absolute"
-                                      onClick={() => handleDeleteVideo(index)}
-                                    >
-                                      <i className="fa-solid fa-trash-can text-primary"></i>
-                                    </Button>
-                                  </div>
-                                ))}
-                              </div>
-                            )}
+                          </div>
+                          <div className="col-md-4 text-start">
+                            <label htmlFor="timings" className="fw-bold">
+                              Timings*
+                            </label>
+                            <Input
+                              type="time"
+                              name="timings"
+                              value={formData.timings}
+                              onChange={handleChange}
+                            />
                           </div>
                         </div>
 
-                        {/* Submit Button */}
-                        <div className="row mt-4">
-                          <div className="col ">
-                            <Button
-                              type="submit"
-                              className="btn-outline-dark float-start fw-semibold"
-                              label="Upload Media"
-                              disabled={!formSubmitted}
+                        <div className="row profile-font">
+                          <div className="col-md-12 text-start">
+                            <label htmlFor="bookingPolicies" className="fw-bold">
+                              Booking Policies*
+                            </label>
+                            <Input
+                              type="text"
+                              name="bookingPolicies"
+                              value={formData.bookingPolicies}
+                              onChange={handleChange}
                             />
                           </div>
                         </div>
+
+                        <Button
+                          type="submit"
+                          className="btn-outline-dark mt-3 float-start mb-5 fw-semibold"
+                          label="Submit"
+                        />
                       </form>
                     </div>
                   </div>
-                )}
+                  {formSubmitted && (
+                    <div className="card col-md-12 p-3">
+                      <div className="">
+                        <form onSubmit={mediaUpload}>
+                          <p className="profile-font fw-semibold">
+                            MEDIA UPLOADS
+                          </p>
+                          <hr className="mb-4" />
+
+                          {/* Image Upload */}
+                          <div className="row mt-4 profile-font">
+                            <div className="col-md-12 col-sm-12">
+                              <label className="fw-bold">Image Upload</label>
+                              <Input
+                                type="file"
+                                name="images"
+                                accept="image/*"
+                                multiple
+                                onChange={(e) => handleFileChange(e, "images")}
+                              />
+                              {images.length > 0 && (
+                                <div className="d-flex flex-wrap gap-3">
+                                  {images.map((file, index) => (
+                                    <div
+                                      key={index}
+                                      className="position-relative p-2"
+                                    >
+                                      <img
+                                        src={URL.createObjectURL(file)}
+                                        alt={`Uploaded image ${index}`}
+                                        className="media-image rounded"
+                                        style={{ height: "90px", width: "90px" }}
+                                      />
+                                      <Button
+                                        type="button"
+                                        className="btn btn-link position-absolute"
+                                        onClick={() => handleDeleteImage(index)}
+                                      >
+                                        <i className="fa-solid fa-trash-can text-primary"></i>
+                                      </Button>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Video Upload */}
+                          <div className="row mt-4 profile-font">
+                            <div className="col-md-12 col-sm-12">
+                              <label className="fw-bold">Video Upload</label>
+                              <Input
+                                type="file"
+                                name="videos"
+                                accept="video/*"
+                                multiple
+                                onChange={(e) => handleFileChange(e, "videos")}
+                              />
+                              {videos.length > 0 && (
+                                <div className="d-flex flex-wrap gap-3">
+                                  {videos.map((file, index) => (
+                                    <div
+                                      key={index}
+                                      className="position-relative p-2"
+                                    >
+                                      <video
+                                        src={URL.createObjectURL(file)} // Preview the video
+                                        controls
+                                        className="media-video rounded"
+                                        style={{ height: "90px", width: "90px" }}
+                                      />
+                                      <Button
+                                        type="button"
+                                        className="btn btn-link position-absolute"
+                                        onClick={() => handleDeleteVideo(index)}
+                                      >
+                                        <i className="fa-solid fa-trash-can text-primary"></i>
+                                      </Button>
+                                    </div>
+                                  ))}
+                                </div>
+                              )}
+                            </div>
+                          </div>
+
+                          {/* Submit Button */}
+                          <div className="row mt-4">
+                            <div className="col ">
+                              <Button
+                                type="submit"
+                                className="btn-outline-dark float-start fw-semibold"
+                                label="Upload Media"
+                                disabled={!formSubmitted}
+                              />
+                            </div>
+                          </div>
+                        </form>
+                      </div>
+                    </div>
+                  )}
+                </div>
               </div>
             </div>
           </div>
         </div>
-        </div>
-        </div>
+      </div>
     </>
   );
 }

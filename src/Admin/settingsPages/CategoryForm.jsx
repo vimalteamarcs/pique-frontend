@@ -60,7 +60,7 @@ const CategoryForm = () => {
       fetchSubCategories();
     }
   }, [mainCategoryId]);
-  
+
   // Fetch main categories and subcategories
   useEffect(() => {
     console.log(isMainCategory);
@@ -189,231 +189,230 @@ const CategoryForm = () => {
 
   return (
     <>
-    <DashLayout/>
-            <div className="container-fluid d-flex flex-column min-vh-100">
-              <div className="d-flex mt-0">
-                <div className="dash-sidebar-container">
-                  <AdminSideBar />
-                </div>
-                <div className="dash-profile-container">
-        <div className="row justify-content-center">
-          <div className="col-md-12">
-            <div className="div">
-              <div className="profile-font">
-                {error && (
-                  <div
-                    className="alert alert-danger alert-dismissible fade show"
-                    role="alert"
-                  >
-                    {error}
-                    <button
-                      type="button"
-                      className="btn-close"
-                      aria-label="Close"
-                      onClick={() => setError("")} // Clears the error message when the close button is clicked
-                    />
-                  </div>
-                )}
+      <DashLayout />
+      <div className="container-fluid w-100 p-0">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container">
+            <div className="row justify-content-center">
+              <div className="col-md-12">
+                <div className="div">
+                  <div className="profile-font">
+                    {error && (
+                      <div
+                        className="alert alert-danger alert-dismissible fade show"
+                        role="alert"
+                      >
+                        {error}
+                        <button
+                          type="button"
+                          className="btn-close"
+                          aria-label="Close"
+                          onClick={() => setError("")} // Clears the error message when the close button is clicked
+                        />
+                      </div>
+                    )}
 
-                {success && (
-                  <div
-                    className="alert alert-success alert-dismissible fade show"
-                    role="alert"
-                  >
-                    {success}
-                    <button
-                      type="button"
-                      className="btn-close"
-                      aria-label="Close"
-                      onClick={() => setSuccess("")} // Clears the success message when the close button is clicked
-                    />
-                  </div>
-                )}
+                    {success && (
+                      <div
+                        className="alert alert-success alert-dismissible fade show"
+                        role="alert"
+                      >
+                        {success}
+                        <button
+                          type="button"
+                          className="btn-close"
+                          aria-label="Close"
+                          onClick={() => setSuccess("")} // Clears the success message when the close button is clicked
+                        />
+                      </div>
+                    )}
 
-                {/* Main Category Creation Form */}
-                <form
-                  onSubmit={handlemainSubmit}
-                  className="mb-3 w-75 d-flex align-items-center"
-                >
-                  <label htmlFor="name" className="form-label  col-md-3 fw-bold">
-                    Main Category Name
-                  </label>
-
-                  <div className="col-md-4 mx-4">
-                    <input
-                      type="text"
-                      id="name"
-                      className="form-control"
-                      placeholder="Enter category name"
-                      value={name}
-                      onChange={(e) => setName(e.target.value)}
-                      required
-                    />
-                  </div>
-
-                  <button type="submit" className="btn btn-dark btn-sm">
-                    ADD
-                  </button>
-                </form>
-                <hr className="mt-3 mb-0 w-100" />
-                {/* <!-- Modal --> */}
-                <CategoryModal
-                  data={categoryData}
-                  done={setSuccess}
-                  err={setError}
-                />
-
-                {/* Sub Category Creation Form */}
-                <div className="row">
-                  <div className="col-md-4">
-                    <p className="mt-5 profile-font fw-semibold">Main Categories</p>
-                    <div
-                      className="list-group  overflow-auto"
-                      style={{
-                        maxHeight: "300px",
-                        scrollbarWidth: "thin",
-                        scrollbarColor: "#ccc transparent",
-                      }}
+                    {/* Main Category Creation Form */}
+                    <form
+                      onSubmit={handlemainSubmit}
+                      className="mb-3 w-75 d-flex align-items-center"
                     >
-                      {mainCategories.map((category) => (
-                        <div key={category.id} className="d-flex ">
-                          <button
-                            className={`list-group-item list-group-item-action ${
-                              mainCategoryId === category.id ? " text-info" : ""
-                            }`}
-                            onClick={() => {
-                              setMainCategoryId(category.id);
-                            }}
-                          >
-                            {category.name}
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline"
-                            data-bs-toggle="custom-modal"
-                            data-bs-target="#emodal"
-                            onClick={() => setCategoryData(category)}
-                          >
-                            <i className="fas fa-edit text-primary"></i>
-                          </button>
-                          <button
-                            type="button"
-                            className="btn btn-outline"
-                            onClick={() => {
-                              if (
-                                window.confirm(
-                                  `Are you sure you want to delete this ${category.name}?`
-                                )
-                              ) {
-                                handleDeleteMainCategory(category.id);
-                              }
-                            }}
-                          >
-                            <i className="fas fa-trash text-danger"></i>
-                          </button>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
+                      <label htmlFor="name" className="form-label  col-md-3 fw-bold">
+                        Main Category Name
+                      </label>
 
-                  <div className="col-md-8">
-                    {/* Subcategory Creation Form */}
-                    <div className="row mt-5 pt-3">
-                      {mainCategoryId && (
-                        <form
-                          onSubmit={handlesubSubmit}
-                          className="mb-3 d-flex align-items-center p-3"
-                        >
-                          <label
-                            htmlFor="name"
-                            className="form-label me-2 mb-0 fw-bold"
-                          >
-                            Subcategory Name
-                          </label>
-                          <input
-                            type="text"
-                            id="name"
-                            className="form-control me-2"
-                            placeholder="Enter subcategory name"
-                            value={subname}
-                            onChange={(e) => setSubname(e.target.value)}
-                            required
-                            style={{ width: "250px" }}
-                          />
-                          <button type="submit" className="btn btn-dark btn-sm">
-                            ADD
-                          </button>
-                        </form>
-                      )}
-                    </div>
+                      <div className="col-md-4 mx-4">
+                        <input
+                          type="text"
+                          id="name"
+                          className="form-control"
+                          placeholder="Enter category name"
+                          value={name}
+                          onChange={(e) => setName(e.target.value)}
+                          required
+                        />
+                      </div>
 
-                    {/* Subcategory Cards */}
+                      <button type="submit" className="btn btn-dark btn-sm">
+                        ADD
+                      </button>
+                    </form>
+                    <hr className="mt-3 mb-0 w-100" />
+                    {/* <!-- Modal --> */}
+                    <CategoryModal
+                      data={categoryData}
+                      done={setSuccess}
+                      err={setError}
+                    />
+
+                    {/* Sub Category Creation Form */}
                     <div className="row">
-                      {subCategories.length > 0 && (
-                        <div className="">
-                          <p className="profile-font fw-semibold">Subcategories</p>
-                          <div
-                            className=" d-flex  flex-wrap overflow-auto"
-                            style={{
-                              maxHeight: "200px",
-                              scrollbarWidth: "thin",
-                              scrollbarColor: "#ccc transparent",
-                            }}
-                          >
-                            {subCategories.map((sub) => (
-                              <div key={sub.id} className="mb-3">
-                                <div
-                                  className=""
-                                  style={{
-                                    width: "fit-content",
-                                    position: "relative",
-                                  }}
-                                >
-                                  <div className="card-body p-2">
-                                    <button
-                                      type="button"
-                                      className="btn btn-outline-dark btn-sm text-capitalize position-relative"
-                                      style={{ paddingRight: "30px" }}
-                                      data-bs-toggle="custom-modal"
-                                      data-bs-target="#emodal"
-                                      onClick={() => setCategoryData(sub)}
-                                    >
-                                      {sub.name}
-                                    </button>
-                                    <button
-                                      type="button"
-                                      className="btn-close position-absolute p-1"
-                                      style={{
-                                        top: "50%",
-                                        right: "15px",
-                                        transform: "translateY(-50%)",
-                                        fontSize: "10px", // Makes the button smaller
-                                      }}
-                                      onClick={() => {
-                                        if (
-                                          window.confirm(
-                                            `Are you sure you want to delete this ${sub.name}?`
-                                          )
-                                        ) {
-                                          handleDeleteSubCategory(sub.id);
-                                        }
-                                      }}
-                                    />
-                                  </div>
-                                </div>
-                              </div>
-                            ))}
-                          </div>
+                      <div className="col-md-4">
+                        <p className="mt-5 profile-font fw-semibold">Main Categories</p>
+                        <div
+                          className="list-group  overflow-auto"
+                          style={{
+                            maxHeight: "300px",
+                            scrollbarWidth: "thin",
+                            scrollbarColor: "#ccc transparent",
+                          }}
+                        >
+                          {mainCategories.map((category) => (
+                            <div key={category.id} className="d-flex ">
+                              <button
+                                className={`list-group-item list-group-item-action ${mainCategoryId === category.id ? " text-info" : ""
+                                  }`}
+                                onClick={() => {
+                                  setMainCategoryId(category.id);
+                                }}
+                              >
+                                {category.name}
+                              </button>
+                              <button
+                                type="button"
+                                className="btn btn-outline"
+                                data-bs-toggle="custom-modal"
+                                data-bs-target="#emodal"
+                                onClick={() => setCategoryData(category)}
+                              >
+                                <i className="fas fa-edit text-primary"></i>
+                              </button>
+                              <button
+                                type="button"
+                                className="btn btn-outline"
+                                onClick={() => {
+                                  if (
+                                    window.confirm(
+                                      `Are you sure you want to delete this ${category.name}?`
+                                    )
+                                  ) {
+                                    handleDeleteMainCategory(category.id);
+                                  }
+                                }}
+                              >
+                                <i className="fas fa-trash text-danger"></i>
+                              </button>
+                            </div>
+                          ))}
                         </div>
-                      )}
+                      </div>
+
+                      <div className="col-md-8">
+                        {/* Subcategory Creation Form */}
+                        <div className="row mt-5 pt-3">
+                          {mainCategoryId && (
+                            <form
+                              onSubmit={handlesubSubmit}
+                              className="mb-3 d-flex align-items-center p-3"
+                            >
+                              <label
+                                htmlFor="name"
+                                className="form-label me-2 mb-0 fw-bold"
+                              >
+                                Subcategory Name
+                              </label>
+                              <input
+                                type="text"
+                                id="name"
+                                className="form-control me-2"
+                                placeholder="Enter subcategory name"
+                                value={subname}
+                                onChange={(e) => setSubname(e.target.value)}
+                                required
+                                style={{ width: "250px" }}
+                              />
+                              <button type="submit" className="btn btn-dark btn-sm">
+                                ADD
+                              </button>
+                            </form>
+                          )}
+                        </div>
+
+                        {/* Subcategory Cards */}
+                        <div className="row">
+                          {subCategories.length > 0 && (
+                            <div className="">
+                              <p className="profile-font fw-semibold">Subcategories</p>
+                              <div
+                                className=" d-flex  flex-wrap overflow-auto"
+                                style={{
+                                  maxHeight: "200px",
+                                  scrollbarWidth: "thin",
+                                  scrollbarColor: "#ccc transparent",
+                                }}
+                              >
+                                {subCategories.map((sub) => (
+                                  <div key={sub.id} className="mb-3">
+                                    <div
+                                      className=""
+                                      style={{
+                                        width: "fit-content",
+                                        position: "relative",
+                                      }}
+                                    >
+                                      <div className="card-body p-2">
+                                        <button
+                                          type="button"
+                                          className="btn btn-outline-dark btn-sm text-capitalize position-relative"
+                                          style={{ paddingRight: "30px" }}
+                                          data-bs-toggle="custom-modal"
+                                          data-bs-target="#emodal"
+                                          onClick={() => setCategoryData(sub)}
+                                        >
+                                          {sub.name}
+                                        </button>
+                                        <button
+                                          type="button"
+                                          className="btn-close position-absolute p-1"
+                                          style={{
+                                            top: "50%",
+                                            right: "15px",
+                                            transform: "translateY(-50%)",
+                                            fontSize: "10px", // Makes the button smaller
+                                          }}
+                                          onClick={() => {
+                                            if (
+                                              window.confirm(
+                                                `Are you sure you want to delete this ${sub.name}?`
+                                              )
+                                            ) {
+                                              handleDeleteSubCategory(sub.id);
+                                            }
+                                          }}
+                                        />
+                                      </div>
+                                    </div>
+                                  </div>
+                                ))}
+                              </div>
+                            </div>
+                          )}
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
-        </div>
         </div>
       </div>
     </>

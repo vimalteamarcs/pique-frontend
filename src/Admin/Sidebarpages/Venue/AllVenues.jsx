@@ -118,6 +118,7 @@ export default function AllVenues() {
               e.preventDefault();
               navigate("/admin/viewdetails", { state: record });
             }}
+            className="text-decoration-none fw-bold text-danger"
           >
             {text}
           </a>
@@ -145,50 +146,50 @@ export default function AllVenues() {
 
   return (
     <>
-    <DashLayout/>
-            <div className="container-fluid d-flex flex-column min-vh-100">
-              <div className="d-flex mt-0">
-                <div className="dash-sidebar-container">
-                  <AdminSideBar />
-                </div>
-                <div className="dash-profile-container">
-      <p className="profile-font fw-semibold">VENUES DETAILS</p><hr/>
-      {successMessage && (
-        <div className="alert alert-danger d-flex align-items-center mt-2">
-          <span className="badge bg-danger me-2">{successMessage}</span>
+      <DashLayout />
+      <div className="container-fluid w-100 p-0">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container">
+            <p className="profile-font fw-semibold">VENUES DETAILS</p><hr />
+            {successMessage && (
+              <div className="alert alert-danger d-flex align-items-center mt-2">
+                <span className="badge bg-danger me-2">{successMessage}</span>
+              </div>
+            )}
+            {error ? (
+              <div className="alert alert-danger">{error}</div>
+            ) : (
+              <div className="m-2">
+                <CustomTable
+                  data={venuedata}
+                  columns={columns}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                  onView={handleView}
+                  loading={loading}
+                  pagination={{
+                    current: pagination.current,
+                    pageSize: pagination.pageSize,
+                    total: pagination.total,
+                    showSizeChanger: true,
+                  }}
+                  onTableChange={(pagination) => {
+                    // Trigger API call with new page and pageSize
+                    fetchVenues(pagination.current, pagination.pageSize, search);
+                  }}
+                  search={search}
+                  onSearchChange={(value) => {
+                    setSearch(value);
+                    fetchVenues(1, pagination.pageSize, value); // Reset to the first page on search
+                  }}
+                />
+              </div>
+            )}
+          </div>
         </div>
-      )}
-      {error ? (
-        <div className="alert alert-danger">{error}</div>
-      ) : (
-        <div className="m-2">
-          <CustomTable
-            data={venuedata}
-            columns={columns}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-            onView={handleView}
-            loading={loading}
-            pagination={{
-              current: pagination.current,
-              pageSize: pagination.pageSize,
-              total: pagination.total,
-              showSizeChanger: true,
-            }}
-            onTableChange={(pagination) => {
-              // Trigger API call with new page and pageSize
-              fetchVenues(pagination.current, pagination.pageSize, search);
-            }}
-            search={search}
-            onSearchChange={(value) => {
-              setSearch(value);
-              fetchVenues(1, pagination.pageSize, value); // Reset to the first page on search
-            }}
-          />
-        </div>
-      )}
-      </div>
-      </div>
       </div>
     </>
   );

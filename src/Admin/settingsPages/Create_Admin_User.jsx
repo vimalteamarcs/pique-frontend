@@ -121,12 +121,12 @@ const Create_Admin_User = () => {
 
     try {
       const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}${CREATE_ADMIN_USER}`, 
-        formData,{
-          headers: {
-            Authorization: `Bearer ${localStorage.getItem("token")}`,
-          },
+        `${import.meta.env.VITE_API_URL}${CREATE_ADMIN_USER}`,
+        formData, {
+        headers: {
+          Authorization: `Bearer ${localStorage.getItem("token")}`,
         },
+      },
       );
 
       if (response.status === 201) {
@@ -161,7 +161,7 @@ const Create_Admin_User = () => {
             />
           </Helmet>
 
-          <div className="container-fluid d-flex flex-column min-vh-100">
+          <div className="container-fluid w-100 p-0">
             <div className="d-flex mt-0">
               <div className="dash-sidebar-container">
                 <AdminSideBar />

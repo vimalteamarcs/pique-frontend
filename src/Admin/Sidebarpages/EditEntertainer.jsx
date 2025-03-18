@@ -523,378 +523,377 @@ export default function EditEntertainer() {
 
   return (
     <>
-      <DashLayout title="Profile" description="View and manage your profile"/>
-              <div className="container-fluid d-flex flex-column min-vh-100">
-                <div className="d-flex mt-0">
-                  <div className="dash-sidebar-container">
-                    <AdminSideBar />
-                  </div>
-                  <div className="dash-profile-container">
-          {/* <Spinner show={loading} /> */}
-          <ToastContainer />
-          <div className="row">
-            <div className="col-md-12">
-              <button
-                onClick={() => navigate(-1)}
-                className="btn btn-outline-dark btn-sm d-flex align-items-center mb-1 m-2"
-              >
-                <i
-                  className="fa fa-arrow-left"
-                  style={{ marginRight: "8px" }}
-                ></i>
-              </button>
-              <p className="profile-font fw-semibold mt-3">PROFILE</p><hr/>
-            </div>
-            <div className="row justify-content-center mb-4 scrollable-container event-form pt-2 m-1">
-              <form onSubmit={handleSubmit}>
-                <div className="d-flex justify-content-center">
-                  <div className="col-12 border-0">
-                    <div className="card-body">
-                      <p className="text-start profile-font fw-semibold text-muted">
-                        Entertainer Details
-                      </p>
-                      <hr />
-                      <div className="row mb-3 profile-font">
-                        <div className="col-md-4">
-                          <label className="fw-semibold">Entertainer Name</label>
-                          <Input
-                            type="text"
-                            name="name"
-                            value={formData.name}
-                            placeholder="Enter your Entertainer Name"
-                            onChange={handleInputChange}
-                          />
-                          {errors.name && (
-                            <div className="text-danger">{errors.name}</div>
-                          )}
+      <DashLayout title="Profile" description="View and manage your profile" />
+      <div className="container-fluid w-100 p-0">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container">
+            {/* <Spinner show={loading} /> */}
+            <ToastContainer />
+            <div className="row">
+              <div className="col-md-12">
+                <button
+                  onClick={() => navigate(-1)}
+                  className="btn btn-outline-dark btn-sm d-flex align-items-center mb-1 m-2"
+                >
+                  <i
+                    className="fa fa-arrow-left"
+                    style={{ marginRight: "8px" }}
+                  ></i>
+                </button>
+                <p className="profile-font fw-semibold mt-3">PROFILE</p><hr />
+              </div>
+              <div className="row justify-content-center mb-4 scrollable-container event-form pt-2 m-1">
+                <form onSubmit={handleSubmit}>
+                  <div className="d-flex justify-content-center">
+                    <div className="col-12 border-0">
+                      <div className="card-body">
+                        <p className="text-start profile-font fw-semibold text-muted">
+                          Entertainer Details
+                        </p>
+                        <hr />
+                        <div className="row mb-3 profile-font">
+                          <div className="col-md-4">
+                            <label className="fw-semibold">Entertainer Name</label>
+                            <Input
+                              type="text"
+                              name="name"
+                              value={formData.name}
+                              placeholder="Enter your Entertainer Name"
+                              onChange={handleInputChange}
+                            />
+                            {errors.name && (
+                              <div className="text-danger">{errors.name}</div>
+                            )}
+                          </div>
+                          <div className="col-md-4">
+                            <label className="fw-semibold">
+                              Entertainer Main Category
+                            </label>
+                            <Select
+                              options={categories}
+                              value={formData.category || ""}
+                              onChange={handleCategoryChange}
+                              placeholder="Select Category"
+                            />
+                          </div>
+                          <div className="col-md-4">
+                            <label className="fw-semibold">
+                              Entertainer Sub Category
+                            </label>
+                            <Select
+                              options={subcategories}
+                              value={formData.specific_category || ""}
+                              onChange={handleSubCategoryChange}
+                              placeholder="Select Subcategory"
+                              isDisabled={!formData.category}
+                            />
+                          </div>
                         </div>
-                        <div className="col-md-4">
-                          <label className="fw-semibold">
-                            Entertainer Main Category
-                          </label>
-                          <Select
-                            options={categories}
-                            value={formData.category || ""}
-                            onChange={handleCategoryChange}
-                            placeholder="Select Category"
-                          />
-                        </div>
-                        <div className="col-md-4">
-                          <label className="fw-semibold">
-                            Entertainer Sub Category
-                          </label>
-                          <Select
-                            options={subcategories}
-                            value={formData.specific_category || ""}
-                            onChange={handleSubCategoryChange}
-                            placeholder="Select Subcategory"
-                            isDisabled={!formData.category}
-                          />
-                        </div>
-                      </div>
 
-                      <div className="row mb-3 profile-font">
-                        <div className="col-md-4">
-                          <label className="fw-semibold">Bio</label>
-                          <textarea
-                            className="form-control"
-                            name="bio"
-                            value={formData.bio}
-                            onChange={handleInputChange}
-                            placeholder="Describe your business"
-                          />
+                        <div className="row mb-3 profile-font">
+                          <div className="col-md-4">
+                            <label className="fw-semibold">Bio</label>
+                            <textarea
+                              className="form-control"
+                              name="bio"
+                              value={formData.bio}
+                              onChange={handleInputChange}
+                              placeholder="Describe your business"
+                            />
+                          </div>
+                          <div className="col-md-4">
+                            <label className="fw-semibold">Contact Number 1</label>
+                            <Input
+                              type="text"
+                              name="phone1"
+                              value={formData.phone1}
+                              placeholder="Enter your contact number."
+                              onChange={handleInputChange}
+                            />
+                            {errors.phone1 && (
+                              <div className="text-danger">{errors.phone1}</div>
+                            )}
+                          </div>
+                          <div className="col-md-4">
+                            <label className="fw-semibold">Contact Number 2</label>
+                            <Input
+                              type="text"
+                              name="phone2"
+                              value={formData.phone2}
+                              placeholder="Enter your another contact number."
+                              onChange={handleInputChange}
+                            />
+                          </div>
                         </div>
-                        <div className="col-md-4">
-                          <label className="fw-semibold">Contact Number 1</label>
-                          <Input
-                            type="text"
-                            name="phone1"
-                            value={formData.phone1}
-                            placeholder="Enter your contact number."
-                            onChange={handleInputChange}
-                          />
-                          {errors.phone1 && (
-                            <div className="text-danger">{errors.phone1}</div>
-                          )}
-                        </div>
-                        <div className="col-md-4">
-                          <label className="fw-semibold">Contact Number 2</label>
-                          <Input
-                            type="text"
-                            name="phone2"
-                            value={formData.phone2}
-                            placeholder="Enter your another contact number."
-                            onChange={handleInputChange}
-                          />
-                        </div>
-                      </div>
 
-                      <div className="row mb-3 profile-font">
-                        <div className="col-md-4">
-                          <label className="fw-semibold">Performance Role</label>
-                          <Select
-                            name="performanceRole"
-                            options={performanceRole}
-                            defaultOption="--Select Role--"
-                            value={formData.performanceRole}
-                            onChange={handleInputChange}
-                          />
-                          {errors.performanceRole && (
-                            <div className="text-danger">
-                              {errors.performanceRole}
-                            </div>
-                          )}
+                        <div className="row mb-3 profile-font">
+                          <div className="col-md-4">
+                            <label className="fw-semibold">Performance Role</label>
+                            <Select
+                              name="performanceRole"
+                              options={performanceRole}
+                              defaultOption="--Select Role--"
+                              value={formData.performanceRole}
+                              onChange={handleInputChange}
+                            />
+                            {errors.performanceRole && (
+                              <div className="text-danger">
+                                {errors.performanceRole}
+                              </div>
+                            )}
+                          </div>
+                          <div className="col-md-4">
+                            <label className="fw-semibold">Availability?</label>
+                            <RadioButton
+                              name="availability"
+                              options={options}
+                              value={formData.availability}
+                              onChange={handleInputChange}
+                            />
+                            {errors.availability && (
+                              <div className="text-danger">
+                                {errors.availability}
+                              </div>
+                            )}
+                          </div>
+                          <div className="col-md-4">
+                            <label className="fw-semibold">Price Per Event</label>
+                            <Input
+                              type="number"
+                              name="pricePerEvent"
+                              value={formData.pricePerEvent}
+                              placeholder="Rs."
+                              onChange={handleInputChange}
+                            />
+                          </div>
                         </div>
-                        <div className="col-md-4">
-                          <label className="fw-semibold">Availability?</label>
-                          <RadioButton
-                            name="availability"
-                            options={options}
-                            value={formData.availability}
-                            onChange={handleInputChange}
-                          />
-                          {errors.availability && (
-                            <div className="text-danger">
-                              {errors.availability}
-                            </div>
-                          )}
+                        <div className="row mb-3 profile-font">
+                          <div className="col-md-4">
+                            <label className="fw-semibold">Vaccinated?</label>
+                            <RadioButton
+                              name="vaccinated"
+                              options={options}
+                              value={formData.vaccinated}
+                              onChange={handleInputChange}
+                            />
+                            {errors.vaccinated && (
+                              <div className="text-danger">
+                                {errors.vaccinated}
+                              </div>
+                            )}
+                          </div>
                         </div>
-                        <div className="col-md-4">
-                          <label className="fw-semibold">Price Per Event</label>
-                          <Input
-                            type="number"
-                            name="pricePerEvent"
-                            value={formData.pricePerEvent}
-                            placeholder="Rs."
-                            onChange={handleInputChange}
-                          />
+                        <p className="text-start text-muted fw-semibold profile-font mt-2">Links</p>
+                        <hr />
+                        <div className="row mb-3 profile-font">
+                          <label className="fw-semibold">Social Media Link</label>
+                          <div className="col-md-6 col-sm-12">
+                            <Input
+                              type="text"
+                              name="socialLinks"
+                              value={formData.socialLinks}
+                              placeholder="Enter your Social Media Link"
+                              onChange={handleInputChange}
+                            />
+                          </div>
                         </div>
-                      </div>
-                      <div className="row mb-3 profile-font">
-                        <div className="col-md-4">
-                          <label className="fw-semibold">Vaccinated?</label>
-                          <RadioButton
-                            name="vaccinated"
-                            options={options}
-                            value={formData.vaccinated}
-                            onChange={handleInputChange}
-                          />
-                          {errors.vaccinated && (
-                            <div className="text-danger">
-                              {errors.vaccinated}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <p className="text-start text-muted fw-semibold profile-font mt-2">Links</p>
-                      <hr />
-                      <div className="row mb-3 profile-font">
-                        <label className="fw-semibold">Social Media Link</label>
-                        <div className="col-md-6 col-sm-12">
-                          <Input
-                            type="text"
-                            name="socialLinks"
-                            value={formData.socialLinks}
-                            placeholder="Enter your Social Media Link"
-                            onChange={handleInputChange}
-                          />
-                        </div>
-                      </div>
-                      <div className="row ">
-                        <div className="col ">
-                          <Button
-                            type="submit"
-                            className="btn btn-dark btn-sm mb-3"
-                            label={"Update"}
-                          />
+                        <div className="row ">
+                          <div className="col ">
+                            <Button
+                              type="submit"
+                              className="btn btn-dark btn-sm mb-3"
+                              label={"Update"}
+                            />
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
-                </div>
-              </form>
-              <div>
-                <div className="d-flex justify-content-center">
-                  <div className="col-12 border-0 ">
-                    <div className="card-body">
-                      <p className="text-start text-muted profile-font fw-semibold mt-2">
-                        Media Uploads
-                      </p>
-                      <hr />
+                </form>
+                <div>
+                  <div className="d-flex justify-content-center">
+                    <div className="col-12 border-0 ">
+                      <div className="card-body">
+                        <p className="text-start text-muted profile-font fw-semibold mt-2">
+                          Media Uploads
+                        </p>
+                        <hr />
 
-                      <div className="row mb-3 profile-font">
-                        <div className="col-md-12 col-sm-12">
-                          <label className="fw-semibold">
-                            Headshot Profile Pic
-                          </label>
-                          <Input
-                            type="file"
-                            name="headshot"
-                            accept="image/*"
-                            onChange={(e) => handleFileChange(e, "headshot")}
-                          />
-
-                          {media.headshot && (
-                            <div className="position-relative">
-                              <img
-                                src={
-                                  media.headshot instanceof File
-                                    ? URL.createObjectURL(media.headshot[0]) // If the headshot is a File object, create an object URL
-                                    : media.headshot[0].url // Otherwise, use the URL stored in the media.headshot object
-                                }
-                                alt="Headshot preview"
-                                className="media-image rounded"
-                                style={{ height: "90px", width: "90px" }}
-                              />
-
-                              <button
-                                type="button"
-                                className="btn btn-link position-absolute"
-                                onClick={() => {
-                                  const confirmDelete = window.confirm(
-                                    "Are you sure you want to delete this headshot?"
-                                  );
-                                  if (confirmDelete) {
-                                    deletemedia(media.headshot[0].id);
-                                  }
-                                }}
-                              >
-                                <i className="fa-solid fa-trash-can text-danger"></i>
-                              </button>
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      <div className="row mt-4">
-                        <div className="col-md-12 col-sm-12">
-                          <label className="fw-semibold profile-font">Image Upload</label>
-                          <Input
-                            type="file"
-                            name="images"
-                            accept="image/*"
-                            multiple
-                            onChange={(e) => handleFileChange(e, "images")}
-                          />
-
-                          {media.image.length > 0 && (
-                            <div className="d-flex flex-wrap gap-3">
-                              {media.image.map((file, index) => (
-                                <div
-                                  key={index}
-                                  className="position-relative p-2"
-                                >
-                                  <img
-                                    src={
-                                      file instanceof File
-                                        ? URL.createObjectURL(file.url)
-                                        : file.url
-                                    }
-                                    alt={`Uploaded image ${index}`}
-                                    className="media-image rounded"
-                                    style={{ height: "90px", width: "90px" }}
-                                  />
-                                  <button
-                                    type="button"
-                                    className="btn btn-link position-absolute"
-                                    onClick={() => {
-                                      const confirmDelete = window.confirm(
-                                        "Are you sure you want to delete this image?"
-                                      );
-                                      if (confirmDelete) {
-                                        deletemedia(file.id);
-                                      }
-                                    }}
-                                  >
-                                    <i className="fa-solid fa-trash-can text-danger"></i>
-                                  </button>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-
-                      {/* Video Upload */}
-                      <div className="row mt-4">
-                        <div className="col-md-12 col-sm-12">
-                          <label className="fw-semibold profile-font">Video Upload</label>
-                          <Input
-                            type="file"
-                            name="videos"
-                            accept="video/*"
-                            multiple
-                            onChange={(e) => handleFileChange(e, "videos")}
-                          />
-
-                          {media.video.length > 0 && (
-                            <div className="d-flex flex-wrap gap-3">
-                              {media.video.map((file, index) => (
-                                <div
-                                  key={index}
-                                  className="position-relative p-2"
-                                >
-                                  {file.url.includes("youtu.be") ? (
-                                    <iframe
-                                      width="190"
-                                      height="90"
-                                      src={`https://www.youtube.com/embed/${
-                                        file.url.split("youtu.be/")[1]
-                                      }?feature=shared`}
-                                      title="YouTube video player"
-                                      frameBorder="0"
-                                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                                      allowFullScreen
-                                    />
-                                  ) : (
-                                    <video
-                                      src={file.url}
-                                      autoPlay={true}
-                                      controls
-                                      className="media-video rounded"
-                                      style={{ height: "90px", width: "190px" }}
-                                    />
-                                  )}
-
-                                  <button
-                                    type="button"
-                                    className="btn btn-link btn-sm position-absolute"
-                                    onClick={() => {
-                                      const confirmDelete = window.confirm(
-                                        "Are you sure you want to delete this video?"
-                                      );
-                                      if (confirmDelete) {
-                                        deletemedia(file.id);
-                                      }
-                                    }}
-                                  >
-                                    <i className="fa-solid fa-trash-can text-danger"></i>
-                                  </button>
-                                </div>
-                              ))}
-                            </div>
-                          )}
-                        </div>
-                      </div>
-                      <div className="row ">
-                        <form onSubmit={uploadUrl}>
+                        <div className="row mb-3 profile-font">
                           <div className="col-md-12 col-sm-12">
-                            <div className=" d-flex m-3">
-                              <div className="col-md-2 p-1">URL:</div>
-                              <div className="col-md-6">
-                                <input
-                                  type="text"
-                                  className="form-control"
-                                  id="url"
-                                  placeholder="Enter media URL"
-                                  value={url}
-                                  onChange={(e) => setUrl(e.target.value)}
-                                  required
-                                />
-                              </div>
-                              {/* Media Type Dropdown */}
+                            <label className="fw-semibold">
+                              Headshot Profile Pic
+                            </label>
+                            <Input
+                              type="file"
+                              name="headshot"
+                              accept="image/*"
+                              onChange={(e) => handleFileChange(e, "headshot")}
+                            />
 
-                              {/* <div className="col-md-3">
+                            {media.headshot && (
+                              <div className="position-relative">
+                                <img
+                                  src={
+                                    media.headshot instanceof File
+                                      ? URL.createObjectURL(media.headshot[0]) // If the headshot is a File object, create an object URL
+                                      : media.headshot[0].url // Otherwise, use the URL stored in the media.headshot object
+                                  }
+                                  alt="Headshot preview"
+                                  className="media-image rounded"
+                                  style={{ height: "90px", width: "90px" }}
+                                />
+
+                                <button
+                                  type="button"
+                                  className="btn btn-link position-absolute"
+                                  onClick={() => {
+                                    const confirmDelete = window.confirm(
+                                      "Are you sure you want to delete this headshot?"
+                                    );
+                                    if (confirmDelete) {
+                                      deletemedia(media.headshot[0].id);
+                                    }
+                                  }}
+                                >
+                                  <i className="fa-solid fa-trash-can text-danger"></i>
+                                </button>
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        <div className="row mt-4">
+                          <div className="col-md-12 col-sm-12">
+                            <label className="fw-semibold profile-font">Image Upload</label>
+                            <Input
+                              type="file"
+                              name="images"
+                              accept="image/*"
+                              multiple
+                              onChange={(e) => handleFileChange(e, "images")}
+                            />
+
+                            {media.image.length > 0 && (
+                              <div className="d-flex flex-wrap gap-3">
+                                {media.image.map((file, index) => (
+                                  <div
+                                    key={index}
+                                    className="position-relative p-2"
+                                  >
+                                    <img
+                                      src={
+                                        file instanceof File
+                                          ? URL.createObjectURL(file.url)
+                                          : file.url
+                                      }
+                                      alt={`Uploaded image ${index}`}
+                                      className="media-image rounded"
+                                      style={{ height: "90px", width: "90px" }}
+                                    />
+                                    <button
+                                      type="button"
+                                      className="btn btn-link position-absolute"
+                                      onClick={() => {
+                                        const confirmDelete = window.confirm(
+                                          "Are you sure you want to delete this image?"
+                                        );
+                                        if (confirmDelete) {
+                                          deletemedia(file.id);
+                                        }
+                                      }}
+                                    >
+                                      <i className="fa-solid fa-trash-can text-danger"></i>
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+
+                        {/* Video Upload */}
+                        <div className="row mt-4">
+                          <div className="col-md-12 col-sm-12">
+                            <label className="fw-semibold profile-font">Video Upload</label>
+                            <Input
+                              type="file"
+                              name="videos"
+                              accept="video/*"
+                              multiple
+                              onChange={(e) => handleFileChange(e, "videos")}
+                            />
+
+                            {media.video.length > 0 && (
+                              <div className="d-flex flex-wrap gap-3">
+                                {media.video.map((file, index) => (
+                                  <div
+                                    key={index}
+                                    className="position-relative p-2"
+                                  >
+                                    {file.url.includes("youtu.be") ? (
+                                      <iframe
+                                        width="190"
+                                        height="90"
+                                        src={`https://www.youtube.com/embed/${file.url.split("youtu.be/")[1]
+                                          }?feature=shared`}
+                                        title="YouTube video player"
+                                        frameBorder="0"
+                                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                                        allowFullScreen
+                                      />
+                                    ) : (
+                                      <video
+                                        src={file.url}
+                                        autoPlay={true}
+                                        controls
+                                        className="media-video rounded"
+                                        style={{ height: "90px", width: "190px" }}
+                                      />
+                                    )}
+
+                                    <button
+                                      type="button"
+                                      className="btn btn-link btn-sm position-absolute"
+                                      onClick={() => {
+                                        const confirmDelete = window.confirm(
+                                          "Are you sure you want to delete this video?"
+                                        );
+                                        if (confirmDelete) {
+                                          deletemedia(file.id);
+                                        }
+                                      }}
+                                    >
+                                      <i className="fa-solid fa-trash-can text-danger"></i>
+                                    </button>
+                                  </div>
+                                ))}
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                        <div className="row ">
+                          <form onSubmit={uploadUrl}>
+                            <div className="col-md-12 col-sm-12">
+                              <div className=" d-flex m-3">
+                                <div className="col-md-2 p-1">URL:</div>
+                                <div className="col-md-6">
+                                  <input
+                                    type="text"
+                                    className="form-control"
+                                    id="url"
+                                    placeholder="Enter media URL"
+                                    value={url}
+                                    onChange={(e) => setUrl(e.target.value)}
+                                    required
+                                  />
+                                </div>
+                                {/* Media Type Dropdown */}
+
+                                {/* <div className="col-md-3">
                     <select
                       className="form-control"
                       id="mediaType"
@@ -909,18 +908,19 @@ export default function EditEntertainer() {
                     </select>
                   </div> */}
 
-                              <div className="col-md-4">
-                                <button
-                                  type="submit"
-                                  className="btn btn-dark btn-sm ms-3 "
-                                  disabled={loading}
-                                >
-                                  {"Save"}
-                                </button>
+                                <div className="col-md-4">
+                                  <button
+                                    type="submit"
+                                    className="btn btn-dark btn-sm ms-3 "
+                                    disabled={loading}
+                                  >
+                                    {"Save"}
+                                  </button>
+                                </div>
                               </div>
                             </div>
-                          </div>
-                        </form>
+                          </form>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -928,9 +928,8 @@ export default function EditEntertainer() {
               </div>
             </div>
           </div>
-          </div>
-          </div>
         </div>
+      </div>
     </>
   );
 }

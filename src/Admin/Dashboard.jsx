@@ -50,34 +50,76 @@ export default function Dashboard() {
   return (
     <>
       <DashLayout />
-      <div className="container-fluid d-flex flex-column min-vh-100">
+      <div className="container-fluid w-100 p-0">
         <div className="d-flex mt-0">
           <div className="dash-sidebar-container">
             <AdminSideBar />
           </div>
           <div className="dash-profile-container">
             <div className="row d-flex justify-content-between">
-              <div className="col">
-                <p className="fs-6 fw-bold">DASHBOARD</p>
+              <div className="col mt-2">
+                <p className="fs-6 fw-semibold">DASHBOARD</p>
               </div>
-              <div className="col d-flex">
+              <div className="col d-flex justify-content-end align-items-center">
                 <Input
                   type="text"
                   placeholder="Search"
-                  className="form-control"
-                  style={{ border: "2px solid #C2CCD666" }}
+                  className="dashSearchBar profile-font ps-3"
+                  style={{ border: "1px solid #C2CCD666", borderRadius: "6px", marginRight: "-1px"}}
                 />
-                <button type="button" className="btn btn-light ms-3">
+                <button type="button" className="btn btn-light">
                   <i className="fa-solid fa-list text-muted"></i>
                 </button>
               </div>
             </div>
 
-            <div className="event-form mt-3">
-              <p className="profile-font fw-semibold ms-2 mt-2">Analytics</p>
+            <div className="event-form mt-2">
+              <p className="fw-semibold ms-2 pt-3">Analytics</p>
               <div className="row d-flex gap-3 p-3">
-                <div className="col total-user p-2">
+              <div className="col total-venues p-2 ps-3">
                   <div className="d-flex justify-content-between mb-0">
+                    <p className="profile-font fw-semibold">Venue Signups</p>
+                    <img
+                      src={`${imagePath}totalvenuedash.svg`}
+                      height="35px"
+                      width="40px"
+                    />
+                  </div>
+                  <p className="fw-bold mt-0 mb-2">{stats.venueCount}</p>
+                  <p className="icon-font mt-0">Total Venues</p>
+                </div>
+
+                <div className="col total-entertainers p-2 ps-3">
+                  <div className="d-flex justify-content-between mb-0">
+                    <p className="profile-font fw-semibold">Entertainer Signups</p>
+                    <img
+                      src={`${imagePath}totalenterdash.svg`}
+                      height="35px"
+                      width="40px"
+                    />
+                  </div>
+                  <p className="fw-bold mt-0 mb-2">
+                    {stats.entertainerCount}
+                  </p>
+                  <p className="icon-font mt-0">Total entertainers</p>
+                </div>
+
+               
+
+                <div className="col total-bookings p-2 ps-3">
+                  <div className="d-flex justify-content-between mb-0">
+                    <p className="profile-font fw-semibold">Total Bookings</p>
+                    <img
+                      src={`${imagePath}totalbookingsdash.svg`}
+                      height="35px"
+                      width="40px"
+                    />
+                  </div>
+                  <p className="fw-bold mt-0 mb-2">{stats.totalBookings}</p>
+                  <p className="icon-font mt-0">Total Bookings Confirmed</p>
+                </div>
+                <div className="col  p-2">
+                  {/* <div className="d-flex justify-content-between mb-0">
                     <p className="icon-font fw-semibold">Total Users</p>
                     <img
                       src={`${imagePath}totaluserdash.svg`}
@@ -86,49 +128,11 @@ export default function Dashboard() {
                     />
                   </div>
                   <p className="fw-semibold mt-0 mb-2">{stats.totalUsers}</p>
-                  <p className="icon-font mt-0">Total users registered</p>
+                  <p className="icon-font mt-0">Total users registered</p> */}
                 </div>
+               
 
-                <div className="col total-bookings p-2">
-                  <div className="d-flex justify-content-between mb-0">
-                    <p className="icon-font fw-semibold">Total Bookings</p>
-                    <img
-                      src={`${imagePath}totalbookingsdash.svg`}
-                      height="35px"
-                      width="40px"
-                    />
-                  </div>
-                  <p className="fw-semibold mt-0 mb-2">{stats.totalBookings}</p>
-                  <p className="icon-font mt-0">Total Bookings Confirmed</p>
-                </div>
-
-                <div className="col total-entertainers p-2">
-                  <div className="d-flex justify-content-between mb-0">
-                    <p className="icon-font fw-semibold">Entertainer Signups</p>
-                    <img
-                      src={`${imagePath}totalenterdash.svg`}
-                      height="35px"
-                      width="40px"
-                    />
-                  </div>
-                  <p className="fw-semibold mt-0 mb-2">
-                    {stats.entertainerCount}
-                  </p>
-                  <p className="icon-font mt-0">Total entertainers</p>
-                </div>
-
-                <div className="col total-venues p-2">
-                  <div className="d-flex justify-content-between mb-0">
-                    <p className="icon-font fw-semibold">Venue Signups</p>
-                    <img
-                      src={`${imagePath}totalvenuedash.svg`}
-                      height="35px"
-                      width="40px"
-                    />
-                  </div>
-                  <p className="fw-semibold mt-0 mb-2">{stats.venueCount}</p>
-                  <p className="icon-font mt-0">Total Venues</p>
-                </div>
+                
               </div>
             </div>
 
@@ -144,7 +148,7 @@ export default function Dashboard() {
                   width="622px"
                 />
               </div>
-              <div className="col upcoming-events event-form">
+              <div className="col dash-upcoming-events event-form">
                 <p className="profile-font fw-semibold ms-2 mt-2 mb-0">
                   Upcoming Events
                 </p>

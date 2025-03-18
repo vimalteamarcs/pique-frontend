@@ -15,19 +15,19 @@ const ReportPage = () => {
   const [dateFilter, setDateFilter] = useState("");
   const [monthFilter, setMonthFilter] = useState(new Date().toISOString().slice(0, 7));
 
-useEffect(() => {
-  if (!monthFilter) {
-    setFilteredData(reportData);
-    return;
-  }
+  useEffect(() => {
+    if (!monthFilter) {
+      setFilteredData(reportData);
+      return;
+    }
 
-  const filtered = reportData.filter((event) => {
-    const eventMonth = new Date(event.startTime).toISOString().slice(0, 7);
-    return eventMonth === monthFilter;
-  });
+    const filtered = reportData.filter((event) => {
+      const eventMonth = new Date(event.startTime).toISOString().slice(0, 7);
+      return eventMonth === monthFilter;
+    });
 
-  setFilteredData(filtered);
-}, [reportData, monthFilter]);
+    setFilteredData(filtered);
+  }, [reportData, monthFilter]);
 
 
   useEffect(() => {
@@ -131,35 +131,35 @@ useEffect(() => {
 
   return (
     <>
-      <div className="container-fluid d-flex flex-column min-vh-100">
-  {/* Fixed Navbar */}
-  <div className="position-fixed w-100 bg-white" >
-    <DashLayout />
-  </div>
+      <div className="container-fluid w-100 p-0">
+        {/* Fixed Navbar */}
+        <div className="position-fixed w-100 bg-white" >
+          <DashLayout />
+        </div>
 
-  <div className="d-flex mt-5">
-    {/* Fixed Sidebar */}
-    <div className="dash-sidebar-container position-fixed vh-100 mt-4" style={{ width: "250px", zIndex: 1040 }}>
-      <AdminSideBar />
-    </div>
+        <div className="d-flex mt-5">
+          {/* Fixed Sidebar */}
+          <div className="dash-sidebar-container position-fixed vh-100 mt-4" style={{ width: "250px", zIndex: 1040 }}>
+            <AdminSideBar />
+          </div>
 
-    {/* Main Content Section - Pushed to Right */}
-    <div className="dash-profile-container flex-grow-1" style={{ marginLeft: "250px" }}>
+          {/* Main Content Section - Pushed to Right */}
+          <div className="dash-profile-container flex-grow-1" style={{ marginLeft: "250px" }}>
             {loading ? (
               <div className="d-flex justify-content-center my-5">
-              <div className="spinner-grow text-dark" role="status">
-                <span className="visually-hidden">Loading...</span>
+                <div className="spinner-grow text-dark" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
               </div>
-            </div>
             ) : (
               <>
-               
+
                 <div className="profile-font">
                   <div className="div mt-2">
-                  
+
                   </div>
-                
-                 
+
+
                   <div className="d-flex justify-content-between my-3">
                     <div className="d-flex ">
                       <div>
@@ -183,10 +183,10 @@ useEffect(() => {
                         />
                       </div>
                       <button className="btn btn-success btn-sm h-50 mt-4 ms-3" onClick={exportToExcel}>
-                      Download Excel
-                    </button>
+                        Download Excel
+                      </button>
                     </div>
-                   
+
                   </div>
 
                   <div className="table-responsive w-100">

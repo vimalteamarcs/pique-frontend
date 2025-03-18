@@ -108,7 +108,7 @@ const EventsList = () => {
             e.preventDefault();
             navigate("/admin/viewevent", { state: record });
           }}
-          className=" text-primary"
+          className=" text-danger fw-bold text-decoration-none"
         >
           {text}
         </a>
@@ -149,7 +149,7 @@ const EventsList = () => {
       key: "status",
       render: (status) => {
         let badgeClass = "";
-    
+
         if (status === "unpublished") {
           badgeClass = "bg-unpublished";
         } else if (status === "confirmed") {
@@ -159,7 +159,7 @@ const EventsList = () => {
         } else {
           badgeClass = "bg-success";
         }
-    
+
         return (
           <span
             style={{ fontSize: "10px" }}
@@ -170,7 +170,7 @@ const EventsList = () => {
         );
       },
     },
-    
+
     { title: "Actions", key: "actions", actions: true },
   ];
 
@@ -179,21 +179,21 @@ const EventsList = () => {
       <DashLayout />
       {/* <h5 className="text-secondary text-center mb-4">Events List</h5> */}
       <ToastContainer />
-      <div className="container-fluid d-flex flex-column min-vh-100">
+      <div className="container-fluid w-100 p-0">
         <div className="d-flex mt-0">
           <div className="dash-sidebar-container">
             <AdminSideBar />
           </div>
           <div className="dash-profile-container mb-0">
             <div className="d-flex justify-content-between">
-              <p className="fs-6 fw-bold mb-0 mt-3">EVENTS</p>
-              <button
+              <p className="fs-6 fw-semibold mb-0 mt-3">EVENTS</p>
+              {/* <button
                 onClick={() => navigate("/admin/createevent")}
                 className="btn btn-outline-dark icon-font float-end d-flex align-items-center m-2 btn-sm"
               >
                 <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
                 Create Event
-              </button>
+              </button> */}
             </div>
             {error ? (
               <div

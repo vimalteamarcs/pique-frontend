@@ -26,7 +26,7 @@ export default function AdminNavbar() {
     <>
       <div className="container-fluid w-100">
         <div className="row">
-          <nav id="navbar1" className="navbar navbar-expand-lg px-4">
+          <nav id="navbar1" className="navbar navbar-expand-lg p-2">
             <div className="container-fluid">
               {/* <!-- Logo Section --> */}
               <Link

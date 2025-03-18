@@ -165,7 +165,7 @@ const CreateEvent = () => {
     <>
       <DashLayout />
       <ToastContainer />
-      <div className="container-fluid d-flex flex-column min-vh-100">
+      <div className="container-fluid w-100 p-0">
         <div className="d-flex mt-0">
           <div className="dash-sidebar-container">
             <AdminSideBar />
@@ -173,34 +173,42 @@ const CreateEvent = () => {
           <div className="dash-profile-container">
             <div className="d-flex justify-content-between">
               <p className="fs-6 fw-semibold">EVENTS</p>
-              <button
-                onClick={() => navigate(-1)}
-                className="btn btn-outline-dark d-flex justify-content-between float-start mb-4 btn-sm"
-              >
-                GO BACK TO LIST
-              </button>
+              <input
+                type="text"
+                className="dashSearchBar profile-font mb-2 ps-3"
+                placeholder="Search"
+                style={{ color: "#778DA2" }}
+              />
             </div>
             <div className="div event-form">
-              <p className="profile-font fw-semibold mt-3">Create Event</p>
+              <p
+                className="profile-font fw-semibold pt-3"
+                style={{ fontSize: "14px" }}
+              >
+                Create Event
+              </p>
               <hr />
               {message && <div className="alert alert-success">{message}</div>}
               {error && <div className="alert alert-danger">{error}</div>}
-              <p className="profile-font text-secondary fw-semibold">
+              <p
+                className=" fw-medium"
+                style={{ color: "#9C9C9C", fontSize: "12px" }}
+              >
                 GENERAL INFORMATION
               </p>
               <form onSubmit={handleSubmit}>
                 {venue ? (
-                  <div className="row mt-2">
+                  <div className="row mt-2 mb-2">
                     <div className="col-md-6">
-                      <label htmlFor="title" className="form-label">
-                        Event Name
+                      <label htmlFor="title" className="form-label fw-medium profile-font mb-0">
+                        Event Name*
                       </label>
                       <input
                         type="text"
-                        className={`form-control ${
+                        className={`custom-form-event profile-font ps-3 ${
                           errors.title ? "is-invalid" : ""
                         }`}
-                        placeholder="enter event name"
+                        placeholder="Enter Event Name"
                         id="title"
                         name="title"
                         value={formData.title}
@@ -217,16 +225,16 @@ const CreateEvent = () => {
                       <div className="col-md-6">
                         <label
                           htmlFor="title"
-                          className="form-label profile-font fw-semibold mb-0"
+                          className="form-label profile-font fw-medium mb-0"
                         >
-                          Event Name
+                          Event Name*
                         </label>
                         <Input
                           type="text"
-                          className={`form-control profile-font${
+                          className={`custom-form-event profile-font ps-3${
                             errors.title ? "is-invalid" : ""
                           }`}
-                          placeholder="Enter event name"
+                          placeholder="Enter Event name"
                           id="title"
                           name="title"
                           value={formData.title}
@@ -236,16 +244,16 @@ const CreateEvent = () => {
                           <div className="invalid-feedback">{errors.title}</div>
                         )}
                       </div>
-                      <div className="col-md-6 position-relative">
+                      <div className="col-md-6">
                         <label
                           htmlFor="venueId"
-                          className="form-label profile-font fw-semibold mb-0"
+                          className="form-label profile-font fw-medium mb-0"
                         >
-                          Select Venue
+                          Select Venue*
                         </label>
                         <input
                           type="text"
-                          className={`form-control ${
+                          className={`custom-form-event profile-font ps-3${
                             errors.venueId ? "is-invalid" : ""
                           }`}
                           placeholder="Enter venue name"
@@ -291,19 +299,20 @@ const CreateEvent = () => {
                   <div className="col-md-6">
                     <label
                       htmlFor="location"
-                      className="form-label profile-font fw-semibold mb-0"
+                      className="form-label profile-font fw-medium mb-0"
                     >
-                      Location
+                      Location*
                     </label>
-                    <textarea
+                    <input
                       type="text"
-                      className={`form-control ${
+                      className={`custom-form-event profile-font ps-3 ${
                         errors.location ? "is-invalid" : ""
                       }`}
                       id="location"
+                      placeholder="Enter Your location..."
                       name="location"
                       value={formData.location}
-                      rows="1"
+                      // rows="1"
                       onChange={handleInputChange}
                     />
                     {errors.location && (
@@ -314,12 +323,12 @@ const CreateEvent = () => {
                   <div className="col-md-6">
                     <label
                       htmlFor="recurring"
-                      className="form-label profile-font fw-semibold mb-0"
+                      className="form-label profile-font fw-medium mb-0"
                     >
-                      Recurring
+                      Recurring*
                     </label>
                     <select
-                      className="form-select profile-font"
+                      className="custom-form-event custom-select profile-font ps-3"
                       id="recurring"
                       name="recurring"
                       value={formData.recurring}
@@ -345,13 +354,13 @@ const CreateEvent = () => {
                   <div className="col-12 col-md-6">
                     <label
                       htmlFor="startTime"
-                      className="form-label profile-font fw-semibold mb-0"
+                      className="form-label profile-font fw-medium mb-0"
                     >
-                      Start Date and Time
+                      Start Date and Time*
                     </label>
                     <input
                       type="datetime-local"
-                      className={`form-control ${
+                      className={`custom-form-event custom-date profile-font ps-3 ${
                         errors.startTime ? "is-invalid" : ""
                       }`}
                       id="startTime"
@@ -367,13 +376,13 @@ const CreateEvent = () => {
                   <div className="col-12 col-md-6">
                     <label
                       htmlFor="endTime"
-                      className="form-label profile-font fw-semibold mb-0"
+                      className="form-label profile-font fw-medium mb-0"
                     >
-                      End Date and Time
+                      End Date and Time*
                     </label>
                     <input
                       type="datetime-local"
-                      className={`form-control ${
+                      className={`custom-form-event custom-date profile-font ps-3 ${
                         errors.endTime ? "is-invalid" : ""
                       }`}
                       id="endTime"
@@ -387,30 +396,31 @@ const CreateEvent = () => {
                   </div>
                 </div>
 
-                <div className="row mb-3">
-                  <div className="col-md-12">
-                    <label
-                      htmlFor="description"
-                      className="form-label profile-font fw-semibold mb-0"
-                    >
-                      Description
-                    </label>
+                <div className="row mb-2">
+                  <label
+                    htmlFor="description"
+                    className="form-label profile-font fw-medium mb-0"
+                  >
+                    Description*
+                  </label>
+                  <div className="col-12 col-md-12">
                     <textarea
-                      className="form-control"
+                      type="text"
+                      className="custom-form-event profile-font ps-3 pt-2"
                       id="description"
                       name="description"
+                      placeholder="Describe your Event..."
                       value={formData.description}
                       onChange={handleInputChange}
                       rows="2"
                     />
                   </div>
                 </div>
-                <button
-                  type="submit"
-                  className="btn btn-outline-dark btn-sm float-start mt-3"
-                >
-                  Create Event
-                </button>
+                <div className="submit-btn-container">
+                  <button type="submit" className="btn btn-dark rounded-3">
+                    Submit
+                  </button>
+                </div>
               </form>
             </div>
           </div>

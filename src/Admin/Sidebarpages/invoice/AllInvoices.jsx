@@ -100,8 +100,8 @@ const AllInvoices = () => {
       key: "status",
       render: (status) => {
         const normalizedStatus = status?.toString().trim().toLowerCase();
-        let statusClass = "badge bg-warning text-dark"; 
-  
+        let statusClass = "badge bg-warning text-dark";
+
         if (normalizedStatus === "paid") {
           statusClass = "badge bg-success";
         } else if (normalizedStatus === "pending") {
@@ -109,7 +109,7 @@ const AllInvoices = () => {
         } else if (normalizedStatus === "overdue") {
           statusClass = "badge bg-danger";
         }
-  
+
         return <span className={statusClass}>{status}</span>;
       },
     },
@@ -118,37 +118,37 @@ const AllInvoices = () => {
 
   return (
     <>
-    <DashLayout/>
-            <div className="container-fluid d-flex flex-column min-vh-100">
-              <div className="d-flex mt-0">
-                <div className="dash-sidebar-container">
-                  <AdminSideBar />
-                </div>
-                <div className="dash-profile-container">
-      <h5 className="text-secondary text-center mb-4">All Invoices</h5>
-      <ToastContainer />
-      {error ? (
-        <div className="alert alert-danger">{error}</div>
-      ) : (
-        <CustomTable
-          data={invoices}
-          columns={columns}
-          onView={handleView}
-          onDelete={handleDelete}
-          loading={loading}
-          pagination={pagination}
-          onTableChange={(pagination) => {
-            fetchInvoices(pagination.current, pagination.pageSize, search);
-          }}
-          search={search}
-          onSearchChange={(value) => {
-            setSearch(value);
-            fetchInvoices(1, pagination.pageSize, value);
-          }}
-        />
-      )}
-      </div>
-      </div>
+      <DashLayout />
+      <div className="container-fluid w-100 p-0">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container">
+            <h5 className="text-secondary text-center mb-4">All Invoices</h5>
+            <ToastContainer />
+            {error ? (
+              <div className="alert alert-danger">{error}</div>
+            ) : (
+              <CustomTable
+                data={invoices}
+                columns={columns}
+                onView={handleView}
+                onDelete={handleDelete}
+                loading={loading}
+                pagination={pagination}
+                onTableChange={(pagination) => {
+                  fetchInvoices(pagination.current, pagination.pageSize, search);
+                }}
+                search={search}
+                onSearchChange={(value) => {
+                  setSearch(value);
+                  fetchInvoices(1, pagination.pageSize, value);
+                }}
+              />
+            )}
+          </div>
+        </div>
       </div>
     </>
   );

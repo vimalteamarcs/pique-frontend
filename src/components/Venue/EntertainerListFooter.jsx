@@ -28,7 +28,7 @@ export default function EntertainerListFooter() {
 
       {/* <!-- Footer --> */}
   <div className="container-fluid bg-searchbar p-5 mt-5">
-    <div className="container">
+    {/* <div className="container"> */}
       <div className="row align-items-center">
         {/* <!-- Left Side --> */}
         <div className="col-md-6">
@@ -77,11 +77,11 @@ export default function EntertainerListFooter() {
             </a>
           </div>
         </div>
-      </div>
+      {/* </div> */}
     </div>
   </div>
   {/* <!-- Dark Footer Bar --> */}
-  <div className="bg-dark text-center text-white py-4"></div>
+  {/* <div className="bg-dark text-center text-white py-4"></div> */}
   {/* <!-- footer end --> */}
     </>
   )

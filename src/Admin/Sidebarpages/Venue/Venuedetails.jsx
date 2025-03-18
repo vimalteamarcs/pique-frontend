@@ -111,287 +111,287 @@ const Venuedetails = () => {
 
   return (
     <>
-    <DashLayout/>
-            <div className="container-fluid d-flex flex-column min-vh-100">
-              <div className="d-flex mt-0">
-                <div className="dash-sidebar-container">
-                  <AdminSideBar />
+      <DashLayout />
+      <div className="container-fluid w-100 p-0">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container">
+            <div className="d-flex justify-content-between">
+              {" "}
+              <button
+                onClick={() => navigate(-1)}
+                className=" btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
+              >
+                <i className="fa fa-arrow-left" style={{ marginRight: "8px" }}></i>
+              </button>
+              {venue ? (
+                <>
+                  <button
+                    onClick={() =>
+                      navigate("/admin/addvenuelocation", { state: venue })
+                    }
+                    className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
+                  >
+                    <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
+                    Add Location
+                  </button>
+                  <button
+                    onClick={() => navigate("/admin/createevent", { state: venue })}
+                    className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
+                  >
+                    <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
+                    Create Event
+                  </button>
+                </>
+              ) : null}
+            </div>
+            <p className="profile-font fw-semibold">VENUE DETAILS</p><hr />
+            <div className="row profile-font fw-semibold scrollable-container event-form pt-3">
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Name:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={venueData.name || ""}
+                    disabled
+                  />
                 </div>
-                <div className="dash-profile-container">
-        <div className="d-flex justify-content-between">
-          {" "}
-          <button
-            onClick={() => navigate(-1)}
-            className=" btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
-          >
-            <i className="fa fa-arrow-left" style={{ marginRight: "8px" }}></i>
-          </button>
-          {venue ? (
-            <>
-              <button
-                onClick={() =>
-                  navigate("/admin/addvenuelocation", { state: venue })
-                }
-                className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
-              >
-                <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
-                Add Location
-              </button>
-              <button
-                onClick={() => navigate("/admin/createevent", { state: venue })}
-                className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
-              >
-                <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
-                Create Event
-              </button>
-            </>
-          ) : null}
-        </div>
-        <p className="profile-font fw-semibold">VENUE DETAILS</p><hr/>
-        <div className="row profile-font fw-semibold scrollable-container event-form pt-2">
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Name:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={venueData.name || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Phone:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={venueData.phone || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Email:</label>
-              <input
-                type="email"
-                className="form-control"
-                value={venueData.email || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Address Line 1:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={venueData.addressLine1 || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Address Line 2:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={venueData.addressLine2 || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Description:</label>
-              <textarea
-                className="form-control"
-                value={venueData.description || ""}
-                disabled
-                rows="1"
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Zip Code:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={venueData.zipCode || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Website URL:</label>
-              <input
-                type="url"
-                className="form-control"
-                value={venueData.websiteUrl || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Booking Policies:</label>
-              <textarea
-                className="form-control"
-                value={venueData.bookingPolicies || ""}
-                disabled
-                rows="1"
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Created At:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={
-                  venueData.createdAt
-                    ? new Date(venueData.createdAt).toLocaleDateString()
-                    : ""
-                }
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Updated At:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={
-                  venueData.updatedAt
-                    ? new Date(venueData.updatedAt).toLocaleDateString()
-                    : ""
-                }
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Amenities:</label>
-              <textarea
-                className="form-control"
-                value={venueData.amenities || ""}
-                disabled
-                rows="1"
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">City:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={venueData.city || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">State:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={venueData.state || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Country:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={venueData.country || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Latitude:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={venueData.lat || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-6 col-sm-12">
-            <div className="mb-3">
-              <label className="form-label">Longitude:</label>
-              <input
-                type="text"
-                className="form-control"
-                value={venueData.long || ""}
-                disabled
-              />
-            </div>
-          </div>
-
-          <div className="col-md-12 col-sm-12"></div>
-        </div>
-        {media.length > 0 && (
-          <div className="row gap-1 mb-4">
-            {media.map((item, index) => (
-              <div
-                key={index}
-                className="position-relative px-2 col-md-3 col-sm-12"
-              >
-                {item.type === "image" ? (
-                  <img
-                    src={item.url}
-                    alt={`Media ${index}`}
-                    className="media-image rounded-4   img-fluid"
-                    style={{ width: "100%", height: "20rem" }}
-                  />
-                ) : item.type === "video" ? (
-                  <video
-                    src={item.url}
-                    controls
-                    className="media-video rounded"
-                  />
-                ) : null}
               </div>
-            ))}
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Phone:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={venueData.phone || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Email:</label>
+                  <input
+                    type="email"
+                    className="custom-form-event ps-3"
+                    value={venueData.email || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Address Line 1:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={venueData.addressLine1 || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Address Line 2:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={venueData.addressLine2 || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Description:</label>
+                  <textarea
+                    className="custom-form-event ps-3"
+                    value={venueData.description || ""}
+                    disabled
+                    rows="1"
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Zip Code:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={venueData.zipCode || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Website URL:</label>
+                  <input
+                    type="url"
+                    className="custom-form-event ps-3"
+                    value={venueData.websiteUrl || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Booking Policies:</label>
+                  <textarea
+                    className="custom-form-event ps-3"
+                    value={venueData.bookingPolicies || ""}
+                    disabled
+                    rows="1"
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Created At:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={
+                      venueData.createdAt
+                        ? new Date(venueData.createdAt).toLocaleDateString()
+                        : ""
+                    }
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Updated At:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={
+                      venueData.updatedAt
+                        ? new Date(venueData.updatedAt).toLocaleDateString()
+                        : ""
+                    }
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Amenities:</label>
+                  <textarea
+                    className="custom-form-event ps-3"
+                    value={venueData.amenities || ""}
+                    disabled
+                    rows="1"
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">City:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={venueData.city || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">State:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={venueData.state || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Country:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={venueData.country || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Latitude:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={venueData.lat || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-6 col-sm-12">
+                <div className="mb-3">
+                  <label className="form-label mb-0">Longitude:</label>
+                  <input
+                    type="text"
+                    className="custom-form-event ps-3"
+                    value={venueData.long || ""}
+                    disabled
+                  />
+                </div>
+              </div>
+
+              <div className="col-md-12 col-sm-12"></div>
+            </div>
+            {media.length > 0 && (
+              <div className="row gap-1 mb-4">
+                {media.map((item, index) => (
+                  <div
+                    key={index}
+                    className="position-relative px-2 col-md-3 col-sm-12"
+                  >
+                    {item.type === "image" ? (
+                      <img
+                        src={item.url}
+                        alt={`Media ${index}`}
+                        className="media-image rounded-4   img-fluid"
+                        style={{ width: "100%", height: "20rem" }}
+                      />
+                    ) : item.type === "video" ? (
+                      <video
+                        src={item.url}
+                        controls
+                        className="media-video rounded"
+                      />
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            )}
           </div>
-        )}
+        </div>
       </div>
-      </div>
-      </div>
-      </>
+    </>
   );
 };
 

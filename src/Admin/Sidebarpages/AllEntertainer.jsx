@@ -150,50 +150,50 @@ export default function AllEntertainer() {
 
   return (
     <>
-    <DashLayout/>
-            <div className="container-fluid d-flex flex-column min-vh-100">
-              <div className="d-flex mt-0">
-                <div className="dash-sidebar-container">
-                  <AdminSideBar />
-                </div>
-                <div className="dash-profile-container">
-      <p className="profile-font fw-semibold">ENTERTAINERS DETAILS</p><hr/>
+      <DashLayout />
+      <div className="container-fluid w-100 p-0">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container">
+            <p className="profile-font fw-semibold">ENTERTAINERS DETAILS</p><hr />
 
-      {error ? (
-        <div className="alert alert-danger">{error}</div>
-      ) : (
-        <div className="m-2 profile-font">
-          <CustomTable
-            data={entertainers}
-            columns={columns}
-            onView={handleView}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-            loading={loading}
-            pagination={{
-              current: pagination.current,
-              pageSize: pagination.pageSize,
-              total: pagination.total,
-              showSizeChanger: false,
-            }}
-            onTableChange={(pagination) => {
-              fetchEntertainers(
-                pagination.current,
-                pagination.pageSize,
-                search
-              );
-            }}
-            search={search}
-            onSearchChange={(value) => {
-              setSearch(value);
-              fetchEntertainers(1, pagination.pageSize, value);
-            }}
-          />
+            {error ? (
+              <div className="alert alert-danger">{error}</div>
+            ) : (
+              <div className="m-2 profile-font">
+                <CustomTable
+                  data={entertainers}
+                  columns={columns}
+                  onView={handleView}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                  loading={loading}
+                  pagination={{
+                    current: pagination.current,
+                    pageSize: pagination.pageSize,
+                    total: pagination.total,
+                    showSizeChanger: false,
+                  }}
+                  onTableChange={(pagination) => {
+                    fetchEntertainers(
+                      pagination.current,
+                      pagination.pageSize,
+                      search
+                    );
+                  }}
+                  search={search}
+                  onSearchChange={(value) => {
+                    setSearch(value);
+                    fetchEntertainers(1, pagination.pageSize, value);
+                  }}
+                />
+              </div>
+            )}
+          </div>
         </div>
-      )}
       </div>
-      </div>
-      </div>
-      </>
+    </>
   );
 }

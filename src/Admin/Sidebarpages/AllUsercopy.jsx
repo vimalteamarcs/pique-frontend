@@ -7,8 +7,10 @@ import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminSideBar from "../../components/Venue/AdminSideBar";
+import AddUserModal from "./AddUserModal";
 export default function AllUserCopy() {
   const navigate = useNavigate();
+  const [showModal, setShowModal] = useState(false);
   const [userdata, setuserdata] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
@@ -217,50 +219,49 @@ export default function AllUserCopy() {
   };
   return (
     <>
-    <DashLayout/>
+      <DashLayout />
       <ToastContainer />
-      <div className="container-fluid d-flex flex-column min-vh-100">
-              <div className="d-flex mt-0">
-                <div className="dash-sidebar-container">
-                  <AdminSideBar />
-                </div>
-                <div className="dash-profile-container">
-      <p className="profile-font fw-semibold">USERS DETAILS</p>
-      <hr/>
-      {error ? (
-        <div className="alert alert-danger">{error}</div>
-      ) : (
-        <div className="m-2">
-          {/* Status Dropdown */}
-          {selectedRowKeys.length > 0 && (
-            <div className=" d-flex justify-content-end float-center">
-              <div className="col-md-3 ">
-                <select
-                  id="status"
-                  className="form-control"
-                  value={status}
-                  onChange={(e) => setStatus(e.target.value)}
-                >
-                  <option value="" selected>
-                    --Select--
-                  </option>
-                  <option value="active">Active</option>
-                  {/* <option value="inactive">Inactive</option> */}
-                  <option value="pending">Pending</option>
-                </select>
-              </div>
-              <div className="col-md-3">
-                <button
-                  className="btn btn-primary"
-                  onClick={handleStatusChange}
-                >
-                  Update Status
-                </button>
-              </div>
-            </div>
-          )}
+      <div className="container-fluid w-100 p-0">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container">
+            <p className="profile-font fw-semibold">USER MANAGEMENT</p>
+            {error ? (
+              <div className="alert alert-danger profile-font">{error}</div>
+            ) : (
+              <div className="m-2 event-form pt-3">
+                {/* Status Dropdown */}
+                {selectedRowKeys.length > 0 && (
+                  <div className=" d-flex justify-content-end float-center">
+                    <div className="col-md-3 ">
+                      <select
+                        id="status"
+                        className="form-control"
+                        value={status}
+                        onChange={(e) => setStatus(e.target.value)}
+                      >
+                        <option value="" selected>
+                          --Select--
+                        </option>
+                        <option value="active">Active</option>
+                        {/* <option value="inactive">Inactive</option> */}
+                        <option value="pending">Pending</option>
+                      </select>
+                    </div>
+                    <div className="col-md-3">
+                      <button
+                        className="btn btn-primary"
+                        onClick={handleStatusChange}
+                      >
+                        Update Status
+                      </button>
+                    </div>
+                  </div>
+                )}
 
-          {/* <button
+                {/* <button
               className="btn btn-primary float-end gap-2"
               onClick={() => {
                 navigate("/viewuser");
@@ -269,38 +270,40 @@ export default function AllUserCopy() {
               <i className="bi bi-plus"></i> View User
             </button> */}
 
-          <button
-            className="btn btn-outline-dark btn-sm float-end gap-2"
-            onClick={() => {
-              navigate("/admin/adduser");
-            }}
-          >
-            <i className="bi bi-plus"></i> Add User
-          </button>
+                <button
+                  className="btn btn-dark btn-sm float-end gap-2 rounded-3 pe-3 ps-3 pt-2 pb-2" style={{fontSize:"12px"}}
+                  // onClick={() => {
+                  //   navigate("/admin/adduser");
+                  // }}
+                  onClick={() => setShowModal(true)}
+                >
+                   Add New Venue
+                </button>
+                <AddUserModal showModal={showModal} closeModal={() => setShowModal(false)} />
 
-          {/* Custom Table Component */}
-          <CustomTable
-            data={userdata}
-            columns={columns}
-            loading={loading}
-            onView={handleView}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-            pagination={{
-              current: pagination.current,
-              pageSize: pagination.pageSize,
-              total: pagination.total,
-              showSizeChanger: true,
-            }}
-            onTableChange={handleTableChange}
-            search={search}
-            onSearchChange={handleSearch}
-          />
+                {/* Custom Table Component */}
+                <CustomTable
+                  data={userdata}
+                  columns={columns}
+                  loading={loading}
+                  onView={handleView}
+                  onEdit={handleEdit}
+                  onDelete={handleDelete}
+                  pagination={{
+                    current: pagination.current,
+                    pageSize: pagination.pageSize,
+                    total: pagination.total,
+                    showSizeChanger: true,
+                  }}
+                  onTableChange={handleTableChange}
+                  search={search}
+                  onSearchChange={handleSearch}
+                />
+              </div>
+            )}
+          </div>
         </div>
-      )}
       </div>
-      </div>
-      </div>
-      </>
+    </>
   );
 }

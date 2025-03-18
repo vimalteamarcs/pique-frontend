@@ -71,7 +71,7 @@ export default function AddUser() {
     <>
       <DashLayout />
       <ToastContainer />
-      <div className="container-fluid d-flex flex-column min-vh-100">
+      <div className="container-fluid w-100 p-0">
         <div className="d-flex mt-0">
           <div className="dash-sidebar-container">
             <AdminSideBar />
@@ -81,7 +81,6 @@ export default function AddUser() {
               onClick={() => navigate(-1)}
               className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
             >
-              {/* <i className="fa fa-arrow-left" style={{ marginRight: "8px" }}></i> */}{" "}
               BACK
             </button>
             <p className="profile-font fw-semibold">CREATE USER</p>
@@ -94,9 +93,8 @@ export default function AddUser() {
                   </label>
                   <input
                     type="text"
-                    className={`form-control ${
-                      errors.name ? "is-invalid" : ""
-                    }`}
+                    className={`form-control ${errors.name ? "is-invalid" : ""
+                      }`}
                     name="name"
                     value={formData.name}
                     onChange={handleChange}
@@ -113,9 +111,8 @@ export default function AddUser() {
                   </label>
                   <input
                     type="email"
-                    className={`form-control ${
-                      errors.email ? "is-invalid" : ""
-                    }`}
+                    className={`form-control ${errors.email ? "is-invalid" : ""
+                      }`}
                     name="email"
                     value={formData.email}
                     onChange={handleChange}
@@ -134,9 +131,8 @@ export default function AddUser() {
                   </label>
                   <input
                     type="text"
-                    className={`form-control ${
-                      errors.phoneNumber ? "is-invalid" : ""
-                    }`}
+                    className={`form-control ${errors.phoneNumber ? "is-invalid" : ""
+                      }`}
                     name="phoneNumber"
                     value={formData.phoneNumber}
                     onChange={handleChange}

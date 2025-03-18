@@ -76,106 +76,104 @@ const EditEvent = () => {
 
   return (
     <>
-    <DashLayout/>
+      <DashLayout />
       <ToastContainer />
-           <div className="container-fluid d-flex flex-column min-vh-100">
-             <div className="d-flex mt-0">
-               <div className="dash-sidebar-container">
-                 <AdminSideBar />
-               </div>
-               <div className="dash-profile-container">
-        <button
-          onClick={() => navigate(-1)}
-          className="btn btn-outline-dark btn-sm float-end mb-4"
-        >
-          <i className="fa fa-close"></i>
-        </button>
-        <p className="profile-font fw-semibold mb-2">EDIT EVENT</p>
-        <hr/>
-        <div className="event-form">
-        <p className="fw-semibold profile-font text-muted">GENERAL INFORMATION</p>
-        <form onSubmit={handleSubmit}>
-          <div className="row mb-3">
-            <div className="col-md-6">
-              <label className="form-label profile-font fw-semibold mb-0">Event Name</label>
-              <input
-                type="text"
-                className={`form-control ${errors.title ? "is-invalid" : ""}`}
-                name="title"
-                value={formData.title}
-                onChange={handleInputChange}
-              />
-              {errors.title && (
-                <div className="invalid-feedback">{errors.title}</div>
-              )}
-            </div>
-            <div className="col-md-6">
-              <label className="form-label profile-font fw-semibold mb-0">Location</label>
-              <input
-                type="text"
-                className={`form-control ${
-                  errors.location ? "is-invalid" : ""
-                }`}
-                name="location"
-                value={formData.location}
-                onChange={handleInputChange}
-              />
-              {errors.location && (
-                <div className="invalid-feedback">{errors.location}</div>
-              )}
+      <div className="container-fluid w-100 p-0">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container">
+            <button
+              onClick={() => navigate(-1)}
+              className="btn btn-outline-dark btn-sm float-end mb-4"
+            >
+              <i className="fa fa-close"></i>
+            </button>
+            <p className="profile-font fw-semibold mb-2">EDIT EVENT</p>
+            <hr />
+            <div className="event-form">
+              <p className="fw-semibold profile-font text-muted">GENERAL INFORMATION</p>
+              <form onSubmit={handleSubmit}>
+                <div className="row mb-3">
+                  <div className="col-md-6">
+                    <label className="form-label profile-font fw-semibold mb-0">Event Name</label>
+                    <input
+                      type="text"
+                      className={`form-control ${errors.title ? "is-invalid" : ""}`}
+                      name="title"
+                      value={formData.title}
+                      onChange={handleInputChange}
+                    />
+                    {errors.title && (
+                      <div className="invalid-feedback">{errors.title}</div>
+                    )}
+                  </div>
+                  <div className="col-md-6">
+                    <label className="form-label profile-font fw-semibold mb-0">Location</label>
+                    <input
+                      type="text"
+                      className={`form-control ${errors.location ? "is-invalid" : ""
+                        }`}
+                      name="location"
+                      value={formData.location}
+                      onChange={handleInputChange}
+                    />
+                    {errors.location && (
+                      <div className="invalid-feedback">{errors.location}</div>
+                    )}
+                  </div>
+                </div>
+
+                <div className="row mb-3">
+                  <div className="col-12 col-md-6">
+                    <label className="form-label profile-font fw-semibold mb-0">Start Date and Time</label>
+                    <input
+                      type="datetime-local"
+                      className={`form-control ${errors.startTime ? "is-invalid" : ""
+                        }`}
+                      name="startTime"
+                      value={formData.startTime}
+                      onChange={handleInputChange}
+                    />
+                    {errors.startTime && (
+                      <div className="invalid-feedback">{errors.startTime}</div>
+                    )}
+                  </div>
+                  <div className="col-12 col-md-6">
+                    <label className="form-label profile-font fw-semibold mb-0">End Date and Time</label>
+                    <input
+                      type="datetime-local"
+                      className={`form-control ${errors.endTime ? "is-invalid" : ""}`}
+                      name="endTime"
+                      value={formData.endTime}
+                      onChange={handleInputChange}
+                    />
+                    {errors.endTime && (
+                      <div className="invalid-feedback">{errors.endTime}</div>
+                    )}
+                  </div>
+                </div>
+                <div className="row mb-3">
+                  <div className="col-12">
+                    <label className="form-label profile-font fw-semibold mb-0">Description</label>
+                    <textarea
+                      className="form-control"
+                      name="description"
+                      value={formData.description}
+                      onChange={handleInputChange}
+                    />
+                  </div>
+                </div>
+                <button type="submit" className="btn btn-outline-dark float-start btn-sm d-flex mx-auto mt-3">
+                  Update Event
+                </button>
+              </form>
             </div>
           </div>
-         
-          <div className="row mb-3">
-            <div className="col-12 col-md-6">
-              <label className="form-label profile-font fw-semibold mb-0">Start Date and Time</label>
-              <input
-                type="datetime-local"
-                className={`form-control ${
-                  errors.startTime ? "is-invalid" : ""
-                }`}
-                name="startTime"
-                value={formData.startTime}
-                onChange={handleInputChange}
-              />
-              {errors.startTime && (
-                <div className="invalid-feedback">{errors.startTime}</div>
-              )}
-            </div>
-            <div className="col-12 col-md-6">
-              <label className="form-label profile-font fw-semibold mb-0">End Date and Time</label>
-              <input
-                type="datetime-local"
-                className={`form-control ${errors.endTime ? "is-invalid" : ""}`}
-                name="endTime"
-                value={formData.endTime}
-                onChange={handleInputChange}
-              />
-              {errors.endTime && (
-                <div className="invalid-feedback">{errors.endTime}</div>
-              )}
-            </div>
-          </div>
-          <div className="row mb-3">
-            <div className="col-12">
-              <label className="form-label profile-font fw-semibold mb-0">Description</label>
-              <textarea
-                className="form-control"
-                name="description"
-                value={formData.description}
-                onChange={handleInputChange}
-              />
-            </div>
-          </div>
-          <button type="submit" className="btn btn-outline-dark float-start btn-sm d-flex mx-auto mt-3">
-            Update Event
-          </button>
-        </form>
         </div>
       </div>
-      </div>
-      </div>
-      </>
+    </>
   );
 };
 

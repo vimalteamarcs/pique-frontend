@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import DashLayoutVenue from "../../components/Venue/DashLayoutVenue";
 import PiqueFooter from "../../components/PiqueComponents/PiqueFooter";
 import SearchBar from "../../components/Venue/SearchBar";
+import EntertainerListFooter from "../../components/Venue/EntertainerListFooter";
 
 export default function VenueDash() {
   const [availability, setAvailability] = useState("");
@@ -12,10 +13,10 @@ export default function VenueDash() {
         title="Venue Dashboard"
         description="View and manage your work"
       >
-        <div className="container-fluid d-flex flex-column min-vh-100">
+        <div className="d-flex flex-column min-vh-100">
           <SearchBar />
-        </div>
-        <PiqueFooter />
+        </div> 
+        <EntertainerListFooter /> 
       </DashLayoutVenue>
     </>
   );

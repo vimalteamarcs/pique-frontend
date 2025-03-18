@@ -147,7 +147,7 @@ export default function SearchBar({ updateFilters }) {
 
   return (
     <>
-      <div className="container-fluid bg-searchbar mt-0">
+      <div className="container-fluid bg-searchbar mt-0 p-0">
         <div className="container">
           <div className="row search-bar gx-1 p-3">
             <div className="col-md-2 position-relative">

@@ -67,7 +67,7 @@ export default function VenueDashNavbar() {
               {/* <!-- Navbar Links --> */}
               <div className="collapse navbar-collapse" id="navbarContent">
                 <ul className="navbar-nav mx-auto mb-2 mb-lg-0 ">
-                  <p className="fw-semibold fs-5 nav-font mt-3">
+                  <p className="fw-semibold fs-6 nav-font mt-3">
                     Entertainment | Education | Engagement
                   </p>
                 </ul>
