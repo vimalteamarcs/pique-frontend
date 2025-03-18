@@ -132,11 +132,10 @@ const ReportPage = () => {
   return (
     <>
       <div className="container-fluid w-100 p-0">
-        {/* Fixed Navbar */}
-        <div className="position-fixed w-100 bg-white" >
-          <DashLayout />
-        </div>
-
+       
+      <div className="position-fixed w-100 top-0 z-1030" style={{backgroundColor:"white"}}>
+       <DashLayout />
+</div>
         <div className="d-flex mt-5">
           {/* Fixed Sidebar */}
           <div className="dash-sidebar-container position-fixed vh-100 mt-4" style={{ width: "250px", zIndex: 1040 }}>

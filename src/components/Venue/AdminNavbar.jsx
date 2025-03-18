@@ -109,7 +109,7 @@ export default function AdminNavbar() {
                       aria-labelledby="venueDropdown"
                     >
                       <li>
-                        <a className="dropdown-item custom-drop-item" href="#">
+                        <a className="nav-link custom-drop-item" href="#">
                           <span>Admin Profile</span>
                         </a>
                       </li>
