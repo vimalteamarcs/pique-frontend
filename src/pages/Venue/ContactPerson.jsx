@@ -11,7 +11,7 @@ export default function ContactPerson() {
             title="Contact Person"
             description="View and manage your profile"
           >
-            <div className="container-fluid d-flex flex-column min-vh-100">
+            <div className="container-fluid d-flex flex-column min-vh-100 p-0">
                       <SearchBar />
                       <div className="d-flex">
                         <div className="sidebar-container">

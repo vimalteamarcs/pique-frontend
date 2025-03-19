@@ -293,11 +293,11 @@ export default function ProfileCard() {
       <form onSubmit={handleSubmit}>
         <div className="d-flex justify-content-between align-items-center mb-0">
           <div className="div">
-          <p className="fw-bold mb-0">PROFILE</p>
+          <p className="fw-semibold profilecard-font mb-0">PROFILE</p>
           </div>
           <div className="div">
-            <button type="button" className="btn btn-outline-dark rounded-3 profile-font" onClick={addVenue}>Add Location</button>
-          <button type="submit" className="btn venue-btn profile-font mb-0 ms-2">
+            <button type="button" className="btn btn-outline-dark rounded-3 label-font" onClick={addVenue}>Add Location</button>
+          <button type="submit" className="btn venue-btn label-font mb-0 ms-2">
             Submit
           </button>
           </div>
@@ -305,9 +305,9 @@ export default function ProfileCard() {
         </div>
         <hr />
         <Toaster position="top-center" reverseOrder={false} />
-        <p className="profile-font text-muted">
+        <p className="text-muted label-font" style={{color:"#525252"}}>
           This information will be shared with entertainers who are booked for
-          Pique.{" "}
+          Pique.
         </p>
         {loading ? (
           <div className="d-flex justify-content-center my-5">
@@ -317,12 +317,12 @@ export default function ProfileCard() {
           </div>
         ) : (
           <>
-            <div className="row mb-2 profile-font">
+            <div className="row mb-3 profile-font">
               <div className="col-md-12 col-sm-12">
-                <label className="fw-semibold">Residence Name*</label>
+                <label className="fw-medium label-font">Residence Name*</label>
                 <Input
                   type="text"
-                  className="form-control profile-font"
+                  className="custom-full-form label-font ps-3"
                   name="name"
                   value={venue.name ?? ""}
                   onChange={handleChange}
@@ -331,26 +331,28 @@ export default function ProfileCard() {
               </div>
             </div>
 
-            <div className="row mb-2 profile-font">
+            <div className="row mb-3 profile-font">
               <div className="col-md-6 col-sm-12">
-                <label className=" fw-semibold">Address Line 1*</label>
+                <label className=" fw-medium label-font mb-0">Address Line 1*</label>
+                <p className="card-font mb-0">Street address, P.O. box, c/o</p>
                 <Input
                   type="text"
                   name="addressLine1"
                   value={venue.addressLine1}
                   onChange={handleChange}
-                  className="form-control profile-font"
+                  className="custom-mid-form label-font ps-3"
                   placeholder="Street Address, P.O.box,c/o"
                 />
               </div>
               <div className="col-md-6 col-sm-12">
-                <label className="fw-semibold">Address Line 2*</label>
+                <label className="fw-medium label-font mb-0">Address Line 2*</label>
+                <p className="card-font mb-0">Apartment, suite, unit, building, floor, etc.</p>
                 <Input
                   type="text"
                   name="addressLine2"
                   value={venue.addressLine2}
                   onChange={handleChange}
-                  className="form-control profile-font"
+                  className="custom-mid-form label-font ps-3"
                   placeholder="Apartment,suite,unit,building,floor,etc."
                 />
               </div>
@@ -358,48 +360,48 @@ export default function ProfileCard() {
 
             <div className="row mb-3 profile-font">
               <div className="col-md-6 col-sm-12">
-                <label className="fw-semibold">Country</label>
+                <label className="fw-medium label-font">Country</label>
                 <Select
                   name="country"
                   options={countries}
                   value={venue.country}
                   onChange={handleChange}
                   defaultOption="--Select Country--"
-                  className="form-control profile-font"
+                  className="custom-mid-form label-font ps-3"
                 />
               </div>
               <div className="col-md-6 col-sm-12">
-                <label className="fw-semibold">State</label>
+                <label className="fw-medium label-font">State/Province</label>
                 <Select
                   name="state"
                   options={states}
                   value={venue.state}
                   onChange={handleChange}
                   defaultOption="--Select State--"
-                  className="form-control profile-font"
+                  className="custom-mid-form label-font ps-3"
                 />
               </div>
             </div>
 
-            <div className="row mb-2 profile-font">
+            <div className="row mb-3 profile-font">
               <div className="col-md-6 col-sm-12">
-                <label className="fw-semibold">City</label>
+                <label className="fw-medium label-font">City</label>
                 <Select
                   name="city"
                   options={cities}
                   value={venue.city}
                   onChange={handleChange}
                   defaultOption="--Select City--"
-                  className="form-control profile-font"
+                  className="custom-mid-form label-font ps-3"
                 />
               </div>
               <div className="col-md-6 col-sm-12">
-                <label className="fw-semibold">ZIP/Postal Code</label>
+                <label className="fw-medium label-font">ZIP/Postal Code</label>
                 <Input
                   name="zipCode"
                   value={venue.zipCode}
                   onChange={handleChange}
-                  className="form-control profile-font"
+                  className="custom-mid-form label-font ps-3"
                   placeholder="Enter zip code"
                 />
               </div>
@@ -407,25 +409,26 @@ export default function ProfileCard() {
 
             <div className="row profile-font mb-2">
               <div className="col-md-6 col-sm-12">
-                <label className=" fw-semibold">Contact Person Name*</label>
+                <label className=" fw-medium label-font">Contact Person Name*</label>
                 <Input
                   type="text"
                   name="name"
                   value={localStorage.getItem("userName")}
                   onChange={handleChange}
-                  className="form-control profile-font"
+                  className="custom-mid-form label-font ps-3"
                   placeholder="Enter your email address"
                   disabled
                 />
               </div>
               <div className="col-md-6 col-sm-12">
-                <label className=" fw-semibold">Phone Number*</label>
+                <label className="fw-medium label-font">Contact Number*</label>
                 <Input
                   type="text"
                   name="phone"
                   value={localStorage.getItem("phone")}
                   onChange={handleChange}
-                  className="form-control profile-font"
+                  className="custom-mid-form label-font ps-3"
+
                   placeholder="Enter phone number"
                   disabled
                 />

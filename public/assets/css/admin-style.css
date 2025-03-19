@@ -327,20 +327,20 @@ html {
 }
 
 .bg-unpublished {
-  background-color: #EAEAEA;
+  background-color: #eaeaea;
   border-radius: 19px;
   color: black;
 }
 
 .bg-cancelled {
-  background-color: #FFB276;
+  background-color: #ffb276;
   border-radius: 19px;
   color: black;
 }
 
 .bg-confirmed {
-  background-color: #B8FFD3;
-  border: 1px solid #B8FFD3;
+  background-color: #b8ffd3;
+  border: 1px solid #b8ffd3;
   border-radius: 19px;
 }
 
@@ -406,46 +406,43 @@ html {
   background-color: #555;
 }
 
-
-
 .main-sidebar a i {
   font-size: 1.75rem !important;
   margin-right: 10px;
 }
 
 .custom-drop-menu {
-    background-color: white !important;
-    border-radius: 10px !important;
-    border: none !important;
-    padding: 4px !important;
-  }
-  
-  .custom-drop-item {
-    padding: 12px !important;
-    font-size: 12px !important;
-  }
-  
-  .custom-drop-item:hover {
-    background-color: #e0e0e0 !important;
-    border-radius: 9px !important;
-  }
+  background-color: white !important;
+  border-radius: 10px !important;
+  border: none !important;
+  padding: 4px !important;
+}
 
-  .dash-profile-container{
-   
-        flex: 1; 
-        padding: 20px;
-      background-color: #F8F8F8;
-  }
+.custom-drop-item {
+  padding: 12px !important;
+  font-size: 12px !important;
+}
 
-  .dash-sidebar-container {
-    width: 260px; /* Adjust width as needed */
-    min-height: 100vh; /* Full height */
-    padding: 19px;
-    background: #ffffff; /* Optional background */
-    border-right: 1px solid #ffffff; /* Light border for separation */
-  }
+.custom-drop-item:hover {
+  background-color: #e0e0e0 !important;
+  border-radius: 9px !important;
+}
 
-  /* For Webkit browsers (Chrome, Safari) */
+.dash-profile-container {
+  flex: 1;
+  padding: 20px;
+  background-color: #f8f8f8;
+}
+
+.dash-sidebar-container {
+  width: 260px !important; /* Adjust width as needed */
+  min-height: 100vh; /* Full height */
+  padding: 19px;
+  background: #ffffff; /* Optional background */
+  border-right: 1px solid #ffffff; /* Light border for separation */
+}
+
+/* For Webkit browsers (Chrome, Safari) */
 ::-webkit-scrollbar {
   display: none;
 }
@@ -464,14 +461,14 @@ body {
   display: flex;
   align-items: center;
   border-radius: 8px;
-  color: #778DA2;
+  color: #778da2;
   text-decoration: none;
   /* position: relative; */
   margin-bottom: 9px;
   margin-left: 12px;
-  height: 40px; 
+  height: 40px;
   transition: color 0.3s ease;
-  overflow: hidden; 
+  overflow: hidden;
 }
 
 .dash-sidebar-link::before {
@@ -481,17 +478,17 @@ body {
   left: 0;
   width: 100%;
   height: 0%;
-  background-color: #F8F8F8;
+  background-color: #f8f8f8;
   transition: height 0.5s ease-in-out;
   z-index: -1;
 }
 
 .dash-active-link {
-  background-color:#F8F8F8 !important;
+  background-color: #f8f8f8 !important;
   color: black !important;
   font-weight: 600 !important;
   width: calc(100% + 12px) !important;
-  margin-left: -2px !important; 
+  margin-left: -2px !important;
   padding-left: 15px !important;
   position: relative;
   padding-right: 9px !important;
@@ -505,143 +502,140 @@ body {
   transition: filter 0.1s ease;
 }
 
-  /* Removes the border around the entire dropdown menu */
-.dropdown-menu {
+/* Removes the border around the entire dropdown menu */
+.dash-drop-menu {
     border: none !important;
-    box-shadow: none !important; 
+    /* box-shadow: none !important;  */
     background-color: white !important;
   }
-  
-  /* Removes any borders from dropdown items */
-  .dropdown-menu .dropdown-item {
+
+/* Removes any borders from dropdown items */
+.dash-drop-menu .dash-drop-item {
     border: none !important;
-    /* padding: 8px 12px !important; */
+    padding: 8px 12px !important;
     background-color: transparent !important;
     margin-left: 35px;
     margin-bottom: 10px;
   }
-  
-  /* Ensures no border appears when hovering */
-  .dropdown-menu .dropdown-item:hover,
-  .dropdown-menu .dropdown-item:focus {
-    /* background-color: #f8f8f8 !important; */
+
+/* Ensures no border appears when hovering */
+/* .dash-drop-menu .dash-drop-item:hover,
+  .dash-drop-menu .dash-drop-item:focus {
+    background-color: #f8f8f8 !important;
     border: none !important;
     outline: none !important;
-  }
-  
-  /* Ensures no focus border on dropdown button */
-  .dropdown-toggle:focus,
-  .dropdown-toggle:active {
-    outline: none !important;
-    box-shadow: none !important;
-    border: none !important;
-  }
+  } */
 
-  .dropdown-item-text {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 11 px;
-    font-weight: 500;
-  }
-  
-  .bullet {
-    width: 8px;
-    height: 8px;
-  }
-  
-  /* Active State */
-  .active-item {
-    color: #008ab4 !important;
-  }
-  
-  .active-item .bullet {
-    background: #008ab4 !important;
-  }
-  
-  /* Inactive State */
-  .inactive-item {
-    color: #b0b0b0 !important;
-  }
-  
-  .inactive-item .bullet {
-    background: #b0b0b0 !important;
-  }
-  
-  
+/* Ensures no focus border on dropdown button */
+/* .dropdown-toggle:focus,
+.dropdown-toggle:active {
+  outline: none !important;
+  box-shadow: none !important;
+  border: none !important;
+} */
 
-  .event-form{
-    background: white !important;
-    border-radius: 10px !important;
-    /* padding: 2px !important; */
-    padding-left: 12px !important;
-    padding-right: 15px !important;
-  }
-  
-  .event-form .submit-btn-container {
-    display: flex;
-    justify-content: flex-start;
-    padding-bottom: 12px; 
-  }
-  
-  .submit-btn-container button {
-    font-size: 12px;
-  }
-  
+.dropdown-item-text {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11 px;
+  font-weight: 500;
+}
 
-.total-user{
-  background: #EBF5FF !important;
+.bullet {
+  width: 8px;
+  height: 8px;
+}
+
+/* Active State */
+.active-item {
+  color: #008ab4 !important;
+}
+
+.active-item .bullet {
+  background: #008ab4 !important;
+}
+
+/* Inactive State */
+.inactive-item {
+  color: #b0b0b0 !important;
+}
+
+.inactive-item .bullet {
+  background: #b0b0b0 !important;
+}
+
+.event-form {
+  background: white !important;
+  border-radius: 10px !important;
+  /* padding: 2px !important; */
+  padding-left: 12px !important;
+  padding-right: 15px !important;
+}
+
+.event-form .submit-btn-container {
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 12px;
+}
+
+.submit-btn-container button {
+  font-size: 12px;
+}
+
+.total-user {
+  background: #ebf5ff !important;
   border-radius: 7px !important;
   height: 103px !important;
 }
 
-.total-bookings{
-  background: #F4EDFF !important;
+.total-bookings {
+  background: #f4edff !important;
   border-radius: 7px !important;
   height: 103px !important;
 }
 
-.total-entertainers{
-  background: #E9FFFA !important;
-  border-radius: 7px !important;
-  height: 103px !important; 
-}
-
-.total-venues{
-  background: #FFF4EE !important;
+.total-entertainers {
+  background: #e9fffa !important;
   border-radius: 7px !important;
   height: 103px !important;
 }
 
-.event-details{
-  background: #FAFAFA;
+.total-venues {
+  background: #fff4ee !important;
+  border-radius: 7px !important;
+  height: 103px !important;
+}
+
+.event-details {
+  background: #fafafa;
   border-radius: 8px;
 }
 
-.revenue-earning{
+.revenue-earning {
   width: 670px;
-height: 271px;
+  height: 271px;
 }
 
-.custom-form-event{
+.custom-form-event {
   top: 269px;
-/* left: 293px; */
-width: 510px;
-height: 45px;
-background: #FFFFFF ;
-border: 0.5px solid #000000;
-border-radius: 5px;
-opacity: 1;
+  /* left: 293px; */
+  width: 510px;
+  height: 45px;
+  background: #ffffff;
+  border: 0.5px solid #000000;
+  border-radius: 5px;
+  opacity: 1;
 }
 
-.dashSearchBar{
+.dashSearchBar {
   top: 94px;
-left: 985px;
-width: 361px;
-height: 41px;
-border: 1px solid #C2CCD666;
-border-radius: 6px;
-opacity: 1;
+  left: 985px;
+  width: 361px;
+  height: 41px;
+  border: 1px solid #c2ccd666;
+  border-radius: 6px;
+  opacity: 1;
 }
 
 .custom-select {
@@ -653,11 +647,11 @@ opacity: 1;
   background-repeat: no-repeat;
   background-position: right 0.5rem center; /* Moves the arrow */
   background-size: 16px;
-  
+
   padding-right: 2rem; /* Ensures text does not overlap with arrow */
 }
 
-.custom-date{
+.custom-date {
   appearance: none; /* Ensures custom styling without removing arrow */
   -webkit-appearance: none;
   -moz-appearance: none;
@@ -666,11 +660,11 @@ opacity: 1;
   background-repeat: no-repeat;
   background-position: right 0.2rem center; /* Moves the arrow */
   background-size: 16px;
-  
+
   padding-right: 1rem; /* Ensures text does not overlap with arrow */
 }
 
-.custom-user-modal{
+.custom-user-modal {
   margin-left: 50px !important;
   margin-right: 30px !important;
   border-radius: 10px !important;
@@ -682,7 +676,15 @@ opacity: 1;
   width: 12px;
   height: 7px;
   margin-right: 8px;
-  transition: transform 0.3s ease; 
+  transition: transform 0.3s ease;
 }
 
-
+.custom-booking-highlight::before {
+  top: 217px;
+  left: -65px;
+  width: 4px;
+  height: 42px;
+  background: #845FD7 0% 0% no-repeat padding-box;
+  border-radius: 2px;
+  opacity: 1;
+}

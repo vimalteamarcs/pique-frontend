@@ -3,6 +3,7 @@ import DashLayoutVenue from "../../components/Venue/DashLayoutVenue";
 import PiqueFooter from "../../components/PiqueComponents/PiqueFooter";
 import SearchBar from "../../components/Venue/SearchBar";
 import EntertainerListFooter from "../../components/Venue/EntertainerListFooter";
+import VenueDashFooter from "../../components/Venue/VenueDashFooter";
 
 export default function VenueDash() {
   const [availability, setAvailability] = useState("");
@@ -13,10 +14,10 @@ export default function VenueDash() {
         title="Venue Dashboard"
         description="View and manage your work"
       >
-        <div className="d-flex flex-column min-vh-100">
+        <div className="d-flex flex-column min-vh-100 p-0">
           <SearchBar />
         </div> 
-        <EntertainerListFooter /> 
+        <VenueDashFooter/>
       </DashLayoutVenue>
     </>
   );

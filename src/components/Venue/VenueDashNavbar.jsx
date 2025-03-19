@@ -67,7 +67,7 @@ export default function VenueDashNavbar() {
               {/* <!-- Navbar Links --> */}
               <div className="collapse navbar-collapse" id="navbarContent">
                 <ul className="navbar-nav mx-auto mb-2 mb-lg-0 ">
-                  <p className="fw-semibold fs-6 nav-font mt-3">
+                  <p className="fw-medium fs-6 nav-font mt-3">
                     Entertainment | Education | Engagement
                   </p>
                 </ul>
@@ -83,16 +83,17 @@ export default function VenueDashNavbar() {
                     <img src={`${imagePath}userIcon.svg`} />
                   </NavLink>
 
-                  <div className="dropdown ms-3">
+                  <div className="dropdown ms-1">
                     <button
                       className="btn btn-nav-venue dropdown-toggle d-flex align-items-center"
                       type="button"
                       id="venueDropdown"
                       data-bs-toggle="dropdown"
                       aria-expanded="false"
+                      style={{fontSize:"14px"}}
                     >
                       Venue Name
-                      <div className="nav-bars ms-2">
+                      <div className="nav-bars ms-1">
                         <img
                           src={`${imagePath}Icon ion-menu.svg`}
                           className="menu-icon"
@@ -101,12 +102,12 @@ export default function VenueDashNavbar() {
                     </button>
 
                     <ul
-                      className="dropdown-menu custom-drop-menu dropdown-menu-end"
+                      className="dropdown-menu venue-drop-menu dropdown-menu-end"
                       aria-labelledby="venueDropdown"
                     >
                       <li>
                         <NavLink
-                          className="dropdown-item custom-drop-item"
+                          className="dropdown-item venue-drop-item"
                           to="/venue/profile"
                         >
                           Account
@@ -114,7 +115,7 @@ export default function VenueDashNavbar() {
                       </li>
                       <li>
                         <NavLink
-                          className="dropdown-item custom-drop-item"
+                          className="dropdown-item venue-drop-item"
                           to="/venue/events"
                         >
                           Events
@@ -122,7 +123,7 @@ export default function VenueDashNavbar() {
                       </li>
                       <li>
                         <NavLink
-                          className="dropdown-item custom-drop-item"
+                          className="dropdown-item venue-drop-item"
                           to="/"
                         >
                           Notifications & Reminders
@@ -130,7 +131,7 @@ export default function VenueDashNavbar() {
                       </li>
                       <li>
                         <NavLink
-                          className="dropdown-item custom-drop-item"
+                          className="dropdown-item venue-drop-item"
                           to="/"
                         >
                           Help & Support
@@ -138,7 +139,7 @@ export default function VenueDashNavbar() {
                       </li>
                       <li>
                         <button
-                          className="dropdown-item custom-drop-item text-dark"
+                          className="dropdown-item venue-drop-item text-dark"
                           data-bs-toggle="modal"
                           data-bs-target="#logoutModal"
                         >

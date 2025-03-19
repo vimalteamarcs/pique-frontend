@@ -1,32 +1,10 @@
 import React from 'react'
 
-export default function EntertainerListFooter() {
+export default function VenueDashFooter() {
     const imagePath = import.meta.env.VITE_LOGGEDIN_IMAGE_PATH;
   return (
     <>
-    <div className="container">
-    <div className="row mt-5 mb-0">
-      <div className="col-md-4">
-        <p className="fw-semibold fs-3 section-title section-font">What We Do</p>
-      </div>
-      <div className="col-md-8">
-        <p className="custom-para-text">
-          Our goal is to entertain, educate, and engage our audiences. We have
-          found that the best way to do that is to include them. We ask
-          questions, encourage them to sing along, and have a friendly rapport
-          during our programs.
-        </p>
-        <p className="custom-para-text">
-          Whether it's music, lecture, or a presentation, one of the best ways
-          to keep the audience engaged is to encourage them to participate as
-          well.We have even incorporated some of their personal stories into
-          our programs.
-        </p>
-      </div>
-    </div>
-    </div>
-
-      {/* <!-- Footer --> */}
+          {/* <!-- Footer --> */}
   <div className="container-fluid bg-footer p-5 mt-5">
     {/* <div className="container"> */}
       <div className="row align-items-center">
@@ -56,7 +34,7 @@ export default function EntertainerListFooter() {
 
         {/* <!-- Right Side --> */}
         <div className="col-md-6 text-center">
-          <p className="fw-semibold text-center ms-5 mb-2">Get The App</p>
+          <p className="fw-semibold text-center custom-para-text ms-5 mb-2">Get The App</p>
           <div className="d-flex justify-content-end me-4 gap-3">
             <a href="#" className="btn btn-outline-dark d-flex align-items-center px-3 py-2 rounded-5">
               <i className="fa-brands fa-apple fs-3 me-2"></i>

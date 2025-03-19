@@ -149,24 +149,24 @@ export default function SearchBar({ updateFilters }) {
     <>
       <div className="container-fluid bg-searchbar mt-0 p-0">
         <div className="container">
-          <div className="row search-bar gx-1 p-3">
-            <div className="col-md-2 position-relative">
+          <div className="row search-bar gx-1 pt-2">
+            <div className="col position-relative">
               <input
                 type="date"
-                className="form-control rounded-3 profile-font custom-date-input"
+                className="custom-date-form rounded-3 custom-search-font custom-date-input p-3"
                 style={{ "border": "none" }}
               />
             </div>
-            <div className="col-md-2">
+            <div className="col">
               <input
                 type="time"
-                className="form-control rounded-3 profile-font ps-5"
+                className="custom-time-form rounded-3 custom-search-font p-3"
                 style={{ "border": "none" }}
               />
             </div>
-            <div className="col-md-3">
+            <div className="col">
               <select
-                className="form-select profile-font rounded-3"
+                className="custom-neighbour-form custom-search-font rounded-3 p-1"
                 aria-label="Default select example"
                 style={{ "border": "none" }}
               >
@@ -177,14 +177,14 @@ export default function SearchBar({ updateFilters }) {
               </select>
             </div>
 
-            <div className="col-md-4">
+            <div className="col">
               <Input
                 type="text"
                 placeholder="Search Entertainers"
                 value={searchQuery}
                 onChange={handleSearchChange}
                 onFocus={() => setShowSuggestions(true)}
-                className="form-control profile-font rounded-3"
+                className="custom-search-form custom-search-font rounded-3 p-2"
                 style={{ "border": "none" }}
               />
               {showSuggestions && suggestions.length > 0 && (
@@ -195,7 +195,7 @@ export default function SearchBar({ updateFilters }) {
                   {suggestions.map((suggestion, index) => (
                     <li
                       key={suggestion.id || index}
-                      className="dropdown-item profile-font"
+                      className="dropdown-item custom-search-font"
                       onClick={() => handleSuggestionClick(suggestion)}
                       style={{ cursor: "pointer" }}
                     >
@@ -206,12 +206,12 @@ export default function SearchBar({ updateFilters }) {
               )}
             </div>
 
-            <div className="col-md-1">
+            <div className="col">
               <Button
-                className="btn btn-dark w-100 rounded-3 profile-font"
+                className="btn btn-dark rounded-3 custom-search-font" style={{width:"150px", fontSize:"12px", height:"38px"}}
                 onClick={handleSearchClick}
               >
-                {/* <i className="fa fa-search me-3"></i> */}
+                <i className="fa fa-search me-3 fs-6"></i>
                 Search
               </Button>
             </div>

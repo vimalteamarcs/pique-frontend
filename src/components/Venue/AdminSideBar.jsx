@@ -140,13 +140,13 @@ export default function AdminSideBar() {
             </div>
 
             <ul
-              className={`dropdown-menu ${isEventsDropdownOpen ? "show" : ""}`}
+              className={`dropdown-menu dash-drop-menu ${isEventsDropdownOpen ? "show" : ""}`}
             >
               <li>
                 <NavLink
                   to="/admin/createevent"
                   className={({ isActive }) =>
-                    `dropdown-item dropdown-item-text ${
+                    `dropdown-item dash-drop-item dropdown-item-text ${
                       isActive ? "active-item fw-semibold" : ""
                     }`
                   }
@@ -158,7 +158,7 @@ export default function AdminSideBar() {
                 <NavLink
                   to="/admin/allevents"
                   className={({ isActive }) =>
-                    `dropdown-item dropdown-item-text ${
+                    `dropdown-item dash-drop-item dropdown-item-text ${
                       isActive ? "active-item fw-semibold" : "inactive-item"
                     }`
                   }
@@ -170,7 +170,7 @@ export default function AdminSideBar() {
                 <NavLink
                   to="/admin/tours"
                   className={({ isActive }) =>
-                    `dropdown-item dropdown-item-text ${
+                    `dropdown-item dash-drop-item dropdown-item-text ${
                       isActive ? "active-item fw-semibold" : "inactive-item"
                     }`
                   }
@@ -219,12 +219,12 @@ export default function AdminSideBar() {
               </div>
             </div>
             <ul
-              className={`dropdown-menu ${isAdminDropdownOpen ? "show" : ""}`}
+              className={`dropdown-menu dash-drop-menu ${isAdminDropdownOpen ? "show" : ""}`}
             >
               <li>
                 <NavLink
                   to="/admin/allusercopy?role=venue"
-                  className={`dropdown-item dropdown-item-text ${
+                  className={`dropdown-item dash-drop-item dropdown-item-text ${
                     isVenueActive ? "active-item fw-semibold" : "inactive-item"
                   }`}
                 >
@@ -235,7 +235,7 @@ export default function AdminSideBar() {
               <li>
                 <NavLink
                   to="/admin/allusercopy?role=entertainer"
-                  className={`dropdown-item dropdown-item-text ${
+                  className={`dropdown-item dash-drop-item dropdown-item-text ${
                     isEntertainerActive ? "active-item fw-semibold" : "inactive-item"
                   }`}
                 >

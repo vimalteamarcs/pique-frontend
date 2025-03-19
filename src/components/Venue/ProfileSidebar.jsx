@@ -16,9 +16,9 @@ export default function ProfileSidebar() {
 
   return (
     <div className="p-2 profile-font">
-      <p className="fs-5 fw-bold mb-1">Account</p>
-      <p className="text-muted small">{name}</p>
-      <nav className="nav flex-column position-relative">
+      <p className="fw-medium mb-1 ms-3" style={{fontSize:"20px"}}><i className="fa-solid fa-angle-left fs-6 me-1"></i>Account</p>
+      <p className="text-muted fw-regular ms-4" style={{fontSize:"14px"}}>{name}</p>
+      <nav className="nav flex-column position-relative ms-4 label-font">
         {/* VENUE PROFILE, CONTACT PERSON, WISHLIST */}
         {[
           {
@@ -46,7 +46,7 @@ export default function ProfileSidebar() {
             key={to}
             to={to}
             className={({ isActive }) =>
-              `nav-link py-2 px-3 mb-2 d-flex align-items-center sidebar-link ${
+              `nav-link py-2 px-4 mb-2 d-flex align-items-center sidebar-link ${
                 isActive ? "active-link" : ""
               }`
             }
@@ -58,7 +58,7 @@ export default function ProfileSidebar() {
 
         <div className="nav-item">
           <div
-            className={`nav-link py-2 px-3 mb-2 d-flex align-items-center sidebar-link ${
+            className={`nav-link py-2 px-4 mb-2 d-flex align-items-center sidebar-link ${
               isEventsActive ? "active-link" : ""
             }`}
             onClick={() => setIsEventsOpen(!isEventsOpen)}
@@ -84,7 +84,7 @@ export default function ProfileSidebar() {
                   key={to}
                   to={to}
                   className={({ isActive }) =>
-                    `nav-link py-2 px-3 mb-2 d-flex align-items-center sidebar-link ${
+                    `nav-link py-2 px-4 mb-2 d-flex align-items-center sidebar-link ${
                       isActive ? "active-link" : ""
                     }`
                   }
@@ -122,7 +122,7 @@ export default function ProfileSidebar() {
             key={to}
             to={to}
             className={({ isActive }) =>
-              `nav-link py-2 px-3 mb-2 d-flex align-items-center sidebar-link ${
+              `nav-link py-2 px-4 mb-2 d-flex align-items-center sidebar-link ${
                 isActive ? "active-link" : ""
               }`
             }

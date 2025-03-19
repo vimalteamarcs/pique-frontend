@@ -22,7 +22,7 @@ const CreateEvent = () => {
     startTime: "",
     endTime: "",
     recurring: "none",
-    status: "pending",
+    status: "unpublished",
     isAdmin: true,
   });
 
@@ -188,8 +188,14 @@ const CreateEvent = () => {
                 Create Event
               </p>
               <hr />
-              {message && <div className="alert alert-success">{message}</div>}
-              {error && <div className="alert alert-danger">{error}</div>}
+              {message && (
+                <div className="alert alert-success profile-font">
+                  {message}
+                </div>
+              )}
+              {error && (
+                <div className="alert alert-danger profile-font">{error}</div>
+              )}
               <p
                 className=" fw-medium"
                 style={{ color: "#9C9C9C", fontSize: "12px" }}
@@ -200,7 +206,10 @@ const CreateEvent = () => {
                 {venue ? (
                   <div className="row mt-2 mb-2">
                     <div className="col-md-6">
-                      <label htmlFor="title" className="form-label fw-medium profile-font mb-0">
+                      <label
+                        htmlFor="title"
+                        className="form-label fw-medium profile-font mb-0"
+                      >
                         Event Name*
                       </label>
                       <input
@@ -249,14 +258,14 @@ const CreateEvent = () => {
                           htmlFor="venueId"
                           className="form-label profile-font fw-medium mb-0"
                         >
-                          Select Venue*
+                          Client*
                         </label>
                         <input
                           type="text"
                           className={`custom-form-event profile-font ps-3${
                             errors.venueId ? "is-invalid" : ""
                           }`}
-                          placeholder="Enter venue name"
+                          placeholder="Enter Venue Owner name"
                           id="venueId"
                           name="venueId"
                           value={venueQuery}
@@ -416,6 +425,112 @@ const CreateEvent = () => {
                     />
                   </div>
                 </div>
+                <p
+                  className=" fw-medium mt-4"
+                  style={{ color: "#9C9C9C", fontSize: "12px" }}
+                >
+                  VENUE INFORMATION
+                </p>
+
+                <div className="row mb-3">
+                <div className="col-md-6">
+                        <label
+                          htmlFor="venueId"
+                          className="form-label profile-font fw-medium mb-0"
+                        >
+                          Venue Name*
+                        </label>
+                        <input
+                          type="text"
+                          className={`custom-form-event profile-font ps-3${
+                            errors.venueId ? "is-invalid" : ""
+                          }`}
+                          placeholder="Enter venue name"
+                          id="venueId"
+                          name="venueId"
+                          value={venueQuery}
+                          onChange={handleVenueChange}
+                        />
+                        {errors.venueId && (
+                          <div className="invalid-feedback">
+                            {errors.venueId}
+                          </div>
+                        )}
+
+                        {venueSuggestions.length > 0 && (
+                          <ul
+                            className="list-group position-absolute w-100 mt-1"
+                            style={{ zIndex: 10 }}
+                          >
+                            {venueSuggestions.map((venue) => (
+                              <li
+                                key={venue.id}
+                                className="list-group-item list-group-item-action"
+                                onClick={() => handleSelectVenue(venue)}
+                                style={{ cursor: "pointer" }}
+                              >
+                                {venue.name}
+                                <p style={{ fontSize: "0.675rem" }}>
+                                  {venue.addressLine1 +
+                                    " " +
+                                    venue.addressLine2}
+                                </p>
+                              </li>
+                            ))}
+                          </ul>
+                        )}
+                      </div>
+                      <div className="col-md-6">
+                    <label
+                      htmlFor="location"
+                      className="form-label profile-font fw-medium mb-0"
+                    >
+                      Location*
+                    </label>
+                    <input
+                      type="text"
+                      className={`custom-form-event profile-font ps-3 ${
+                        errors.location ? "is-invalid" : ""
+                      }`}
+                      id="location"
+                      placeholder="Enter Your location..."
+                      name="location"
+                      value={formData.location}
+                      // rows="1"
+                      onChange={handleInputChange}
+                    />
+                    {errors.location && (
+                      <div className="invalid-feedback">{errors.location}</div>
+                    )}
+                  </div>
+                    </div>
+
+                    <div className="row mb-3">
+                      <div className="col-md-6">
+                        <label
+                          htmlFor="title"
+                          className="form-label profile-font fw-medium mb-0"
+                        >
+                          Venue Contact*
+                        </label>
+                        <Input
+                          type="text"
+                          className={`custom-form-event profile-font ps-3${
+                            errors.title ? "is-invalid" : ""
+                          }`}
+                          placeholder="Enter Venue Contact Number"
+                          id="title"
+                          name="title"
+                          // value={formData.title}
+                          // onChange={handleInputChange}
+                        />
+                        {/* {errors.title && (
+                          <div className="invalid-feedback">{errors.title}</div>
+                        )} */}
+                      </div>
+                      
+                    </div>
+
                 <div className="submit-btn-container">
                   <button type="submit" className="btn btn-dark rounded-3">
                     Submit

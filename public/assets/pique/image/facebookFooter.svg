@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="44" height="44" viewBox="0 0 44 44">
+  <g id="Group_11013" data-name="Group 11013" transform="translate(0)">
+    <g id="Rectangle_1137" data-name="Rectangle 1137" transform="translate(0)" fill="none" stroke="#333" stroke-width="1">
+      <rect width="44" height="44" rx="11" stroke="none"/>
+      <rect x="0.5" y="0.5" width="43" height="43" rx="10.5" fill="none"/>
+    </g>
+    <path id="Icon_corebrands-facebook-f" data-name="Icon corebrands-facebook-f" d="M21.988,15.318l.757-4.928H18.016v-3.2a2.464,2.464,0,0,1,2.778-2.663h2.15V.334A26.223,26.223,0,0,0,19.128,0c-3.894,0-6.439,2.361-6.439,6.633v3.756H8.36v4.928h4.329V27.232h5.327V15.319Z" transform="translate(6.284 8.32)" fill="#333"/>
+  </g>
+</svg>
