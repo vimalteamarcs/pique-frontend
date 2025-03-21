@@ -4,6 +4,7 @@ import { Helmet } from "react-helmet-async";
 import Button from "../components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/Input";
+import toast, { Toaster } from "react-hot-toast";
 
 
 const Login = () => {
@@ -12,7 +13,7 @@ const Login = () => {
     email: "",
     password: "",
   });
-
+  const [errors, setErrors] = useState({});
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
@@ -22,10 +23,38 @@ const Login = () => {
       ...prevData,
       [name]: value,
     }));
+
+ setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: "",
+    }));
   };
+
+  const validateForm = () => {
+    let newErrors = {};
+
+    if (!formData.email.trim()) {
+      newErrors.email = "Email is required.";
+    } else if (!/^\S+@\S+\.\S+$/.test(formData.email)) {
+      newErrors.email = "Enter a valid email address.";
+    }
+
+    if (!formData.password.trim()) {
+      newErrors.password = "Password is required.";
+    } else if (formData.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters long.";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; // Returns true if no errors
+  };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if (!validateForm()) {
+      return;
+    }
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}auth/login`,
@@ -42,9 +71,8 @@ const Login = () => {
       localStorage.setItem("userName", response.data.data.user.name);
       localStorage.setItem('phone',response.data.data.user.phone);
       localStorage.setItem('email',response.data.data.user.email);
-
-
       window.dispatchEvent(new Event("storage"));
+
       // const status = localStorage.getItem("status");
       // if (response.data.role === "venue" && status === "pending") {
       //   navigate("/statusverification");
@@ -67,7 +95,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login error", error);
-      setErrorMessage(
+      toast.danger(
         error.response?.data?.message || "An error occurred. Please try again."
       );
     }
@@ -86,6 +114,7 @@ const Login = () => {
           content="Login to your account to access personalized features and services."
         />
       </Helmet>
+      <Toaster/>
       {/* <PiqueNavbar/> */}
       <div className="container min-vh-100 ">
         <div className="row d-flex justify-content-around mt-5">
@@ -107,14 +136,14 @@ const Login = () => {
             <div className="row d-flex justify-content-center">
               <h3 className="text-center mt-5 fw-semibold">Login</h3>
               <div className="col-md-10 col-sm-12 p-3 ">
-                {errorMessage && (
+                {/* {errorMessage && (
                   <div className="alert alert-danger" role="alert">
                     {errorMessage}
                   </div>
-                )}
+                )} */}
                 <form onSubmit={handleSubmit}>
                   <div className="row ">
-                    <label className="fw-semibold">Email*</label>
+                    <label className="fw-semibold">Email<span style={{ color: "red", display: "inline" }}>*</span></label>
                     <Input
                       type="email"
                       placeholder="Enter email address"
@@ -122,11 +151,12 @@ const Login = () => {
                       value={formData.email}
                       onChange={handleChange}
                       className="input-line text-dark"
-                    />
+                      error={errors.email}
+                      />
                   </div>
 
                   <div className="row mt-2">
-                    <label className="fw-semibold">Password*</label>
+                    <label className="fw-semibold">Password<span style={{ color: "red", display: "inline" }}>*</span></label>
                     <Input
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter your password"
@@ -136,15 +166,18 @@ const Login = () => {
                       showPassword={showPassword}
                       togglePasswordVisibility={togglePasswordVisibility}
                       className="input-line text-dark"
+                      error={errors.password}
                     />
+
+                  
                   </div>
 
-                  <div className="d-flex justify-content-between mb-3">
+                  <div className="d-flex justify-content-between mb-3 mt-3">
                     <div>
-                      <input type="checkbox" id="rememberMe" className="me-1" />
-                      <label htmlFor="rememberMe">Remember Me</label>
+                      <input type="checkbox" id="rememberMe" className="m-1" />
+                      <label htmlFor="rememberMe" className="profile-font">Remember Me</label>
                     </div>
-                    <Link href="#" className="text-decoration-none text-dark">
+                    <Link href="#" className="text-decoration-none text-dark profile-font">
                       Forgot Password?
                     </Link>
                   </div>
@@ -158,7 +191,7 @@ const Login = () => {
                     </div>
                   </div>
                 </form>
-                <p className="text-center mt-3">
+                <p className="text-center mt-3 profile-font">
                   Don't have an account?
                   <Link to="/signup/venue" className="text-primary">
                     Sign Up Now

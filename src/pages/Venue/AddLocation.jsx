@@ -163,106 +163,142 @@ export default function AddLocation() {
 
   return (
     <>
-    <DashLayout/>
-            <div className="container-fluid d-flex flex-column min-vh-100">
-              <div className="d-flex mt-0">
-                <div className="dash-sidebar-container">
-                  <AdminSideBar />
+      <DashLayout />
+      <div className="container-fluid d-flex flex-column min-vh-100">
+        <div className="d-flex mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container">
+            <p
+              className="label-font fw-semibold"
+              style={{ cursor: "pointer" }}
+              onClick={() => navigate(-1)}
+            >
+              <i className="fa-solid fa-chevron-left me-2"></i>
+              ADD LOCATIONS FOR {venue.name}
+            </p>
+            <hr />
+            <form
+              onSubmit={handleSubmit}
+              className="profile-font event-form pt-2 pb-2"
+            >
+              {locations.map((loc, index) => (
+                <div key={index} className="mb-3">
+                  <div className="row">
+                    <div className="col-md-6">
+                      <label className="form-label label-font mb-0 fw-medium">
+                        Address Line 1
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control label-font"
+                        placeholder="Enter address line 1"
+                        name="addressLine1"
+                        value={loc.addressLine1}
+                        onChange={(e) => handleChange(index, e)}
+                        required
+                      />
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label label-font mb-0 fw-medium">
+                        Address Line 2
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control label-font"
+                        placeholder="Enter address line 2"
+                        name="addressLine2"
+                        value={loc.addressLine2}
+                        onChange={(e) => handleChange(index, e)}
+                      />
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6">
+                      <label className="form-label label-font mt-3 mb-0 fw-medium">
+                        Country
+                      </label>
+                      <select
+                        className="form-control label-font"
+                        name="country"
+                        onChange={(e) => handleChange(index, e)}
+                        required
+                      >
+                        <option value="">Select Country</option>
+                        {countries.map((c) => (
+                          <option key={c.id} value={c.id}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="col-md-6">
+                      <label className="form-label label-font mt-3 mb-0 fw-medium">
+                        State
+                      </label>
+                      <select
+                        className="form-control label-font"
+                        name="state"
+                        onChange={(e) => handleChange(index, e)}
+                        required
+                      >
+                        <option value="">Select State</option>
+                        {states.map((s) => (
+                          <option key={s.id} value={s.id}>
+                            {s.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="row">
+                    <div className="col-md-6">
+                      <label className="form-label label-font mt-3 mb-0 fw-medium">
+                        City
+                      </label>
+                      <select
+                        className="form-control label-font"
+                        name="city"
+                        onChange={(e) => handleChange(index, e)}
+                        required
+                      >
+                        <option value="">Select City</option>
+                        {cities.map((c) => (
+                          <option key={c.id} value={c.id}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                    <div className="col-md-6">
+                      <label className="form-label label-font mt-3 mb-0 fw-medium">
+                        Zip Code
+                      </label>
+                      <input
+                        type="text"
+                        className="form-control label-font"
+                        placeholder="Enter zip code"
+                        name="zipCode"
+                        value={loc.zipCode}
+                        onChange={(e) => handleChange(index, e)}
+                        required
+                      />
+                    </div>
+                  </div>
                 </div>
-                <div className="dash-profile-container">
-        <p className="profile-font fw-semibold">ADD LOCATIONS FOR {venue.name}</p><hr/>
-        <form onSubmit={handleSubmit} className="profile-font event-form pt-2 pb-2">
-          {locations.map((loc, index) => (
-            <div key={index} className="mb-3">
-              <label className="form-label">Address Line 1</label>
-              <input
-                type="text"
-                className="form-control"
-                name="addressLine1"
-                value={loc.addressLine1}
-                onChange={(e) => handleChange(index, e)}
-                required
-              />
-
-              <label className="form-label">Address Line 2</label>
-              <input
-                type="text"
-                className="form-control"
-                name="addressLine2"
-                value={loc.addressLine2}
-                onChange={(e) => handleChange(index, e)}
-              />
-
-              <label className="form-label">Country</label>
-              <select
-                className="form-control"
-                name="country"
-                onChange={(e) => handleChange(index, e)}
-                required
-              >
-                <option value="">Select Country</option>
-                {countries.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-
-              <label className="form-label">State</label>
-              <select
-                className="form-control"
-                name="state"
-                onChange={(e) => handleChange(index, e)}
-                required
-              >
-                <option value="">Select State</option>
-                {states.map((s) => (
-                  <option key={s.id} value={s.id}>
-                    {s.name}
-                  </option>
-                ))}
-              </select>
-
-              <label className="form-label">City</label>
-              <select
-                className="form-control"
-                name="city"
-                onChange={(e) => handleChange(index, e)}
-                required
-              >
-                <option value="">Select City</option>
-                {cities.map((c) => (
-                  <option key={c.id} value={c.id}>
-                    {c.name}
-                  </option>
-                ))}
-              </select>
-
-              <label className="form-label">Zip Code</label>
-              <input
-                type="text"
-                className="form-control"
-                name="zipCode"
-                value={loc.zipCode}
-                onChange={(e) => handleChange(index, e)}
-                required
-              />
-            </div>
-          ))}
-          <button
-            type="button"
-            className="btn btn-secondary btn-sm"
-            onClick={handleAddLocation}
-          >
-            Add Another Location
-          </button>
-          <button type="submit" className="btn btn-dark btn-sm ms-2">
-            Submit
-          </button>
-        </form>
-        <ToastContainer />
-      </div>
-      </div>
+              ))}
+              <button type="submit" className="btn btn-dark label-font">
+                Submit
+              </button>
+            </form>
+            <ToastContainer />
+          </div>
+        </div>
       </div>
     </>
   );

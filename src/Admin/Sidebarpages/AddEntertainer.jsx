@@ -198,7 +198,7 @@ export default function Profile() {
     const newErrors = {};
     if (!formData.name) newErrors.name = "Entertainer Name is required";
 
-    if (!formData.type) newErrors.type = "Entertainer Type is required";
+    if (!formData.category) newErrors.category = "Entertainer Category is required";
 
     if (!formData.phone1) newErrors.phone1 = "Phone Number 1 is required";
     else if (!/^\d+$/.test(formData.phone1))
@@ -327,7 +327,7 @@ export default function Profile() {
                     <AdminSideBar />
                   </div>
                   <div className="dash-profile-container">
-          <div className="row profile-font">
+          <div className="row label-font">
             <div className="col-md-12">
               <button
                 onClick={() => navigate(-1)}
@@ -338,20 +338,20 @@ export default function Profile() {
                   style={{ marginRight: "8px" }}
                 ></i>
               </button>
-              <p className="profile-font fw-semibold mt-3">PROFILE</p><hr/>
+              <p className="label-font fw-semibold mt-3">PROFILE</p><hr/>
             </div>
             <div className="row justify-content-center mb-4 scrollable-container event-form pt-2 ms-1 mb-2">
               <form onSubmit={handleSubmit} style={{ display: `${showform}` }}>
                 <div className="d-flex justify-content-center">
                   <div className=" col-12 border-0 rounded">
                     <div className="div">
-                      <p className="profile-font fw-semibold text-muted">
+                      <p className="label-font fw-semibold text-muted">
                         Entertainer Details
                       </p>
                       <hr className="mb-4" />
                       <div className="row mb-3">
                         <div className="col-md-4">
-                          <label className="fw-semibold profile-font">Entertainer Name</label>
+                          <label className="fw-semibold label-font">Entertainer Name</label>
                           <Input
                             type="text"
                             name="name"
@@ -364,7 +364,7 @@ export default function Profile() {
                           )}
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-semibold profile-font">
+                          <label className="fw-semibold label-font">
                             Entertainer Main Category
                           </label>
                           <Select
@@ -373,9 +373,12 @@ export default function Profile() {
                             onChange={handleCategoryChange}
                             placeholder="Select Category"
                           />
+                          {errors.category && (
+                            <div className="text-danger">{errors.category}</div>
+                          )}
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-semibold profile-font">
+                          <label className="fw-semibold label-font">
                             Entertainer Sub Category
                           </label>
                           <Select
@@ -390,18 +393,18 @@ export default function Profile() {
 
                       <div className="row mb-3">
                         <div className="col-md-4">
-                          <label className="fw-semibold profile-font">Bio</label>
+                          <label className="fw-semibold label-font">Bio</label>
                           <textarea
                             className="form-control"
                             name="bio"
                             value={formData.bio}
-                            rows="2"
+                            rows="1"
                             onChange={handleInputChange}
                             placeholder="Describe your business"
                           />
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-semibold profile-font">Contact Number 1</label>
+                          <label className="fw-semibold label-font">Contact Number 1</label>
                           <Input
                             type="text"
                             name="phone1"
@@ -414,7 +417,7 @@ export default function Profile() {
                           )}
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-semibold profile-font">Contact Number 2</label>
+                          <label className="fw-semibold label-font">Contact Number 2</label>
                           <Input
                             type="text"
                             name="phone2"
@@ -427,7 +430,7 @@ export default function Profile() {
 
                       <div className="row mb-3">
                         <div className="col-md-4">
-                          <label className="fw-semibold profile-font">Performance Role</label>
+                          <label className="fw-semibold label-font">Performance Role</label>
                           <Select
                             name="performanceRole"
                             options={performanceRole}
@@ -442,7 +445,7 @@ export default function Profile() {
                           )}
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-semibold profile-font">Availability?</label>
+                          <label className="fw-semibold label-font">Availability?</label>
                           <RadioButton
                             name="availability"
                             options={options}
@@ -450,25 +453,30 @@ export default function Profile() {
                             onChange={handleInputChange}
                           />
                           {errors.availability && (
-                            <div className="text-danger">
+                            <div className="text-danger mt-0">
                               {errors.availability}
                             </div>
                           )}
                         </div>
                         <div className="col-md-4">
-                          <label className="fw-semibold profile-font">Price Per Event</label>
+                          <label className="fw-semibold label-font">Price Per Event</label>
                           <Input
-                            type="number"
+                            type="text"
                             name="pricePerEvent"
                             value={formData.pricePerEvent}
                             placeholder="Rs."
                             onChange={handleInputChange}
                           />
+                          {errors.pricePerEvent && (
+                            <div className="text-danger">
+                              {errors.pricePerEvent}
+                            </div>
+                          )}
                         </div>
                       </div>
                       <div className="row mb-3">
                         <div className="col-md-4">
-                          <label className="fw-semibold profile-font">Vaccinated?</label>
+                          <label className="fw-semibold label-font">Vaccinated?</label>
                           <RadioButton
                             name="vaccinated"
                             options={options}
@@ -482,10 +490,10 @@ export default function Profile() {
                           )}
                         </div>
                       </div>
-                      <p className="text-start text-muted profile-font fw-semibold mt-2">Links</p>
+                      <p className="text-start text-muted label-font fw-semibold mt-2">Links</p>
                       <hr className="mb-4" />
                       <div className="row mb-3">
-                        <label className="fw-semibold profile-font">Social Media Link</label>
+                        <label className="fw-semibold label-font">Social Media Link</label>
                         <div className="col-md-6 col-sm-12">
                           <Input
                             type="text"
@@ -500,7 +508,7 @@ export default function Profile() {
                         <div className="col d-flex ">
                           <Button
                             type="submit"
-                            className="btn-outline-dark float-start "
+                            className="btn-dark mb-3 float-start label-font rounded-3 "
                             label={isEditing ? "Update" : "Submit"}
                           />
                         </div>

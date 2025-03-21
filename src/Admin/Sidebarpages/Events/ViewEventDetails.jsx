@@ -46,7 +46,8 @@ const ViewEventDetails = () => {
     const fetchBookingDetails = async () => {
       try {
         const response = await axios.get(
-          `${import.meta.env.VITE_API_URL}${GETBOOKING_BYEVENT_ID}${eventDta.id
+          `${import.meta.env.VITE_API_URL}${GETBOOKING_BYEVENT_ID}${
+            eventDta.id
           }`,
           {
             headers: {
@@ -116,15 +117,17 @@ const ViewEventDetails = () => {
 
               <div className="mb-3 d-flex justify-content-end">
                 <button
-                  className={`btn btn-sm ${view === "event" ? "btn-dark" : "btn-outline-dark"
-                    } me-2`}
+                  className={`btn btn-sm ${
+                    view === "event" ? "btn-dark" : "btn-outline-dark"
+                  } me-2`}
                   onClick={() => setView("event")}
                 >
                   Home
                 </button>
                 <button
-                  className={`btn btn-sm ${view === "bookings" ? "btn-dark" : "btn-outline-dark"
-                    }`}
+                  className={`btn btn-sm ${
+                    view === "bookings" ? "btn-dark" : "btn-outline-dark"
+                  }`}
                   onClick={() => setView("bookings")}
                 >
                   Bookings
@@ -133,7 +136,10 @@ const ViewEventDetails = () => {
             </div>
 
             {isLoading ? (
-              <div className="d-flex justify-content-center align-items-center" style={{ minHeight: "50vh" }}>
+              <div
+                className="d-flex justify-content-center align-items-center"
+                style={{ minHeight: "50vh" }}
+              >
                 <div className="spinner-border text-primary" role="status">
                   <span className="visually-hidden">Loading...</span>
                 </div>
@@ -143,7 +149,9 @@ const ViewEventDetails = () => {
                 {/* Show Event Details */}
                 {view === "event" && event && (
                   <div className="card p-3">
-                    <p className="profile-font fw-semibold mb-0">EVENT DETAILS</p>
+                    <p className="profile-font fw-semibold mb-0">
+                      EVENT DETAILS
+                    </p>
                     <hr />
                     <div className="row">
                       <div className="col-md-6 profile-font">
@@ -158,11 +166,31 @@ const ViewEventDetails = () => {
                         </p>
                         <p>
                           <strong>Start Time:</strong>{" "}
-                          {new Date(event.startTime).toLocaleString()}
+                          {new Date(event.startTime).toLocaleDateString(
+                            "en-GB",
+                            {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            }
+                          )}
                         </p>
                         <p>
                           <strong>End Time:</strong>{" "}
-                          {new Date(event.endTime).toLocaleString()}
+                          {new Date(event.endTime).toLocaleDateString(
+                            "en-GB",
+                            {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            }
+                          )}
                         </p>
                         <p>
                           <strong>Recurring:</strong> {event.recurring}
@@ -174,15 +202,35 @@ const ViewEventDetails = () => {
                         </p>
                         <p>
                           <strong>Created At:</strong>{" "}
-                          {new Date(event.createdAt).toLocaleString()}
+                          {new Date(event.createdAt).toLocaleDateString(
+                            "en-GB",
+                            {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            }
+                          )}
                         </p>
                         <p>
                           <strong>Updated At:</strong>{" "}
-                          {new Date(event.updatedAt).toLocaleString()}
+                          {new Date(event.updatedAt).toLocaleDateString(
+                            "en-GB",
+                            {
+                              day: "2-digit",
+                              month: "short",
+                              year: "numeric",
+                              hour: "2-digit",
+                              minute: "2-digit",
+                              hour12: true,
+                            }
+                          )}
                         </p>
                         <p>
-                          <strong>Venue:</strong> {event.name}, {event.addressLine1}
-                          , {event.addressLine2}
+                          <strong>Venue:</strong> {event.name},{" "}
+                          {event.addressLine1}, {event.addressLine2}
                         </p>
                         <p>
                           <strong>Created By:</strong>{" "}
@@ -226,9 +274,11 @@ const ViewEventDetails = () => {
                                         phone1: booking.phone1,
                                         phone2: booking.phone2,
                                         bio: booking.bio,
-                                        performanceRole: booking.performanceRole,
+                                        performanceRole:
+                                          booking.performanceRole,
                                         categoryName: booking.categoryName,
-                                        specificCatName: booking.specific_catName,
+                                        specificCatName:
+                                          booking.specific_catName,
                                         availability: booking.availability,
                                         pricePerEvent: booking.pricePerEvent,
                                         vaccinated: booking.vaccinated,
@@ -271,13 +321,15 @@ const ViewEventDetails = () => {
                               <td>
                                 {booking.isAcceptedDate
                                   ? new Date(
-                                    booking.isAcceptedDate
-                                  ).toLocaleString()
+                                      booking.isAcceptedDate
+                                    ).toLocaleString()
                                   : " "}
                               </td>
                               <td>
                                 {booking.statusDate
-                                  ? new Date(booking.statusDate).toLocaleString()
+                                  ? new Date(
+                                      booking.statusDate
+                                    ).toLocaleString()
                                   : " "}
                               </td>
                             </tr>

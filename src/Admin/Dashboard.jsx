@@ -77,7 +77,7 @@ export default function Dashboard() {
               <p className="profile-font fw-semibold ms-2 pt-3">Analytics</p>
               <div className="row d-flex gap-3 p-3">
 
-              <div className="col total-bookings custom-booking-highlight p-2 ps-3">
+              <div className="col total-bookings p-2 ps-3">
                   <div className="d-flex justify-content-between mb-0">
                     <p className="profile-font fw-semibold">Total Bookings</p>
                     <img

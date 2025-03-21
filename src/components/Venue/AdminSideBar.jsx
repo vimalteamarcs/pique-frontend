@@ -59,7 +59,7 @@ export default function AdminSideBar() {
   const handleEventsClick = () => {
     if (!isEventsDropdownOpen) {
       setIsEventsDropdownOpen(true);
-      navigate("/admin/createevent");
+      navigate("/admin/allevents");
     } else {
       setIsEventsDropdownOpen(false);
     }
@@ -144,26 +144,26 @@ export default function AdminSideBar() {
             >
               <li>
                 <NavLink
-                  to="/admin/createevent"
+                  to="/admin/allevents"
                   className={({ isActive }) =>
                     `dropdown-item dash-drop-item dropdown-item-text ${
                       isActive ? "active-item fw-semibold" : ""
                     }`
                   }
                 >
-                  <span className="bullet"></span> Create Events
+                  <span className="bullet"></span> All Events
                 </NavLink>
               </li>
               <li>
                 <NavLink
-                  to="/admin/allevents"
+                  to="/admin/createevent"
                   className={({ isActive }) =>
                     `dropdown-item dash-drop-item dropdown-item-text ${
                       isActive ? "active-item fw-semibold" : "inactive-item"
                     }`
                   }
                 >
-                  <span className="bullet"></span> All Events
+                  <span className="bullet"></span> Create Events
                 </NavLink>
               </li>
               <li>
@@ -228,7 +228,7 @@ export default function AdminSideBar() {
                     isVenueActive ? "active-item fw-semibold" : "inactive-item"
                   }`}
                 >
-                  <span className="bullet"></span> Venue Management
+                  <span className="bullet"></span> User Management
                 </NavLink>
 
               </li>

@@ -137,13 +137,13 @@ const Venuedetails = () => {
                     <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
                     Add Location
                   </button>
-                  <button
+                  {/* <button
                     onClick={() => navigate("/admin/createevent", { state: venue })}
                     className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
                   >
                     <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
                     Create Event
-                  </button>
+                  </button> */}
                 </>
               ) : null}
             </div>

@@ -543,18 +543,18 @@ export default function EditEntertainer() {
                     style={{ marginRight: "8px" }}
                   ></i>
                 </button>
-                <p className="profile-font fw-semibold mt-3">PROFILE</p><hr />
+                <p className="label-font fw-semibold mt-3">PROFILE</p><hr />
               </div>
               <div className="row justify-content-center mb-4 scrollable-container event-form pt-2 m-1">
                 <form onSubmit={handleSubmit}>
                   <div className="d-flex justify-content-center">
                     <div className="col-12 border-0">
                       <div className="card-body">
-                        <p className="text-start profile-font fw-semibold text-muted">
+                        <p className="text-start label-font fw-semibold text-muted">
                           Entertainer Details
                         </p>
                         <hr />
-                        <div className="row mb-3 profile-font">
+                        <div className="row mb-3 label-font">
                           <div className="col-md-4">
                             <label className="fw-semibold">Entertainer Name</label>
                             <Input
@@ -593,7 +593,7 @@ export default function EditEntertainer() {
                           </div>
                         </div>
 
-                        <div className="row mb-3 profile-font">
+                        <div className="row mb-3 label-font">
                           <div className="col-md-4">
                             <label className="fw-semibold">Bio</label>
                             <textarea
@@ -629,7 +629,7 @@ export default function EditEntertainer() {
                           </div>
                         </div>
 
-                        <div className="row mb-3 profile-font">
+                        <div className="row mb-3 label-font">
                           <div className="col-md-4">
                             <label className="fw-semibold">Performance Role</label>
                             <Select
@@ -670,7 +670,7 @@ export default function EditEntertainer() {
                             />
                           </div>
                         </div>
-                        <div className="row mb-3 profile-font">
+                        <div className="row mb-3 label-font">
                           <div className="col-md-4">
                             <label className="fw-semibold">Vaccinated?</label>
                             <RadioButton
@@ -686,9 +686,9 @@ export default function EditEntertainer() {
                             )}
                           </div>
                         </div>
-                        <p className="text-start text-muted fw-semibold profile-font mt-2">Links</p>
+                        <p className="text-start text-muted fw-semibold label-font mt-2">Links</p>
                         <hr />
-                        <div className="row mb-3 profile-font">
+                        <div className="row mb-3 label-font">
                           <label className="fw-semibold">Social Media Link</label>
                           <div className="col-md-6 col-sm-12">
                             <Input
@@ -717,12 +717,12 @@ export default function EditEntertainer() {
                   <div className="d-flex justify-content-center">
                     <div className="col-12 border-0 ">
                       <div className="card-body">
-                        <p className="text-start text-muted profile-font fw-semibold mt-2">
+                        <p className="text-start text-muted label-font fw-semibold mt-2">
                           Media Uploads
                         </p>
                         <hr />
 
-                        <div className="row mb-3 profile-font">
+                        <div className="row mb-3 label-font">
                           <div className="col-md-12 col-sm-12">
                             <label className="fw-semibold">
                               Headshot Profile Pic
@@ -768,7 +768,7 @@ export default function EditEntertainer() {
 
                         <div className="row mt-4">
                           <div className="col-md-12 col-sm-12">
-                            <label className="fw-semibold profile-font">Image Upload</label>
+                            <label className="fw-semibold label-font">Image Upload</label>
                             <Input
                               type="file"
                               name="images"
@@ -803,7 +803,7 @@ export default function EditEntertainer() {
                                         );
                                         if (confirmDelete) {
                                           deletemedia(file.id);
-                                        }
+                                        } 
                                       }}
                                     >
                                       <i className="fa-solid fa-trash-can text-danger"></i>
@@ -818,7 +818,7 @@ export default function EditEntertainer() {
                         {/* Video Upload */}
                         <div className="row mt-4">
                           <div className="col-md-12 col-sm-12">
-                            <label className="fw-semibold profile-font">Video Upload</label>
+                            <label className="fw-semibold label-font">Video Upload</label>
                             <Input
                               type="file"
                               name="videos"

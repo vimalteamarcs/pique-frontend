@@ -4,6 +4,7 @@ import { Link, useNavigate } from "react-router-dom";
 import Button from "../components/Button";
 import axios from "axios";
 import Input from "../components/Input";
+import toast, { Toaster } from "react-hot-toast";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -46,6 +47,34 @@ const Signup = () => {
     phoneNumber: "",
   });
 
+  const handleInputChange = (e) => {
+    const { name, value } = e.target;
+  
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  
+    let error = "";
+    if (name === "name" && !value) {
+      error = "Name is required.";
+    } else if (name === "email" && !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(value)) {
+      error = "Please enter a valid email address.";
+    } else if (name === "password" && value.length < 6) {
+      error = "Password must be at least 6 characters long.";
+    } else if (name === "cpassword" && value !== formData.password) {
+      error = "Passwords do not match.";
+    } else if (name === "phoneNumber" && !/^[0-9]{10}$/.test(value)) {
+      error = "Please enter a valid contact number.";
+    }
+  
+    setErrors((prevErrors) => ({
+      ...prevErrors,
+      [name]: error,
+    }));
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
@@ -69,11 +98,11 @@ const Signup = () => {
         : "Please enter a valid contact number.",
     };
 
-    // setErrors(newErrors);
+    setErrors(newErrors);
 
-    // if (Object.values(newErrors).some((error) => error !== "")) {
-    //   return;
-    // }
+    if (Object.values(newErrors).some((error) => error !== "")) {
+      return;
+    }
     const data = {
       name: formData.name,
       email: formData.email,
@@ -86,17 +115,34 @@ const Signup = () => {
         `${import.meta.env.VITE_API_URL}auth/register`,
         data
       );
-      console.log("Registration Successful", response.data.user);
-      navigate("/login");
+      console.log("Registration Successful", response.data);
+      toast.success("Registration Successful!", { position: "top-right" });
+      const token = response.data.token;
+      const role = response.data.data.role;
+      const userId = response.data.data.id;
+      localStorage.setItem("token", token);
+      localStorage.setItem("role", role);
+      localStorage.setItem("userId", userId);
+      localStorage.setItem("status", response.data.data.status);
+      localStorage.setItem("userName", response.data.data.name);
+      localStorage.setItem('phone',response.data.data.phoneNumber);
+      if (role === "venue") {
+        navigate("/venue");
+      } else if (role === "entertainer") {
+        navigate("/entertainer");
+      } else {
+        navigate("/error");
+      }
     } catch (error) {
       if (error.response) {
         console.error("Registration Failed", error.response.data);
+        toast.error(error.response.data.message, { position: "top-right" });
       } else if (error.request) {
         console.error("No response from server", error.request);
-        alert("No response from server. Please try again later.");
+        toast.error("No response from server. Please try again.", { position: "top-right" });
       } else {
         console.error("Error", error.message);
-        alert("An unexpected error occurred. Please try again.");
+        toast.error("An unexpected error occurred. Please try again.", { position: "top-right" });
       }
     }
   };
@@ -114,6 +160,7 @@ const Signup = () => {
           content={`Register as a new  ${formData.role} and get started with our platform.`}
         />
       </Helmet>
+      <Toaster/>
       {/* <PiqueNavbar /> */}
       <div className="container min-vh-100">
         <div className="row mt-5">
@@ -170,18 +217,16 @@ const Signup = () => {
                     </div>
                   </div>
 
-                  <div className="row mt-4">
+                  <div className="row mt-4 mb-2">
                     <div className="col-md-6">
-                      <label className="text-start fw-semibold">Name*</label>
+                      <label className="text-start fw-semibold">Name<span style={{ color: "red", display: "inline" }}>*</span></label>
                       <Input
                         type="text"
                         placeholder="Enter your name"
                         className="input-line text-dark"
                         name="name"
                         value={formData.name}
-                        onChange={(e) =>
-                          setFormData({ ...formData, name: e.target.value })
-                        }
+                        onChange={handleInputChange}
                       />
                       {errors.name && (
                         <p className="text-danger text-start">{errors.name}</p>
@@ -189,7 +234,7 @@ const Signup = () => {
                     </div>
                     <div className="col-md-6">
                       <label className="text-start fw-semibold">
-                        Contact Number*
+                        Contact Number<span style={{ color: "red", display: "inline" }}>*</span>
                       </label>
                       <div className="contact-input">
                         <select className="country-code">
@@ -204,12 +249,7 @@ const Signup = () => {
                           className="input-line text-dark"
                           name="phoneNumber"
                           value={formData.phoneNumber}
-                          onChange={(e) =>
-                            setFormData({
-                              ...formData,
-                              phoneNumber: e.target.value,
-                            })
-                          }
+                          onChange={handleInputChange}
                         />
                       </div>
                       {errors.phoneNumber && (
@@ -220,17 +260,15 @@ const Signup = () => {
                     </div>
                   </div>
 
-                  <div className="row">
-                    <label className="text-start fw-semibold">Email*</label>
+                  <div className="row mb-2">
+                    <label className="text-start fw-semibold">Email<span style={{ color: "red", display: "inline" }}>*</span></label>
 
                     <Input
                       type="email"
                       placeholder="Enter Email address"
                       name="email"
                       value={formData.email}
-                      onChange={(e) =>
-                        setFormData({ ...formData, email: e.target.value })
-                      }
+                      onChange={handleInputChange}
                       className="input-line text-dark"
                     />
                     {errors.email && (
@@ -238,9 +276,9 @@ const Signup = () => {
                     )}
                   </div>
 
-                  <div className="row">
+                  <div className="row mb-2">
                     <label className="text-start fw-semibold">
-                      Create Password*
+                      Create Password<span style={{ color: "red", display: "inline" }}>*</span>
                     </label>
 
                     <Input
@@ -249,9 +287,7 @@ const Signup = () => {
                       className="input-line text-dark"
                       placeholder="Enter Password"
                       value={formData.password}
-                      onChange={(e) =>
-                        setFormData({ ...formData, password: e.target.value })
-                      }
+                      onChange={handleInputChange}
                       showPassword={showPassword}
                       togglePasswordVisibility={togglePasswordVisibility}
                     />
@@ -262,9 +298,9 @@ const Signup = () => {
                     )}
                   </div>
 
-                  <div className="row">
+                  <div className="row mb-3">
                     <label className="text-start fw-semibold">
-                      Confirm Password*
+                      Confirm Password<span style={{ color: "red", display: "inline" }}>*</span>
                     </label>
 
                     <Input
@@ -273,9 +309,7 @@ const Signup = () => {
                       className="input-line text-dark"
                       placeholder="Re-enter Password"
                       value={formData.cpassword}
-                      onChange={(e) =>
-                        setFormData({ ...formData, cpassword: e.target.value })
-                      }
+                      onChange={handleInputChange}
                       showPassword={showCPassword}
                       togglePasswordVisibility={toggleCPasswordVisibility}
                     />
@@ -307,7 +341,7 @@ const Signup = () => {
 
                 <hr />
                 <p className="text-center">
-                  Already have an account?{" "}
+                  Already have an account?
                   <Link
                     to="/login"
                     className="text-primary fw-semibold"

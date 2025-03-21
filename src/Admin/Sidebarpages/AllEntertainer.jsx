@@ -13,7 +13,7 @@ export default function AllEntertainer() {
   const [error, setError] = useState(null);
   const [pagination, setPagination] = useState({
     current: 1, // Current page
-    pageSize: 10, // Records per page
+    pageSize: 20, // Records per page
     total: 0, // Total number of records
   });
   const [search, setSearch] = useState("");
@@ -101,6 +101,13 @@ export default function AllEntertainer() {
 
   // Define columns for Table
   const columns = [
+    {
+      title: "S.No",
+      dataIndex: "serialNumber",
+      key: "serialNumber",
+      render: (text, record, index) =>
+        (pagination.current - 1) * pagination.pageSize + index + 1,
+    },
     {
       title: "Name",
       dataIndex: "name",

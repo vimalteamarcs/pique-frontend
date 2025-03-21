@@ -18,9 +18,21 @@ export default function AddUserModal({ showModal, closeModal }) {
   const [showPassword, setShowPassword] = useState(false);
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-    setErrors({ ...errors, [e.target.name]: "" });
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  
+    let newErrors = { ...errors, [name]: "" };
+  
+    if (name === "phoneNumber") {
+      const phoneRegex = /^[0-9]{10}$/;
+      if (!phoneRegex.test(value)) {
+        newErrors.phoneNumber = "Phone number must be exactly 10 digits.";
+      }
+    }
+  
+    setErrors(newErrors);
   };
+
 
   const validateFormData = () => {
     let newErrors = {};
@@ -66,13 +78,13 @@ export default function AddUserModal({ showModal, closeModal }) {
         <div className="modal-dialog custom-user-modal">
           <div className="modal-content p-2">
             <div className="modal-header">
-              <p className="modal-title fw-semibold mb-0">Add Venue</p>
+              <p className="modal-title fw-semibold mb-0">Add User</p>
               <button type="button" className="btn btn-close btn-sm" onClick={closeModal}></button>
             </div>
             <div className="modal-body profile-font">
               <form onSubmit={handleSubmit}>
                 <div className="mb-3">
-                  <label className="form-label">Name</label>
+                  <label className="form-label">Name<span style={{ color: "red", display: "inline" }}>*</span></label>
                   <input
                     type="text"
                     className={`form-control ${errors.name ? "is-invalid" : ""}`}
@@ -85,7 +97,7 @@ export default function AddUserModal({ showModal, closeModal }) {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label">Email</label>
+                  <label className="form-label">Email<span style={{ color: "red", display: "inline" }}>*</span></label>
                   <input
                     type="email"
                     className={`form-control ${errors.email ? "is-invalid" : ""}`}
@@ -98,7 +110,7 @@ export default function AddUserModal({ showModal, closeModal }) {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label">Phone Number</label>
+                  <label className="form-label">Phone Number<span style={{ color: "red", display: "inline" }}>*</span></label>
                   <input
                     type="text"
                     className={`form-control profile-font ${errors.phoneNumber ? "is-invalid" : ""}`}
@@ -111,7 +123,7 @@ export default function AddUserModal({ showModal, closeModal }) {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label">Password</label>
+                  <label className="form-label">Password<span style={{ color: "red", display: "inline" }}>*</span></label>
                   <div className="position-relative">
                     <input
                       type={showPassword ? "text" : "password"}
@@ -132,15 +144,15 @@ export default function AddUserModal({ showModal, closeModal }) {
                 </div>
 
                 <div className="mb-3">
-                  <label className="form-label">Role</label>
+                  <label className="form-label">Role<span style={{ color: "red", display: "inline" }}>*</span></label>
                   <select className="form-select profile-font" style={{ fontSize: "14px" }} name="role" value={formData.role} onChange={handleChange}>
                     <option value="venue" className="profile-font">Venue</option>
                     <option value="entertainer" className="profile-font">Entertainer</option>
                   </select>
                 </div>
 
-                <button type="submit" className="btn btn-sm rounded-3 btn-dark me-2" style={{fontSize:"12px", width:"63px", height:"34px"}}>Save</button>
-                <button type="button" className="btn btn-light rounded-3 btn-sm" style={{fontSize:"12px", width:"76px",height:"34px" }} onClick={closeModal}>Cancel</button>
+                <button type="submit" className="btn btn-sm rounded-3 btn-dark me-2" style={{ fontSize: "12px", width: "63px", height: "34px" }}>Save</button>
+                <button type="button" className="btn btn-light rounded-3 btn-sm" style={{ fontSize: "12px", width: "76px", height: "34px" }} onClick={closeModal}>Cancel</button>
 
               </form>
             </div>

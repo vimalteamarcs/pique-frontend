@@ -107,6 +107,13 @@ export default function AllVenues() {
   // Define columns for Table
   const columns = [
     {
+      title: "S.No",
+      dataIndex: "serialNumber",
+      key: "serialNumber",
+      render: (text, record, index) =>
+        (pagination.current - 1) * pagination.pageSize + index + 1,
+    },
+    {
       title: "Name",
       dataIndex: "name",
       key: "name",

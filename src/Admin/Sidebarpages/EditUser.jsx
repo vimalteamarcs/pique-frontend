@@ -117,10 +117,10 @@ export default function EditUser() {
 
             <p className="profile-font fw-semibold">UPDATE USER DETAILS</p>
             <hr />
-            <form onSubmit={handleSubmit} className="event-form pt-2 pb-3">
+            <form onSubmit={handleSubmit} className="event-form p-3 label-font">
               <div className="row profile-font">
                 <div className="mb-3 col-md-6 col-sm-12">
-                  <label className="form-label fw-medium mb-0">Name</label>
+                  <label className="form-label label-font fw-medium mb-0">Name<span style={{color:"red", display:"inline"}}>*</span></label><br/>
                   <input
                     type="text"
                     className={`custom-form-event ps-3${errors.name ? "is-invalid" : ""
@@ -131,12 +131,12 @@ export default function EditUser() {
                     required
                   />
                   {errors.name && (
-                    <div className="text-danger">{errors.name}</div>
+                    <div className="text-danger label-font">{errors.name}</div>
                   )}
                 </div>
 
                 <div className="mb-3 col-md-6 col-sm-12">
-                  <label className="form-label fw-medium mb-0">Email</label>
+                  <label className="form-label label-font fw-medium mb-0">Email<span style={{color:"red", display:"inline"}}>*</span></label>
                   <input
                     type="email"
                     className={`custom-form-event ps-3${errors.email ? "is-invalid" : ""
@@ -154,8 +154,8 @@ export default function EditUser() {
 
               <div className="row profile-font">
                 <div className="mb-3 col-md-6 col-sm-12">
-                  <label className="form-label fw-medium mb-0">
-                    Phone Number
+                  <label className="form-label label-font fw-medium mb-0">
+                    Phone Number<span style={{color:"red", display:"inline"}}>*</span>
                   </label>
                   <input
                     type="text"
@@ -172,7 +172,7 @@ export default function EditUser() {
                 </div>
 
                 <div className="mb-3 col-md-6 col-sm-12">
-                  <label className="form-label fw-medium mb-0">Role</label>
+                  <label className="form-label label-font fw-medium mb-0">Role<span style={{color:"red", display:"inline"}}>*</span></label>
                   <select
                     className={`custom-form-event custom-select ps-3${errors.role ? "is-invalid" : ""
                       }`}
@@ -191,7 +191,7 @@ export default function EditUser() {
 
               <div className="row profile-font">
                 <div className="mb-3 col-md-6 col-sm-12">
-                  <label className="form-label fw-medium mb-0">Status</label>
+                  <label className="form-label label-font fw-medium mb-0">Status<span style={{color:"red", display:"inline"}}>*</span></label>
                   <select
                     className={`custom-form-event custom-select ps-3 ${errors.status ? "is-invalid" : ""
                       }`}

@@ -56,7 +56,7 @@ const CREATE_EVENT="admin/events/create";
 const GET_ALL_EVENTS="admin/events/getall?"
 const GET_EVENTBY_ID="admin/events/eventbyid/"
 const UPDATE_EVENT="admin/events/updatebyid/"
-const DELETE_EVENT="admin/events/deletebyid"
+const DELETE_EVENT="admin/events/deletebyid/"
 const GETBOOKING_BYEVENT_ID='admin/events/BookingsByEventId/'
 
 

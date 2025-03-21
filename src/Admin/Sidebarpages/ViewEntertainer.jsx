@@ -152,337 +152,342 @@ export default function ViewEntertainer() {
 
             {loading && <p>Loading data...</p>}
             {error && <p className="text-danger profile-font">{error}</p>}
-
-            {/* Conditional rendering for entertainers */}
-            {user?.role ? (
-              <div className="event-form mt-2 mb-2">
-                <div className="row align-items-center">
-                  <div className="col text-start mt-3">
-                    <p className="profile-font fw-semibold ">USER DETAILS</p>
-                    <hr />
-                  </div>
-                  <div className="col-auto profile-font">
-                    {headshoturl ? (
-                      <img
-                        src={`${headshoturl}`}
-                        alt="User"
-                        className="rounded-circle"
-                        style={{
-                          width: "200px",
-                          height: "200px",
-                          objectFit: "cover",
-                        }}
-                      />
-                    ) : (
-                      ""
-                    )}
-                  </div>
-                </div>
-
-                <div className="row profile-font event-form pt-3 mb-2">
-                  <div className="mb-3 col-md-6 col-sm-12">
-                    <p>
-                      <strong>Name:</strong> {user?.name || " "}
-                    </p>
-                  </div>
-
-                  <div className="mb-3 col-md-6 col-sm-12">
-                    <p>
-                      <strong>Email:</strong> {user?.email || " "}
-                    </p>
-                  </div>
-
-                  <div className="mb-3 col-md-6 col-sm-12">
-                    <p>
-                      <strong>Phone Number:</strong> {user?.phoneNumber || " "}
-                    </p>
-                  </div>
-
-                  <div className="mb-3 col-md-6 col-sm-12">
-                    <p>
-                      <strong>Role:</strong>{" "}
-                      <span className="text-capitalize">
-                        {user?.role || " "}
-                      </span>
-                    </p>
-                  </div>
-
-                  <div className="mb-3 col-md-6 col-sm-12">
-                    <p>
-                      <strong>Status:</strong>{" "}
-                      <span className="text-capitalize">
-                        {user?.status || " "}
-                      </span>
-                    </p>
-                  </div>
-                </div>
-                {entertainers.length === 0 ? (
-                  <>
-                    <p className="profile-font">
-                      No entertainer details found for this user.
-                    </p>
-                    <button
-                      className=" btn btn-outline-dark btn-sm float-start gap-2"
-                      onClick={() => {
-                        navigate("/admin/addentertainer", { state: user });
-                      }}
-                    >
-                      <i className="bi bi-plus"></i> Add Entertainer
-                    </button>
-                  </>
-                ) : (
-                  <div className="row profile-font">
-                    {entertainers.map((entertainer) => (
-                      <div key={entertainer.id} className="col-12">
-                        <div className="row">
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Entertainer Name:</strong>{" "}
-                              {entertainer.name || " "}
-                            </p>
-                          </div>
-
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Phone 1:</strong>{" "}
-                              {entertainer.phone1 || " "}
-                            </p>
-                          </div>
-
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Phone 2:</strong>{" "}
-                              {entertainer.phone2 || " "}
-                            </p>
-                          </div>
-
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Bio:</strong> {entertainer.bio || " "}
-                            </p>
-                          </div>
-
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Performance Role:</strong>{" "}
-                              {entertainer.performanceRole || " "}
-                            </p>
-                          </div>
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Category:</strong>{" "}
-                              {entertainer.category || " "}
-                            </p>
-                          </div>
-
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Specific Category:</strong>{" "}
-                              {entertainer.specific_category || " "}
-                            </p>
-                          </div>
-
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Availability:</strong>{" "}
-                              {entertainer.availability || " "}
-                            </p>
-                          </div>
-
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Price Per Event:</strong>{" "}
-                              {entertainer.pricePerEvent || " "}
-                            </p>
-                          </div>
-
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Vaccinated:</strong>{" "}
-                              {entertainer.vaccinated ? "Yes" : "No"}
-                            </p>
-                          </div>
-
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Social Links:</strong>{" "}
-                              <a
-                                href={entertainer.socialLinks || "#"}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {entertainer.socialLinks || " "}
-                              </a>
-                            </p>
-                          </div>
-
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Created At:</strong>{" "}
-                              {new Date(
-                                entertainer.createdAt
-                              ).toLocaleDateString()}
-                            </p>
-                          </div>
-
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Updated At:</strong>{" "}
-                              {new Date(
-                                entertainer.updatedAt
-                              ).toLocaleDateString()}
-                            </p>
-                          </div>
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-              </div>
-            ) : (
-              <>
-                {entertainers.length === 0 ? (
-                  <>
-                    <p>No entertainer details found for this user.</p>
-                    <button
-                      className=" btn btn-primary float-end gap-2"
-                      onClick={() => {
-                        navigate("/admin/addentertainer", { state: user });
-                      }}
-                    >
-                      <i className="bi bi-plus"></i> Add Entertainer
-                    </button>
-                  </>
-                ) : (
-                  <div className="row">
-                    <div className="row align-items-center">
-                      <div className="col text-center"></div>
-                      <div className="col-auto">
-                        {headshoturl ? (
-                          <img
-                            src={`${headshoturl}`}
-                            alt="User"
-                            className="rounded-circle"
-                            style={{
-                              width: "200px",
-                              height: "200px",
-                              objectFit: "cover",
-                            }}
-                          />
-                        ) : (
-                          ""
-                        )}
-                      </div>
+            <div className="event-form mt-2">
+              {/* Conditional rendering for entertainers */}
+              {user?.role ? (
+                <div className="event-form mt-2 mb-2">
+                  <div className="row align-items-center">
+                    <div className="col text-start mt-3">
+                      <p className="profile-font fw-semibold ">USER DETAILS</p>
+                      <hr />
                     </div>
-                    {entertainers.map((entertainer) => (
-                      <div key={entertainer.id} className="col-12 profile-font event-form">
-                        <div className="row mt-3">
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Entertainer Name:</strong>{" "}
-                              {entertainer.name || " "}
-                            </p>
-                          </div>
+                    <div className="col-auto profile-font">
+                      {headshoturl ? (
+                        <img
+                          src={`${headshoturl}`}
+                          alt="User"
+                          className="rounded-circle"
+                          style={{
+                            width: "200px",
+                            height: "200px",
+                            objectFit: "cover",
+                          }}
+                        />
+                      ) : (
+                        ""
+                      )}
+                    </div>
+                  </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Phone 1:</strong>{" "}
-                              {entertainer.phone1 || " "}
-                            </p>
-                          </div>
+                  <div className="row profile-font event-form pt-3 mb-2">
+                    <div className="mb-3 col-md-6 col-sm-12">
+                      <p>
+                        <strong>Name:</strong> {user?.name || " "}
+                      </p>
+                    </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Phone 2:</strong>{" "}
-                              {entertainer.phone2 || " "}
-                            </p>
-                          </div>
+                    <div className="mb-3 col-md-6 col-sm-12">
+                      <p>
+                        <strong>Email:</strong> {user?.email || " "}
+                      </p>
+                    </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Bio:</strong> {entertainer.bio || " "}
-                            </p>
-                          </div>
+                    <div className="mb-3 col-md-6 col-sm-12">
+                      <p>
+                        <strong>Phone Number:</strong>{" "}
+                        {user?.phoneNumber || " "}
+                      </p>
+                    </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Performance Role:</strong>{" "}
-                              {entertainer.performanceRole || " "}
-                            </p>
-                          </div>
+                    <div className="mb-3 col-md-6 col-sm-12">
+                      <p>
+                        <strong>Role:</strong>{" "}
+                        <span className="text-capitalize">
+                          {user?.role || " "}
+                        </span>
+                      </p>
+                    </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Category:</strong>{" "}
-                              {entertainer.category || " "}
-                            </p>
-                          </div>
+                    <div className="mb-3 col-md-6 col-sm-12">
+                      <p>
+                        <strong>Status:</strong>{" "}
+                        <span className="text-capitalize">
+                          {user?.status || " "}
+                        </span>
+                      </p>
+                    </div>
+                  </div>
+                  {entertainers.length === 0 ? (
+                    <>
+                      <p className="profile-font">
+                        No entertainer details found for this user.
+                      </p>
+                      <button
+                        className=" btn btn-outline-dark btn-sm float-start gap-2"
+                        onClick={() => {
+                          navigate("/admin/addentertainer", { state: user });
+                        }}
+                      >
+                        <i className="bi bi-plus"></i> Add Entertainer
+                      </button>
+                    </>
+                  ) : (
+                    <div className="row profile-font">
+                      {entertainers.map((entertainer) => (
+                        <div key={entertainer.id} className="col-12">
+                          <div className="row">
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Entertainer Name:</strong>{" "}
+                                {entertainer.name || " "}
+                              </p>
+                            </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Specific Category:</strong>{" "}
-                              {entertainer.specific_category || " "}
-                            </p>
-                          </div>
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Phone 1:</strong>{" "}
+                                {entertainer.phone1 || " "}
+                              </p>
+                            </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Availability:</strong>{" "}
-                              {entertainer.availability || " "}
-                            </p>
-                          </div>
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Phone 2:</strong>{" "}
+                                {entertainer.phone2 || " "}
+                              </p>
+                            </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Price Per Event:</strong>{" "}
-                              {entertainer.pricePerEvent || " "}
-                            </p>
-                          </div>
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Bio:</strong> {entertainer.bio || " "}
+                              </p>
+                            </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Vaccinated:</strong>{" "}
-                              {entertainer.vaccinated ? "Yes" : "No"}
-                            </p>
-                          </div>
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Performance Role:</strong>{" "}
+                                {entertainer.performanceRole || " "}
+                              </p>
+                            </div>
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Category:</strong>{" "}
+                                {entertainer.category || " "}
+                              </p>
+                            </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Social Links:</strong>{" "}
-                              <a
-                                href={entertainer.socialLinks || "#"}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                              >
-                                {entertainer.socialLinks || " "}
-                              </a>
-                            </p>
-                          </div>
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Specific Category:</strong>{" "}
+                                {entertainer.specific_category || " "}
+                              </p>
+                            </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Created At:</strong>{" "}
-                              {new Date(
-                                entertainer.createdAt
-                              ).toLocaleDateString()}
-                            </p>
-                          </div>
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Availability:</strong>{" "}
+                                {entertainer.availability || " "}
+                              </p>
+                            </div>
 
-                          <div className="mb-3 col-md-6 col-sm-12">
-                            <p>
-                              <strong>Updated At:</strong>{" "}
-                              {new Date(
-                                entertainer.updatedAt
-                              ).toLocaleDateString()}
-                            </p>
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Price Per Event:</strong>{" "}
+                                {entertainer.pricePerEvent || " "}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Vaccinated:</strong>{" "}
+                                {entertainer.vaccinated ? "Yes" : "No"}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Social Links:</strong>{" "}
+                                <a
+                                  href={entertainer.socialLinks || "#"}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {entertainer.socialLinks || " "}
+                                </a>
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Created At:</strong>{" "}
+                                {new Date(
+                                  entertainer.createdAt
+                                ).toLocaleDateString()}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Updated At:</strong>{" "}
+                                {new Date(
+                                  entertainer.updatedAt
+                                ).toLocaleDateString()}
+                              </p>
+                            </div>
                           </div>
                         </div>
+                      ))}
+                    </div>
+                  )}
+                </div>
+              ) : (
+                <>
+                  {entertainers.length === 0 ? (
+                    <div className="d-flex justify-content-between">
+                      <p>No entertainer details found for this user.</p>
+                      <button
+                        className=" btn btn-primary float-end gap-2"
+                        onClick={() => {
+                          navigate("/admin/addentertainer", { state: user });
+                        }}
+                      >
+                        <i className="bi bi-plus"></i> Add Entertainer
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="row">
+                      <div className="row align-items-center">
+                        <div className="col text-center"></div>
+                        <div className="col-auto">
+                          {headshoturl ? (
+                            <img
+                              src={`${headshoturl}`}
+                              alt="User"
+                              className="rounded-circle"
+                              style={{
+                                width: "200px",
+                                height: "200px",
+                                objectFit: "cover",
+                              }}
+                            />
+                          ) : (
+                            ""
+                          )}
+                        </div>
                       </div>
-                    ))}
-                  </div>
-                )}
-              </>
-            )}
+                      {entertainers.map((entertainer) => (
+                        <div
+                          key={entertainer.id}
+                          className="col-12 profile-font"
+                        >
+                          <div className="row mt-3">
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Entertainer Name:</strong>{" "}
+                                {entertainer.name || " "}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Phone 1:</strong>{" "}
+                                {entertainer.phone1 || " "}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Phone 2:</strong>{" "}
+                                {entertainer.phone2 || " "}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Bio:</strong> {entertainer.bio || " "}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Performance Role:</strong>{" "}
+                                {entertainer.performanceRole || " "}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Category:</strong>{" "}
+                                {entertainer.category || " "}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Specific Category:</strong>{" "}
+                                {entertainer.specific_category || " "}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Availability:</strong>{" "}
+                                {entertainer.availability || " "}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Price Per Event:</strong>{" "}
+                                {entertainer.pricePerEvent || " "}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Vaccinated:</strong>{" "}
+                                {entertainer.vaccinated ? "Yes" : "No"}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Social Links:</strong>{" "}
+                                <a
+                                  href={entertainer.socialLinks || "#"}
+                                  target="_blank"
+                                  rel="noopener noreferrer"
+                                >
+                                  {entertainer.socialLinks || " "}
+                                </a>
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Created At:</strong>{" "}
+                                {new Date(
+                                  entertainer.createdAt
+                                ).toLocaleDateString()}
+                              </p>
+                            </div>
+
+                            <div className="mb-3 col-md-6 col-sm-12">
+                              <p>
+                                <strong>Updated At:</strong>{" "}
+                                {new Date(
+                                  entertainer.updatedAt
+                                ).toLocaleDateString()}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                </>
+              )}
+            </div>
           </div>
         </div>
       </div>

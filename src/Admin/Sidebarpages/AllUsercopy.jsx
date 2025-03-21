@@ -44,7 +44,7 @@ export default function AllUserCopy() {
         params: { page, pageSize, search, role },
         headers: { Authorization: `Bearer ${token}` },
       });
-
+     console.log(response.data)
       if (response.data && response.data.records) {
         const filteredRecords = response.data.records.filter(
           (record) => record.role === role
@@ -103,12 +103,17 @@ export default function AllUserCopy() {
     }
 
     try {
+      const token = localStorage.getItem('token')
+      const body = {
+        
+      }
       const response = await axios.patch(
-        `${import.meta.env.VITE_API_URL}${UPDATE_USER_STATUS}`,
+        `${import.meta.env.VITE_API_URL}admin/users`,
         {
-          ids: selectedRowKeys, // Pass the selected IDs
-          status: status, // Pass the selected status
-        }
+          headers:{
+            Authorization: `Bearer ${token}` },
+          }
+        
       );
 
       if (response.status === 200) {
@@ -123,6 +128,13 @@ export default function AllUserCopy() {
 
   // Define columns
   const columns = [
+    {
+      title: "S.No",
+      dataIndex: "serialNumber",
+      key: "serialNumber",
+      render: (text, record, index) =>
+        (pagination.current - 1) * pagination.pageSize + index + 1,
+    },
     {
       title: (
         <input
@@ -200,23 +212,29 @@ export default function AllUserCopy() {
 
   const handleDelete = async (record) => {
     try {
-      const response = await axios.patch(
-        `${import.meta.env.VITE_API_URL}${UPDATE_USER_STATUS}`,
+      const response = await axios.delete(
+        `${import.meta.env.VITE_API_URL}admin/users`, 
         {
-          ids: [record.id],
-          status: "inactive",
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+            "Content-Type": "application/json",
+          },
+          data: {
+            
+          },
         }
       );
-
+  
       if (response.status === 200) {
-        // After updating, fetch users again to reflect changes
+        // Refresh user list after deletion
         fetchusers(pagination.current, pagination.pageSize, search, role);
-        console.log("Status updated successfully");
+        console.log("User deleted successfully");
       }
     } catch (error) {
-      console.error("Error updating status:", error);
+      console.error("Error deleting user:", error);
     }
   };
+  
   return (
     <>
       <DashLayout />
@@ -277,7 +295,7 @@ export default function AllUserCopy() {
                   // }}
                   onClick={() => setShowModal(true)}
                 >
-                   Add New Venue
+                   Add User
                 </button>
                 <AddUserModal showModal={showModal} closeModal={() => setShowModal(false)} />
 

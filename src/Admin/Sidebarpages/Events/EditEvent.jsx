@@ -5,6 +5,7 @@ import DashLayout from "../../DashLayout";
 import { UPDATE_EVENT } from "../../../../constants";
 import { toast, ToastContainer } from "react-toastify";
 import AdminSideBar from "../../../components/Venue/AdminSideBar";
+import Input from "../../../components/Input";
 
 const EditEvent = () => {
   const location = useLocation();
@@ -66,7 +67,11 @@ const EditEvent = () => {
     try {
       await axios.put(
         `${import.meta.env.VITE_API_URL}${UPDATE_EVENT}${event.id}`,
-        formData
+        formData,{
+          headers: {
+            Authorization: `Bearer ${localStorage.getItem("token")}`,
+          },
+        }
       );
       toast.success("Event updated successfully!", { autoClose: 1000 });
     } catch (err) {
@@ -92,15 +97,15 @@ const EditEvent = () => {
             </button>
             <p className="profile-font fw-semibold mb-2">EDIT EVENT</p>
             <hr />
-            <div className="event-form">
-              <p className="fw-semibold profile-font text-muted">GENERAL INFORMATION</p>
+            <div className="event-form p-3">
+            <p className="fw-medium label-font " style={{ color: "#9C9C9C", fontSize: "12px" }}>GENERAL INFORMATION</p>
               <form onSubmit={handleSubmit}>
                 <div className="row mb-3">
                   <div className="col-md-6">
-                    <label className="form-label profile-font fw-semibold mb-0">Event Name</label>
+                    <label className="form-label label-font fw-medium mb-0">Event Name<span style={{color:"red", display:"inline"}}>*</span></label>
                     <input
                       type="text"
-                      className={`form-control ${errors.title ? "is-invalid" : ""}`}
+                      className={`custom-mid-form ps-3 label-font ${errors.title ? "is-invalid" : ""}`}
                       name="title"
                       value={formData.title}
                       onChange={handleInputChange}
@@ -109,11 +114,40 @@ const EditEvent = () => {
                       <div className="invalid-feedback">{errors.title}</div>
                     )}
                   </div>
+
                   <div className="col-md-6">
-                    <label className="form-label profile-font fw-semibold mb-0">Location</label>
+                    <label
+                      htmlFor="recurring"
+                      className="form-label label-font fw-medium mb-0"
+                    >
+                      Recurring<span style={{color:"red", display:"inline"}}>*</span>
+                    </label>
+                    <select
+                      className="custom-mid-form custom-select label-font ps-3"
+                      id="recurring"
+                      name="recurring"
+                      value={formData.recurring}
+                      onChange={handleInputChange}
+                    >
+                      <option value="none" className="label-font">
+                        None
+                      </option>
+                      <option value="daily" className="label-font">
+                        Daily
+                      </option>
+                      <option value="weekly" className="label-font">
+                        Weekly
+                      </option>
+                      <option value="monthly" className="label-font">
+                        Monthly
+                      </option>
+                    </select>
+                  </div>
+                  {/* <div className="col-md-6">
+                    <label className="form-label label-font fw-semibold mb-0">Location<span style={{color:"red", display:"inline"}}>*</span></label>
                     <input
                       type="text"
-                      className={`form-control ${errors.location ? "is-invalid" : ""
+                      className={`custom-mid-form ps-3 label-font${errors.location ? "is-invalid" : ""
                         }`}
                       name="location"
                       value={formData.location}
@@ -122,15 +156,70 @@ const EditEvent = () => {
                     {errors.location && (
                       <div className="invalid-feedback">{errors.location}</div>
                     )}
+                  </div> */}
+                   {/* <div className="col-md-6">
+                    <label className="form-label label-font fw-medium mb-0">Client<span style={{color:"red", display:"inline"}}>*</span></label><br/>
+                    <input
+                      type="text"
+                      className={`custom-mid-form ps-3 label-font ${errors.title ? "is-invalid" : ""}`}
+                      name="title"
+                      placeholder="Enter Venue Owner Name"
+                      onChange={handleInputChange}
+                    />
+                   
+                  </div> */}
+                </div>
+
+                <div className="row mb-3">
+                  
+
+                  
+                  <div className="col-md-6">
+                  <label
+                      htmlFor="status"
+                      className="form-label label-font fw-medium mb-0"
+                    >
+                      Status<span style={{color:"red", display:"inline"}}>*</span>
+                    </label><br/>
+                  <select
+                      className="custom-mid-form custom-select label-font ps-3"
+                      id="status"
+                      name="status"
+                      // value={formData.recurring}
+                      onChange={handleInputChange}
+                    >
+                      <option value="unpublished" className="label-font">
+                        Unpublished
+                      </option>
+                      <option value="scheduled" className="label-font">
+                        Scheduled
+                      </option>
+                      <option value="confirmed" className="label-font">
+                        Confirmed
+                      </option>
+                      <option value="cancelled" className="label-font">
+                        Cancelled
+                      </option>
+                    </select>
+                  </div>
+
+                  <div className="col-md-6">
+                    <label className="form-label label-font fw-medium mb-0">Description<span style={{color:"red", display:"inline"}}>*</span></label><br/>
+                    <textarea
+                      className="custom-mid-form ps-3 label-font pt-2"
+                      name="description"
+                      value={formData.description}
+                      onChange={handleInputChange}
+                    />
                   </div>
                 </div>
 
                 <div className="row mb-3">
                   <div className="col-12 col-md-6">
-                    <label className="form-label profile-font fw-semibold mb-0">Start Date and Time</label>
+                    <label className="form-label label-font fw-medium mb-0">Start Date and Time<span style={{color:"red", display:"inline"}}>*</span></label>
                     <input
                       type="datetime-local"
-                      className={`form-control ${errors.startTime ? "is-invalid" : ""
+                      className={`custom-mid-form ps-3 label-font pe-2${errors.startTime ? "is-invalid" : ""
                         }`}
                       name="startTime"
                       value={formData.startTime}
@@ -141,10 +230,10 @@ const EditEvent = () => {
                     )}
                   </div>
                   <div className="col-12 col-md-6">
-                    <label className="form-label profile-font fw-semibold mb-0">End Date and Time</label>
+                    <label className="form-label label-font fw-medium mb-0">End Date and Time<span style={{color:"red", display:"inline"}}>*</span></label>
                     <input
                       type="datetime-local"
-                      className={`form-control ${errors.endTime ? "is-invalid" : ""}`}
+                      className={`custom-mid-form ps-3 label-font pe-2 ${errors.endTime ? "is-invalid" : ""}`}
                       name="endTime"
                       value={formData.endTime}
                       onChange={handleInputChange}
@@ -155,19 +244,120 @@ const EditEvent = () => {
                   </div>
                 </div>
                 <div className="row mb-3">
-                  <div className="col-12">
-                    <label className="form-label profile-font fw-semibold mb-0">Description</label>
-                    <textarea
-                      className="form-control"
-                      name="description"
-                      value={formData.description}
+                 
+
+                 
+                </div>
+
+                <p className="fw-medium label-font " style={{ color: "#9C9C9C", fontSize: "12px" }}>VENUE INFORMATION</p>
+
+                <div className="row mb-3">
+                <div className="col-md-6">
+                        <label
+                          htmlFor="venueId"
+                          className="form-label label-font fw-medium mb-0"
+                        >
+                          Venue Name<span style={{color:"red", display:"inline"}}>*</span>
+                        </label>
+                        <input
+                          type="text"
+                          className={`custom-mid-form label-font ps-3${
+                            errors.venueId ? "is-invalid" : ""
+                          }`}
+                          placeholder="Enter venue name"
+                          id="venueId"
+                          name="venueId"
+                          // value={venueQuery}
+                          // onChange={handleVenueChange}
+                        />
+                        {/* {errors.venueId && (
+                          <div className="invalid-feedback">
+                            {errors.venueId}
+                          </div>
+                        )}
+
+                        {venueSuggestions.length > 0 && (
+                          <ul
+                            className="list-group position-absolute w-100 mt-1"
+                            style={{ zIndex: 10 }}
+                          >
+                            {venueSuggestions.map((venue) => (
+                              <li
+                                key={venue.id}
+                                className="list-group-item list-group-item-action"
+                                onClick={() => handleSelectVenue(venue)}
+                                style={{ cursor: "pointer" }}
+                              >
+                                {venue.name}
+                                <p style={{ fontSize: "0.675rem" }}>
+                                  {venue.addressLine1 +
+                                    " " +
+                                    venue.addressLine2}
+                                </p>
+                              </li>
+                            ))}
+                          </ul>
+                        )} */}
+                      </div>
+                      <div className="col-md-6">
+                    <label
+                      htmlFor="location"
+                      className="form-label label-font fw-medium mb-0"
+                    >
+                      Location<span style={{color:"red", display:"inline"}}>*</span>
+                    </label>
+                    <input
+                      type="text"
+                      className={`custom-mid-form label-font ps-3 ${
+                        errors.location ? "is-invalid" : ""
+                      }`}
+                      id="location"
+                      placeholder="Enter Your location..."
+                      name="location"
+                      value={formData.location}
+                      // rows="1"
                       onChange={handleInputChange}
                     />
+                    {errors.location && (
+                      <div className="invalid-feedback">{errors.location}</div>
+                    )}
                   </div>
-                </div>
-                <button type="submit" className="btn btn-outline-dark float-start btn-sm d-flex mx-auto mt-3">
+                    </div>
+
+                    <div className="row mb-3">
+                      <div className="col-md-6">
+                        <label
+                          htmlFor="title"
+                          className="form-label label-font fw-medium mb-0"
+                        >
+                          Venue Contact<span style={{color:"red", display:"inline"}}>*</span>
+                        </label>
+                        <input
+                          type="text"
+                          className={`custom-mid-form label-font ps-3${
+                            errors.title ? "is-invalid" : ""
+                          }`}
+                          placeholder="Enter Venue Contact Number"
+                          id="title"
+                          name="title"
+                          // value={formData.title}
+                          // onChange={handleInputChange}
+                        />
+                        {/* {/<span style={{color:"red", display:"inline"}}>*</span> {errors.title && (
+                          <div className="invalid-feedback">{errors.title}</div>
+                        )} <span style={{color:"red", display:"inline"}}>*</span>/} */}
+                      </div>
+                      
+                    </div>
+
+                <div className="row">
+                <div className="col">
+                <button type="submit" className="btn btn-dark label-font rounded-3 float-start">
                   Update Event
                 </button>
+                </div>
+                </div>
+                
               </form>
             </div>
           </div>

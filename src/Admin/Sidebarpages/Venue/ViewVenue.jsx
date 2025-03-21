@@ -154,54 +154,65 @@ export default function ViewVenue() {
               onClick={() => navigate(-1)}
               className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
             >
-              <i className="fa fa-arrow-left" style={{ marginRight: "8px" }}></i>
+              <i
+                className="fa fa-arrow-left"
+                style={{ marginRight: "8px" }}
+              ></i>
             </button>
 
             {user?.role ? (
               // User details section
               <div className="event-form">
-              <p className="profile-font fw-semibold pt-2">USER DETAILS</p>
-              <hr />
+                <p className="label-font fw-semibold pt-2">USER DETAILS</p>
+                <hr />
                 <div className="container">
                   <button
-                    className=" btn btn-dark rounded-3 btn-sm float-end gap-2" style={{fontSize:"12px"}}
+                    className=" btn btn-dark rounded-3 btn-sm float-end gap-2"
+                    style={{ fontSize: "12px" }}
                     onClick={() => {
                       navigate("/admin/addvenue", { state: user });
                     }}
                   >
-                     Add Venue
+                    Add Venue
                   </button>
                 </div>
                 <div className="container profile-font">
                   <div className="mb-3 col-md-6 col-sm-12">
-                    <p>
-                      <strong>Name:</strong> {user?.name || ""}
+                    <p className="label-font">
+                      <span className="fw-semibold"> Name: </span>
+                      {user?.name || ""}
                     </p>
                   </div>
 
                   <div className="mb-3 col-md-6 col-sm-12">
-                    <p>
-                      <strong>Email:</strong> {user?.email || ""}
+                    <p className="label-font">
+                      <span className="fw-semibold">Email:</span>{" "}
+                      {user?.email || ""}
                     </p>
                   </div>
 
                   <div className="mb-3 col-md-6 col-sm-12">
-                    <p>
-                      <strong>Phone Number:</strong> {user?.phoneNumber || ""}
+                    <p className="label-font">
+                      <span className="fw-semibold">Phone Number:</span>{" "}
+                      {user?.phoneNumber || ""}
                     </p>
                   </div>
 
                   <div className="mb-3 col-md-6 col-sm-12">
-                    <p>
-                      <strong>Role:</strong>{" "}
-                      <span className="text-capitalize">{user?.role || ""}</span>
+                    <p className="label-font">
+                      <span className="fw-semibold">Role:</span>{" "}
+                      <span className="text-capitalize">
+                        {user?.role || ""}
+                      </span>
                     </p>
                   </div>
 
                   <div className="mb-3 col-md-6 col-sm-12">
-                    <p>
-                      <strong>Status:</strong>{" "}
-                      <span className="text-capitalize">{user?.status || ""}</span>
+                    <p className="label-font">
+                      <span className="fw-semibold">Status:</span>{" "}
+                      <span className="text-capitalize">
+                        {user?.status || ""}
+                      </span>
                     </p>
                   </div>
                 </div>
@@ -209,36 +220,37 @@ export default function ViewVenue() {
                 <>
                   {loading && <p>Loading venues...</p>}
                   {error && <p className="text-danger">{error}</p>}
-                  {!loading &&
-                    !error &&
-                    filteredVenues &&
-                    filteredVenues.length === 0 && (
-                      <p>No venues found for this user.</p>
-                    )}
-                  {!loading &&
-                    !error &&
-                    filteredVenues &&
-                    filteredVenues.length > 0 && (
-                      <div className="container-fluid">
-                        <div className="row">
-                          <p className="profile-font fw-semibold">VENUES LOCATIONS</p>
+                  {!loading && !error && (
+                    <div className="container-fluid">
+                      <div className="row">
+                        <p className="label-font fw-semibold">
+                          VENUES LOCATIONS
+                        </p>
+                      </div>
+
+                      {/* Search Input - Always Visible */}
+                      <div className="row">
+                        <div className="mb-3">
+                          <input
+                            type="text"
+                            className="dashSearchBar w-25 rounded-3 label-font ps-3"
+                            placeholder="Search Venues ...."
+                            value={searchTerm}
+                            onChange={(e) => setSearchTerm(e.target.value)}
+                          />
                         </div>
-                        <div className="row">
-                          {/* Search Input */}
-                          <div className="mb-3">
-                            <input
-                              type="text"
-                              className="dashSearchBar w-25 rounded-3 profile-font ps-3"
-                              placeholder="Search Venues ...."
-                              value={searchTerm}
-                              onChange={(e) => setSearchTerm(e.target.value)}
-                            />
-                          </div>
-                        </div>
+                      </div>
+
+                      {/* No Venues Message After Search Bar */}
+                      {filteredVenues && filteredVenues.length === 0 && (
+                        <p className="label-font text-danger fw-medium">No venues found for this user.</p>
+                      )}
+
+                      {/* Table Only When Venues Exist */}
+                      {filteredVenues && filteredVenues.length > 0 && (
                         <div className="row">
                           <div className="col-12">
-                            {/* Remove overflow hidden, allow horizontal scroll */}
-                            <div className="table-responsive profile-font">
+                            <div className="table-responsive label-font">
                               <table className="table table-responsive">
                                 <thead>
                                   <tr className="text-nowrap">
@@ -254,26 +266,29 @@ export default function ViewVenue() {
                                 <tbody>
                                   {filteredVenues.map((venue) => (
                                     <tr key={venue.id}>
-                                      <td className="text-nowrap">{venue.name}</td>
-
+                                      <td className="text-nowrap">
+                                        {venue.name}
+                                      </td>
                                       <td>{venue.phone || ""}</td>
                                       <td>{venue.email || ""}</td>
-                                      <td>{`${venue.addressLine1}, ${venue.addressLine2 || ""
-                                        }`}</td>
+                                      <td>{`${venue.addressLine1}, ${
+                                        venue.addressLine2 || ""
+                                      }`}</td>
                                       <td>
                                         {venue?.city &&
-                                          venue?.state &&
-                                          venue?.country
+                                        venue?.state &&
+                                        venue?.country
                                           ? `${venue.city}, ${venue.state}, ${venue.country}`
                                           : ""}
                                       </td>
-
                                       <td>
                                         {venue.websiteUrl && (
                                           <Button
                                             type="link"
                                             href={
-                                              venue.websiteUrl.startsWith("http")
+                                              venue.websiteUrl.startsWith(
+                                                "http"
+                                              )
                                                 ? venue.websiteUrl
                                                 : `https://${venue.websiteUrl}`
                                             }
@@ -309,8 +324,9 @@ export default function ViewVenue() {
                             </div>
                           </div>
                         </div>
-                      </div>
-                    )}
+                      )}
+                    </div>
+                  )}
                 </>
               </div>
             ) : (

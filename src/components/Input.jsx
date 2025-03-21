@@ -5,6 +5,8 @@ export default function Input({
   name,
   showPassword,
   togglePasswordVisibility,
+  className,
+  error,
   ...props
 }) {
   return (
@@ -14,12 +16,13 @@ export default function Input({
         placeholder={props.placeholder}
         name={name}
         id={props.id}
-        className="form-control"
+        className={`form-control ${className} ${error ? "is-invalid" : ""}`}
         {...props}
       />
+        {error && <div className="invalid-feedback">{error}</div>}
       {(name === "password" || name === "cpassword") && (
         <span
-          className=" eye-icon"
+          className=" eye-icon pe-2"
           onClick={togglePasswordVisibility}
           style={{ cursor: "pointer" }}
         >

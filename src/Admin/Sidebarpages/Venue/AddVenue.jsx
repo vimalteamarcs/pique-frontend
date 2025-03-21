@@ -204,12 +204,12 @@ export default function AddVenue() {
         state: 0,
         zipCode: "",
         country: 0,
-        lat: "",
-        long: "",
-        amenities: [],
-        websiteUrl: "",
-        timings: "",
-        bookingPolicies: "",
+        // lat: "",
+        // long: "",
+        // amenities: [],
+        // websiteUrl: "",
+        // timings: "",
+        // bookingPolicies: "",
         // isParent: true,
       });
       toast.success("Venue added successfully!", {
@@ -220,7 +220,7 @@ export default function AddVenue() {
       setFormSubmitted(true);
     } catch (err) {
       console.error("Error submitting form:", err.response || err.message);
-      toast.error("Failed to submit the form.");
+      toast.error(err.response.data.message);
     }
   };
 
@@ -293,11 +293,11 @@ export default function AddVenue() {
                     style={{ marginRight: "8px" }}
                   ></i>
                 </button>
-                <p className="profile-font fw-semibold mt-3">
+                <p className="label-font fw-semibold mt-3">
                   VENUE DETAILS
                 </p><hr />
 
-                {Object.keys(errors).length > 0 && (
+                {/* {Object.keys(errors).length > 0 && (
                   <div className="alert alert-danger">
                     <strong>Please fill out all required fields:</strong>
                     <ul>
@@ -306,19 +306,19 @@ export default function AddVenue() {
                       ))}
                     </ul>
                   </div>
-                )}
+                )} */}
                 <div className="justify-content-center scrollable-container event-form pt-2">
                   <div className="col-md-12">
                     <div className="text-center">
                       <form onSubmit={handleSubmit}>
-                        <p className="profile-font fw-semibold text-start text-muted">
-                          General Information
+                        <p className="label-font fw-semibold text-start text-muted">
+                          GENERAL INFORMATION
                         </p><hr />
-                        {/* <hr className="fw-bold" /> */}
-                        <div className="row profile-font">
+                        {/* <hr className="fw-medium" /> */}
+                        <div className="row label-font">
                           <div className="col-md-4 text-start">
-                            <label htmlFor="name" className="fw-bold">
-                              Name*
+                            <label htmlFor="name" className="fw-medium">
+                              Name<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="text"
@@ -326,14 +326,15 @@ export default function AddVenue() {
                               placeholder="Enter name"
                               value={formData.name}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                             {errors.name && (
                               <small className="text-danger">{errors.name}</small>
                             )}
                           </div>
                           <div className="col-md-4 text-start">
-                            <label htmlFor="phone" className="fw-bold">
-                              Phone*
+                            <label htmlFor="phone" className="fw-medium">
+                              Phone<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="text"
@@ -341,6 +342,7 @@ export default function AddVenue() {
                               placeholder="Enter your phone number"
                               value={formData.phone}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                             {errors.phone && (
                               <small className="text-danger">
@@ -349,8 +351,8 @@ export default function AddVenue() {
                             )}
                           </div>
                           <div className="col-md-4 text-start">
-                            <label htmlFor="email" className="fw-bold">
-                              Email*
+                            <label htmlFor="email" className="fw-medium">
+                              Email<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="email"
@@ -358,6 +360,7 @@ export default function AddVenue() {
                               placeholder="Enter your email address"
                               value={formData.email}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                             {errors.email && (
                               <small className="text-danger">
@@ -366,14 +369,14 @@ export default function AddVenue() {
                             )}
                           </div>
                         </div>
-                        <p className="text-start profile-font fw-semibold text-muted mt-3 mb-0">
-                          Address Details
+                        <p className="text-start label-font fw-semibold text-muted mt-5 mb-0">
+                          ADDRESS DETAILS
                         </p><hr />
-                        {/* <hr className="fw-bold" /> */}
-                        <div className="row mb-3 mt-3 profile-font">
+                        {/* <hr className="fw-medium" /> */}
+                        <div className="row mb-3 mt-3 label-font">
                           <div className="col-md-4 text-start">
-                            <label htmlFor="country" className="fw-bold">
-                              Country*
+                            <label htmlFor="country" className="fw-medium">
+                              Country<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Select
                               name="country"
@@ -381,6 +384,7 @@ export default function AddVenue() {
                               value={formData.country}
                               onChange={handleChange}
                               defaultOption="Select Country"
+                              className="form-control label-font"
                             />
                             {errors.country && (
                               <small className="text-danger">
@@ -389,8 +393,8 @@ export default function AddVenue() {
                             )}
                           </div>
                           <div className="col-md-4 text-start">
-                            <label htmlFor="state" className="fw-bold">
-                              State*
+                            <label htmlFor="state" className="fw-medium">
+                              State<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Select
                               name="state"
@@ -398,6 +402,7 @@ export default function AddVenue() {
                               value={formData.state}
                               onChange={handleChange}
                               defaultOption="Select State"
+                              className="form-control label-font"
                             />
                             {errors.state && (
                               <small className="text-danger">
@@ -406,8 +411,8 @@ export default function AddVenue() {
                             )}
                           </div>
                           <div className="col-md-4 text-start">
-                            <label htmlFor="city" className="fw-bold">
-                              City*
+                            <label htmlFor="city" className="fw-medium">
+                              City<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Select
                               name="city"
@@ -415,16 +420,17 @@ export default function AddVenue() {
                               value={formData.city}
                               onChange={handleChange}
                               defaultOption="Select City"
+                              className="form-control label-font"
                             />
                             {errors.city && (
                               <small className="text-danger">{errors.city}</small>
                             )}
                           </div>
                         </div>
-                        <div className="row mb-3 mt-2 profile-font">
+                        <div className="row mb-3 mt-2 label-font">
                           <div className="col-md-4 text-start">
-                            <label htmlFor="addressLine1" className="fw-bold">
-                              Address Line 1*
+                            <label htmlFor="addressLine1" className="fw-medium">
+                              Address Line 1<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="text"
@@ -432,6 +438,7 @@ export default function AddVenue() {
                               placeholder="Address Line 1"
                               value={formData.addressLine1}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                             {errors.addressLine1 && (
                               <small className="text-danger">
@@ -440,8 +447,8 @@ export default function AddVenue() {
                             )}
                           </div>
                           <div className="col-md-4 text-start">
-                            <label htmlFor="addressLine2" className="fw-bold">
-                              Address Line 2*
+                            <label htmlFor="addressLine2" className="fw-medium">
+                              Address Line 2<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="text"
@@ -449,6 +456,7 @@ export default function AddVenue() {
                               placeholder="Address Line 2"
                               value={formData.addressLine2}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                             {errors.addressLine2 && (
                               <small className="text-danger">
@@ -458,8 +466,8 @@ export default function AddVenue() {
                           </div>
 
                           <div className="col-md-4 text-start">
-                            <label htmlFor="zipCode" className="fw-bold">
-                              Zip Code*
+                            <label htmlFor="zipCode" className="fw-medium">
+                              Zip Code<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="text"
@@ -467,6 +475,7 @@ export default function AddVenue() {
                               placeholder="Enter your zip code"
                               value={formData.zipCode}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                             {errors.zipCode && (
                               <small className="text-danger">
@@ -476,17 +485,19 @@ export default function AddVenue() {
                           </div>
                         </div>
 
-                        <div className="row mb-3 mt-2 profile-font">
-                          <div className="col-md-4 text-start">
-                            <label htmlFor="location" className="fw-bold">
-                              Description*
+                        <div className="row mb-3 mt-2 label-font">
+                          <div className="col-md-12 text-start">
+                            <label htmlFor="location" className="fw-medium">
+                              Description<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
-                            <Input
+                            <textarea
                               type="text"
                               name="description"
+                              rows="1"
                               placeholder="Describe your venue"
                               value={formData.description}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                             {errors.description && (
                               <small className="text-danger">
@@ -494,9 +505,9 @@ export default function AddVenue() {
                               </small>
                             )}
                           </div>
-                          <div className="col-md-4 text-start">
-                            <label htmlFor="lat" className="fw-bold">
-                              Latitude*
+                          {/* <div className="col-md-4 text-start">
+                            <label htmlFor="lat" className="fw-medium">
+                              Latitude<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="text"
@@ -504,11 +515,12 @@ export default function AddVenue() {
                               placeholder=" "
                               value={formData.lat}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                           </div>
                           <div className="col-md-4 text-start">
-                            <label htmlFor="long" className="fw-bold">
-                              Longitude*
+                            <label htmlFor="long" className="fw-medium">
+                              Longitude<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="text"
@@ -516,17 +528,18 @@ export default function AddVenue() {
                               placeholder=""
                               value={formData.long}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
-                          </div>
+                          </div> */}
                         </div>
-                        <p className="text-start profile-font fw-semibold text-muted mt-4">
-                          Venue Information
+                        {/* <p className="text-start label-font fw-semibold text-muted mt-5">
+                          VENUE INFORMATION
                         </p>
-                        <hr className="fw-bold" />
-                        <div className="row mb-3 mt-2 profile-font">
+                        <hr className="fw-medium" />
+                        <div className="row mb-3 mt-2 label-font">
                           <div className="col-md-4 text-start">
-                            <label htmlFor="amenities" className="fw-bold">
-                              Amenities*
+                            <label htmlFor="amenities" className="fw-medium">
+                              Amenities<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="text"
@@ -534,11 +547,12 @@ export default function AddVenue() {
                               placeholder="List your amenities"
                               value={formData.amenities}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                           </div>
                           <div className="col-md-4 text-start">
-                            <label htmlFor="websiteUrl" className="fw-bold">
-                              Website URL*
+                            <label htmlFor="websiteUrl" className="fw-medium">
+                              Website URL<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="text"
@@ -546,38 +560,41 @@ export default function AddVenue() {
                               placeholder="Enter your website URL"
                               value={formData.websiteUrl}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                           </div>
                           <div className="col-md-4 text-start">
-                            <label htmlFor="timings" className="fw-bold">
-                              Timings*
+                            <label htmlFor="timings" className="fw-medium">
+                              Timings<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="time"
                               name="timings"
                               value={formData.timings}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                           </div>
                         </div>
 
-                        <div className="row profile-font">
+                        <div className="row label-font">
                           <div className="col-md-12 text-start">
-                            <label htmlFor="bookingPolicies" className="fw-bold">
-                              Booking Policies*
+                            <label htmlFor="bookingPolicies" className="fw-medium">
+                              Booking Policies<span style={{color:"red", display:"inline"}}>*</span>
                             </label>
                             <Input
                               type="text"
                               name="bookingPolicies"
                               value={formData.bookingPolicies}
                               onChange={handleChange}
+                              className="form-control label-font"
                             />
                           </div>
-                        </div>
+                        </div> */}
 
                         <Button
                           type="submit"
-                          className="btn-outline-dark mt-3 float-start mb-5 fw-semibold"
+                          className="btn-dark mt-3 float-start rounded-3 mb-5 label-font"
                           label="Submit"
                         />
                       </form>
@@ -587,20 +604,21 @@ export default function AddVenue() {
                     <div className="card col-md-12 p-3">
                       <div className="">
                         <form onSubmit={mediaUpload}>
-                          <p className="profile-font fw-semibold">
+                          <p className="label-font fw-semibold text-muted">
                             MEDIA UPLOADS
                           </p>
                           <hr className="mb-4" />
 
                           {/* Image Upload */}
-                          <div className="row mt-4 profile-font">
+                          <div className="row mt-4 label-font">
                             <div className="col-md-12 col-sm-12">
-                              <label className="fw-bold">Image Upload</label>
+                              <label className="fw-medium">Image Upload</label>
                               <Input
                                 type="file"
                                 name="images"
                                 accept="image/*"
                                 multiple
+                                className="form-control label-font"
                                 onChange={(e) => handleFileChange(e, "images")}
                               />
                               {images.length > 0 && (
@@ -631,13 +649,14 @@ export default function AddVenue() {
                           </div>
 
                           {/* Video Upload */}
-                          <div className="row mt-4 profile-font">
+                          <div className="row mt-4 label-font">
                             <div className="col-md-12 col-sm-12">
-                              <label className="fw-bold">Video Upload</label>
+                              <label className="fw-medium">Video Upload</label>
                               <Input
                                 type="file"
                                 name="videos"
                                 accept="video/*"
+                                className="form-control label-font"
                                 multiple
                                 onChange={(e) => handleFileChange(e, "videos")}
                               />
@@ -669,11 +688,11 @@ export default function AddVenue() {
                           </div>
 
                           {/* Submit Button */}
-                          <div className="row mt-4">
+                          <div className="row mt-3">
                             <div className="col ">
                               <Button
                                 type="submit"
-                                className="btn-outline-dark float-start fw-semibold"
+                                className="btn-dark float-start label-font rounded-3"
                                 label="Upload Media"
                                 disabled={!formSubmitted}
                               />

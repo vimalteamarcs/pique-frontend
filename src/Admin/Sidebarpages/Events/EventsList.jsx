@@ -15,7 +15,7 @@ const EventsList = () => {
   const [error, setError] = useState(null);
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 10,
+    pageSize: 6,
     total: 0,
   });
   const [search, setSearch] = useState("");
@@ -84,6 +84,7 @@ const EventsList = () => {
         `Failed to delete event with ID ${id}:`,
         error.response?.data || error.message
       );
+      toast.error(error.response.message)
     }
   };
   const handleDelete = async (record) => {
@@ -98,21 +99,28 @@ const EventsList = () => {
 
   const columns = [
     {
+      title: "S.No",
+      dataIndex: "serialNumber",
+      key: "serialNumber",
+      render: (text, record, index) =>
+        (pagination.current - 1) * pagination.pageSize + index + 1,
+    },
+    {
       title: "Title",
       dataIndex: "title",
       key: "title",
-      render: (text, record) => (
-        <a
-          href="#"
-          onClick={(e) => {
-            e.preventDefault();
-            navigate("/admin/viewevent", { state: record });
-          }}
-          className=" text-danger fw-bold text-decoration-none"
-        >
-          {text}
-        </a>
-      ),
+      // render: (text, record) => (
+      //   <a
+      //     href="#"
+      //     onClick={(e) => {
+      //       e.preventDefault();
+      //       navigate("/admin/viewevent", { state: record });
+      //     }}
+      //     className=" text-danger fw-bold text-decoration-none"
+      //   >
+      //     {text}
+      //   </a>
+      // ),
     },
     { title: "Location", dataIndex: "location", key: "location" },
     {
@@ -212,18 +220,37 @@ const EventsList = () => {
                     onEdit={handleEdit}
                     onDelete={handleDelete}
                     loading={loading}
-                    pagination={pagination}
-                    onTableChange={(pagination) => {
-                      fetchEvents(
-                        pagination.current,
-                        pagination.pageSize,
-                        search
-                      );
+                    // pagination={pagination}
+                    pagination={{
+                      current: pagination.current,
+                      pageSize: pagination.pageSize,
+                      total: pagination.total,
+                    }}
+                    // onTableChange={(pagination) => {
+                    //   fetchEvents(
+                    //     pagination.current,
+                    //     pagination.pageSize,
+                    //     search
+                    //   );
+                    // }}
+                    onTableChange={(newPagination) => {
+                      setPagination((prev) => ({
+                        ...prev,
+                        current: newPagination.current, // Update current page
+                        pageSize: newPagination.pageSize,
+                      }));
                     }}
                     search={search}
+                    // onSearchChange={(value) => {
+                    //   setSearch(value);
+                    //   fetchEvents(1, pagination.pageSize, value);
+                    // }}
                     onSearchChange={(value) => {
                       setSearch(value);
-                      fetchEvents(1, pagination.pageSize, value);
+                      setPagination((prev) => ({
+                        ...prev,
+                        current: 1, // Reset to first page on search
+                      }));
                     }}
                   />
                 </div>

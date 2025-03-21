@@ -82,6 +82,13 @@ const AllInvoices = () => {
 
   const columns = [
     {
+      title: "S.No",
+      dataIndex: "serialNumber",
+      key: "serialNumber",
+      render: (text, record, index) =>
+        (pagination.current - 1) * pagination.pageSize + index + 1,
+    },
+    {
       title: "Invoice Number",
       dataIndex: "invoice_number",
       key: "invoice_number",
