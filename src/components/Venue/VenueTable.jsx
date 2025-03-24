@@ -159,7 +159,7 @@ export default function VenueTable({
               <tbody className="profile-font text-secondary">
               {venues.map((venue, index) => (
                   <tr key={venue.id}>
-                    <td>{index + 1} {index === 0 && <span className="badge bg-success ms-1">Parent Location</span>}</td>
+                    <td>{index + 1}</td>
                     <td>{venue.addressLine1} </td>
                     <td>{venue.addressLine2}</td>
                     <td>{venue.email}</td>

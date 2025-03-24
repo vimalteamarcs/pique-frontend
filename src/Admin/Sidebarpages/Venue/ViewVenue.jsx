@@ -16,9 +16,13 @@ export default function ViewVenue() {
   const location = useLocation();
   const navigate = useNavigate();
   let user = location.state;
+  console.log(user)
+  localStorage.setItem('venueUserId',user.id)
   const [venues, setVenues] = useState([]);
+  const [hasVenues, setHasVenues] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [userData, setUserData] = useState(null);
   const [searchTerm, setSearchTerm] = useState(""); // State for search term
 
   useEffect(() => {
@@ -58,7 +62,7 @@ export default function ViewVenue() {
 
           if (response.data?.total !== 0) {
             const records = response.data.records[0];
-
+            setHasVenues(true);
             let countries = [];
             let states = [];
             let cities = [];
@@ -105,15 +109,18 @@ export default function ViewVenue() {
                   state: stateName,
                   city: cityName,
                 };
+                
               })
             );
           } else {
             setVenues([]);
-            user = null; // If no venues, nullify the user to show venue details
+            user = null;
+            setHasVenues(false); // If no venues, nullify the user to show venue details
           }
         } else {
           setVenues([user]); // No role means this is a venue
-          user = null; // nullify user to show venue details
+          user = null;
+          setHasVenues(false); // nullify user to show venue details
         }
 
         setLoading(false); // Set loading to false after data is fetched
@@ -129,6 +136,8 @@ export default function ViewVenue() {
       fetchVenues();
     }
   }, [user?.id]);
+
+
 
   // Filter venues based on search term
   const filteredVenues = venues.filter((venue) => {
@@ -166,7 +175,7 @@ export default function ViewVenue() {
                 <p className="label-font fw-semibold pt-2">USER DETAILS</p>
                 <hr />
                 <div className="container">
-                  <button
+                  {/* <button
                     className=" btn btn-dark rounded-3 btn-sm float-end gap-2"
                     style={{ fontSize: "12px" }}
                     onClick={() => {
@@ -174,7 +183,28 @@ export default function ViewVenue() {
                     }}
                   >
                     Add Venue
-                  </button>
+                  </button> */}
+                  {hasVenues ? (
+                    <button
+                      className="btn btn-dark rounded-3 btn-sm float-end gap-2"
+                      style={{ fontSize: "12px" }}
+                      onClick={() => {
+                        navigate("/admin/addvenuelocation", { state: user }); // ✅ Navigate to Add Location page
+                      }}
+                    >
+                      Add Location
+                    </button>
+                  ) : (
+                    <button
+                      className="btn btn-dark rounded-3 btn-sm float-end gap-2"
+                      style={{ fontSize: "12px" }}
+                      onClick={() => {
+                        navigate("/admin/addvenue", { state: user }); // ✅ Navigate to Add Venue page
+                      }}
+                    >
+                      Add Venue
+                    </button>
+                  )}
                 </div>
                 <div className="container profile-font">
                   <div className="mb-3 col-md-6 col-sm-12">
@@ -243,7 +273,9 @@ export default function ViewVenue() {
 
                       {/* No Venues Message After Search Bar */}
                       {filteredVenues && filteredVenues.length === 0 && (
-                        <p className="label-font text-danger fw-medium">No venues found for this user.</p>
+                        <p className="label-font text-danger fw-medium">
+                          No venues found for this user.
+                        </p>
                       )}
 
                       {/* Table Only When Venues Exist */}
@@ -258,8 +290,9 @@ export default function ViewVenue() {
                                     <th>Phone</th>
                                     <th>Email</th>
                                     <th>Address</th>
-                                    <th>City,State,Country</th>
-                                    <th>Website</th>
+                                    <th>Zip Code</th>
+                                    {/* <th>City,State,Country</th> */}
+                                    {/* <th>Website</th> */}
                                     <th>Actions</th>
                                   </tr>
                                 </thead>
@@ -274,14 +307,15 @@ export default function ViewVenue() {
                                       <td>{`${venue.addressLine1}, ${
                                         venue.addressLine2 || ""
                                       }`}</td>
-                                      <td>
+                                      <td>{venue.zipCode || ""}</td>
+                                      {/* <td>
                                         {venue?.city &&
                                         venue?.state &&
                                         venue?.country
                                           ? `${venue.city}, ${venue.state}, ${venue.country}`
                                           : ""}
-                                      </td>
-                                      <td>
+                                      </td> */}
+                                      {/* <td>
                                         {venue.websiteUrl && (
                                           <Button
                                             type="link"
@@ -300,7 +334,7 @@ export default function ViewVenue() {
                                             />
                                           </Button>
                                         )}
-                                      </td>
+                                      </td> */}
                                       <td>
                                         <Button
                                           type="link"

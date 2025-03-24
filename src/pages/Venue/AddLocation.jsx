@@ -28,12 +28,12 @@ export default function AddLocation() {
       state: "",
       country: "",
       zipCode: "",
-      lat: "",
-      long: "",
-      amenities: [],
-      websiteUrl: "",
-      timings: "",
-      bookingPolicies: "",
+      // lat: "",
+      // long: "",
+      // amenities: [],
+      // websiteUrl: "",
+      // timings: "",
+      // bookingPolicies: "",
     },
   ]);
   const [countries, setCountries] = useState([]);
@@ -121,29 +121,30 @@ export default function AddLocation() {
     try {
       for (const formData of locations) {
         const venueFormData = {
-          name: venue.name || "",
-          description: venue.description || "",
+          // name: venue.name || "",
+          // description: venue.description || "",
           email: venue.email || "",
-          phone: venue.phone || "",
+          phone: venue.phoneNumber || "",
           addressLine1: formData.addressLine1 || "",
           addressLine2: formData.addressLine2 || "",
           zipCode: formData.zipCode || "",
           city: Number(formData.city) || 0,
           state: Number(formData.state) || 0,
           country: Number(formData.country) || 0,
-          lat: formData.lat || "0.0",
-          long: formData.long || "0.0",
-          amenities: formData.amenities || [],
-          websiteUrl: formData.websiteUrl || "N/A",
-          timings: formData.timings || "N/A",
-          bookingPolicies: formData.bookingPolicies || "N/A",
-          userId: Number(localStorage.getItem("userId")) || 0,
-          isParent: false,
-          parentId: venue.id ? Number(venue.id) : 0,
+          // lat: formData.lat || "0.0",
+          // long: formData.long || "0.0",
+          // amenities: formData.amenities || [],
+          // websiteUrl: formData.websiteUrl || "N/A",
+          // timings: formData.timings || "N/A",
+          // bookingPolicies: formData.bookingPolicies || "N/A",
+          userId: Number(localStorage.getItem("venueUserId")) || 0,
+          // isParent: false,
+          // parentId: venue.id ? Number(venue.id) : 0,
         };
+        console.log(venueFormData);
 
         await axios.post(
-          `${import.meta.env.VITE_API_URL}${CREATE_VENUE}`,
+          `${import.meta.env.VITE_API_URL}admin/venue/location`,
           venueFormData,
           {
             headers: {
@@ -154,7 +155,7 @@ export default function AddLocation() {
         );
       }
 
-      toast.success("All locations added successfully!");
+      toast.success("Location added successfully!");
     } catch (error) {
       console.error("Error adding locations:", error);
       toast.error("Error adding locations. Please try again.");

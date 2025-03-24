@@ -129,13 +129,14 @@ const EventsList = () => {
       key: "startTime",
       render: (text) =>
         new Date(text).toLocaleString("en-GB", {
-          day: "2-digit",
-          month: "2-digit",
+          day: "numeric",
+          month: "short", // Short month name (e.g., Mar)
           year: "numeric",
           hour: "2-digit",
           minute: "2-digit",
-          hour12: true,
+          hour12: true, // Use 12-hour format with AM/PM
         }),
+        
     },
     {
       title: "End Time",
@@ -143,12 +144,12 @@ const EventsList = () => {
       key: "endTime",
       render: (text) =>
         new Date(text).toLocaleString("en-GB", {
-          day: "2-digit",
-          month: "2-digit",
+          day: "numeric",
+          month: "short", // Short month name (e.g., Mar)
           year: "numeric",
           hour: "2-digit",
           minute: "2-digit",
-          hour12: true,
+          hour12: true, // Use 12-hour format with AM/PM
         }),
     },
     {
@@ -165,7 +166,7 @@ const EventsList = () => {
         } else if (status === "cancelled") {
           badgeClass = "bg-cancelled";
         } else {
-          badgeClass = "bg-success";
+          badgeClass = "bg-success text-white";
         }
 
         return (

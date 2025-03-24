@@ -16,7 +16,7 @@ export default function Input({
         placeholder={props.placeholder}
         name={name}
         id={props.id}
-        className={`form-control ${className} ${error ? "is-invalid" : ""}`}
+        className={`form-control ${error ? "is-invalid" : ""} ${className}`}
         {...props}
       />
         {error && <div className="invalid-feedback">{error}</div>}

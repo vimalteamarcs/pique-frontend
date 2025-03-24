@@ -17,6 +17,7 @@ export default function AddEvents() {
     endTime: "",
     location: "",
     description: "",
+    status:"",
   });
 
   const [loading, setLoading] = useState(false);
@@ -156,10 +157,12 @@ export default function AddEvents() {
                     className="form-control profile-font"
                     onChange={handleChange}
                     options={[
-                      { value: "pending", label: "Pending" },
-                      { value: "confirmed", label: "Confirmed" },
+                      { value: "unpublished", label: "Unpublished" },
+                      { value: "scheduled", label: "Scheduled" },
                       { value: "cancelled", label: "Cancelled" },
+                      { value: "confirmed", label: "Confirmed" },
                       { value: "completed", label: "Completed" },
+
                     ]}
                     defaultOption="--Select Status--"
                   />

@@ -64,6 +64,7 @@ import Events from "../pages/Venue/Events";
 import VenueList from "../pages/Venue/VenueList";
 import AddLocation from "../pages/Venue/AddLocation";
 import AddEvents from "../pages/Venue/AddEvents";
+import OtpVerification from "../pages/OtpVerification";
 const basename = import.meta.env.VITE_BASE || "/P/";
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -77,6 +78,8 @@ const router = createBrowserRouter(
       <Route path="/signup/entertainer" element={<PublicSignup />} />
       <Route path="/statusverification" element={<StatusVerification />} />
       <Route path="/error" element={<ErrorPage />} />
+      <Route path="/otpverification" element={<OtpVerification />} />
+
 
       {/* Protected User Routes (Venues & Entertainers) */}
       <Route element={<ProtectedRoute allowedRoles={["venue"]} />}>

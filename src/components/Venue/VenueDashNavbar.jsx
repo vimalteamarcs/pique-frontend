@@ -113,14 +113,14 @@ export default function VenueDashNavbar() {
                           Account
                         </NavLink>
                       </li>
-                      <li>
+                      {/* <li>
                         <NavLink
                           className="dropdown-item venue-drop-item"
                           to="/venue/events"
                         >
                           Events
                         </NavLink>
-                      </li>
+                      </li> */}
                       <li>
                         <NavLink
                           className="dropdown-item venue-drop-item"
@@ -162,7 +162,7 @@ export default function VenueDashNavbar() {
         aria-labelledby="logoutModalLabel"
         aria-hidden="true"
       >
-        <div className="modal-dialog modal-dialog-centered">
+        <div className="modal-dialog logout-modal modal-dialog-centered">
           <div className="modal-content">
             <div className="modal-header">
               <h5 className="modal-title profile-font" id="logoutModalLabel">

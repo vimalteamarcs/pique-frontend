@@ -73,18 +73,18 @@ const Login = () => {
       localStorage.setItem('email',response.data.data.user.email);
       window.dispatchEvent(new Event("storage"));
 
-      // const status = localStorage.getItem("status");
-      // if (response.data.role === "venue" && status === "pending") {
-      //   navigate("/statusverification");
-      // } else if (response.data.role === "venue" && status === "active") {
-      //   navigate("/loggedin/venuedash");
-      // }else if (response.data.role === "entertainer" && status === "pending"){
-      //   navigate("/statusverification");
-      // }else if (response.data.role === "entertainer" && status === "active") {
-      //   navigate("/loggedin/entertainerdash");
-      // }else{
-      //   navigate("/error");
-      // }
+      const status = localStorage.getItem("status");
+      if (response.data.role === "venue" && status === "pending") {
+        navigate("/statusverification");
+      } else if (response.data.role === "venue" && status === "active") {
+        navigate("/loggedin/venuedash");
+      }else if (response.data.role === "entertainer" && status === "pending"){
+        navigate("/statusverification");
+      }else if (response.data.role === "entertainer" && status === "active") {
+        navigate("/loggedin/entertainerdash");
+      }else{
+        navigate("/error");
+      }
 
       if (role === "venue") {
         navigate("/venue");
@@ -95,7 +95,7 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login error", error);
-      toast.danger(
+      toast.error(
         error.response?.data?.message || "An error occurred. Please try again."
       );
     }
@@ -141,7 +141,7 @@ const Login = () => {
                     {errorMessage}
                   </div>
                 )} */}
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmit} className="profile-font">
                   <div className="row ">
                     <label className="fw-semibold">Email<span style={{ color: "red", display: "inline" }}>*</span></label>
                     <Input
@@ -150,7 +150,7 @@ const Login = () => {
                       name="email"
                       value={formData.email}
                       onChange={handleChange}
-                      className="input-line text-dark"
+                      className="input-line text-dark profile-font"
                       error={errors.email}
                       />
                   </div>
@@ -165,7 +165,7 @@ const Login = () => {
                       onChange={handleChange}
                       showPassword={showPassword}
                       togglePasswordVisibility={togglePasswordVisibility}
-                      className="input-line text-dark"
+                      className="input-line text-dark profile-font"
                       error={errors.password}
                     />
 
@@ -183,11 +183,11 @@ const Login = () => {
                   </div>
                   <div className="row">
                     <div className="col d-flex justify-content-center">
-                      <Button
+                      <button
                         type="submit"
                         className="btn-primary w-100 fw-bold sign-in-btn"
                         label="Login"
-                      />
+                      >Login</button>
                     </div>
                   </div>
                 </form>

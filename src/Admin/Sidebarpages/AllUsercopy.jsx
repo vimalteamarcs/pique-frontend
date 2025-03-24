@@ -122,6 +122,7 @@ export default function AllUserCopy() {
         toast.success("User status Updated successfully!", { autoClose: 1000 });
       }
     } catch (error) {
+      console.log(error)
       toast.error("Error updating status:", error);
     }
   };

@@ -320,18 +320,30 @@ export default function ViewEntertainer() {
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
                                 <strong>Created At:</strong>{" "}
-                                {new Date(
-                                  entertainer.createdAt
-                                ).toLocaleDateString()}
+                                {new Date(entertainer.createdAt)
+                                  .toLocaleString("en-GB", {
+                                    day: "numeric",
+                                    month: "short", // "Mar" instead of "03"
+                                    year: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: true, // 12-hour format with AM/PM
+                                  })}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
                                 <strong>Updated At:</strong>{" "}
-                                {new Date(
-                                  entertainer.updatedAt
-                                ).toLocaleDateString()}
+                                {new Date(entertainer.updatedAt)
+                                  .toLocaleString("en-GB", {
+                                    day: "numeric",
+                                    month: "short", // "Mar" instead of "03"
+                                    year: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: true, // 12-hour format with AM/PM
+                                  })}
                               </p>
                             </div>
                           </div>
@@ -466,18 +478,30 @@ export default function ViewEntertainer() {
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
                                 <strong>Created At:</strong>{" "}
-                                {new Date(
-                                  entertainer.createdAt
-                                ).toLocaleDateString()}
+                                {new Date(entertainer.createdAt)
+                                  .toLocaleString("en-GB", {
+                                    day: "numeric",
+                                    month: "short", // "Mar" instead of "03"
+                                    year: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: true, // 12-hour format with AM/PM
+                                  })}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
                                 <strong>Updated At:</strong>{" "}
-                                {new Date(
-                                  entertainer.updatedAt
-                                ).toLocaleDateString()}
+                                {new Date(entertainer.updatedAt)
+                                  .toLocaleString("en-GB", {
+                                    day: "numeric",
+                                    month: "short", // "Mar" instead of "03"
+                                    year: "numeric",
+                                    hour: "2-digit",
+                                    minute: "2-digit",
+                                    hour12: true, // 12-hour format with AM/PM
+                                  })}
                               </p>
                             </div>
                           </div>

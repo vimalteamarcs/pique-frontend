@@ -287,10 +287,23 @@ export default function Viewinvoice() {
                     <p>Invoice no.: {invoicedata.invoice_number}</p>
                     <p>
                       Invoice date:{" "}
-                      {new Date(invoicedata.issue_date).toLocaleDateString()}
+                      {/* {new Date(invoicedata.issue_date).toLocaleDateString()} */}
+                      {new Date(invoicedata.issue_date)
+                                  .toLocaleString("en-GB", {
+                                    day: "numeric",
+                                    month: "short", // "Mar" instead of "03"
+                                    year: "numeric",
+                                  })}
                     </p>
                     <p>
-                      Due date: {new Date(invoicedata.due_date).toLocaleDateString()}
+                      Due date:{" "} 
+                      {/* {new Date(invoicedata.due_date).toLocaleDateString()} */}
+                      {new Date(invoicedata.due_date)
+                                  .toLocaleString("en-GB", {
+                                    day: "numeric",
+                                    month: "short", // "Mar" instead of "03"
+                                    year: "numeric",
+                                  })}
                     </p>
                   </div>
 
@@ -310,7 +323,13 @@ export default function Viewinvoice() {
                       <tr>
                         <td>1</td>
                         <td>
-                          {new Date(invoicedata.issue_date).toLocaleDateString()}
+                          {/* {new Date(invoicedata.issue_date).toLocaleDateString()} */}
+                          {new Date(invoicedata.issue_date)
+                                  .toLocaleString("en-GB", {
+                                    day: "numeric",
+                                    month: "short", // "Mar" instead of "03"
+                                    year: "numeric",
+                                  })}
                         </td>
                         <td>
                           <strong className="text-warp">

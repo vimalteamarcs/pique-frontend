@@ -35,12 +35,12 @@ export default function AddVenue() {
     state: 0,
     zipCode: "",
     country: 0,
-    lat: "",
-    long: "",
-    amenities: [],
-    websiteUrl: "",
-    timings: "",
-    bookingPolicies: "",
+    // lat: "",
+    // long: "",
+    // amenities: [],
+    // websiteUrl: "",
+    // timings: "",
+    // bookingPolicies: "",
     // isParent: true,
   });
 

@@ -178,7 +178,7 @@ export default function SearchBar({ updateFilters }) {
             </div>
 
             <div className="col">
-              <Input
+              <input
                 type="text"
                 placeholder="Search Entertainers"
                 value={searchQuery}
