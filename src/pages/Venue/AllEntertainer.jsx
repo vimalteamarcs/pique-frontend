@@ -100,7 +100,7 @@ export default function AllEntertainer() {
               ) : entertainers.length > 0 ? (
                 entertainers.map((entertainer) => (
                   <EntertainerCard
-                    key={entertainer.id}
+                    key={entertainer.eid}
                     entertainer={entertainer}
                   />
                 ))

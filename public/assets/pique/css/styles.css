@@ -1503,27 +1503,16 @@ body {
   display: inline-block;
 }
 
-/* Vaccination badge styling */
-.vaccination-badge {
-  position: absolute;
-  top: -2px; /* Adjust to move the badge higher */
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 4px 10px;
-  border-radius: 12px;
-  font-size: 14px;
-  font-weight: bold;
-  color: white;
-}
+
 
 /* Orange badge for vaccinated = "yes" */
 .vaccinated-orange {
-  background-color: #ff6600;
+  background-color: #ff6600 !important;
 }
 
 /* Red badge for vaccinated = "no" */
 .vaccinated-red {
-  background-color: red;
+  background-color: red !important;
 }
 
 /* Headshot styling */
@@ -2464,17 +2453,17 @@ body {
 }
 
 .vaccination-badge {
-  position: absolute;
-  top: 103%;
-  left: 80.5%;
-  transform: translateX(-50%);
-  padding: 4px 10px;
-  border: 2px solid orangered;
-  border-radius: 16px;
-  background: orangered;
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
+  position: absolute !important;
+  top: 280px !important;
+  left: 80.5% !important;
+  transform: translateX(-50%) !important;
+  padding: 4px 10px !important;
+  border: 2px solid orangered !important;
+  border-radius: 16px !important;
+  background: orangered !important;
+  font-size: 12px !important;
+  font-weight: bold !important;
+  color: white !important;
 }
 
 .star-font {
@@ -2633,6 +2622,12 @@ body {
   border: 2px solid #F3F6F8;
   padding: 15px;
   border-radius: 12px
+}
+
+.reset-password-form{
+  border: 1px solid #9a9e9e;
+  padding: 30px;
+  border-radius: 12px;
 }
 
 .dash-navbar {
@@ -2825,19 +2820,7 @@ body {
   border: 2px solid #DA3E07;
 }
 
-.vaccination-badge {
-  position: absolute;
-  /* top: 101%; */
-  left: 79%;
-  transform: translateX(-50%);
-  padding: 4px 10px;
-  border: 2px solid orangered;
-  border-radius: 16px;
-  background: orangered;
-  font-size: 12px;
-  font-weight: bold;
-  color: white;
-}
+
 
 .admin-btn {
   background-color: "#E0E0E0" !important;

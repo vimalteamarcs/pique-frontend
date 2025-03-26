@@ -65,6 +65,7 @@ import VenueList from "../pages/Venue/VenueList";
 import AddLocation from "../pages/Venue/AddLocation";
 import AddEvents from "../pages/Venue/AddEvents";
 import OtpVerification from "../pages/OtpVerification";
+import ResetPassword from "../pages/ResetPassword";
 const basename = import.meta.env.VITE_BASE || "/P/";
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -79,6 +80,8 @@ const router = createBrowserRouter(
       <Route path="/statusverification" element={<StatusVerification />} />
       <Route path="/error" element={<ErrorPage />} />
       <Route path="/otpverification" element={<OtpVerification />} />
+      <Route path="/reset-password" element={<ResetPassword />} />
+
 
 
       {/* Protected User Routes (Venues & Entertainers) */}

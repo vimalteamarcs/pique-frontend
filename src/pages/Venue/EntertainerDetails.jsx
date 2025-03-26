@@ -13,7 +13,8 @@ export default function EntertainerDetails() {
   const imagePath = import.meta.env.VITE_LOGGEDIN_IMAGE_PATH;
   const location = useLocation();
   const navigate = useNavigate();
-  const entertainerId = localStorage.getItem("entertainerId");
+  const entertainerId = location.state?.entertainerId;
+  console.log("Received entertainerId:", entertainerId);
   const [entertainer, setEntertainer] = useState({});
   const [loading, setLoading] = useState(true);
   const [showTime, setShowTime] = useState("");
@@ -31,20 +32,19 @@ export default function EntertainerDetails() {
       }
 
       const token = localStorage.getItem("token");
+      const apiUrl = `${import.meta.env.VITE_API_URL}venues/entertainer-profile/${entertainerId}`;
+    
+      console.log("Fetching entertainer from:", apiUrl); // Debugging log
+    
       try {
-        const response = await axios.get(
-          `${
-            import.meta.env.VITE_API_URL
-          }venues/entertainer-profile/${entertainerId}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              "Content-Type": "application/json",
-            },
-          }
-        );
-        console.log("Fetched entertainer:", response.data.entertainer);
-        setEntertainer(response.data?.entertainer || {});
+        const response = await axios.get(apiUrl, {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            "Content-Type": "application/json",
+          },
+        });
+        console.log("Fetched entertainer:", response.data);
+        setEntertainer(response.data?.data || {});
       } catch (error) {
         console.error("Error fetching entertainer details:", error);
         setEntertainer({});
@@ -129,7 +129,10 @@ export default function EntertainerDetails() {
     }
   };
 
-  const image = entertainer.media?.find((media) => media.type === "image")?.url;
+  // const image = entertainer.media?.find((media) => media.type === "image")?.url;
+  const headshot = entertainer?.media?.find((media) => media.type === "headshot")?.url;
+  const validHeadshotUrl = headshot?.includes("https") ? headshot : "/assets/pique/image/comedian.avif";
+  
 
   return (
     <DashLayoutVenue
@@ -160,18 +163,19 @@ export default function EntertainerDetails() {
           </div>
 
           <div className="row d-flex justify-content-between column-gap-5">
-            {!loading && entertainer?.media?.length > 0 ? (
+            {/* {!loading && entertainer?.imageUrl ? ( */}
               <div className="row">
                 {entertainer?.media?.filter((media) => media.type === "image")
                   .length > 0 ? (
                   <>
                     <div className="col-md-7">
                       <img
-                        src={
-                          entertainer.media.find(
-                            (media) => media.type === "image"
-                          )?.url
-                        }
+                        // src={
+                        //   entertainer.media.find(
+                        //     (media) => media.type === "image"
+                        //   )?.url
+                        // }
+                        src={entertainer.imageUrl}
                         alt="Main Entertainer Image"
                         className="img-fluid rounded-4 main-image"
                         style={{
@@ -183,37 +187,37 @@ export default function EntertainerDetails() {
                     </div>
 
                     <div className="col-md-5 d-flex flex-wrap gap-2">
-                      {entertainer?.media
-                        ?.filter((media) => media.type === "image")
-                        .slice(1, 5)
-                        .map((media, index) => (
-                          <img
-                            key={index}
-                            src={
-                              media.url || "/assets/pique/image/magician.jpg"
-                            }
-                            alt={`Entertainer Image ${index + 2}`}
-                            className="img-fluid rounded-4 small-image"
-                            style={{
-                              width: "48%",
-                              height: "190px",
-                              objectFit: "cover",
-                            }}
-                          />
-                        ))}
-                    </div>
+  {Array.isArray(entertainer?.imageUrl) && entertainer.imageUrl.length > 1 ? (
+    entertainer.imageUrl.slice(1, 5).map((media, index) => (
+      <img
+        key={index}
+        src={media.url || "/assets/pique/image/magician.jpg"}
+        alt={`Entertainer Image ${index + 2}`}
+        className="img-fluid rounded-4 small-image"
+        style={{
+          width: "48%",
+          height: "190px",
+          objectFit: "cover",
+        }}
+      />
+    ))
+  ) : (
+    <p className="profile-font text-muted">No media available</p>
+  )}
+</div>
+
                   </>
                 ) : (
-                  <p>No images available</p>
+                  <p className="profile-font text-muted">No media available for this entertainer.</p>
                 )}
               </div>
-            ) : (
+            {/* ) : (
               <div className="d-flex justify-content-center my-5">
                 <div className="spinner-grow text-dark" role="status">
                   <span className="visually-hidden">Loading...</span>
                 </div>
               </div>
-            )}
+            )} */}
 
             <div className="row booking-row mt-5">
               <div className="col-md-8">
@@ -228,16 +232,16 @@ export default function EntertainerDetails() {
                           Entertainer Name:
                         </p>
                         <p className="profile-font fw-semibold mb-0">
-                          Performance Role:
+                          Category:
                         </p>
                         <p className="profile-font fw-semibold">
                           Pricing(per hour):
                         </p>
                       </div>
                       <div className="col-md-3">
-                        <p className="profile-font mb-0">{entertainer.name}</p>
+                        <p className="profile-font mb-0">{entertainer.username}</p>
                         <p className="profile-font mb-0">
-                          {entertainer.performanceRole}
+                          {entertainer.specific_category_name}
                         </p>
                         <p className="profile-font">
                           Rs. {entertainer.pricePerEvent}
@@ -302,24 +306,26 @@ export default function EntertainerDetails() {
                     Vaccinated
                   </span>
                 )}
-                <div className="d-flex flex-column align-items-center">
-                  {entertainer?.media?.length > 0 && (
-                    <img
-                      src={
-                        entertainer.media.find((m) => m.type === "headshot")
-                          ?.url || "../assets/pique/image/alfonso4.avif"
-                      }
-                      alt={entertainer?.name || "No name available"}
-                      className="img-fluid rounded-circle"
-                      style={{
-                        width: "200px",
-                        height: "200px",
-                        objectFit: "cover",
-                      }}
-                    />
-                  )}
-                </div>
-                <h5 className="text-center mt-3 mb-1">{entertainer.name}</h5>
+<div className="d-flex flex-column align-items-center">
+  {entertainer?.media?.length > 0 ? (
+    <img
+      src={validHeadshotUrl}
+      alt={entertainer?.entertainer_name || "No name available"}
+      className="img-fluid rounded-circle"
+      style={{
+        width: "200px",
+        height: "200px",
+        objectFit: "cover",
+      }}
+    />
+  ) : (
+    <p className="profile-font text-muted">No headshot available</p>
+  )}
+</div>
+
+
+                <h5 className="text-center mt-3 mb-1">{entertainer.category_name}</h5>
+                <p className="profile-font text-center mb-1">By {entertainer.username}</p>
                 <p className="star-font text-center">
                   4.5 <i className="fa-solid fa-star star-icon"></i>
                   <i className="fa-solid fa-star star-icon"></i>
@@ -337,7 +343,7 @@ export default function EntertainerDetails() {
                         </label>
                         <Input
                           type="time"
-                          className="form-control icon-font"
+                          className="form-control profile-font"
                           name="showTime"
                           value={showTime}
                           onChange={(e) => setShowTime(e.target.value)}
@@ -349,7 +355,7 @@ export default function EntertainerDetails() {
                         </label>
                         <Input
                           type="date"
-                          className="form-control icon-font"
+                          className="form-control profile-font"
                           name="showDate"
                           value={showDate}
                           onChange={(e) => setShowDate(e.target.value)}
@@ -362,7 +368,7 @@ export default function EntertainerDetails() {
                         Entertainers
                       </label>
                       <select
-                        className="form-select icon-font rounded-3"
+                        className="form-select profile-font rounded-3"
                         aria-label="Default select example"
                       >
                         <option value="default">Soloist</option>
@@ -375,7 +381,7 @@ export default function EntertainerDetails() {
                       Special Notes
                     </p>
                     <textarea
-                      className="form-control icon-font"
+                      className="form-control profile-font"
                       placeholder="Enter your message here..."
                       rows="2"
                       value={specialNotes}
@@ -390,12 +396,12 @@ export default function EntertainerDetails() {
                       name="eventId"
                       value={selectedEvent}
                       onChange={(e) => setSelectedEvent(e.target.value)}
-                      className="form-control icon-font"
+                      className="form-control profile-font"
                     >
-                      <option value="">--Select Event--</option>
+                      <option value="" className="profile-font">--Select Event--</option>
                       {events.length > 0 ? (
                         events.map((event) => (
-                          <option key={event.id} value={event.id}>
+                          <option key={event.id} value={event.id} className="profile-font">
                             {event.title}
                           </option>
                         ))

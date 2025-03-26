@@ -6,7 +6,6 @@ import { Link, useNavigate } from "react-router-dom";
 import Input from "../components/Input";
 import toast, { Toaster } from "react-hot-toast";
 
-
 const Login = () => {
   const navigate = useNavigate();
   const [formData, setFormData] = useState({
@@ -17,6 +16,24 @@ const Login = () => {
   const [errorMessage, setErrorMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
 
+  useEffect(() => {
+    const checkPasswordReset = () => {
+      if (localStorage.getItem("passwordResetSuccess") === "true") {
+        toast.success("Password reset successfully! Please log in.", {
+          position: "top-center",
+        });
+        navigate("/login"); // Redirect to login page
+        localStorage.removeItem("passwordResetSuccess"); // Remove flag
+      }
+    };
+
+    window.addEventListener("storage", checkPasswordReset);
+
+    return () => {
+      window.removeEventListener("storage", checkPasswordReset);
+    };
+  }, []);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData((prevData) => ({
@@ -24,7 +41,7 @@ const Login = () => {
       [name]: value,
     }));
 
- setErrors((prevErrors) => ({
+    setErrors((prevErrors) => ({
       ...prevErrors,
       [name]: "",
     }));
@@ -49,43 +66,114 @@ const Login = () => {
     return Object.keys(newErrors).length === 0; // Returns true if no errors
   };
 
+  const handleResetPsw = async (e) => {
+    e.preventDefault();
+    const body = { email: formData.email };
+
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_API_URL}auth/forgot-password`,
+        body
+      );
+      console.log(response.data);
+      toast.success("Password reset link sent to your registered  email", {
+        position: "top-center",
+      });
+
+      // navigate("/reset-password", { state: { email: formData.email } });
+    } catch (error) {
+      console.log(error);
+      toast.error("User not found", {
+        position: "top-center",
+      });
+    }
+  };
+
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   if (!validateForm()) {
+  //     return;
+  //   }
+  //   try {
+  //     const response = await axios.post(
+  //       `${import.meta.env.VITE_API_URL}auth/login`,
+  //       formData
+  //     );
+  //     console.log("Login successful", response.data);
+  //     console.log(response.data.data.user.isVerified)
+  //     const token = response.data.access_token;
+  //     const role = response.data.data.user.role;
+  //     const userId = response.data.data.user.id;
+  //     localStorage.setItem("token", token);
+  //     localStorage.setItem("role", role);
+  //     localStorage.setItem("userId", userId);
+  //     localStorage.setItem("status", response.data.data.user.status);
+  //     localStorage.setItem("userName", response.data.data.user.name);
+  //     localStorage.setItem("phone", response.data.data.user.phone);
+  //     localStorage.setItem("email", response.data.data.user.email);
+  //     window.dispatchEvent(new Event("storage"));
+
+
+  //     if (role === "venue") {
+  //       navigate("/venue");
+  //     } else if (role === "entertainer") {
+  //       navigate("/entertainer");
+  //     } else {
+  //       navigate("/error");
+  //     }
+  //   } catch (error) {
+  //     console.error("Login error", error);
+  //     toast.error(
+  //       error.response?.data?.message || "An error occurred. Please try again."
+  //     );
+  //   }
+  // };
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     if (!validateForm()) {
       return;
     }
+  
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}auth/login`,
         formData
       );
+  
+
+      const { access_token, data } = response.data;
+      const { user } = data;
+      const { isVerified, role, id, status, name, phone, email } = user;
       console.log("Login successful", response.data);
-      const token = response.data.access_token;
-      const role = response.data.data.user.role;
-      const userId = response.data.data.user.id;
-      localStorage.setItem("token", token);
+      localStorage.setItem("token", access_token);
       localStorage.setItem("role", role);
-      localStorage.setItem("userId", userId);
-      localStorage.setItem("status", response.data.data.user.status);
-      localStorage.setItem("userName", response.data.data.user.name);
-      localStorage.setItem('phone',response.data.data.user.phone);
-      localStorage.setItem('email',response.data.data.user.email);
+      localStorage.setItem("userId", id);
+      localStorage.setItem("status", status);
+      localStorage.setItem("userName", name);
+      localStorage.setItem("phone", phone);
+      localStorage.setItem("email", email);
       window.dispatchEvent(new Event("storage"));
-
-      const status = localStorage.getItem("status");
-      if (response.data.role === "venue" && status === "pending") {
-        navigate("/statusverification");
-      } else if (response.data.role === "venue" && status === "active") {
-        navigate("/loggedin/venuedash");
-      }else if (response.data.role === "entertainer" && status === "pending"){
-        navigate("/statusverification");
-      }else if (response.data.role === "entertainer" && status === "active") {
-        navigate("/loggedin/entertainerdash");
-      }else{
-        navigate("/error");
+  
+      if (!isVerified) {
+        await axios.post(`${import.meta.env.VITE_API_URL}auth/user-verification`, {
+          email,
+        });
+  
+        localStorage.setItem("email", email);
+        localStorage.setItem("case", "login");
+  
+        toast.success("Verification OTP sent to your email.");
+        
+        navigate("/otpverification");
+        return;
       }
+  
+      // Store user data in local storage
 
+  
+      // Navigate based on role
       if (role === "venue") {
         navigate("/venue");
       } else if (role === "entertainer") {
@@ -95,11 +183,15 @@ const Login = () => {
       }
     } catch (error) {
       console.error("Login error", error);
+      console.log(error)
       toast.error(
         error.response?.data?.message || "An error occurred. Please try again."
       );
     }
   };
+  
+  
+
 
   const togglePasswordVisibility = () => {
     setShowPassword(!showPassword);
@@ -114,7 +206,7 @@ const Login = () => {
           content="Login to your account to access personalized features and services."
         />
       </Helmet>
-      <Toaster/>
+      <Toaster />
       {/* <PiqueNavbar/> */}
       <div className="container min-vh-100 ">
         <div className="row d-flex justify-content-around mt-5">
@@ -143,7 +235,10 @@ const Login = () => {
                 )} */}
                 <form onSubmit={handleSubmit} className="profile-font">
                   <div className="row ">
-                    <label className="fw-semibold">Email<span style={{ color: "red", display: "inline" }}>*</span></label>
+                    <label className="fw-semibold">
+                      Email
+                      <span style={{ color: "red", display: "inline" }}>*</span>
+                    </label>
                     <Input
                       type="email"
                       placeholder="Enter email address"
@@ -152,11 +247,14 @@ const Login = () => {
                       onChange={handleChange}
                       className="input-line text-dark profile-font"
                       error={errors.email}
-                      />
+                    />
                   </div>
 
                   <div className="row mt-2">
-                    <label className="fw-semibold">Password<span style={{ color: "red", display: "inline" }}>*</span></label>
+                    <label className="fw-semibold">
+                      Password
+                      <span style={{ color: "red", display: "inline" }}>*</span>
+                    </label>
                     <Input
                       type={showPassword ? "text" : "password"}
                       placeholder="Enter your password"
@@ -168,18 +266,21 @@ const Login = () => {
                       className="input-line text-dark profile-font"
                       error={errors.password}
                     />
-
-                  
                   </div>
 
                   <div className="d-flex justify-content-between mb-3 mt-3">
                     <div>
                       <input type="checkbox" id="rememberMe" className="m-1" />
-                      <label htmlFor="rememberMe" className="profile-font">Remember Me</label>
+                      <label htmlFor="rememberMe" className="profile-font">
+                        Remember Me
+                      </label>
                     </div>
-                    <Link href="#" className="text-decoration-none text-dark profile-font">
+                    <Button
+                      className="btn btn-link text-primary profile-font"
+                      onClick={handleResetPsw}
+                    >
                       Forgot Password?
-                    </Link>
+                    </Button>
                   </div>
                   <div className="row">
                     <div className="col d-flex justify-content-center">
@@ -187,7 +288,9 @@ const Login = () => {
                         type="submit"
                         className="btn-primary w-100 fw-bold sign-in-btn"
                         label="Login"
-                      >Login</button>
+                      >
+                        Login
+                      </button>
                     </div>
                   </div>
                 </form>
@@ -198,10 +301,7 @@ const Login = () => {
                   </Link>
                 </p>
 
-                <p
-                  className="text-center"
-                  style={{ fontSize: "12px" }}
-                >
+                <p className="text-center" style={{ fontSize: "12px" }}>
                   T&C | Privacy Policy
                 </p>
               </div>

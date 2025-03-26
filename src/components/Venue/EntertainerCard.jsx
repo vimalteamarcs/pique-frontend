@@ -14,7 +14,7 @@ const EntertainerCard = ({ entertainer, isWishlisted, isProcessing, onRemoveFrom
     setIsLoading(true);
     console.log("entertainer details", entertainer);
     const body = {
-      name: entertainer.name,
+      username: entertainer.name,
       url: "www.abc.com",
       category: entertainer.category,
       specific_category: entertainer.specific_category,
@@ -50,9 +50,10 @@ const EntertainerCard = ({ entertainer, isWishlisted, isProcessing, onRemoveFrom
   const handleCardClick = (e) => {
     if (e.target.closest(".favorite-btn")) return;
     e.preventDefault();
-    localStorage.setItem("entertainerId", entertainer.eid);
-    navigate("/venue/entertainerDetails");
+    console.log("Navigating with entertainerId:", entertainer.eid);
+    navigate("/venue/entertainerDetails", { state: { entertainerId: entertainer.eid } });
   };
+  
 
   const headshot =
     entertainer.media?.find((media) => media.type === "headshot")?.url ||
@@ -82,7 +83,8 @@ const EntertainerCard = ({ entertainer, isWishlisted, isProcessing, onRemoveFrom
           )}
           </button>
           <img
-            src={headshot && "../assets/pique/image/magician.jpg"}
+            // src={headshot && "./assets/pique/image/magician.jpg"}
+            src={entertainer.mediaUrl}
             className="card-img"
             style={{
               // height:"250px",

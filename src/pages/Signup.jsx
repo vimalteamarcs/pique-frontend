@@ -161,7 +161,9 @@ const Signup = () => {
       return;
     }
     localStorage.setItem("userDetails", JSON.stringify(formData));
-    navigate("/otpverification");
+    navigate("/otpverification", {
+      state: { email: formData.email, source: "register" },
+    });
     const body = { email: formData.email };
 
     try {
@@ -171,7 +173,7 @@ const Signup = () => {
       );
       console.log(response.data);
       toast.success("OTP sent successfully to your mail!", { position: "top-center" });
-
+      localStorage.setItem("case","signup")
       navigate("/otpverification", { state: { email: formData.email } });
     } catch (error) {
       console.log(error)
@@ -183,6 +185,8 @@ const Signup = () => {
       setIsEmailVerified(true);
     }, 1000);
   };
+
+
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -308,14 +312,12 @@ const Signup = () => {
                   <div className="role-container w-100 p-2">
                     <div className="role-selection-box w-100">
                       <div
-                        className={`role-indicator ${
-                          formData.role === "venue" ? "left" : "right"
-                        }`}
+                        className={`role-indicator ${formData.role === "venue" ? "left" : "right"
+                          }`}
                       ></div>
                       <button
-                        className={`role-btn ${
-                          formData.role === "venue" ? "active" : ""
-                        }`}
+                        className={`role-btn ${formData.role === "venue" ? "active" : ""
+                          }`}
                         onClick={() => handleRoleSelection("venue")}
                       >
                         <p className="fw-light profile-font pt-2">
@@ -323,9 +325,8 @@ const Signup = () => {
                         </p>
                       </button>
                       <button
-                        className={`role-btn ${
-                          formData.role === "entertainer" ? "active" : ""
-                        }`}
+                        className={`role-btn ${formData.role === "entertainer" ? "active" : ""
+                          }`}
                         onClick={() => handleRoleSelection("entertainer")}
                       >
                         <p className="fw-light profile-font pt-2">
@@ -433,8 +434,8 @@ const Signup = () => {
                         //   ✅ Verified
                         // </span>
                         <div className="d-flex">
-                        <p className="mt-4 me-2 fs-6 fw-bold text-primary">Verified</p>
-                        <img src="./../assets/pique/image/verifiedTag.avif" height="30px" className="mt-4"/>
+                          <p className="mt-4 me-2 fs-6 fw-bold text-primary">Verified</p>
+                          <img src="./../assets/pique/image/verifiedTag.avif" height="30px" className="mt-4" />
                         </div>
                       ) : (
                         <button
@@ -500,7 +501,7 @@ const Signup = () => {
                     )}
                   </div>
                   <div className="d-flex justify-content-between">
-                    <div className="row">
+                    <div className="row gx-4">
                       <div className="col-1">
                         <input
                           type="checkbox"
@@ -518,6 +519,7 @@ const Signup = () => {
                           </p>
                         </label>
                       </div>
+                      
                     </div>
                   </div>
                   <button

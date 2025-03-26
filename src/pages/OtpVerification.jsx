@@ -6,14 +6,16 @@ import toast, { Toaster } from "react-hot-toast";
 import axios from "axios";
 import { ClipLoader } from "react-spinners";
 import Lottie from "lottie-react";
-import VerifiedAnimation from "../../public/assets/pique/image/verified.json";
+import VerifiedAnimation from "/assets/pique/image/verified.json?url";
 
 
 export default function OtpVerification() {
   const [otp, setOtp] = useState("");
   const location = useLocation();
   const navigate = useNavigate();
-  const email = location.state?.email || "";
+  // const email = location.state?.email || "";
+  const email = localStorage.getItem("email")
+  console.log("email",email)
   const setIsEmailVerified = location.state?.setIsEmailVerified || (() => {});
   const [timeLeft, setTimeLeft] = useState(
     parseInt(localStorage.getItem("otpTimer")) || 600
@@ -25,12 +27,15 @@ export default function OtpVerification() {
 
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem("userDetails"));
-    if (!storedData || !storedData.email) {
+    const Usercase = localStorage.getItem("case"); 
+  
+    if (!storedData?.email && Usercase === "signup") {
       navigate("/signup/venue");
     } else {
       setUserDetails(storedData);
     }
   }, [navigate]);
+  
 
   useEffect(() => {
     if (timeLeft > 0) {
@@ -49,35 +54,80 @@ export default function OtpVerification() {
     return `${minutes}:${secs < 10 ? "0" : ""}${secs}`;
   };
 
+  // const handleVerifyOtp = async (e) => {
+  //   e.preventDefault();
+  //   setVerifying(true);
+  //   const body = {
+  //     email,
+  //     otp,
+  //   };
+  //   try {
+  //     const response = await axios.post(
+  //       `${import.meta.env.VITE_API_URL}auth/verify-otp`,
+  //       body
+  //     );
+  //     console.log(response.data);
+  //     // toast.success("Email verified successfully!", { position: "top-right" });
+  //     const updatedData = { ...userDetails, emailVerified: true };
+  //     localStorage.setItem("userDetails", JSON.stringify(updatedData));
+  //     setTimeout(() => {
+  //       setVerified(true);
+  //       setVerifying(false);
+  //       setIsEmailVerified(true);
+  //       localStorage.removeItem("otpTimer");
+  //       setTimeout(() => navigate("/signup/venue"), 2000);
+  //     }, 6000);
+  //   } catch (error) {
+  //     console.log(error);
+  //     toast.error("Invalid OTP, please try again.", { position: "top-center" });
+  //     setVerifying(false);
+  //   }
+  // };
+
   const handleVerifyOtp = async (e) => {
     e.preventDefault();
     setVerifying(true);
-    const body = {
-      email,
-      otp,
-    };
+  
+    const Usercase = localStorage.getItem("case");
+    const body = { email, otp };
+    const apiUrl =
+      Usercase === "signup"
+        ? `${import.meta.env.VITE_API_URL}auth/verify-otp`
+        : `${import.meta.env.VITE_API_URL}auth/verify-email`;
+  
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}auth/verify-otp`,
-        body
-      );
+      const response = await axios.post(apiUrl, body);
       console.log(response.data);
-      // toast.success("Email verified successfully!", { position: "top-right" });
-      const updatedData = { ...userDetails, emailVerified: true };
-      localStorage.setItem("userDetails", JSON.stringify(updatedData));
-      setTimeout(() => {
+  
+      if (location.state?.source === "register") {
+        // After registration, mark email as verified and redirect to next step
+        const updatedData = { ...userDetails, emailVerified: true };
+        localStorage.setItem("userDetails", JSON.stringify(updatedData));
         setVerified(true);
-        setVerifying(false);
         setIsEmailVerified(true);
         localStorage.removeItem("otpTimer");
         setTimeout(() => navigate("/signup/venue"), 2000);
-      }, 6000);
+      } else {
+        // After login, navigate to dashboard
+        toast.success("Email verified successfully!", { position: "top-center" });
+        // setTimeout(() => navigate("/userdash"), 2000);
+        if(localStorage.getItem("role")==="venue"){
+          navigate("/venue")
+        }else if(localStorage.getItem("role")==="entertainer"){
+          navigate("/entertainer")
+        }else{
+          navigate("/error")
+        }
+      }
     } catch (error) {
       console.log(error);
       toast.error("Invalid OTP, please try again.", { position: "top-center" });
+    } finally {
       setVerifying(false);
     }
   };
+  
+
 
   const handleResendOtp = async () => {
     setResending(true);
@@ -91,7 +141,8 @@ const body = {email}
       localStorage.setItem("otpTimer", 600);
     } catch (error) {
       console.log(error)
-      toast.error("Failed to resend OTP. Please try again.", {
+      console.log(error.response.data.message[0])
+      toast.error("Failed to resend OTP. Please try again later.", {
         position: "top-center",
       });
     } finally {
@@ -148,21 +199,7 @@ const body = {email}
             <p className="fw-bold text-success mt-2">Verified Successfully!</p>
           </div>
         )}
-
-        {/* Checkmark when verified */}
-        {/* {verified && (
-          <div className="mt-4 text-success">
-            <BsCheckCircleFill size={80} />
-            <p className="fw-bold mt-2">Verified Successfully!</p>
-          </div>
-        )} */}
-
-        {/* <button
-          className="btn btn-link btn-sm rounded-3 mt-3"
-          onClick={handleResendOtp}
-        >
-          Resend Otp
-        </button> */}
+        
         <button className="btn btn-link btn-sm rounded-3 mt-3" onClick={handleResendOtp} disabled={resending}>
           {resending ? <ClipLoader color="black" size={15} /> : "Resend OTP"}
         </button>
