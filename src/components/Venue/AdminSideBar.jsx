@@ -166,7 +166,7 @@ export default function AdminSideBar() {
                   <span className="bullet"></span> Create Events
                 </NavLink>
               </li>
-              <li>
+              {/* <li>
                 <NavLink
                   to="/admin/tours"
                   className={({ isActive }) =>
@@ -177,7 +177,7 @@ export default function AdminSideBar() {
                 >
                   <span className="bullet"></span> Tours
                 </NavLink>
-              </li>
+              </li> */}
             </ul>
           </div>
 
@@ -257,7 +257,7 @@ export default function AdminSideBar() {
           >
             <div className="d-flex align-items-center">
               <i className="fa-solid fa-building me-2 mt-2 fs-5"></i>
-              <p className="mb-0 mt-2 profile-font ms-3">Manage Venues</p>
+              <p className="mb-0 mt-2 profile-font ms-3">All Venues</p>
             </div>
           </NavLink>
 

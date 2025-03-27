@@ -9,6 +9,7 @@ const SEARCH_EVENT="admin/venue/search?query="
 const ALL_ENTERTAINERS= "admin/entertainer/all";
 const CREATE_ENTERTAINER="admin/entertainer/createent";
 const CHANGE_STATUS_ENT="admin/entertainer/updatestatusent"
+const DELETE_ENT_PROFILE = "admin/entertainer/"
 const GET_MAIN_CATEGORY="admin/entertainer/maincategory";
 const GET_SUB_CATEGORY="admin/entertainer/subcategory";
 const GET_CATEGORY_BYID="admin/entertainer/categorybyId?id=";
@@ -113,5 +114,6 @@ export {
   GET_CAPABILITIES,
   GET_ROLES,
   CREATE_VENUE,
-  GET_ENTERTAINERS_BYID
+  GET_ENTERTAINERS_BYID,
+  DELETE_ENT_PROFILE
 };

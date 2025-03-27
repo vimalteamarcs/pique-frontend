@@ -543,7 +543,7 @@ export default function EditEntertainer() {
                     style={{ marginRight: "8px" }}
                   ></i>
                 </button>
-                <p className="label-font fw-semibold mt-3">PROFILE</p><hr />
+                <p className="profile-font fw-semibold mt-3">PROFILE</p><hr />
               </div>
               <div className="row justify-content-center mb-4 scrollable-container event-form pt-2 m-1">
                 <form onSubmit={handleSubmit}>
@@ -556,7 +556,7 @@ export default function EditEntertainer() {
                         <hr />
                         <div className="row mb-3 label-font">
                           <div className="col-md-4">
-                            <label className="fw-semibold">Entertainer Name</label>
+                            <label className="fw-semibold mb-2">Entertainer Name</label>
                             <Input
                               type="text"
                               name="name"
@@ -569,7 +569,7 @@ export default function EditEntertainer() {
                             )}
                           </div>
                           <div className="col-md-4">
-                            <label className="fw-semibold">
+                            <label className="fw-semibold mb-2">
                               Entertainer Main Category
                             </label>
                             <Select
@@ -580,7 +580,7 @@ export default function EditEntertainer() {
                             />
                           </div>
                           <div className="col-md-4">
-                            <label className="fw-semibold">
+                            <label className="fw-semibold mb-2">
                               Entertainer Sub Category
                             </label>
                             <Select
@@ -595,7 +595,7 @@ export default function EditEntertainer() {
 
                         <div className="row mb-3 label-font">
                           <div className="col-md-4">
-                            <label className="fw-semibold">Bio</label>
+                            <label className="fw-semibold mb-2">Bio</label>
                             <textarea
                               className="form-control"
                               name="bio"
@@ -605,7 +605,7 @@ export default function EditEntertainer() {
                             />
                           </div>
                           <div className="col-md-4">
-                            <label className="fw-semibold">Contact Number 1</label>
+                            <label className="fw-semibold mb-2">Contact Number 1</label>
                             <Input
                               type="text"
                               name="phone1"
@@ -618,7 +618,7 @@ export default function EditEntertainer() {
                             )}
                           </div>
                           <div className="col-md-4">
-                            <label className="fw-semibold">Contact Number 2</label>
+                            <label className="fw-semibold mb-2">Contact Number 2</label>
                             <Input
                               type="text"
                               name="phone2"
@@ -631,7 +631,7 @@ export default function EditEntertainer() {
 
                         <div className="row mb-3 label-font">
                           <div className="col-md-4">
-                            <label className="fw-semibold">Performance Role</label>
+                            <label className="fw-semibold mb-2">Performance Role</label>
                             <Select
                               name="performanceRole"
                               options={performanceRole}
@@ -646,7 +646,7 @@ export default function EditEntertainer() {
                             )}
                           </div>
                           <div className="col-md-4">
-                            <label className="fw-semibold">Availability?</label>
+                            <label className="fw-semibold mb-2">Availability?</label>
                             <RadioButton
                               name="availability"
                               options={options}
@@ -660,7 +660,7 @@ export default function EditEntertainer() {
                             )}
                           </div>
                           <div className="col-md-4">
-                            <label className="fw-semibold">Price Per Event</label>
+                            <label className="fw-semibold mb-2">Price Per Event</label>
                             <Input
                               type="number"
                               name="pricePerEvent"
@@ -672,7 +672,7 @@ export default function EditEntertainer() {
                         </div>
                         <div className="row mb-3 label-font">
                           <div className="col-md-4">
-                            <label className="fw-semibold">Vaccinated?</label>
+                            <label className="fw-semibold mb-2">Vaccinated?</label>
                             <RadioButton
                               name="vaccinated"
                               options={options}
@@ -689,7 +689,7 @@ export default function EditEntertainer() {
                         <p className="text-start text-muted fw-semibold label-font mt-2">Links</p>
                         <hr />
                         <div className="row mb-3 label-font">
-                          <label className="fw-semibold">Social Media Link</label>
+                          <label className="fw-semibold mb-2">Social Media Link</label>
                           <div className="col-md-6 col-sm-12">
                             <Input
                               type="text"
@@ -724,7 +724,7 @@ export default function EditEntertainer() {
 
                         <div className="row mb-3 label-font">
                           <div className="col-md-12 col-sm-12">
-                            <label className="fw-semibold">
+                            <label className="fw-semibold mb-2">
                               Headshot Profile Pic
                             </label>
                             <Input
@@ -768,7 +768,7 @@ export default function EditEntertainer() {
 
                         <div className="row mt-4">
                           <div className="col-md-12 col-sm-12">
-                            <label className="fw-semibold label-font">Image Upload</label>
+                            <label className="fw-semibold label-font mb-2">Image Upload</label>
                             <Input
                               type="file"
                               name="images"
@@ -818,7 +818,7 @@ export default function EditEntertainer() {
                         {/* Video Upload */}
                         <div className="row mt-4">
                           <div className="col-md-12 col-sm-12">
-                            <label className="fw-semibold label-font">Video Upload</label>
+                            <label className="fw-semibold label-font mb-2">Video Upload</label>
                             <Input
                               type="file"
                               name="videos"

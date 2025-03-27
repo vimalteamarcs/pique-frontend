@@ -44,6 +44,7 @@ const EventsList = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
+      console.log(response.data)
 
       if (response.data && response.data.records) {
         setEvents(response.data.records);
@@ -99,7 +100,7 @@ const EventsList = () => {
 
   const columns = [
     {
-      title: "S.No",
+      title: "SNo",
       dataIndex: "serialNumber",
       key: "serialNumber",
       render: (text, record, index) =>

@@ -182,26 +182,26 @@ export default function ViewEntertainer() {
                   <div className="row profile-font event-form pt-3 mb-2">
                     <div className="mb-3 col-md-6 col-sm-12">
                       <p>
-                        <strong>Name:</strong> {user?.name || " "}
+                        <span className = "fw-semibold"> clasName:</span> {user?.name || " "}
                       </p>
                     </div>
 
                     <div className="mb-3 col-md-6 col-sm-12">
                       <p>
-                        <strong>Email:</strong> {user?.email || " "}
+                        <span className = "fw-semibold">Email:</span> {user?.email || " "}
                       </p>
                     </div>
 
                     <div className="mb-3 col-md-6 col-sm-12">
                       <p>
-                        <strong>Phone Number:</strong>{" "}
+                        <span className = "fw-semibold">Phone Number:</span>{" "}
                         {user?.phoneNumber || " "}
                       </p>
                     </div>
 
                     <div className="mb-3 col-md-6 col-sm-12">
                       <p>
-                        <strong>Role:</strong>{" "}
+                        <span className = "fw-semibold">Role:</span>{" "}
                         <span className="text-capitalize">
                           {user?.role || " "}
                         </span>
@@ -210,7 +210,7 @@ export default function ViewEntertainer() {
 
                     <div className="mb-3 col-md-6 col-sm-12">
                       <p>
-                        <strong>Status:</strong>{" "}
+                        <span className = "fw-semibold">Status:</span>{" "}
                         <span className="text-capitalize">
                           {user?.status || " "}
                         </span>
@@ -238,75 +238,75 @@ export default function ViewEntertainer() {
                           <div className="row">
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Entertainer Name:</strong>{" "}
+                                <span className = "fw-semibold">Entertainer Name:</span>{" "}
                                 {entertainer.name || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Phone 1:</strong>{" "}
+                                <span className = "fw-semibold">Phone 1:</span>{" "}
                                 {entertainer.phone1 || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Phone 2:</strong>{" "}
+                                <span className = "fw-semibold">Phone 2:</span>{" "}
                                 {entertainer.phone2 || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Bio:</strong> {entertainer.bio || " "}
+                                <span className = "fw-semibold">Bio:</span> {entertainer.bio || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Performance Role:</strong>{" "}
+                                <span className = "fw-semibold">Performance Role:</span>{" "}
                                 {entertainer.performanceRole || " "}
                               </p>
                             </div>
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Category:</strong>{" "}
+                                <span className = "fw-semibold">Category:</span>{" "}
                                 {entertainer.category || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Specific Category:</strong>{" "}
+                                <span className = "fw-semibold">Specific Category:</span>{" "}
                                 {entertainer.specific_category || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Availability:</strong>{" "}
+                                <span className = "fw-semibold">Availability:</span>{" "}
                                 {entertainer.availability || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Price Per Event:</strong>{" "}
+                                <span className = "fw-semibold">Price Per Event:</span>{" "}
                                 {entertainer.pricePerEvent || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Vaccinated:</strong>{" "}
+                                <span className = "fw-semibold">Vaccinated:</span>{" "}
                                 {entertainer.vaccinated ? "Yes" : "No"}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Social Links:</strong>{" "}
+                                <span className = "fw-semibold">Social Links:</span>{" "}
                                 <a
                                   href={entertainer.socialLinks || "#"}
                                   target="_blank"
@@ -319,7 +319,7 @@ export default function ViewEntertainer() {
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Created At:</strong>{" "}
+                                <span className = "fw-semibold">Created At:</span>{" "}
                                 {new Date(entertainer.createdAt)
                                   .toLocaleString("en-GB", {
                                     day: "numeric",
@@ -334,7 +334,7 @@ export default function ViewEntertainer() {
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Updated At:</strong>{" "}
+                                <span className = "fw-semibold">Updated At:</span>{" "}
                                 {new Date(entertainer.updatedAt)
                                   .toLocaleString("en-GB", {
                                     day: "numeric",
@@ -395,76 +395,76 @@ export default function ViewEntertainer() {
                           <div className="row mt-3">
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Entertainer Name:</strong>{" "}
+                                <span className = "fw-semibold">Entertainer Name:</span>{" "}
                                 {entertainer.name || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Phone 1:</strong>{" "}
+                                <span className = "fw-semibold">Phone 1:</span>{" "}
                                 {entertainer.phone1 || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Phone 2:</strong>{" "}
+                                <span className = "fw-semibold">Phone 2:</span>{" "}
                                 {entertainer.phone2 || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Bio:</strong> {entertainer.bio || " "}
+                                <span className = "fw-semibold">Bio:</span> {entertainer.bio || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Performance Role:</strong>{" "}
+                                <span className = "fw-semibold">Performance Role:</span>{" "}
                                 {entertainer.performanceRole || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Category:</strong>{" "}
+                                <span className = "fw-semibold">Category:</span>{" "}
                                 {entertainer.category || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Specific Category:</strong>{" "}
+                                <span className = "fw-semibold">Specific Category:</span>{" "}
                                 {entertainer.specific_category || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Availability:</strong>{" "}
+                                <span className = "fw-semibold">Availability:</span>{" "}
                                 {entertainer.availability || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Price Per Event:</strong>{" "}
+                                <span className = "fw-semibold">Price Per Event:</span>{" "}
                                 {entertainer.pricePerEvent || " "}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Vaccinated:</strong>{" "}
+                                <span className = "fw-semibold">Vaccinated:</span>{" "}
                                 {entertainer.vaccinated ? "Yes" : "No"}
                               </p>
                             </div>
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Social Links:</strong>{" "}
+                                <span className = "fw-semibold">Social Links:</span>{" "}
                                 <a
                                   href={entertainer.socialLinks || "#"}
                                   target="_blank"
@@ -477,7 +477,7 @@ export default function ViewEntertainer() {
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Created At:</strong>{" "}
+                                <span className = "fw-semibold">Created At:</span>{" "}
                                 {new Date(entertainer.createdAt)
                                   .toLocaleString("en-GB", {
                                     day: "numeric",
@@ -492,7 +492,7 @@ export default function ViewEntertainer() {
 
                             <div className="mb-3 col-md-6 col-sm-12">
                               <p>
-                                <strong>Updated At:</strong>{" "}
+                                <span className = "fw-semibold">Updated At:</span>{" "}
                                 {new Date(entertainer.updatedAt)
                                   .toLocaleString("en-GB", {
                                     day: "numeric",

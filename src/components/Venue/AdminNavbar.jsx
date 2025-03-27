@@ -109,14 +109,14 @@ export default function AdminNavbar() {
                       aria-labelledby="venueDropdown"
                     >
                       <li>
-                        <a className="nav-link custom-drop-item" href="#">
+                        <Link className="nav-link custom-drop-item" to="">
                           <span>Admin Profile</span>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href="#" className="nav-link custom-drop-item" onClick={handleLogout}>
+                        <Link to="" className="nav-link custom-drop-item" onClick={handleLogout}>
                             Logout
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>

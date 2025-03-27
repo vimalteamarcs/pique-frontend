@@ -99,12 +99,12 @@ const router = createBrowserRouter(
           element={<EntertainerDetails />}
         />
         <Route path="/venue/bookingPage" element={<BookingPage />} />
-        <Route path='/venue/contactPerson' element={<ContactPerson/>}/>
-        <Route path='/venue/wishlist' element={<WishlistPage/>}/>
-        <Route path='/venue/events' element={<Events/>}/>
-        <Route path='/venue/locations' element={<VenueList/>}/>
-        <Route path="/venue/addlocation" element={<AddLocation/>}/>
-        <Route path='/venue/addevents' element={<AddEvents/>}/>
+        <Route path='/venue/contactPerson' element={<ContactPerson />} />
+        <Route path='/venue/wishlist' element={<WishlistPage />} />
+        <Route path='/venue/events' element={<Events />} />
+        <Route path='/venue/locations' element={<VenueList />} />
+        <Route path="/venue/addlocation" element={<AddLocation />} />
+        <Route path='/venue/addevents' element={<AddEvents />} />
       </Route>
 
       <Route element={<ProtectedRoute allowedRoles={["entertainer"]} />}>
@@ -153,12 +153,13 @@ const router = createBrowserRouter(
       <Route path="*" element={<PageNotFound />} />
     </>
   ),
-  { basename,
+  {
+    basename,
     future: {
       v7_relativeSplatPath: true,
       v7_startTransition: true, // ✅ Fixes the warning
     },
-   }
+  }
 );
 
 export default router;

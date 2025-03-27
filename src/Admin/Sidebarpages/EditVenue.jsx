@@ -45,12 +45,12 @@ export default function EditVenue() {
         state: "",
         zipCode: "",
         country: "",
-        lat: "",
-        long: "",
-        amenities: [""],
-        websiteUrl: "",
-        timings: "",
-        bookingPolicies: "",
+        // lat: "",
+        // long: "",
+        // amenities: [""],
+        // websiteUrl: "",
+        // timings: "",
+        // bookingPolicies: "",
       }
   );
 
@@ -307,7 +307,7 @@ export default function EditVenue() {
               </p><hr />
 
 
-              {Object.keys(errors).length > 0 && (
+              {/* {Object.keys(errors).length > 0 && (
                 <div className="alert alert-danger">
                   <strong>Please fill out all required fields:</strong>
                   <ul>
@@ -316,15 +316,15 @@ export default function EditVenue() {
                     ))}
                   </ul>
                 </div>
-              )}
+              )} */}
 
-              <form onSubmit={handleSubmit} className="conatiner m-1 profile-font scrollable-container event-form p-3">
+              <form onSubmit={handleSubmit} className="conatiner m-1 profile-font scrollable-container event-form ps-4 pt-3 pe-4">
                 <div className="row text-start ">
-                  <h5 className=" profile-font fw-semibold text-muted">General Information</h5>
-                  <hr className="fw-bold" />
+                  <p className=" profile-font fw-semibold text-muted mb-3">General Information</p>
+                  <hr className="fw-semibold" />
                   <div className="row mb-3">
                     <div className="col-md-4 ">
-                      <label htmlFor="name" className="fw-bold">
+                      <label htmlFor="name" className="fw-semibold mb-2">
                         Name
                       </label>
                       <Input
@@ -339,7 +339,7 @@ export default function EditVenue() {
                       )}
                     </div>
                     <div className="col-md-4">
-                      <label htmlFor="phone" className="fw-bold">
+                      <label htmlFor="phone" className="fw-semibold mb-2">
                         Phone
                       </label>
                       <Input
@@ -354,7 +354,7 @@ export default function EditVenue() {
                       )}
                     </div>
                     <div className="col-md-4">
-                      <label htmlFor="email" className="fw-bold">
+                      <label htmlFor="email" className="fw-semibold mb-2">
                         Email
                       </label>
                       <Input
@@ -371,13 +371,13 @@ export default function EditVenue() {
                   </div>
                 </div>
                 <div className="row text-start ">
-                  <p className="text-start mt-2 profile-font fw-semibold text-muted">
+                  <p className="text-start mt-4 profile-font fw-semibold text-muted">
                     Address Details
                   </p>
-                  <hr className="fw-bold" />
+                  <hr className="fw-semibold" />
                   <div className="row mb-3">
                     <div className="col-md-4 text-start">
-                      <label htmlFor="country" className="fw-bold">
+                      <label htmlFor="country" className="fw-semibold mb-2">
                         Country
                       </label>
                       <Select
@@ -394,7 +394,7 @@ export default function EditVenue() {
                       )}
                     </div>
                     <div className="col-md-4 text-start">
-                      <label htmlFor="state" className="fw-bold">
+                      <label htmlFor="state" className="fw-semibold mb-2">
                         State
                       </label>
                       <Select
@@ -411,7 +411,7 @@ export default function EditVenue() {
                       )}
                     </div>
                     <div className="col-md-4 text-start">
-                      <label htmlFor="city" className="fw-bold">
+                      <label htmlFor="city" className="fw-semibold mb-2">
                         City
                       </label>
                       <Select
@@ -428,7 +428,7 @@ export default function EditVenue() {
                   </div>
                   <div className=" row mb-3 mt-2">
                     <div className="col-md-4 text-start">
-                      <label htmlFor="addressLine1" className="fw-bold">
+                      <label htmlFor="addressLine1" className="fw-semibold mb-2">
                         Address Line 1
                       </label>
                       <Input
@@ -445,7 +445,7 @@ export default function EditVenue() {
                       )}
                     </div>
                     <div className="col-md-4 text-start">
-                      <label htmlFor="addressLine2" className="fw-bold">
+                      <label htmlFor="addressLine2" className="fw-semibold mb-2">
                         Address Line 2
                       </label>
                       <Input
@@ -462,7 +462,7 @@ export default function EditVenue() {
                       )}
                     </div>
                     <div className="col-md-4 text-start">
-                      <label htmlFor="zipCode" className="fw-bold">
+                      <label htmlFor="zipCode" className="fw-semibold mb-2">
                         Zip Code
                       </label>
                       <Input
@@ -478,8 +478,8 @@ export default function EditVenue() {
                     </div>
                   </div>
                   <div className=" row mb-3 mt-2">
-                    <div className="col-md-4 text-start">
-                      <label htmlFor="location" className="fw-bold">
+                    <div className="col-md-12 text-start">
+                      <label htmlFor="location" className="fw-semibold mb-2">
                         Description
                       </label>
                       <Input
@@ -495,8 +495,8 @@ export default function EditVenue() {
                         </small>
                       )}
                     </div>
-                    <div className="col-md-4 text-start">
-                      <label htmlFor="lat" className="fw-bold">
+                    {/* <div className="col-md-4 text-start">
+                      <label htmlFor="lat" className="fw-semibold">
                         Latitude
                       </label>
                       <Input
@@ -508,7 +508,7 @@ export default function EditVenue() {
                       />
                     </div>
                     <div className="col-md-4 text-start">
-                      <label htmlFor="long" className="fw-bold">
+                      <label htmlFor="long" className="fw-semibold">
                         Longitude
                       </label>
                       <Input
@@ -518,17 +518,17 @@ export default function EditVenue() {
                         value={formData.long}
                         onChange={handleChange}
                       />
-                    </div>
+                    </div> */}
                   </div>
                 </div>
-                <div className="row pb-4 text-start ">
+                {/* <div className="row pb-4 text-start ">
                   <p className="text-start text-muted profile-font fw-semibold mt-2">
                     Venue Information
                   </p>
-                  <hr className="fw-bold" />
+                  <hr className="fw-semibold" />
                   <div className=" row mb-3 mt-2">
                     <div className="col-md-4 text-start">
-                      <label htmlFor="amenities" className="fw-bold">
+                      <label htmlFor="amenities" className="fw-semibold">
                         Amenities
                       </label>
                       <Input
@@ -540,7 +540,7 @@ export default function EditVenue() {
                       />
                     </div>
                     <div className="col-md-4 text-start">
-                      <label htmlFor="websiteUrl" className="fw-bold">
+                      <label htmlFor="websiteUrl" className="fw-semibold">
                         Website URL
                       </label>
                       <Input
@@ -552,7 +552,7 @@ export default function EditVenue() {
                       />
                     </div>
                     <div className="col-md-4 text-start">
-                      <label htmlFor="timings" className="fw-bold">
+                      <label htmlFor="timings" className="fw-semibold">
                         Timings
                       </label>
                       <Input
@@ -566,7 +566,7 @@ export default function EditVenue() {
 
                   <div className=" row ">
                     <div className="col-md-12 text-start">
-                      <label htmlFor="bookingPolicies" className="fw-bold">
+                      <label htmlFor="bookingPolicies" className="fw-semibold">
                         Booking Policies
                       </label>
                       <textarea
@@ -578,7 +578,7 @@ export default function EditVenue() {
                       />
                     </div>
                   </div>
-                </div>
+                </div> */}
               
                   <Button
                     type="submit"
@@ -597,7 +597,7 @@ export default function EditVenue() {
 
                     <div className="row mt-4 event-form">
                       <div className="col-md-12 col-sm-12">
-                        <label className="fw-bold profile-font mb-3 pt-2">Image Upload</label><br/>
+                        <label className="fw-semibold profile-font mb-3 pt-2">Image Upload</label><br/>
                         <input
                           type="file"
                           accept="image/*"

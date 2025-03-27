@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DashLayout from "../DashLayout";
 import CustomTable from "../../components/CustomTable";
-import { ALL_ENTERTAINERS, CHANGE_STATUS_ENT } from "../../../constants";
+import { ALL_ENTERTAINERS, CHANGE_STATUS_ENT, DELETE_ENT_PROFILE } from "../../../constants";
 import { useNavigate } from "react-router-dom";
 import AdminSideBar from "../../components/Venue/AdminSideBar";
 
@@ -76,12 +76,8 @@ export default function AllEntertainer() {
     console.log("value to send", value)
     // Implement the delete logic here
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_API_URL}${CHANGE_STATUS_ENT}`, value,
-        // {
-        //   id: [Number(record.id)],
-        //   status: 'inactive',
-        // },
+      const response = await axios.delete(
+        `${import.meta.env.VITE_API_URL}${DELETE_ENT_PROFILE}${record.id}`,
         {
           headers: { Authorization: `Bearer ${localStorage.getItem("token")}` }
         }
@@ -139,11 +135,7 @@ export default function AllEntertainer() {
       dataIndex: "vaccinated",
       key: "vaccinated",
       render: (text) => (
-        <span
-          className={
-            text == "no" ? "badge bg-danger " : "badge bg-success px-3"
-          }
-        >
+        <span>
           {text}
         </span>
       ),

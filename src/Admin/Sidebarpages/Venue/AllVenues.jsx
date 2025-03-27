@@ -19,7 +19,7 @@ export default function AllVenues() {
   const [search, setSearch] = useState("");
   const navigate = useNavigate();
 
-  const fetchVenues = async (page = 1, pageSize = 5, search = "") => {
+  const fetchVenues = async (page, pageSize, search) => {
     setLoading(true);
 
     const token = localStorage.getItem("token");
@@ -92,7 +92,8 @@ export default function AllVenues() {
     } catch (error) {
       console.error("Error deleting venue:", error);
     }
-    fetchVenues();
+    fetchVenues(pagination.current, pagination.pageSize, search);
+
   };
 
   const handleTableChange = (pagination) => {
@@ -125,7 +126,7 @@ export default function AllVenues() {
               e.preventDefault();
               navigate("/admin/viewdetails", { state: record });
             }}
-            className="text-decoration-none fw-bold text-danger"
+            className="text-decoration-none text-black"
           >
             {text}
           </a>
@@ -160,7 +161,7 @@ export default function AllVenues() {
             <AdminSideBar />
           </div>
           <div className="dash-profile-container">
-            <p className="profile-font fw-semibold">VENUES DETAILS</p><hr />
+            <p className="profile-font fw-semibold">VENUES DETAILS</p>
             {successMessage && (
               <div className="alert alert-danger d-flex align-items-center mt-2">
                 <span className="badge bg-danger me-2">{successMessage}</span>

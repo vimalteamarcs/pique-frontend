@@ -90,12 +90,12 @@ export default function AddLocation() {
         state: "",
         country: "",
         zipCode: "",
-        lat: "",
-        long: "",
-        amenities: [],
-        websiteUrl: "",
-        timings: "",
-        bookingPolicies: "",
+        // lat: "",
+        // long: "",
+        // amenities: [],
+        // websiteUrl: "",
+        // timings: "",
+        // bookingPolicies: "",
       },
     ]);
   };
@@ -124,7 +124,7 @@ export default function AddLocation() {
           // name: venue.name || "",
           // description: venue.description || "",
           email: venue.email || "",
-          phone: venue.phoneNumber || "",
+          phone: venue.phone || "",
           addressLine1: formData.addressLine1 || "",
           addressLine2: formData.addressLine2 || "",
           zipCode: formData.zipCode || "",
@@ -137,11 +137,12 @@ export default function AddLocation() {
           // websiteUrl: formData.websiteUrl || "N/A",
           // timings: formData.timings || "N/A",
           // bookingPolicies: formData.bookingPolicies || "N/A",
-          userId: Number(localStorage.getItem("venueUserId")) || 0,
+          // userId: Number(localStorage.getItem("venueUserId")) || 0,
+          userId: Number(venue.id) || 0
           // isParent: false,
           // parentId: venue.id ? Number(venue.id) : 0,
         };
-        console.log(venueFormData);
+        console.log("venue form data",venueFormData);
 
         await axios.post(
           `${import.meta.env.VITE_API_URL}admin/venue/location`,

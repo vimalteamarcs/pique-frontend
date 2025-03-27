@@ -64,14 +64,14 @@ export default function CustomTable({
               onClick={() => handleView(record)}
               type=""
               size="small"
-              style={{ marginRight: 8 }}
+              style={{ marginRight: 3 }}
               icon={<EyeOutlined />}
             ></Button>
             <Button
               onClick={() => handleEdit(record)}
-              type="primary"
+              type=""
               size="small"
-              style={{ marginRight: 8 }}
+              style={{ marginRight: 3 }}
               icon={<EditOutlined />}
             ></Button>
             {/* <Popconfirm
@@ -86,7 +86,7 @@ export default function CustomTable({
             </Popconfirm> */}
             <Button
               onClick={() => handleDeleteClick(record)}
-              type="danger"
+              type=""
               size="small"
               icon={<DeleteOutlined />}
             ></Button>
@@ -102,8 +102,8 @@ export default function CustomTable({
     <div style={{ borderRadius: "10px", padding: "0px" }}>
       {/* Search Input */}
       <div
-        style={{ marginBottom: 16, borderRadius: "10px" }}
-        className="d-flex justify-content-between"
+        style={{  borderRadius: "10px" }}
+        className="d-flex float-start m-2"
       >
         <Input
           placeholder="Search..."
@@ -115,6 +115,7 @@ export default function CustomTable({
       </div>
 
       {/* Data Table */}
+      <div className="event-form p-2">
       <Table
         columns={columnsWithActions}
         dataSource={data}
@@ -122,8 +123,8 @@ export default function CustomTable({
         loading={loading}
         onChange={onTableChange} // Triggered on pagination or sorting
         rowKey="id"
-        style={{ padding: "0px" }}
       />
+      </div>
 
       <Modal
       className="w-25"

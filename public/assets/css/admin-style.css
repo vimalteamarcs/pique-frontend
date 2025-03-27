@@ -322,7 +322,7 @@ html {
   > tr
   > td {
   padding: 5px 10px;
-  color: var(--bs-text-primary);
+  /* color: var(--bs-text-primary); */
   font-size: var(--bs-body-fontsize);
 }
 
@@ -687,4 +687,27 @@ body {
   background: #845FD7 0% 0% no-repeat padding-box;
   border-radius: 2px;
   opacity: 1;
+}
+
+
+
+
+
+/* Removes row hover effect */
+.ant-table-tbody > tr:hover > td {
+  background: none !important;
+}
+
+/* Ensures rows have a solid background */
+.ant-table-tbody > tr > td {
+  background: white !important;
+}
+
+/* Adjusts border radius */
+.ant-table {
+  border-radius: 10px;
+}
+
+.ant-table-thead{
+  background: white !important;
 }
