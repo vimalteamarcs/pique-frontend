@@ -18,14 +18,14 @@ export default function AdminSideBar() {
     location.pathname.startsWith("/admin/editevent");
 
     const isVenueActive =
-    location.pathname.startsWith("/admin/allusercopy") &&
+    location.pathname.startsWith("/admin/allVenues") &&
     location.search.includes("role=venue") || 
     location.pathname.startsWith("/admin/viewvenue") || 
     location.pathname.startsWith("/admin/edituser") || 
     location.pathname.startsWith("/admin/adduser");
   
   const isEntertainerActive =
-    location.pathname.startsWith("/admin/allusercopy") &&
+    location.pathname.startsWith("/admin/allentertainer") &&
     location.search.includes("role=entertainer") ||
     location.pathname.startsWith("/admin/adduser") || 
     location.pathname.startsWith("/admin/edituser") ||
@@ -68,7 +68,7 @@ export default function AdminSideBar() {
   const handleAdminClick = () => {
     if (!isAdminDropdownOpen) {
       setIsAdminDropdownOpen(true);
-      navigate("/admin/allusercopy?role=venue", { replace: true }); 
+      // navigate("/admin/alluser", { replace: true }); 
     } else {
       setIsAdminDropdownOpen(false);
     }
@@ -222,36 +222,71 @@ export default function AdminSideBar() {
               className={`dropdown-menu dash-drop-menu ${isAdminDropdownOpen ? "show" : ""}`}
             >
               <li>
-                <NavLink
-                  to="/admin/allusercopy?role=venue"
+                {/* <NavLink
+                  to="/admin/alluser"
                   className={`dropdown-item dash-drop-item dropdown-item-text ${
                     isVenueActive ? "active-item fw-semibold" : "inactive-item"
                   }`}
                 >
-                  <span className="bullet"></span> User Management
-                </NavLink>
+                  <span className="bullet"></span> Venue Management
+                </NavLink> */}
+
+                          <NavLink
+            to="/admin/allVenues"
+            className={
+              `dropdown-item dash-drop-item dropdown-item-text ${
+                isVenueActive ? "active-item fw-semibold" : "inactive-item"
+              }`
+            }
+          >
+            <span className="bullet"></span> Venue Management
+          </NavLink>
 
               </li>
               <li>
-                <NavLink
-                  to="/admin/allusercopy?role=entertainer"
+                {/* <NavLink
+                  to="/admin/alluser"
                   className={`dropdown-item dash-drop-item dropdown-item-text ${
                     isEntertainerActive ? "active-item fw-semibold" : "inactive-item"
                   }`}
                 >
                   <span className="bullet"></span> Entertainer
                   Management
-                </NavLink>
+                </NavLink> */}
+
+                <NavLink
+            to="/admin/allentertainer"
+            className={`dropdown-item dash-drop-item dropdown-item-text ${
+              isEntertainerActive ? "active-item fw-semibold" : "inactive-item"
+            }`}
+          >
+             <span className="bullet"></span> Entertainer
+             Management
+          </NavLink>
               </li>
             </ul>
           </div>
 
+
+          <NavLink
+            to="/admin/alluser"
+            className={({ isActive }) =>
+              `nav-link dash-sidebar-link ${
+                isActive ? "dash-active-link fw-semibold" : ""
+              }`
+            }
+          >
+            <div className="d-flex align-items-center">
+              <i className="fa-solid fa-users-rectangle me-2 mt-2 fs-5"></i>
+              <p className="mb-0 mt-2 profile-font ms-3">Users</p>
+            </div>
+          </NavLink>
           {/* Manage Venues */}
           <NavLink
             to="/admin/allVenues"
             className={
               `nav-link dash-sidebar-link ${
-                isManageVenueActive ? "dash-active-link fw-semibold" : ""
+                isManageVenueActive ? "dash-active-lin" : ""
               }`
             }
           >
@@ -266,7 +301,7 @@ export default function AdminSideBar() {
             to="/admin/allentertainer"
             className={({ isActive }) =>
               `nav-link dash-sidebar-link ${
-                isActive ? "dash-active-link fw-semibold" : ""
+                isActive ? "dash-active-lin" : ""
               }`
             }
           >

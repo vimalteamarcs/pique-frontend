@@ -81,13 +81,13 @@ const AllInvoices = () => {
   };
 
   const columns = [
-    {
-      title: "S.No",
-      dataIndex: "serialNumber",
-      key: "serialNumber",
-      render: (text, record, index) =>
-        (pagination.current - 1) * pagination.pageSize + index + 1,
-    },
+    // {
+    //   title: "S.No",
+    //   dataIndex: "serialNumber",
+    //   key: "serialNumber",
+    //   render: (text, record, index) =>
+    //     (pagination.current - 1) * pagination.pageSize + index + 1,
+    // },
     {
       title: "Invoice Number",
       dataIndex: "invoice_number",
@@ -120,7 +120,7 @@ const AllInvoices = () => {
         return <span className={statusClass}>{status}</span>;
       },
     },
-    { title: "Actions", key: "actions", actions: true },
+    // { title: "Actions", key: "actions", actions: true },
   ];
 
   return (

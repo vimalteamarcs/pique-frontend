@@ -41,7 +41,7 @@ export default function AllVenues() {
           Authorization: `Bearer ${token}`,
         },
       });
-
+    console.log(response)
       if (response.data && response.data.records) {
         setVenuedata(response.data.records); // Update table data
         setPagination((prev) => ({
@@ -107,13 +107,13 @@ export default function AllVenues() {
 
   // Define columns for Table
   const columns = [
-    {
-      title: "S.No",
-      dataIndex: "serialNumber",
-      key: "serialNumber",
-      render: (text, record, index) =>
-        (pagination.current - 1) * pagination.pageSize + index + 1,
-    },
+    // {
+    //   title: "SNo",
+    //   dataIndex: "serialNumber",
+    //   key: "serialNumber",
+    //   render: (text, record, index) =>
+    //     (pagination.current - 1) * pagination.pageSize + index + 1,
+    // },
     {
       title: "Name",
       dataIndex: "name",
@@ -145,11 +145,11 @@ export default function AllVenues() {
       key: "contactInfo",
     },
 
-    {
-      title: "Actions",
-      key: "actions",
-      actions: true, // Custom flag to add action buttons
-    },
+    // {
+    //   title: "Actions",
+    //   key: "actions",
+    //   actions: true, // Custom flag to add action buttons
+    // },
   ];
 
   return (

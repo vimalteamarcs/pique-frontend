@@ -170,11 +170,11 @@ export default function AllUser() {
         </span>
       ),
     },
-    {
-      title: "Actions",
-      key: "actions",
-      actions: true,
-    },
+    // {
+    //   title: "Actions",
+    //   key: "actions",
+    //   actions: true,
+    // },
   ];
 
   const handleView = async (record) => {

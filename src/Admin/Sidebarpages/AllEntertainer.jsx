@@ -84,6 +84,10 @@ export default function AllEntertainer() {
       );
 
       console.log(response.data); // Log the API response
+      
+      setEntertainers((prevEntertainers) =>
+        prevEntertainers.filter((ent) => ent.id !== record.id)
+      );
     } catch (error) {
       console.error("Failed to update status:", error);
     }
@@ -97,13 +101,13 @@ export default function AllEntertainer() {
 
   // Define columns for Table
   const columns = [
-    {
-      title: "S.No",
-      dataIndex: "serialNumber",
-      key: "serialNumber",
-      render: (text, record, index) =>
-        (pagination.current - 1) * pagination.pageSize + index + 1,
-    },
+    // {
+    //   title: "S.No",
+    //   dataIndex: "serialNumber",
+    //   key: "serialNumber",
+    //   render: (text, record, index) =>
+    //     (pagination.current - 1) * pagination.pageSize + index + 1,
+    // },
     {
       title: "Name",
       dataIndex: "name",
@@ -140,11 +144,11 @@ export default function AllEntertainer() {
         </span>
       ),
     },
-    {
-      title: "Actions",
-      key: "actions",
-      actions: true, // Custom flag to add action buttons
-    },
+    // {
+    //   title: "Actions",
+    //   key: "actions",
+    //   actions: true, // Custom flag to add action buttons
+    // },
   ];
 
   return (

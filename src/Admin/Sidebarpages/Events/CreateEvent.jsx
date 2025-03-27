@@ -156,7 +156,7 @@ const CreateEvent = () => {
   const handleSelectVenue = (e) => {
     const venueId = e.target.value;
     const selectedVenue = venues.find((venue) => venue.id.toString() === venueId);
-
+   console.log("selected venue",selectedVenue)
     setFormData({
       ...formData,
       venueId: Number(venueId),
@@ -184,7 +184,7 @@ console.log(formData)
           },
         }
       );
-
+console.log(response)
       if (response) {
         // Handle success response
         toast.success("Event added successfully!", {
@@ -200,6 +200,7 @@ console.log(formData)
       setMessage("");
       toast.error("Failed to create event. Please try again.");
       setError("Error creating event.");
+      console.log(error)
       console.error("Error creating event:", err);
     }
   };
@@ -216,12 +217,6 @@ console.log(formData)
           <div className="dash-profile-container">
             <div className="d-flex justify-content-between">
               <p className="fs-6 fw-semibold">EVENTS</p>
-              <input
-                type="text"
-                className="dashSearchBar label-font mb-2 ps-3"
-                placeholder="Search"
-                style={{ color: "#778DA2" }}
-              />
             </div>
             <div className="div event-form">
               <p
@@ -319,6 +314,7 @@ console.log(formData)
                           value={formData.recurring}
                           onChange={handleInputChange}
                         >
+                          <option value="default" className="select-recurring">Select Recurring</option>
                           <option value="none" className="label-font">
                             None
                           </option>
@@ -562,6 +558,7 @@ console.log(formData)
                       placeholder="Select Venue Location"
                       name="location"
                       value={formData.location || ""}
+                      onChange={handleInputChange}
                       readOnly
                     />
                     {errors.location && (
@@ -587,7 +584,7 @@ console.log(formData)
                       placeholder="Enter Venue Contact Number"
                       id="phone"
                       name="phone"
-                      value={phone}
+                      value={formData.phone || ""}
                       onChange={handlePhoneChange}
                     />
                   {errors.phone && <div className="invalid-feedback">{errors.phone}</div>}

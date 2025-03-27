@@ -7,6 +7,8 @@ import DashLayout from "../../DashLayout";
 import CustomTable from "../../../components/CustomTable";
 import { DELETE_EVENT, GET_ALL_EVENTS } from "../../../../constants";
 import AdminSideBar from "../../../components/Venue/AdminSideBar";
+import { Tooltip } from "antd";
+
 
 const EventsList = () => {
   const navigate = useNavigate();
@@ -23,6 +25,7 @@ const EventsList = () => {
 
   useEffect(() => {
     fetchEvents(pagination.current, pagination.pageSize, search);
+    console.log(events);
   }, [pagination.current, pagination.pageSize, search, flag]);
 
   const fetchEvents = async (page, pageSize, search) => {
@@ -44,11 +47,17 @@ const EventsList = () => {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-      console.log(response.data)
+      console.log(response.data);
 
-      if (response.data && response.data.records) {
+      // if (response.data && response.data.records) {
+      //   setEvents(response.data.records);
+      //   setPagination((prev) => ({ ...prev, total: response.data.total }));
+      // }
+      if (Array.isArray(response.data.records)) {
         setEvents(response.data.records);
         setPagination((prev) => ({ ...prev, total: response.data.total }));
+      } else {
+        setEvents([]); // Fallback to an empty array
       }
     } catch (err) {
       setError("Failed to load events");
@@ -85,7 +94,7 @@ const EventsList = () => {
         `Failed to delete event with ID ${id}:`,
         error.response?.data || error.message
       );
-      toast.error(error.response.message)
+      toast.error(error.response.message);
     }
   };
   const handleDelete = async (record) => {
@@ -100,58 +109,76 @@ const EventsList = () => {
 
   const columns = [
     {
-      title: "SNo",
-      dataIndex: "serialNumber",
-      key: "serialNumber",
-      render: (text, record, index) =>
-        (pagination.current - 1) * pagination.pageSize + index + 1,
-    },
-    {
       title: "Title",
       dataIndex: "title",
       key: "title",
-      // render: (text, record) => (
-      //   <a
-      //     href="#"
-      //     onClick={(e) => {
-      //       e.preventDefault();
-      //       navigate("/admin/viewevent", { state: record });
-      //     }}
-      //     className=" text-danger fw-bold text-decoration-none"
-      //   >
-      //     {text}
-      //   </a>
-      // ),
     },
-    { title: "Location", dataIndex: "location", key: "location" },
+    // { title: "Venue Name", dataIndex: "venueName", key: "venueName" },
     {
-      title: "Start Time",
-      dataIndex: "startTime",
-      key: "startTime",
-      render: (text) =>
-        new Date(text).toLocaleString("en-GB", {
-          day: "numeric",
-          month: "short", // Short month name (e.g., Mar)
-          year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true, // Use 12-hour format with AM/PM
-        }),
-        
+      title: "Venue Name",
+      dataIndex: "venueName",
+      key: "venueName",
+      render: (text, record) => (
+        <Tooltip title={record.location || "No Location"}>
+          <span>{text}</span>
+        </Tooltip>
+      ),
     },
     {
-      title: "End Time",
-      dataIndex: "endTime",
-      key: "endTime",
-      render: (text) =>
-        new Date(text).toLocaleString("en-GB", {
+      title: "Date",
+      key: "date",
+      render: (_, record) => {
+        const startDate = new Date(record.startTime).toLocaleDateString(
+          "en-GB",
+          {
+            day: "numeric",
+            month: "short",
+            year: "numeric",
+          }
+        );
+
+        const endDate = new Date(record.endTime).toLocaleDateString("en-GB", {
           day: "numeric",
-          month: "short", // Short month name (e.g., Mar)
+          month: "short",
           year: "numeric",
-          hour: "2-digit",
-          minute: "2-digit",
-          hour12: true, // Use 12-hour format with AM/PM
-        }),
+        });
+
+        return `${startDate} - ${endDate}`;
+      },
+    },
+    {
+      title: "Duration",
+      key: "duration",
+      dataIndex: ["startTime", "endTime"],
+      render: (_, record) => {
+        const start = new Date(record.startTime);
+        const end = new Date(record.endTime);
+        const durationMs = end - start;
+
+        if (durationMs < 0) return "Invalid Time"; // Handle incorrect data
+
+        // Convert duration to minutes, hours, and days
+        const totalMinutes = Math.floor(durationMs / (1000 * 60));
+        const days = Math.floor(totalMinutes / (60 * 24));
+        const hours = Math.floor((totalMinutes % (60 * 24)) / 60);
+        const minutes = totalMinutes % 60;
+
+        // Construct duration string based on conditions
+        if (days > 0) {
+          return `${days}d`; // Show only days if duration is 1+ days
+        } else {
+          let durationStr = "";
+          if (hours > 0) durationStr += `${hours}h `;
+          if (minutes > 0) durationStr += `${minutes}m`;
+          return durationStr.trim(); // Remove trailing space if empty
+        }
+      },
+    },
+    {
+      title: "Recurring",
+      dataIndex: "recurring",
+      key: "recurring",
+      render: (text) => <p>{text}</p>,
     },
     {
       title: "Status",
@@ -180,9 +207,9 @@ const EventsList = () => {
         );
       },
     },
-
-    { title: "Actions", key: "actions", actions: true },
   ];
+
+  console.log("Table Data:", events);
 
   return (
     <>
@@ -213,50 +240,46 @@ const EventsList = () => {
                 {error}
               </div>
             ) : (
-              <div className="table" style={{ borderRadius: "10px" }}>
-                <div className="table table-responsive">
-                  <CustomTable
-                    data={events}
-                    columns={columns}
-                    onView={handleView}
-                    onEdit={handleEdit}
-                    onDelete={handleDelete}
-                    loading={loading}
-                    // pagination={pagination}
-                    pagination={{
-                      current: pagination.current,
-                      pageSize: pagination.pageSize,
-                      total: pagination.total,
-                    }}
-                    // onTableChange={(pagination) => {
-                    //   fetchEvents(
-                    //     pagination.current,
-                    //     pagination.pageSize,
-                    //     search
-                    //   );
-                    // }}
-                    onTableChange={(newPagination) => {
-                      setPagination((prev) => ({
-                        ...prev,
-                        current: newPagination.current, // Update current page
-                        pageSize: newPagination.pageSize,
-                      }));
-                    }}
-                    search={search}
-                    // onSearchChange={(value) => {
-                    //   setSearch(value);
-                    //   fetchEvents(1, pagination.pageSize, value);
-                    // }}
-                    onSearchChange={(value) => {
-                      setSearch(value);
-                      setPagination((prev) => ({
-                        ...prev,
-                        current: 1, // Reset to first page on search
-                      }));
-                    }}
-                  />
-                </div>
-              </div>
+              <CustomTable
+                data={events}
+                columns={columns}
+                onView={handleView}
+                onEdit={handleEdit}
+                onDelete={handleDelete}
+                loading={loading}
+                // pagination={pagination}
+                pagination={{
+                  current: pagination.current,
+                  pageSize: pagination.pageSize,
+                  total: pagination.total,
+                }}
+                // onTableChange={(pagination) => {
+                //   fetchEvents(
+                //     pagination.current,
+                //     pagination.pageSize,
+                //     search
+                //   );
+                // }}
+                onTableChange={(newPagination) => {
+                  setPagination((prev) => ({
+                    ...prev,
+                    current: newPagination.current, // Update current page
+                    pageSize: newPagination.pageSize,
+                  }));
+                }}
+                search={search}
+                // onSearchChange={(value) => {
+                //   setSearch(value);
+                //   fetchEvents(1, pagination.pageSize, value);
+                // }}
+                onSearchChange={(value) => {
+                  setSearch(value);
+                  setPagination((prev) => ({
+                    ...prev,
+                    current: 1, // Reset to first page on search
+                  }));
+                }}
+              />
             )}
           </div>
         </div>

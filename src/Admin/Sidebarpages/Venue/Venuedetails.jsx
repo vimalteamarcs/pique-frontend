@@ -22,6 +22,7 @@ const Venuedetails = () => {
   useEffect(() => {
     if (venue) {
       setVenueData(venue);
+      console.log("d", venueData);
     }
   }, [venue]);
   useEffect(() => {
@@ -113,6 +114,108 @@ const Venuedetails = () => {
     <>
       <DashLayout />
       <div className="container-fluid w-100 p-0">
+        <div className="d-flex flex-column flex-lg-row mt-0">
+          <div className="dash-sidebar-container">
+            <AdminSideBar />
+          </div>
+          <div className="dash-profile-container w-100 p-3">
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <button
+                onClick={() => navigate(-1)}
+                className="btn btn-outline-dark btn-sm d-flex align-items-center"
+              >
+                <i className="fa fa-arrow-left me-2"></i> Back
+              </button>
+              {venueData && (
+                <button
+                  onClick={() =>
+                    navigate("/admin/addvenuelocation", { state: venueData })
+                  }
+                  className="btn btn-outline-dark btn-sm d-flex align-items-center"
+                >
+                  <i className="fa fa-add me-2"></i> Add Location
+                </button>
+              )}
+            </div>
+
+            <div className="border rounded p-3 bg-white">
+              <h6 className="fw-bold">VENUE DETAILS</h6>
+              <hr />
+              <div className="row">
+                <div className="col-md-6">
+                  <p>
+                    <strong>Name:</strong> {venueData?.name || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Phone:</strong> {venueData?.phone || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Email:</strong> {venueData?.email || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Address:</strong> {venueData?.addressLine1 || ""},{" "}
+                    {venueData?.addressLine2 || ""}
+                  </p>
+                  <p>
+                    <strong>City:</strong> {venueData?.city || "N/A"}
+                  </p>
+                  <p>
+                    <strong>State:</strong> {venueData?.state || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Country:</strong> {venueData?.country || "N/A"}
+                  </p>
+                  <p>
+                    <strong>Zip Code:</strong> {venueData?.zipCode || "N/A"}
+                  </p>
+                </div>
+                <div className="col-md-6">
+                  <p>
+                    <strong>Description:</strong>{" "}
+                    {venueData?.description || "N/A"}
+                  </p>
+                  {/* <p>
+                    <strong>Created At:</strong>{" "}
+                    {venueData?.createdAt
+                      ? new Date(venueData.createdAt).toLocaleString()
+                      : "N/A"}
+                  </p>
+                  <p>
+                    <strong>Updated At:</strong>{" "}
+                    {venueData?.updatedAt
+                      ? new Date(venueData.updatedAt).toLocaleString()
+                      : "N/A"}
+                  </p> */}
+                </div>
+              </div>
+            </div>
+
+            {media?.length > 0 && (
+              <div className="row mt-4">
+                {media.map((item, index) => (
+                  <div key={index} className="col-md-3 col-sm-6 mb-3">
+                    {item.type === "image" ? (
+                      <img
+                        src={item.url}
+                        alt={`Media ${index}`}
+                        className="img-fluid rounded"
+                        style={{ width: "100%", height: "auto" }}
+                      />
+                    ) : item.type === "video" ? (
+                      <video
+                        src={item.url}
+                        controls
+                        className="img-fluid rounded"
+                      />
+                    ) : null}
+                  </div>
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+      {/* <div className="container-fluid w-100 p-0">
         <div className="d-flex mt-0">
           <div className="dash-sidebar-container">
             <AdminSideBar />
@@ -137,13 +240,7 @@ const Venuedetails = () => {
                     <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
                     Add Location
                   </button>
-                  {/* <button
-                    onClick={() => navigate("/admin/createevent", { state: venue })}
-                    className="btn btn-outline-dark btn-sm d-flex align-items-center mb-4"
-                  >
-                    <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
-                    Create Event
-                  </button> */}
+                  
                 </>
               ) : null}
             </div>
@@ -390,7 +487,7 @@ const Venuedetails = () => {
             )}
           </div>
         </div>
-      </div>
+      </div> */}
     </>
   );
 };

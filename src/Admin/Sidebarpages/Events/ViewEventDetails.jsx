@@ -35,6 +35,7 @@ const ViewEventDetails = () => {
             },
           }
         );
+        console.log("response",response.data)
         setEvent(response.data);
       } catch (err) {
         setError("Failed to load event details");
@@ -156,7 +157,7 @@ const ViewEventDetails = () => {
                     <div className="row">
                       <div className="col-md-6 profile-font">
                         <p>
-                          <strong>Title:</strong> {event.title}
+                          <strong>Title:</strong> {event.ename}
                         </p>
                         <p>
                           <strong>Location:</strong> {event.location}
@@ -200,7 +201,7 @@ const ViewEventDetails = () => {
                         <p>
                           <strong>Status:</strong> {event.status}
                         </p>
-                        <p>
+                        {/* <p>
                           <strong>Created At:</strong>{" "}
                           {new Date(event.createdAt).toLocaleDateString(
                             "en-GB",
@@ -227,7 +228,7 @@ const ViewEventDetails = () => {
                               hour12: true,
                             }
                           )}
-                        </p>
+                        </p> */}
                         <p>
                           <strong>Venue:</strong> {event.name},{" "}
                           {event.addressLine1}, {event.addressLine2}
