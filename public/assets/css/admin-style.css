@@ -7,7 +7,12 @@
   --bs-text-primary: #3a3a3a;
   --bs-body-fontsize: 12px;
 }
-
+.pageLayout {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  height: 100vh;
+}
 .back-to-top {
   position: fixed;
   display: none;
@@ -322,7 +327,7 @@ html {
   > tr
   > td {
   padding: 5px 10px;
-  /* color: var(--bs-text-primary); */
+  color: var(--bs-text-primary);
   font-size: var(--bs-body-fontsize);
 }
 
@@ -444,29 +449,29 @@ html {
 
 /* For Webkit browsers (Chrome, Safari) */
 ::-webkit-scrollbar {
-  display: none;
+  /* display: none; */
 }
 
 /* For Firefox */
 html {
-  scrollbar-width: none;
+  /* scrollbar-width: none; */
 }
 
 /* For IE, Edge */
 body {
-  -ms-overflow-style: none;
+  /* -ms-overflow-style: none; */
 }
 
 .dash-sidebar-link {
   display: flex;
   align-items: center;
-  border-radius: 8px;
+  /* border-radius: 8px; */
   color: #778da2;
   text-decoration: none;
   /* position: relative; */
-  margin-bottom: 9px;
+  margin-bottom: 5px;
   margin-left: 12px;
-  height: 40px;
+  /* height: 40px; */
   transition: color 0.3s ease;
   overflow: hidden;
 }
@@ -488,12 +493,12 @@ body {
   color: black !important;
   font-weight: 600 !important;
   width: calc(100% + 12px) !important;
-  margin-left: -2px !important;
-  padding-left: 15px !important;
+  margin-left: 0px !important;
+  /* padding-left: 15px !important; */
   position: relative;
-  padding-right: 9px !important;
+  padding-right: 9px !important;border-radius: 8px;
 }
-
+.dash-active-link .dash-sidebar-link {  color: #333333 !important;}
 .dash-active-link::before {
   height: 100%;
 }
@@ -501,21 +506,28 @@ body {
 .dash-sidebar-link img {
   transition: filter 0.1s ease;
 }
+.dash-sidebar-link .menuIconA  {
+  width: 18px;
+  /* height: 20px; */
+  margin-right: 10px;
+  font-size: 15px;
+}
 
 /* Removes the border around the entire dropdown menu */
 .dash-drop-menu {
     border: none !important;
     /* box-shadow: none !important;  */
     background-color: white !important;
+    
   }
-
+  .dropdown-menu.dash-drop-menu {padding: 0;}
 /* Removes any borders from dropdown items */
 .dash-drop-menu .dash-drop-item {
     border: none !important;
     padding: 8px 12px !important;
     background-color: transparent !important;
-    margin-left: 35px;
-    margin-bottom: 10px;
+    margin-left: 30px;
+    margin-bottom: 0px;
   }
 
 /* Ensures no border appears when hovering */
@@ -538,7 +550,7 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 11 px;
+  font-size: 11px;
   font-weight: 500;
 }
 
@@ -673,9 +685,10 @@ body {
 }
 
 .dropdown-arrow {
-  width: 12px;
-  height: 7px;
+  width: 10px;
+  height: 8px;
   margin-right: 8px;
+  margin-top: -3px;
   transition: transform 0.3s ease;
 }
 
@@ -688,26 +701,30 @@ body {
   border-radius: 2px;
   opacity: 1;
 }
-
-
-
-
-
-/* Removes row hover effect */
-.ant-table-tbody > tr:hover > td {
-  background: none !important;
+.mobileMenuToggler {
+  display: none;
 }
-
-/* Ensures rows have a solid background */
-.ant-table-tbody > tr > td {
-  background: white !important;
-}
-
-/* Adjusts border radius */
-.ant-table {
-  border-radius: 10px;
-}
-
-.ant-table-thead{
-  background: white !important;
-}
+/* ---------- CSS Media Queries---------- */
+/* ##Device = Desktops, ##Screen = 1281px to higher resolution desktops */
+@media (min-width:1281px){ 
+ }
+ /* ##Device = Laptops, Desktops, ##Screen = B/w 1025px to 1280px */
+ @media (min-width:1025px) and (max-width:1280px){ 
+ }
+ /* ##Device = Tablets, Ipads (portrait), ##Screen = B/w 768px to 1024px */
+ @media (min-width:768px) and (max-width:1024px){ 
+ }
+ /* ##Device = Tablets, Ipads (landscape), ##Screen = B/w 768px to 1024px */
+ @media (min-width:768px) and (max-width:1024px) and (orientation:landscape){ 
+ }
+ /* ##Device = Low Resolution Tablets, Mobiles (Landscape), ##Screen = B/w 481px to 767px */
+ @media (min-width:481px) and (max-width:767px){ 
+ }
+ /* ##Device = Most of the Smartphones Mobiles (Portrait), ##Screen = B/w 320px to 479px */
+ @media (min-width:320px) and (max-width:480px){
+  nav .logoMain {height: 30px;}
+  .mobileMenuToggler {display: inline;color: #000;margin-right: 10px;}
+  .dash-sidebar-container {display: none;}
+  .dash-sidebar-container.show {display: inline;}
+  .dash-sidebar-container.hide {display: none;}
+ }

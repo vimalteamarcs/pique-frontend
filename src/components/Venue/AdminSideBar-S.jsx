@@ -11,7 +11,6 @@ export default function AdminSideBar() {
   const [isAdminDropdownOpen, setIsAdminDropdownOpen] = useState(false);
   const [isSettingDropdownOpen, setIsSettingDropdownOpen] = useState(false);
 
-
   const isSettingActive =
     location.pathname.startsWith("/admin/manageisallowed") ||
     location.pathname.startsWith("/admin/createcategory");
@@ -23,13 +22,15 @@ export default function AdminSideBar() {
     location.pathname.startsWith("/admin/editevent");
 
   const isVenueActive =
-    location.pathname.startsWith("/admin/allVenues") ||
+    location.pathname.startsWith("/admin/allVenues") &&
+    location.search.includes("role=venue") ||
     location.pathname.startsWith("/admin/viewvenue") ||
     location.pathname.startsWith("/admin/edituser") ||
     location.pathname.startsWith("/admin/adduser");
 
   const isEntertainerActive =
-    location.pathname.startsWith("/admin/allentertainer") ||
+    location.pathname.startsWith("/admin/allentertainer") &&
+    location.search.includes("role=entertainer") ||
     location.pathname.startsWith("/admin/adduser") ||
     location.pathname.startsWith("/admin/edituser") ||
     location.pathname.startsWith("/admin/viewentertainer") ||
@@ -45,28 +46,43 @@ export default function AdminSideBar() {
     ;
 
 
+  // useEffect(() => {
+  //   if (isSettingActive) {
+  //     setIsSettingDropdownOpen(true);
+  //   } else {
+  //     setIsSettingDropdownOpen(false);
+  //   }
+  // }, [isSettingActive]);
+
+
+
+  // useEffect(() => {
+  //   if (isAdminActive) setIsAdminDropdownOpen(true);
+  // }, [isAdminActive]);
+  
+
+  // useEffect(() => {
+  //   setIsEventsDropdownOpen(isEventsActive);
+  // }, [isEventsActive]);
 
   useEffect(() => {
-    if (isEventsActive) {
-      setIsEventsDropdownOpen(isEventsActive);
-    }
+    setIsEventsDropdownOpen(isEventsActive);
   }, [isEventsActive]);
-
+  
   useEffect(() => {
-    if (isAdminActive) {
-      setIsAdminDropdownOpen(isAdminActive);
-    }
+    setIsAdminDropdownOpen(isAdminActive);
   }, [isAdminActive]);
-
-
+  
   useEffect(() => {
     setIsSettingDropdownOpen(isSettingActive);
   }, [isSettingActive]);
+  
+
 
   const handleEventsClick = () => {
     if (!isEventsDropdownOpen) {
       setIsEventsDropdownOpen(true);
-      navigate("/admin/allevents");
+      // navigate("/admin/allevents");
     } else {
       setIsEventsDropdownOpen(false);
     }
@@ -75,7 +91,7 @@ export default function AdminSideBar() {
   const handleAdminClick = () => {
     if (!isAdminDropdownOpen) {
       setIsAdminDropdownOpen(true);
-      navigate("/admin/allusercopy?role=venue", { replace: true });
+      // navigate("/admin/alluser", { replace: true }); 
     } else {
       setIsAdminDropdownOpen(false);
     }
@@ -88,6 +104,7 @@ export default function AdminSideBar() {
       setIsSettingDropdownOpen(false);
     }
   };
+
 
   return (
     <div>
@@ -106,14 +123,14 @@ export default function AdminSideBar() {
             }
           >
             {({ isActive }) => (
-              <div className="d-flex align-items-center  dash-sidebar-link">
+              <div className="d-flex align-items-center dash-sidebar-link">
                 {/* <img
-                  src={`${imagePath}${isActive ? "Dashboard.svg" : "inactiveDashboard.svg"
-                    }`}
+                  src={`${imagePath}${
+                    isActive ? "Dashboard.svg" : "inactiveDashboard.svg"
+                  }`}
                   alt="Dashboard"
-                  className="menuIconA me-2"
+                  className="logoMain me-2"
                 /> */}
-
                 <p className="profile-font"> <i class="fa-solid fa-table-cells-large menuIconA"></i> Dashboard</p>
               </div>
             )}
@@ -133,12 +150,12 @@ export default function AdminSideBar() {
             >
               <div className="d-flex align-items-center dash-sidebar-link flex-grow-1">
                 {/* <img
-                  src={`${imagePath}${isEventsActive ? "Events.svg" : "inactiveEvents.svg"
-                    }`}
+                  src={`${imagePath}${
+                    isEventsActive ? "Events.svg" : "inactiveEvents.svg"
+                  }`}
                   alt="Events"
-                  className="menuIconA me-2"
+                  className="logoMain me-2"
                 /> */}
-
                 <p className="profile-font"> <i class="fa-regular fa-calendar menuIconA"></i> Events</p>
               </div>
               <div>
@@ -169,7 +186,7 @@ export default function AdminSideBar() {
                 <NavLink
                   to="/admin/createevent"
                   className={({ isActive }) =>
-                    `dropdown-item dash-drop-item dropdown-item-text ${isActive ? "active-item fw-semibold" : "inactive-item"
+                    `dropdown-item dash-drop-item dropdown-item-text ${isActive ? "active-item fw-semibold" : ""
                     }`
                   }
                 >
@@ -180,7 +197,8 @@ export default function AdminSideBar() {
                 <NavLink
                   to="/admin/tours"
                   className={({ isActive }) =>
-                    `dropdown-item dash-drop-item dropdown-item-text ${isActive ? "active-item fw-semibold" : "inactive-item"
+                    `dropdown-item dash-drop-item dropdown-item-text ${
+                      isActive ? "active-item fw-semibold" : "inactive-item"
                     }`
                   }
                 >
@@ -195,12 +213,12 @@ export default function AdminSideBar() {
             `nav-link dash-sidebar-link ${isActive ? "dash-active-link fw-semibold" : ""}`
           }>
             <div className="d-flex align-items-center">
-              <i className="fa-solid fa-users menuIconA me-2 mt-2 fs-5"></i>
+              <i className="fa-solid fa-users me-2 mt-2 fs-5"></i>
               <p className="mb-0 profile-font ms-2">Manage User</p>
             </div>
           </NavLink> */}
 
-          {/* Admin Dropdown */}
+          {/* Adminstration Dropdown */}
           <div className="dropdown">
             <div
               className={`nav-link dash-sidebar-link2 d-flex justify-content-between align-items-center ${isAdminDropdownOpen ? "dash-active-link fw-semibold" : ""
@@ -210,12 +228,12 @@ export default function AdminSideBar() {
             >
               <div className="d-flex align-items-center dash-sidebar-link flex-grow-1">
                 {/* <img
-                  src={`${imagePath}${isAdminDropdownOpen ? "administrationDash.svg" : "administrationDash.svg"
-                    }`}
+                  src={`${imagePath}${
+                    isAdminDropdownOpen ? "administrationDash.svg" : "administrationDash.svg"
+                  }`}
                   alt="Events"
-                  className="menuIconA me-2"
+                  className="logoMain me-2"
                 /> */}
-
                 <p className="profile-font"><i class="fa-regular fa-folder-closed menuIconA"></i> Administration</p>
               </div>
               <div>
@@ -230,20 +248,44 @@ export default function AdminSideBar() {
               className={`dropdown-menu dash-drop-menu ${isAdminDropdownOpen ? "show" : ""}`}
             >
               <li>
+                {/* <NavLink
+                  to="/admin/alluser"
+                  className={`dropdown-item dash-drop-item dropdown-item-text ${
+                    isVenueActive ? "active-item fw-semibold" : "inactive-item"
+                  }`}
+                >
+                  <span className="bullet"></span> Venue Management
+                </NavLink> */}
+
                 <NavLink
                   to="/admin/allVenues"
-                  className={`dropdown-item dash-drop-item dropdown-item-text ${isVenueActive ? "active-item fw-semibold" : "inactive-item"
-                    }`}
+
+                  className={({ isActive }) =>
+                    `dropdown-item dash-drop-item dropdown-item-text ${isActive ? "active-item fw-semibold" : ""
+                    }`
+                  }
                 >
                   <span className="bullet"></span> Venue Management
                 </NavLink>
 
               </li>
               <li>
+                {/* <NavLink
+                  to="/admin/alluser"
+                  className={`dropdown-item dash-drop-item dropdown-item-text ${
+                    isEntertainerActive ? "active-item fw-semibold" : "inactive-item"
+                  }`}
+                >
+                  <span className="bullet"></span> Entertainer
+                  Management
+                </NavLink> */}
+
                 <NavLink
                   to="/admin/allentertainer"
-                  className={`dropdown-item dash-drop-item dropdown-item-text ${isEntertainerActive ? "active-item fw-semibold" : "inactive-item"
-                    }`}
+                  className={({ isActive }) =>
+                    `dropdown-item dash-drop-item dropdown-item-text ${isActive ? "active-item fw-semibold" : ""
+                    }`
+                  }
                 >
                   <span className="bullet"></span> Entertainer
                   Management
@@ -252,17 +294,33 @@ export default function AdminSideBar() {
             </ul>
           </div>
 
-          {/* Manage Venues */}
-          {/* <NavLink
-            to="/admin/allVenues"
-            className={
-              `nav-link dash-sidebar-link2 ${isManageVenueActive ? "dash-active-link fw-semibold" : ""
+          {/* Users */}
+          <NavLink
+            to="/admin/alluser"
+            className={({ isActive }) =>
+              `nav-link dash-sidebar-link2 ${isActive ? "dash-active-link fw-semibold" : ""
               }`
             }
           >
             <div className="d-flex align-items-center dash-sidebar-link">
+              {/* <i className="fa-solid fa-users-rectangle me-2 mt-2 fs-5"></i>
+              <p className="mb-0 mt-2 profile-font ms-3">Users</p> */}
+              <p className="profile-font"> <i class="fa-solid fa-users-rectangle menuIconA"></i>Users</p>
+            </div>
+          </NavLink>
 
-              <p className=" profile-font "><i className="fa-solid fa-building menuIconA"></i> Manage Venues</p>
+          {/* Manage Venues */}
+          {/* <NavLink
+            to="/admin/allVenues"
+            className={
+              `nav-link dash-sidebar-link ${
+                isManageVenueActive ? "dash-active-lin" : ""
+              }`
+            }
+          >
+            <div className="d-flex align-items-center">
+              <i className="fa-solid fa-building me-2 mt-2 fs-5"></i>
+              <p className="mb-0 mt-2 profile-font ms-3">All Venues</p>
             </div>
           </NavLink> */}
 
@@ -270,13 +328,14 @@ export default function AdminSideBar() {
           {/* <NavLink
             to="/admin/allentertainer"
             className={({ isActive }) =>
-              `nav-link dash-sidebar-link2 ${isActive ? "dash-active-link fw-semibold" : ""
+              `nav-link dash-sidebar-link ${
+                isActive ? "dash-active-lin" : ""
               }`
             }
           >
-            <div className="d-flex align-items-center dash-sidebar-link">
-
-              <p className=" profile-font "> <i className="fa-solid fa-theater-masks menuIconA"></i> All Entertainers</p>
+            <div className="d-flex align-items-center">
+              <i className="fa-solid fa-theater-masks me-2 mt-2 fs-5"></i>
+              <p className="mb-0 mt-2 profile-font ms-2">All Entertainers</p>
             </div>
           </NavLink> */}
 
@@ -380,8 +439,8 @@ export default function AdminSideBar() {
               <li>
                 <NavLink
                   to="/admin/manageisallowed"
-                  className={({ isActive }) =>
-                    `dropdown-item dropdown-item-text ${isActive ? " fw-bold" : ""
+                  className={({ isSettingActive }) =>
+                    `dropdown-item dropdown-item-text ${isSettingActive ? " fw-bold" : ""
                     }`
                   }
                 >
@@ -404,8 +463,8 @@ export default function AdminSideBar() {
               <li>
                 <NavLink
                   to="/admin/createcategory"
-                  className={({ isActive }) =>
-                    `dropdown-item dropdown-item-text ${isActive ? " fw-bold" : ""
+                  className={({ isSettingActive }) =>
+                    `dropdown-item dropdown-item-text ${isSettingActive ? " fw-bold" : ""
                     }`
                   }
                 >
@@ -414,9 +473,8 @@ export default function AdminSideBar() {
               </li>
             </ul>
           </div>
-
         </div>
-      </nav >
-    </div >
+      </nav>
+    </div>
   );
 }

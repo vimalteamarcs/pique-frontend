@@ -14,6 +14,11 @@ export default function AdminNavbar() {
       $(".sidebar, .content").toggleClass("open");
       return false;
     });
+
+    $(".mobileMenuToggler").on('click', function () {
+      $(".dash-sidebar-container").toggleClass('show');
+
+    });
   }, []);
 
   function handleLogout() {
@@ -24,10 +29,29 @@ export default function AdminNavbar() {
 
   return (
     <>
+      {/* <nav className="navbar navbar-expand-lg bg-body-tertiary">
+        <div className="container-fluid">
+          <a className="navbar-brand" href="#">Navbar</a>
+          <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span className="navbar-toggler-icon"></span>
+          </button>
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav me-auto mb-2 mb-lg-0">
+              <li className="nav-item">
+                <a className="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <li className="nav-item">
+                <a className="nav-link" href="#">Link</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav> */}
       <div className="container-fluid w-100">
         <div className="row">
           <nav id="navbar1" className="navbar navbar-expand-lg p-2">
             <div className="container-fluid">
+              <span className="mobileMenuToggler"> <i className="fa-solid fa-bars"></i> </span>
               {/* <!-- Logo Section --> */}
               <Link
                 className="navbar-brand d-flex align-items-center"
@@ -95,9 +119,8 @@ export default function AdminNavbar() {
                         }}
                       >
                         <img
-                          src={`${
-                            import.meta.env.VITE_BASE
-                          }assets/pique/image/Icon ion-menu.svg`}
+                          src={`${import.meta.env.VITE_BASE
+                            }assets/pique/image/Icon ion-menu.svg`}
                           alt="Menu"
                           className="menu-icon"
                         />
@@ -109,14 +132,14 @@ export default function AdminNavbar() {
                       aria-labelledby="venueDropdown"
                     >
                       <li>
-                        <Link className="nav-link custom-drop-item" to="">
+                        <a className="nav-link custom-drop-item" href="#">
                           <span>Admin Profile</span>
-                        </Link>
+                        </a>
                       </li>
                       <li>
-                        <Link to="" className="nav-link custom-drop-item" onClick={handleLogout}>
-                            Logout
-                        </Link>
+                        <a href="#" className="nav-link custom-drop-item" onClick={handleLogout}>
+                          Logout
+                        </a>
                       </li>
                     </ul>
                   </div>
