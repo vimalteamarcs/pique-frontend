@@ -5,7 +5,7 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DashLayout from "../../DashLayout";
 import CustomTable from "../../../components/CustomTable";
-import { DELETE_INVOICE, GET_ALL_INVOICES } from "../../../../constants";
+import { DELETE_INVOICE, GENERATE_INVOICE, GET_ALL_INVOICES } from "../../../../constants";
 import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
 const AllInvoices = () => {
@@ -42,6 +42,11 @@ const AllInvoices = () => {
         {
           params: { page, pageSize, search },
           headers: { Authorization: `Bearer ${token}` },
+        },
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
         }
       );
 
@@ -79,6 +84,31 @@ const AllInvoices = () => {
       );
     }
   };
+
+  const handleGenerateInvoice = async() => {
+    const token = localStorage.getItem("token");
+    try {
+      const response = await axios.get(`${import.meta.env.VITE_API_URL}${GENERATE_INVOICE}`,
+        {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        }
+      )
+      console.log(response.data)
+      if (response.status === 200) {
+        toast.success("Invoice generated successfully", { autoClose: 1000 });
+        setFlag(!flag);
+      }
+    } catch (error) {
+      console.error(
+        "Failed to generate invoice:",
+        error.response?.data || error.message
+      );
+      toast.error("Failed to generate invoice:", error.response?.data || error.message)
+    }
+    }
+  
 
   const columns = [
     // {
@@ -132,10 +162,17 @@ const AllInvoices = () => {
             <AdminSideBar />
           </div>
           <div className="dash-profile-container">
-            <h5 className="text-secondary text-center mb-4">All Invoices</h5>
+<div className="d-flex justify-content-between">
+<h5 className="text-secondary text-start mb-3">All Invoices</h5>
+<button type="button" className="btn btn-dark btn-sm rounded-3" onClick={handleGenerateInvoice}>Generate Invoice</button>
+</div>
             <ToastContainer />
-            {error ? (
-              <div className="alert alert-danger">{error}</div>
+            {loading ? (
+              <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+                <div className="spinner-border text-primary" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
             ) : (
               <CustomTable
                 data={invoices}

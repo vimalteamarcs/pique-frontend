@@ -41,7 +41,7 @@ export default function AllVenues() {
           Authorization: `Bearer ${token}`,
         },
       });
-    console.log(response)
+      console.log(response)
       if (response.data && response.data.records) {
         setVenuedata(response.data.records); // Update table data
         setPagination((prev) => ({
@@ -167,8 +167,12 @@ export default function AllVenues() {
                 <span className="badge bg-danger me-2">{successMessage}</span>
               </div>
             )}
-            {error ? (
-              <div className="alert alert-danger">{error}</div>
+            {loading ? (
+              <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+                <div className="spinner-border text-primary" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
             ) : (
               <div className="m-2">
                 <CustomTable

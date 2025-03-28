@@ -184,6 +184,9 @@ export default function EditVenue() {
       toast.success("Venue updated successfully!", {
         autoClose: 1000,
       });
+      setTimeout(() => {
+        navigate(-1);
+      }, 1000);
     } catch (err) {
       console.error("Error updating venue:", err.response || err.message);
       toast.error("Error updating venue.");

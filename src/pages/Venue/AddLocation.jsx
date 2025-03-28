@@ -138,7 +138,7 @@ export default function AddLocation() {
           // timings: formData.timings || "N/A",
           // bookingPolicies: formData.bookingPolicies || "N/A",
           // userId: Number(localStorage.getItem("venueUserId")) || 0,
-          userId: Number(venue.id) || 0
+          venueId: Number(venue.id) || 0,
           // isParent: false,
           // parentId: venue.id ? Number(venue.id) : 0,
         };

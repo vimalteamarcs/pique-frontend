@@ -1,34 +1,18 @@
+
 import { useState, useEffect } from "react";
 import axios from "axios";
 import DashLayout from "../../DashLayout";
-import Spinner from "../../../components/Spinner";
 import * as XLSX from "xlsx";
-import { CURRENCY_SIGN, GET_REPORT } from "../../../../constants";
-import { useNavigate } from "react-router-dom";
+import { GET_REPORT } from "../../../../constants";
 import AdminSideBar from "../../../components/Venue/AdminSideBar";
+import CustomTable from "../../../components/CustomTable";
 
 const ReportPage = () => {
   const [reportData, setReportData] = useState([]);
-  const [filteredData, setFilteredData] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  const [dateFilter, setDateFilter] = useState("");
-  const [monthFilter, setMonthFilter] = useState(new Date().toISOString().slice(0, 7));
-
-  useEffect(() => {
-    if (!monthFilter) {
-      setFilteredData(reportData);
-      return;
-    }
-
-    const filtered = reportData.filter((event) => {
-      const eventMonth = new Date(event.startTime).toISOString().slice(0, 7);
-      return eventMonth === monthFilter;
-    });
-
-    setFilteredData(filtered);
-  }, [reportData, monthFilter]);
-
+  const [from, setFrom] = useState(new Date().toISOString().slice(0, 7));
+  const [to, setTo] = useState(new Date().toISOString().slice(0, 7));
 
   useEffect(() => {
     const fetchData = async () => {
@@ -39,236 +23,247 @@ const ReportPage = () => {
             headers: {
               Authorization: `Bearer ${localStorage.getItem("token")}`,
             },
+            params: { from, to },
           }
         );
-        setReportData(response.data);
-        setFilteredData(response.data); // Initially set to full data
+        setReportData(response.data.data);
       } catch (err) {
-        setError("Failed to fetch report data");
+        setError(err.message);
       } finally {
         setLoading(false);
       }
     };
     fetchData();
-  }, []);
+  }, [to, from]);
 
-  // Function to handle date filter change
-  const handleDateFilter = (e) => {
-    const selectedDate = e.target.value;
-    setDateFilter(selectedDate);
-
-    if (!selectedDate) {
-      setFilteredData(reportData);
-      return;
+  useEffect(() => {
+    if (from > to) {
+      setError("To date cannot be earlier than From date.");
+    } else {
+      setError(null);
     }
+  }, [from, to]);
 
-    const filtered = reportData.filter(
-      (event) =>
-        new Date(event.startTime).toISOString().split("T")[0] === selectedDate
-    );
-
-    setFilteredData(filtered);
-  };
-  const handleMonthFilter = (e) => {
-    const selectedMonth = e.target.value; // "YYYY-MM"
-    setMonthFilter(selectedMonth);
-
-    if (!selectedMonth) {
-      setFilteredData(reportData);
-      return;
-    }
-
-    const filtered = reportData.filter((event) => {
-      const eventMonth = new Date(event.startTime).toISOString().slice(0, 7); // Extract "YYYY-MM"
-      return eventMonth === selectedMonth;
-    });
-
-    setFilteredData(filtered);
-  };
+  const column = [
+    {
+      title: "Date",
+      dataIndex: "event_startTime",
+      key: "date",
+      render: (text) => {
+        const date = new Date(text);
+        return `${date.getDate()}-${date.toLocaleString("en-GB", {
+          month: "short",
+        })}-${date.getFullYear()}`;
+      },
+    },
+    {
+      title: "Time",
+      dataIndex: "event_startTime",
+      key: "time",
+      render: (text) => {
+        const date = new Date(text);
+        return `${date.getHours()}:${date
+          .getMinutes()
+          .toString()
+          .padStart(2, "0")}`;
+      },
+    },
+    { title: "Event", dataIndex: "event_title", key: "event" },
+    { title: "Type", dataIndex: "event_recurring", key: "recurring" },
+    { title: "Location", dataIndex: "venue_name", key: "location" },
+    { title: "Entertainer", dataIndex: "entertainer_name", key: "ent" },
+    {
+      title: "Location Confirmation",
+      dataIndex: "venue_confirmation_date",
+      key: "loc_conf",
+      render: (text) => {
+        const date = new Date(text);
+        return `${date.getDate()}-${date.toLocaleString("en-GB", {
+          month: "short",
+        })}-${date.getFullYear()}`;
+      },
+    },
+    {
+      title: "Entertainer Confirmation",
+      dataIndex: "entertainer_confirmation_date",
+      key: "ent_conf",
+      render: (text) => {
+        const date = new Date(text);
+        return `${date.getDate()}-${date.toLocaleString("en-GB", {
+          month: "short",
+        })}-${date.getFullYear()}`;
+      },
+    },
+    {
+      title: "Venue Invoice No",
+      dataIndex: "venue_invoice_number",
+      key: "venue_invoice_number",
+    },
+    { title: "Amount", dataIndex: "venue_total_amount", key: "amount" },
+    {
+      title: "Payment Status",
+      dataIndex: "venue_invoice_status",
+      key: "payment_status",
+    },
+    {
+      title: "Payment Date",
+      dataIndex: "venue_payment_date",
+      key: "payment_date",
+      render: (text) => {
+        const date = new Date(text);
+        return `${date.getDate()}-${date.toLocaleString("en-GB", {
+          month: "short",
+        })}-${date.getFullYear()}`;
+      },
+    },
+    {
+      title: "Payment Method",
+      dataIndex: "venue_payment_method",
+      key: "payment_method",
+    },
+    {
+      title: "Ent Invoice",
+      dataIndex: "ent_invoice_number",
+      key: "ent_invoice",
+    },
+    { title: "Ent Payment", dataIndex: "ent_total_amount", key: "ent_payment" },
+    {
+      title: "Ent Payment Status",
+      dataIndex: "ent_invoice_status",
+      key: "ent_payment_status",
+    },
+    {
+      title: "Ent Payment Date",
+      dataIndex: "ent_payment_date",
+      key: "ent_payment_date",
+      render: (text) => {
+        const date = new Date(text);
+        return `${date.getDate()}-${date.toLocaleString("en-GB", {
+          month: "short",
+        })}-${date.getFullYear()}`;
+      },
+    },
+    {
+      title: "Ent Payment Method",
+      dataIndex: "ent_payment_method",
+      key: "ent_payment_method",
+    },
+  ];
 
   const exportToExcel = () => {
-    const excelData = filteredData.flatMap((event) =>
-      event.bookings.flatMap((booking) =>
-        booking.invoices.map((invoice) => ({
-          Date: new Date(event.startTime).toLocaleDateString(),
-          Time: new Date(event.startTime).toLocaleTimeString(),
-          "Entertainer Name": booking.entertainer?.name || "",
-          Location: event.venue
-            ? `${event.venue.name || " "}, ${event.venue.addressLine1 || ""} ${event.venue.addressLine2 || ""
-            }`
-            : " ",
-          "Inv Amt.": invoice.total_amount || "0",
-          "Count Amt.": booking.count || " ",
-          Confirmation:
-            booking.status === "confirmed"
-              ? booking.isAcceptedDate
-                ? new Date(booking.isAcceptedDate).toLocaleDateString("en-US", {
-                  month: "2-digit",
-                  day: "2-digit",
-                })
-                : ""
-              : "",
-          "Invoice Paid Amt.":
-            invoice.status === "confirmed" ? invoice.total_with_tax : 0,
-          "Invoice Status": invoice.status || " ",
-          "Chk#": invoice.invoice_number || " ",
-          "Data Dep": invoice.payment_date || " ",
-          "Cord Paid Amt.": invoice.total_with_tax || "0",
-          "My Chk#": invoice.check_number || " ",
-          "Date Sent": invoice.issue_date || " ",
-          "Entertainer Status": booking?.isAccepted || " ",
-          "Venue Status": booking.status || " ",
-        }))
-      )
-    );
+    const excelData = reportData.map((event, index) => ({
+      SrNo: index + 1,
+      Date: new Date(event.event_startTime)
+        .toLocaleDateString("en-GB", {
+          day: "2-digit",
+          month: "short",
+          year: "numeric",
+        })
+        .toUpperCase()
+        .replace(/\s/g, "-"),
+      Time: new Date(event.event_startTime).toLocaleTimeString("en-US", {
+        hour: "2-digit",
+        minute: "2-digit",
+        hour12: true,
+      }),
+      Event: event.event_title,
+      Location: event.venue_name,
+      Entertainer: event.entertainer_name,
+      "Location Confirmation": new Date(
+        event.venue_confirmation_date
+      ).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+      "Entertainer Confirmation": new Date(
+        event.entertainer_confirmation_date
+      ).toLocaleDateString("en-GB", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+      }),
+      "Venue Inv No": event.venue_invoice_number,
+      Amount: event.venue_total_amount,
+      "Payment Status": event.venue_invoice_status,
+      "Payment Date": event.venue_payment_date,
+      "Payment Method": event.venue_payment_method,
+      "Ent Invoice": event.ent_invoice_number,
+      "Ent Payment": event.ent_total_amount,
+      "Ent Payment Status": event.ent_payment_status,
+      "Ent Payment Date": event.ent_payment_date,
+      "Ent Payment Method": event.ent_payment_method,
+    }));
 
     const worksheet = XLSX.utils.json_to_sheet(excelData);
     const workbook = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(workbook, worksheet, "Report");
     XLSX.writeFile(workbook, "Report.xlsx");
   };
-  if (error) return <p>{error}</p>;
 
   return (
-    <>
-      <div className="container-fluid w-100 p-0">
-       
-      <div className="position-fixed w-100 top-0 z-1030" style={{backgroundColor:"white"}}>
-       <DashLayout />
-</div>
-        <div className="d-flex mt-5">
-          {/* Fixed Sidebar */}
-          <div className="dash-sidebar-container position-fixed vh-100 mt-4" style={{ width: "250px", zIndex: 1040 }}>
-            <AdminSideBar />
-          </div>
-
-          {/* Main Content Section - Pushed to Right */}
-          <div className="dash-profile-container flex-grow-1" style={{ marginLeft: "250px" }}>
-            {loading ? (
-              <div className="d-flex justify-content-center my-5">
-                <div className="spinner-grow text-dark" role="status">
-                  <span className="visually-hidden">Loading...</span>
+    <div className="container-fluid w-100 p-0">
+      <div
+        className="position-fixed w-100 top-0 z-1030"
+        style={{ backgroundColor: "white" }}
+      >
+        <DashLayout />
+      </div>
+      <div className="d-flex mt-5">
+        <div
+          className="dash-sidebar-container position-fixed vh-100 mt-4"
+          style={{ width: "250px", zIndex: 1040 }}
+        >
+          <AdminSideBar />
+        </div>
+        <div
+          className="dash-profile-container flex-grow-1"
+          style={{ marginLeft: "250px" }}
+        >
+          {loading ? (
+            <div className="d-flex justify-content-center my-5">
+              <div className="spinner-grow text-dark" role="status">
+                <span className="visually-hidden">Loading...</span>
+              </div>
+            </div>
+          ) : (
+            <>
+              <div className="d-flex justify-content-between my-3">
+                <div className="d-flex gap-2">
+                  <input
+                    type="month"
+                    className="form-control w-auto"
+                    value={from}
+                    onChange={(e) => setFrom(e.target.value)}
+                  />
+                  <input
+                    type="month"
+                    className="form-control w-auto"
+                    value={to}
+                    onChange={(e) => setTo(e.target.value)}
+                  />
+                  <button
+                    className="btn btn-success btn-sm h-50 mt-4 ms-3"
+                    onClick={exportToExcel}
+                  >
+                    Download Excel
+                  </button>
                 </div>
               </div>
-            ) : (
-              <>
-
-                <div className="profile-font">
-                  <div className="div mt-2">
-
-                  </div>
-
-
-                  <div className="d-flex justify-content-between my-3">
-                    <div className="d-flex ">
-                      <div>
-                        <label className="me-2 fw-bold">Filter by Date</label>
-                        <br />
-                        <input
-                          type="date"
-                          className="form-control w-auto me-2"
-                          value={dateFilter}
-                          onChange={handleDateFilter}
-                        />
-                      </div>
-                      <div>
-                        <label className="me-2 fw-bold">By Month:</label>
-                        <br />
-                        <input
-                          type="month"
-                          className="form-control w-auto"
-                          value={monthFilter}
-                          onChange={handleMonthFilter}
-                        />
-                      </div>
-                      <button className="btn btn-success btn-sm h-50 mt-4 ms-3" onClick={exportToExcel}>
-                        Download Excel
-                      </button>
-                    </div>
-
-                  </div>
-
-                  <div className="table-responsive w-100">
-                    <table className="table table-bordered table-striped">
-                      <thead>
-                        <tr>
-                          <th className="text-nowrap m-2"> Date</th>
-                          <th className="text-nowrap m-2"> Time</th>
-                          <th className="text-nowrap m-2">Entertainer Name</th>
-                          <th className="text-nowrap m-2">Location</th>
-                          <th className="text-nowrap m-2">Inv Amt.</th>
-                          <th className="text-nowrap m-2">Count Amt.</th>
-                          <th className="text-nowrap m-2">Confirmation</th>
-                          <th className="text-nowrap m-2">Invoice Paid Amt.</th>
-                          <th className="text-nowrap m-2">Invoice Status</th>
-                          <th className="text-nowrap m-2">Chk#</th>
-                          <th className="text-nowrap m-2">Data Dep</th>
-                          <th className="text-nowrap m-2">Cord Paid Amt.</th>
-                          <th className="text-nowrap m-2">My Chk#</th>
-                          <th className="text-nowrap m-2">Date Sent</th>
-                          <th className="text-nowrap m-2">Entertainer Status</th>
-                          <th className="text-nowrap m-2">Venue Status</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        {filteredData.map((event, index) =>
-                          event.bookings.map((booking, bIndex) =>
-                            booking.invoices.map((invoice, iIndex) => (
-                              <tr key={`${index}-${bIndex}-${iIndex}`}>
-                                <td>
-                                  {new Date(event.startTime).toLocaleDateString()}
-                                </td>
-                                <td>
-                                  {new Date(event.startTime).toLocaleTimeString()}
-                                </td>
-                                <td>{booking.entertainer?.name || " "}</td>
-                                <td>
-                                  {event.venue
-                                    ? `${event.venue.name || " "}, ${event.venue.addressLine1 || ""
-                                    } ${event.venue.addressLine2 || ""}`
-                                    : " "}
-                                </td>
-                                <td>{CURRENCY_SIGN + invoice.total_amount || "0"}</td>
-                                <td>{booking.count || " "}</td>
-                                <td>
-                                  {booking.status === "confirmed"
-                                    ? booking.isAcceptedDate
-                                      ? new Date(
-                                        booking.isAcceptedDate
-                                      ).toLocaleDateString("en-US", {
-                                        month: "2-digit",
-                                        day: "2-digit",
-                                      })
-                                      : ""
-                                    : ""}
-                                </td>
-                                <td>
-                                  {invoice.status === "confirmed"
-                                    ? CURRENCY_SIGN + invoice.total_with_tax
-                                    : CURRENCY_SIGN + 0}
-                                </td>
-                                <td>{invoice.status || " "}</td>
-                                <td>{invoice.invoice_number || " "}</td>
-                                <td>{invoice.payment_date || " "}</td>
-                                <td>{CURRENCY_SIGN}{invoice.total_with_tax || "0"}</td>
-                                <td>{invoice.check_number || " "}</td>
-                                <td>{invoice.issue_date || " "}</td>
-                                <td>{booking?.isAccepted || " "}</td>
-                                <td>{booking.status || " "}</td>
-                              </tr>
-                            ))
-                          )
-                        )}
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </>
-            )}
-          </div>
+              <CustomTable
+                columns={column}
+                data={reportData}
+                pagination={{
+                  current: 1,
+                  pageSize: 10,
+                  total: 20,
+                }}
+              />
+            </>
+          )}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 

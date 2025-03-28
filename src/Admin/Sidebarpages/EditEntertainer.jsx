@@ -10,8 +10,11 @@ import { useLocation, useNavigate } from "react-router-dom";
 import {
   CREATE_ENTERTAINER,
   DELETE_MEDIA,
+  GET_CITIES,
+  GET_COUNTRIES,
   GET_MAIN_CATEGORY,
   GET_MEDIA_BYID,
+  GET_STATES,
   GET_SUB_CATEGORY,
   UPDATE_ENTERTAINERS_BYID,
   UPDATE_MEDIA,
@@ -43,6 +46,7 @@ export default function EditEntertainer() {
   const location = useLocation();
   const navigate = useNavigate();
   let data = location.state;
+  console.log(data)
 
   const [formData, setFormData] = useState({
     id: 0,
@@ -57,9 +61,60 @@ export default function EditEntertainer() {
     pricePerEvent: 0,
     socialLinks: "",
     vaccinated: "",
-    status: "active",
+    status: "",
     user: data.user.id || "",
+    country:0,
+    state:0,
+    city:0
   });
+    const [countries, setCountries] = useState([]);
+    const [states, setStates] = useState([]);
+    const [cities, setCities] = useState([]);
+  
+    useEffect(() => {
+      const fetchCountries = async () => {
+        try {
+          const response = await axios.get(
+            `${import.meta.env.VITE_API_URL}${GET_COUNTRIES}`
+          );
+          console.log(response.data); // Debugging
+    
+          setCountries(response.data?.countries || []);
+        } catch (error) {
+          console.error("Error fetching countries:", error);
+        }
+      };
+    
+      fetchCountries();
+    }, []);
+    
+  
+    const fetchStates = async (countryId) => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}${GET_STATES}${countryId}`
+        );
+        console.log("States fetched:", response.data); // Debugging
+        setStates(response.data?.states || []);
+      } catch (error) {
+        console.error("Error fetching states:", error);
+      }
+    };
+    
+  
+    const fetchCities = async (stateId) => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}${GET_CITIES}${stateId}`
+        );
+        console.log("Cities fetched:", response.data); // Debugging
+        setCities(response.data?.cities || []);
+      } catch (error) {
+        console.error("Error fetching cities:", error);
+      }
+    };
+    
+
   useEffect(() => {
     if (data?.id) {
       setFormData((prevState) => ({
@@ -82,6 +137,12 @@ export default function EditEntertainer() {
       }));
     }
   }, [data]);
+
+  const status = [
+    { value: "active", label: "Active"},
+    { value: "pending", label: "Pending"}
+  ]
+
   useEffect(() => {
     const fetchData = async () => {
       if (data?.id) {
@@ -178,11 +239,47 @@ export default function EditEntertainer() {
     setLoading(false);
   }, []);
 
+  useEffect(() => {
+    if (data) {
+      setFormData((prev) => ({
+        ...prev,
+        country: data.country || "",
+        state: data.state || "",
+        city: data.city || "",
+      }));
+  
+      if (data.country) {
+        fetchStates(data.country); // Fetch states for selected country
+      }
+  
+      if (data.state) {
+        fetchCities(data.state); // Fetch cities for selected state
+      }
+    }
+  }, [data]);
+  
+
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-    setTempLink(e.target.value);
+  
+    setFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  
+    if (name === "country") {
+      setStates([]); // Clear states list
+      setCities([]); // Clear cities list
+      fetchStates(value); // Fetch new states based on country
+    }
+  
+    if (name === "state") {
+      setCities([]); // Clear cities list
+      fetchCities(value); // Fetch new cities based on state
+    }
   };
+  
+  
 
   // Fetch subcategories when the selected category changes
   useEffect(() => {
@@ -451,7 +548,9 @@ export default function EditEntertainer() {
     const validationErrors = validateForm();
     if (Object.keys(validationErrors).length > 0) {
       setErrors(validationErrors);
+      return;
     }
+    setLoading(true);
 
     const { id, ...rest } = formData;
 
@@ -459,7 +558,12 @@ export default function EditEntertainer() {
       id: Number(id),
       fieldsToUpdate: {
         ...rest,
-        pricePerEvent: Number(formData.pricePerEvent), // Ensure it's a number
+        category:Number(formData.category),
+        specific_category: Number(formData.specific_category),
+        pricePerEvent: Number(formData.pricePerEvent),
+        city:Number(formData.city),
+        country:Number(formData.country),
+        state:Number(formData.state),
       },
     };
 
@@ -685,6 +789,79 @@ export default function EditEntertainer() {
                               </div>
                             )}
                           </div>
+                          <div className="col-md-4">
+                            <label className="fw-semibold label-font">Status</label>
+                            <Select
+                              name="status"
+                              options={status}
+                              defaultOption="--Select Status--"
+                              value={formData.status}
+                              onChange={handleInputChange}
+                            />
+                          </div>
+                        </div>
+
+                        <div className="row mb-3">
+                          <div className="col-md-4">
+                            <label className="form-label label-font mt-3  fw-medium">
+                              Country
+                            </label>
+                            <select
+                              className="form-control "
+                              name="country"
+                              value={formData.country}
+                              onChange={handleInputChange}
+                              required
+                            >
+                              <option value="">Select Country</option>
+                              {countries.map((c) => (
+                                <option key={c.id} value={c.id}>
+                                  {c.name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <div className="col-md-4">
+                            <label className="form-label label-font mt-3 fw-medium">
+                              State
+                            </label>
+                            <select
+                              className="form-control"
+                              name="state"
+                              onChange={handleInputChange}
+                              value={formData.state}
+                              required
+                            >
+                              <option value="">Select State</option>
+                              {states.map((s) => (
+                                <option key={s.id} value={s.id}>
+                                  {s.name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <div className="col-md-4">
+                            <label className="form-label label-font mt-3 fw-medium">
+                              City
+                            </label>
+                            <select
+                              className="form-control"
+                              name="city"
+                              value={formData.city}
+                              onChange={handleInputChange}
+                              required
+                            >
+                              <option value="">Select City</option>
+                              {cities.map((c) => (
+                                <option key={c.id} value={c.id}>
+                                  {c.name}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
                         </div>
                         <p className="text-start text-muted fw-semibold label-font mt-2">Links</p>
                         <hr />
@@ -803,7 +980,7 @@ export default function EditEntertainer() {
                                         );
                                         if (confirmDelete) {
                                           deletemedia(file.id);
-                                        } 
+                                        }
                                       }}
                                     >
                                       <i className="fa-solid fa-trash-can text-danger"></i>

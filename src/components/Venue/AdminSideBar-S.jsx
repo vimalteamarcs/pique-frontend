@@ -22,15 +22,13 @@ export default function AdminSideBar() {
     location.pathname.startsWith("/admin/editevent");
 
   const isVenueActive =
-    location.pathname.startsWith("/admin/allVenues") &&
-    location.search.includes("role=venue") ||
+    location.pathname.startsWith("/admin/allVenues") ||
     location.pathname.startsWith("/admin/viewvenue") ||
     location.pathname.startsWith("/admin/edituser") ||
     location.pathname.startsWith("/admin/adduser");
 
   const isEntertainerActive =
-    location.pathname.startsWith("/admin/allentertainer") &&
-    location.search.includes("role=entertainer") ||
+    location.pathname.startsWith("/admin/allentertainer")  ||
     location.pathname.startsWith("/admin/adduser") ||
     location.pathname.startsWith("/admin/edituser") ||
     location.pathname.startsWith("/admin/viewentertainer") ||
@@ -305,7 +303,7 @@ export default function AdminSideBar() {
             <div className="d-flex align-items-center dash-sidebar-link">
               {/* <i className="fa-solid fa-users-rectangle me-2 mt-2 fs-5"></i>
               <p className="mb-0 mt-2 profile-font ms-3">Users</p> */}
-              <p className="profile-font"> <i class="fa-solid fa-users-rectangle menuIconA"></i>Users</p>
+              <p className="profile-font"> <i className="fa-solid fa-users-rectangle menuIconA"></i>Users</p>
             </div>
           </NavLink>
 

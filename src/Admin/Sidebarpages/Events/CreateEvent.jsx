@@ -244,16 +244,16 @@ console.log(response)
                     <div className="col-md-6">
                       <label
                         htmlFor="title"
-                        className="form-label fw-medium label-font mb-0"
+                        className="form-label fw-medium label-font"
                       >
                         Event Name
                         <span style={{ color: "red", display: "inline" }}>
                           *
                         </span>
                       </label>
-                      <input
+                      <Input
                         type="text"
-                        className={`custom-form-event label-font ps-3 ${
+                        className={`form-control label-font ps-3 ${
                           errors.title ? "is-invalid" : ""
                         }`}
                         placeholder="Enter Event Name"

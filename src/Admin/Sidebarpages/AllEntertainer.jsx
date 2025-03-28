@@ -162,8 +162,12 @@ export default function AllEntertainer() {
           <div className="dash-profile-container">
             <p className="profile-font fw-semibold">ENTERTAINERS DETAILS</p><hr />
 
-            {error ? (
-              <div className="alert alert-danger">{error}</div>
+            {loading ? (
+              <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+                <div className="spinner-border text-primary" role="status">
+                  <span className="visually-hidden">Loading...</span>
+                </div>
+              </div>
             ) : (
               <div className="m-2 profile-font">
                 <CustomTable

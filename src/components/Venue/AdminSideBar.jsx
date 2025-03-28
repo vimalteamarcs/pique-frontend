@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import "bootstrap/dist/css/bootstrap.min.css";
-import "bootstrap/dist/js/bootstrap.bundle.min.js";
+// import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/js/bootstrap.bundle.min.js";
 
 export default function AdminSideBar() {
   const imagePath = import.meta.env.VITE_LOGGEDIN_IMAGE_PATH;
@@ -66,7 +66,7 @@ export default function AdminSideBar() {
   const handleEventsClick = () => {
     if (!isEventsDropdownOpen) {
       setIsEventsDropdownOpen(true);
-      navigate("/admin/allevents");
+      // navigate("/admin/allevents");
     } else {
       setIsEventsDropdownOpen(false);
     }
@@ -75,7 +75,7 @@ export default function AdminSideBar() {
   const handleAdminClick = () => {
     if (!isAdminDropdownOpen) {
       setIsAdminDropdownOpen(true);
-      navigate("/admin/allusercopy?role=venue", { replace: true });
+      // navigate("/admin/allusercopy?role=venue", { replace: true });
     } else {
       setIsAdminDropdownOpen(false);
     }
@@ -114,7 +114,7 @@ export default function AdminSideBar() {
                   className="menuIconA me-2"
                 /> */}
 
-                <p className="profile-font"> <i class="fa-solid fa-table-cells-large menuIconA"></i> Dashboard</p>
+                <p className="profile-font"> <i className="fa-solid fa-table-cells-large menuIconA"></i> Dashboard</p>
               </div>
             )}
           </NavLink>
@@ -139,7 +139,7 @@ export default function AdminSideBar() {
                   className="menuIconA me-2"
                 /> */}
 
-                <p className="profile-font"> <i class="fa-regular fa-calendar menuIconA"></i> Events</p>
+                <p className="profile-font"> <i className="fa-regular fa-calendar menuIconA"></i> Events</p>
               </div>
               <div>
                 <img
@@ -216,7 +216,7 @@ export default function AdminSideBar() {
                   className="menuIconA me-2"
                 /> */}
 
-                <p className="profile-font"><i class="fa-regular fa-folder-closed menuIconA"></i> Administration</p>
+                <p className="profile-font"><i className="fa-regular fa-folder-closed menuIconA"></i> Administration</p>
               </div>
               <div>
                 <img
@@ -251,6 +251,21 @@ export default function AdminSideBar() {
               </li>
             </ul>
           </div>
+
+           {/* Users */}
+                    <NavLink
+                      to="/admin/alluser"
+                      className={({ isActive }) =>
+                        `nav-link dash-sidebar-link2 ${isActive ? "dash-active-link fw-semibold" : ""
+                        }`
+                      }
+                    >
+                      <div className="d-flex align-items-center dash-sidebar-link">
+                        {/* <i className="fa-solid fa-users-rectangle me-2 mt-2 fs-5"></i>
+                        <p className="mb-0 mt-2 profile-font ms-3">Users</p> */}
+                        <p className="profile-font"> <i className="fa-solid fa-users-rectangle menuIconA"></i> Users</p>
+                      </div>
+                    </NavLink>
 
           {/* Manage Venues */}
           {/* <NavLink

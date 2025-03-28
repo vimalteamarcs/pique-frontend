@@ -9,7 +9,10 @@ import DashLayout from "../DashLayout";
 import { useLocation, useNavigate } from "react-router-dom";
 import {
   CREATE_ENTERTAINER,
+  GET_CITIES,
+  GET_COUNTRIES,
   GET_MAIN_CATEGORY,
+  GET_STATES,
   GET_SUB_CATEGORY,
   UPLOAD_MEDIA,
 } from "../../../constants";
@@ -29,17 +32,20 @@ export default function Profile() {
     specific_category: "",
     bio: "",
     phone1: "",
+    country:0,
+    state:0,
+    city:0,
     phone2: "",
     performanceRole: "",
     availability: "",
     pricePerEvent: 0,
     socialLinks: "",
     vaccinated: "",
-    status: "active",
+    status: "",
     userId: data.id || "",
-    images: [],
-    videos: [],
-    headshot: null,
+    // images: [],
+    // videos: [],
+    // headshot: null,
   });
   useEffect(() => {
     if (data?.id) {
@@ -60,12 +66,52 @@ export default function Profile() {
 
   const [showmediaupload, setShowmediaupload] = useState("none");
   const [showform, setShowform] = useState("block");
+  const [countries, setCountries] = useState([]);
+  const [states, setStates] = useState([]);
+  const [cities, setCities] = useState([]);
+
+  useEffect(() => {
+    const fetchCountries = async () => {
+      try {
+        const response = await axios.get(
+          `${import.meta.env.VITE_API_URL}${GET_COUNTRIES}`
+        );
+        console.log(response.data); // Debugging
+  
+        setCountries(response.data?.countries || []);
+      } catch (error) {
+        console.error("Error fetching countries:", error);
+      }
+    };
+  
+    fetchCountries();
+  }, []);
+  
+
+  const fetchStates = async (countryId) => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_URL}${GET_STATES}${countryId}`
+    );
+    setStates(data?.states || []);
+  };
+
+  const fetchCities = async (stateId) => {
+    const { data } = await axios.get(
+      `${import.meta.env.VITE_API_URL}${GET_CITIES}${stateId}`
+    );
+    setCities(data?.cities || []);
+  };
 
   const performanceRole = [
     { value: "soloist", label: "Soloist" },
     { value: "duo", label: "Duo" },
     { value: "trio", label: "Trio" },
   ];
+
+  const status = [
+    { value: "active", label: "Active"},
+    { value: "pending", label: "Pending"}
+  ]
 
   const options = [
     { value: "yes", label: "Yes" },
@@ -106,10 +152,24 @@ export default function Profile() {
     fetchCategories();
   }, []);
 
-  const handleInputChange = (e) => {
+ 
+  
+
+  const handleInputChange = async(e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
     setTempLink(e.target.value);
+
+    if (name === "country") {
+      setStates([]); // Clear previous states
+      setCities([]); // Clear previous cities
+      if (value) await fetchStates(value);
+    }
+  
+    if (name === "state") {
+      setCities([]); // Clear previous cities
+      if (value) await fetchCities(value);
+    }
   };
 
   const handleCategoryChange = async (selectedValue) => {
@@ -270,7 +330,12 @@ export default function Profile() {
 
         toast.success("Media uploaded successfully!", {
           autoClose: 1000,
-        });
+          
+        }
+      );
+      setTimeout(() => {
+        navigate("/admin/viewentertainer");
+      }, 1000);
       }
     } catch (error) {
       console.error("Error uploading media:", error);
@@ -290,10 +355,13 @@ export default function Profile() {
       ...formData,
       category:Number(formData.category),
       specific_category: Number(formData.specific_category),
-      pricePerEvent: Number(formData.pricePerEvent), // Ensure it's a number
+      pricePerEvent: Number(formData.pricePerEvent),
+      city:Number(formData.city),
+      country:Number(formData.country),
+      state:Number(formData.state),
     };
 
-    // console.log("entertainer details",payload)
+    console.log("entertainer details",payload)
     try {
       const response = await axios.post(
         `${import.meta.env.VITE_API_URL}${CREATE_ENTERTAINER}`,
@@ -489,6 +557,78 @@ export default function Profile() {
                             </div>
                           )}
                         </div>
+                        <div className="col-md-4">
+                        <label className="fw-semibold label-font">Status</label>
+                          <Select
+                            name="status"
+                            options={status}
+                            defaultOption="--Select Status--"
+                            value={formData.status}
+                            onChange={handleInputChange}
+                          />
+                        </div>
+                      </div>
+
+                      <div className="row mb-3">
+                        <div className="col-md-4">
+                      <label className="form-label label-font mt-3 mb-0 fw-medium">
+                        Country
+                      </label>
+                      <select
+                        className="form-control "
+                        name="country"
+                        value={formData.country}
+                        onChange={handleInputChange}
+                        required
+                      >
+                        <option value="">Select Country</option>
+                        {countries.map((c) => (
+                          <option key={c.id} value={c.id}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="col-md-4">
+                      <label className="form-label mt-3 mb-0 fw-medium">
+                        State
+                      </label>
+                      <select
+                        className="form-control"
+                        name="state"
+                        onChange={handleInputChange}
+                        value={formData.state}
+                        required
+                      >
+                        <option value="">Select State</option>
+                        {states.map((s) => (
+                          <option key={s.id} value={s.id}>
+                            {s.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div className="col-md-4">
+                    <label className="form-label label-font mt-3 mb-0 fw-medium">
+                        City
+                      </label>
+                      <select
+                        className="form-control"
+                        name="city"
+                        value={formData.city}
+                        onChange={handleInputChange}
+                        required
+                      >
+                        <option value="">Select City</option>
+                        {cities.map((c) => (
+                          <option key={c.id} value={c.id}>
+                            {c.name}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
                       </div>
                       <p className="text-start text-muted label-font fw-semibold mt-2">Links</p>
                       <hr className="mb-4" />

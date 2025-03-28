@@ -25,6 +25,8 @@ const UPDATE_MEDIA="admin/media/update/"
 
 const ALL_USER="admin/users/all";
 const UPDATE_USER_STATUS="admin/users/updateuserstatus";
+const DELETE_USER="admin/users/";
+
 const UPDATE_USER="admin/users/updateuser";
 const CREATE_USER="admin/users/create";
 const GET_VENUE_BY_USER="admin/venue/venuebyId/";
@@ -67,7 +69,10 @@ const DELETE_INVOICE="admin/invoice/deleteinvoice"
 
 const GET_REPORT="admin/report/all"
 const CURRENCY_SIGN="$"
+
+const GENERATE_INVOICE = "admin/invoice/generateinvoices"
 export {
+  GENERATE_INVOICE,
   CURRENCY_SIGN,
   GET_REPORT,
   DELETE_INVOICE,
@@ -115,5 +120,6 @@ export {
   GET_ROLES,
   CREATE_VENUE,
   GET_ENTERTAINERS_BYID,
-  DELETE_ENT_PROFILE
+  DELETE_ENT_PROFILE,
+  DELETE_USER
 };

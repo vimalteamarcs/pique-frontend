@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import DashLayout from "../DashLayout";
-import { ALL_USER, UPDATE_USER_STATUS } from "../../../constants";
+import { ALL_USER, DELETE_USER, UPDATE_USER_STATUS } from "../../../constants";
 import CustomTable from "../../components/CustomTable";
 import { useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from "react-toastify";
@@ -37,7 +37,7 @@ export default function AllUser() {
         params: { page, pageSize, search },
         headers: { Authorization: `Bearer ${token}` },
       });
-
+      console.log(response.data)
       if (response.data && response.data.records) {
         setuserdata(response.data.records);
 
@@ -55,14 +55,34 @@ export default function AllUser() {
     }
   };
 
+
   useEffect(() => {
     fetchusers(pagination.current, pagination.pageSize, search);
   }, [pagination.current, pagination.pageSize, search]);
 
+  // useEffect(() => {
+  //   fetchusers(1, pagination.pageSize, search); // Always start from page 1 on search change
+  // }, [search]);
+
+
+
+
   // Handle table pagination change
-  const handleTableChange = (pagination) => {
-    fetchusers(pagination.current, pagination.pageSize, search);
+  // const handleTableChange = (pagination) => {
+  //   fetchusers(pagination.current, pagination.pageSize, search);
+  // };
+
+  const handleTableChange = (page, pageSize) => {
+    setPagination((prev) => ({
+      ...prev,
+      current: page,
+      pageSize,
+    }));
+
+    fetchusers(page, pageSize, search);
   };
+
+
 
   // Handle search input
   const handleSearch = (value) => {
@@ -190,21 +210,19 @@ export default function AllUser() {
 
   const handleDelete = async (record) => {
     try {
-      const response = await axios.patch(
-        `${import.meta.env.VITE_API_URL}${UPDATE_USER_STATUS}`,
-        {
-          ids: [record.id],
-          status: "inactive",
-        },
+      const response = await axios.delete(
+        `${import.meta.env.VITE_API_URL}${DELETE_USER}${record.id}`,
+
         {
           headers: { Authorization: `Bearer ${token}` },
         }
       );
-
+      console.log(response.data)
       if (response.status === 200) {
         // After updating, fetch users again to reflect changes
         fetchusers(pagination.current, pagination.pageSize, search);
         console.log("Status updated successfully");
+        toast.success("User deleted successfully!", { autoClose: 1000 });
       }
     } catch (error) {
       console.error("Error updating status:", error);
@@ -272,24 +290,39 @@ export default function AllUser() {
                 </button>
 
                 {/* Custom Table Component */}
-                <CustomTable
-                  data={userdata}
-                  columns={columns}
-                  loading={loading}
-                  onView={handleView}
-                  onEdit={handleEdit}
-                  onDelete={handleDelete}
-                  pagination={{
-                    current: pagination.current,
-                    pageSize: pagination.pageSize,
-                    total: pagination.total,
-                    showSizeChanger: true,
-                  }}
-                  onTableChange={handleTableChange}
-                  search={search}
-                  onSearchChange={handleSearch}
-                />
+                {loading ? (
+                  <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+                    <div className="spinner-border text-primary" role="status">
+                      <span className="visually-hidden">Loading...</span>
+                    </div>
+                  </div>
+                ) : (
+                  <CustomTable
+                    data={userdata}
+                    columns={columns}
+                    loading={loading}
+                    onView={handleView}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                    // pagination={{
+                    //   current: pagination.current,
+                    //   pageSize: pagination.pageSize,
+                    //   total: pagination.total,
+                    //   showSizeChanger: true,
+                    // }}
+                    pagination={{
+                      current: pagination.current,
+                      pageSize: pagination.pageSize,
+                      total: pagination.total,
+                      
+                    }}
+                  // onTableChange={handleTableChange}
+                  // search={search}
+                  // onSearchChange={handleSearch}
+                  />
+                )}
               </div>
+
             )}
           </div>
         </div>

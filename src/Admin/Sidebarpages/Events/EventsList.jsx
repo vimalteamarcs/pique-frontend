@@ -168,7 +168,7 @@ const EventsList = () => {
           return `${days}d`; // Show only days if duration is 1+ days
         } else {
           let durationStr = "";
-          if (hours > 0) durationStr += `${hours}h `;
+          if (hours > 0) durationStr += `${hours}hr `;
           if (minutes > 0) durationStr += `${minutes}m`;
           return durationStr.trim(); // Remove trailing space if empty
         }
@@ -232,14 +232,13 @@ const EventsList = () => {
                 Create Event
               </button> */}
             </div>
-            {error ? (
-              <div
-                className="alert alert-danger"
-                style={{ borderRadius: "10px" }}
-              >
-                {error}
-              </div>
-            ) : (
+            {loading ? (
+  <div className="d-flex justify-content-center mt-4">
+    <div className="spinner-border" role="status">
+      <span className="sr-only">Loading...</span>
+    </div>
+  </div>
+) : (
               <CustomTable
                 data={events}
                 columns={columns}
