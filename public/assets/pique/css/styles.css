@@ -882,235 +882,6 @@ body {
   color: #ff5722;
 }
 
-/* ---------- Media ---------- */
-/* ##Device = Desktops, ##Screen = 1281px to higher resolution desktops */
-@media (min-width: 1281px) {}
-
-/* ##Device = Laptops, Desktops, ##Screen = B/w 1025px to 1280px */
-@media (min-width: 1025px) and (max-width: 1280px) {}
-
-/* ##Device = Tablets, Ipads (portrait), ##Screen = B/w 768px to 1024px */
-@media (min-width: 768px) and (max-width: 1024px) {}
-
-/* ##Device = Tablets, Ipads (landscape), ##Screen = B/w 768px to 1024px */
-@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
-
-/* ##Device = Low Resolution Tablets, Mobiles (Landscape), ##Screen = B/w 481px to 767px */
-@media (min-width: 481px) and (max-width: 767px) {}
-
-/* ##Device = Most of the Smartphones Mobiles (Portrait), ##Screen = B/w 320px to 479px */
-@media (min-width: 320px) and (max-width: 480px) {
-  .dBlock {
-    display: inline-block;
-  }
-
-  .mainNavbar {
-    overflow: hidden;
-  }
-
-  /* .slideImage{display: none;} */
-  .bannerTextWrap .heading {
-    font-size: 25px;
-    line-height: 30px;
-  }
-
-  .dashboard-banner {
-    padding-top: 25px;
-    padding-bottom: 15px;
-  }
-
-  /* .dashboard-banner .w100{display: none;} */
-  .dashboard-banner .rightSide,
-  .dashboard-banner .leftSide {
-    position: static;
-    text-align: center;
-  }
-
-  .dashboard-banner .heading {
-    color: #000;
-  }
-
-  .dashboard-banner .myBTN {
-    min-width: 200px;
-  }
-
-  .dashboard-banner .leftSide {
-    margin-top: 40px;
-  }
-
-  .perfectWrap .weTXT .heading {
-    font-size: 36px;
-    line-height: 55px;
-    text-align: center;
-  }
-
-  .perfectWrap .weTXT .paraTXT {
-    text-align: center;
-    font-size: 16px;
-    margin-bottom: 40px;
-  }
-
-  .venuIMG .heading {
-    font-size: 20px;
-  }
-
-  .venuIMG .heading.a1 {
-    top: 120px;
-    left: 6%;
-  }
-
-  .venuIMG .heading.a3 {
-    bottom: 12px;
-    left: 36%;
-  }
-
-  .venuIMG .heading.a2 {
-    top: 120px;
-    right: 0%;
-  }
-
-  .venuIMG {
-    padding: 52px 30px;
-  }
-
-  .perfectWrap .buildWrap .heading {
-    font-size: 25px;
-    color: #000000;
-    font-weight: 600;
-    line-height: 15px;
-    margin-bottom: 25px;
-  }
-
-  .perfectWrap .buildWrap .buildshdwBox .buidBox {
-    padding: 15px 0px;
-    border-right: none;
-    border-bottom: 1px solid #707070;
-  }
-
-  .container-fluid,
-  .container {
-    overflow: hidden;
-  }
-
-  .text-end,
-  .text-start {
-    text-align: center !important;
-  }
-
-  .readyWrap .heading.trns2,
-  .readyWrap .heading.trns1 {
-    transform: none;
-  }
-
-  .readyWrap .headings {
-    font-size: 35px;
-    font-weight: 600;
-  }
-
-  .ratedIMG {
-    margin-top: 160px;
-  }
-
-  .ratedWrap .ratedTXT .heading {
-    font-size: 35px;
-  }
-
-  .serviceWrap .card.serviceBox {
-    margin-bottom: 20px !important;
-  }
-
-  /* .enterWrap .enterMain{height: 100vh;} */
-  .footerWrap {
-    text-align: center;
-  }
-
-  .info-section {
-    margin-top: 20px;
-  }
-
-  .dashboard-banner .heading {
-    font-size: 24px;
-  }
-
-  .dashboard-banner .rightSide {
-    margin-top: 35px;
-  }
-
-  .enterWrap .enterMain .heading {
-    font-size: 23px;
-    position: static;
-    margin-top: 15px;
-    transform: none;
-  }
-
-  .ratedWrap {
-    padding-top: 0;
-  }
-
-  .dashboard-banner .slideImage .personBH {
-    height: 150px;
-  }
-
-  .dashboard-banner .slideImage {
-    top: 70px;
-  }
-
-  .mainNavbar .navbar-nav {
-    border: none;
-    background: none;
-  }
-
-  .mainNavbar .myBTNB {
-    border-radius: 30px;
-    padding: 5px 13px;
-    font-weight: 500;
-    border: 1px solid #707070;
-    min-width: 110px;
-    margin-right: 6px !important;
-  }
-
-  .mainNavbar .nav-item {
-    padding: 5px 0;
-  }
-
-  .serviceWrap {
-    padding-bottom: 0;
-  }
-
-  .testWrap {
-    padding-top: 30px;
-  }
-
-  .readyWrap {
-    background: url(../image/bgmobile.png);
-    background-repeat: no-repeat;
-    background-size: cover;
-    padding-top: 60px;
-    padding-bottom: 60px;
-  }
-
-  .leftWrapper {
-    margin-bottom: 50px;
-  }
-
-  .right-box .timeline-item::before {
-    left: 100%;
-  }
-
-  .right-box .timeline::before {
-    left: 307px;
-  }
-}
-
-@media (max-width: 767px) {
-
-  .enterWrap .venuiconBH,
-  .enterWrap .venuiconBH.a4 {
-    top: -48px;
-    right: -52px;
-  }
-}
-
 .visonWrap {
   position: relative;
   display: block;
@@ -1396,7 +1167,7 @@ body {
   font-size: 14px;
 }
 
-.modal-dialog-venue {
+.modal-dialog {
   position: fixed;
   top: 7%;
   left: 25%;
@@ -1405,7 +1176,7 @@ body {
   max-width: 600px; 
 }
 
-.modal-content-venue {
+.modal-content {
   max-height: 80vh; 
   overflow-y: auto; 
   padding-right: 10px;
@@ -2030,14 +1801,14 @@ body {
 }
 
 .navbar .profile-font {
-  font-size: 12px !important;
+  font-size: 13px !important;
   margin-bottom: 0 ;
 }
 
 /* Default label styles */
 .custom-label {
   position: absolute;
-  left: 12px;
+  left: 13px;
   top: 50%;
   transform: translateY(-50%);
   pointer-events: none;
@@ -2518,7 +2289,7 @@ body {
   text-decoration: none !important;
   transition: all 0.3s !important;
   padding: 11px 15px !important;
-  font-size: 11px !important;
+  font-size: 12px !important;
 }
 
 /* Default grey bullet */
@@ -2930,4 +2701,235 @@ button:disabled{
 .logout-modal{
   margin-left: 60px !important;
   margin-top: -50px !important;
+}
+
+
+
+/* ---------- Media ---------- */
+/* ##Device = Desktops, ##Screen = 1281px to higher resolution desktops */
+@media (min-width: 1281px) {}
+
+/* ##Device = Laptops, Desktops, ##Screen = B/w 1025px to 1280px */
+@media (min-width: 1025px) and (max-width: 1280px) {}
+
+/* ##Device = Tablets, Ipads (portrait), ##Screen = B/w 768px to 1024px */
+@media (min-width: 768px) and (max-width: 1024px) {}
+
+/* ##Device = Tablets, Ipads (landscape), ##Screen = B/w 768px to 1024px */
+@media (min-width: 768px) and (max-width: 1024px) and (orientation: landscape) {}
+
+/* ##Device = Low Resolution Tablets, Mobiles (Landscape), ##Screen = B/w 481px to 767px */
+@media (min-width: 481px) and (max-width: 767px) {}
+
+/* ##Device = Most of the Smartphones Mobiles (Portrait), ##Screen = B/w 320px to 479px */
+@media (min-width: 320px) and (max-width: 480px) {
+  .dBlock {
+    display: inline-block;
+  }
+
+  .mainNavbar {
+    overflow: hidden;
+  }
+
+  /* .slideImage{display: none;} */
+  .bannerTextWrap .heading {
+    font-size: 25px;
+    line-height: 30px;
+  }
+
+  .dashboard-banner {
+    padding-top: 25px;
+    padding-bottom: 15px;
+  }
+
+  /* .dashboard-banner .w100{display: none;} */
+  .dashboard-banner .rightSide,
+  .dashboard-banner .leftSide {
+    position: static;
+    text-align: center;
+  }
+
+  .dashboard-banner .heading {
+    color: #000;
+  }
+
+  .dashboard-banner .myBTN {
+    min-width: 200px;
+  }
+
+  .dashboard-banner .leftSide {
+    margin-top: 40px;
+  }
+
+  .perfectWrap .weTXT .heading {
+    font-size: 36px;
+    line-height: 55px;
+    text-align: center;
+  }
+
+  .perfectWrap .weTXT .paraTXT {
+    text-align: center;
+    font-size: 16px;
+    margin-bottom: 40px;
+  }
+
+  .venuIMG .heading {
+    font-size: 20px;
+  }
+
+  .venuIMG .heading.a1 {
+    top: 120px;
+    left: 6%;
+  }
+
+  .venuIMG .heading.a3 {
+    bottom: 12px;
+    left: 36%;
+  }
+
+  .venuIMG .heading.a2 {
+    top: 120px;
+    right: 0%;
+  }
+
+  .venuIMG {
+    padding: 52px 30px;
+  }
+
+  .perfectWrap .buildWrap .heading {
+    font-size: 25px;
+    color: #000000;
+    font-weight: 600;
+    line-height: 15px;
+    margin-bottom: 25px;
+  }
+
+  .perfectWrap .buildWrap .buildshdwBox .buidBox {
+    padding: 15px 0px;
+    border-right: none;
+    border-bottom: 1px solid #707070;
+  }
+
+  .container-fluid,
+  .container {
+    overflow: hidden;
+  }
+
+  .text-end,
+  .text-start {
+    text-align: center !important;
+  }
+
+  .readyWrap .heading.trns2,
+  .readyWrap .heading.trns1 {
+    transform: none;
+  }
+
+  .readyWrap .headings {
+    font-size: 35px;
+    font-weight: 600;
+  }
+
+  .ratedIMG {
+    margin-top: 160px;
+  }
+
+  .ratedWrap .ratedTXT .heading {
+    font-size: 35px;
+  }
+
+  .serviceWrap .card.serviceBox {
+    margin-bottom: 20px !important;
+  }
+
+  /* .enterWrap .enterMain{height: 100vh;} */
+  .footerWrap {
+    text-align: center;
+  }
+
+  .info-section {
+    margin-top: 20px;
+  }
+
+  .dashboard-banner .heading {
+    font-size: 24px;
+  }
+
+  .dashboard-banner .rightSide {
+    margin-top: 35px;
+  }
+
+  .enterWrap .enterMain .heading {
+    font-size: 23px;
+    position: static;
+    margin-top: 15px;
+    transform: none;
+  }
+
+  .ratedWrap {
+    padding-top: 0;
+  }
+
+  .dashboard-banner .slideImage .personBH {
+    height: 150px;
+  }
+
+  .dashboard-banner .slideImage {
+    top: 70px;
+  }
+
+  .mainNavbar .navbar-nav {
+    border: none;
+    background: none;
+  }
+
+  .mainNavbar .myBTNB {
+    border-radius: 30px;
+    padding: 5px 13px;
+    font-weight: 500;
+    border: 1px solid #707070;
+    min-width: 110px;
+    margin-right: 6px !important;
+  }
+
+  .mainNavbar .nav-item {
+    padding: 5px 0;
+  }
+
+  .serviceWrap {
+    padding-bottom: 0;
+  }
+
+  .testWrap {
+    padding-top: 30px;
+  }
+
+  .readyWrap {
+    background: url(../image/bgmobile.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    padding-top: 60px;
+    padding-bottom: 60px;
+  }
+
+  .leftWrapper {
+    margin-bottom: 50px;
+  }
+
+  .right-box .timeline-item::before {
+    left: 100%;
+  }
+
+  .right-box .timeline::before {
+    left: 307px;
+  }
+}
+
+@media (max-width: 767px) {
+
+  .enterWrap .venuiconBH,
+  .enterWrap .venuiconBH.a4 {
+    top: -48px;
+    right: -52px;
+  }
 }

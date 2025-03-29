@@ -5,15 +5,34 @@
   --dark: #191c24;
   --bs-primary: #191c24;
   --bs-text-primary: #3a3a3a;
-  --bs-body-fontsize: 12px;
+  --bs-body-fontsize: .8rem;
 }
+/* Common CSS */
+.pageLayout {display: flex;flex-direction: row;justify-content: space-between;height: 100vh;}
+.headingPG {font-size: 1rem;font-weight: 600;color: #191c24;margin-bottom: .8rem;}
+.card {border-color: #f1f2f3 !important;border-radius: 0.5rem;background-color: #fff;}
+.btn.mybtn {background-color: #333333;border-color: #333333;color: #fff;font-size: 12px;font-weight: 500;}
+.form-control {font-size: .8rem !important;padding: .4rem .5rem !important;}
 
-.pageLayout {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  height: 100vh;
-}
+.table {width: 100%;border-collapse: collapse;font-size: .8rem;}
+.table thead {}
+.table thead th {color: #525252;font-weight: 600 !important;}
+.table tbody {}
+.table tbody tr {}
+.table tbody tr td {vertical-align: middle;padding: .3rem .5rem;}
+.table tbody tr td .badge {font-weight: 500;}
+.table tbody tr td .btn-group {}
+.table tbody tr td .btn-group .btn-outline-primary {background-color: #F8F8F8;color: #333;border-color: #D1D1D1; padding: .3rem .5rem;font-size: .7rem;}
+
+.table.dataTableUI {font-size: .8rem;}
+.table.dataTableUI thead th, .table.dataTableUI td, table.dataTable.no-footer, table.dataTable.footer {border-color: #dee2e6;} 
+.dataTables_wrapper .dataTables_length, .dataTables_wrapper .dataTables_filter, .dataTables_wrapper .dataTables_info, .dataTables_wrapper .dataTables_processing, .dataTables_wrapper .dataTables_paginate {font-size: .8rem;}
+.dataTables_filter input  {border-radius: 15px !important;padding-block: 0;padding-inline: 0;border: 1px solid #ccc;outline: 0;padding: 4px 8px !important;}
+.dataTables_length select {border-radius: 15px !important;padding-block: 0;padding-inline: 0;border: 1px solid #ccc;outline: 0;padding: 3px 5px !important;}
+table.dataTable thead th, table.dataTable tfoot th {font-weight: 600;}
+
+
+
 
 .back-to-top {
   position: fixed;
@@ -305,15 +324,29 @@ html {
   font-family: "Poppins", sans-serif !important;
 }
 
-.ant-table-wrapper .ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>thead>tr>th {
+.ant-table-wrapper
+  .ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-content
+  > table
+  > thead
+  > tr
+  > th {
   padding: 5px 10px;
 }
 
-.ant-table-content>table>tbody>tr>td {
+.ant-table-content > table > tbody > tr > td {
   padding: 5px 10px;
 }
 
-.ant-table-wrapper .ant-table.ant-table-bordered>.ant-table-container>.ant-table-content>table>tbody>tr>td {
+.ant-table-wrapper
+  .ant-table.ant-table-bordered
+  > .ant-table-container
+  > .ant-table-content
+  > table
+  > tbody
+  > tr
+  > td {
   padding: 5px 10px;
   color: var(--bs-text-primary);
   font-size: var(--bs-body-fontsize);
@@ -423,20 +456,16 @@ html {
 
 .dash-profile-container {
   flex: 1;
-  padding: 20px;
+  padding: 1rem;
   background-color: #f8f8f8;
 }
 
 .dash-sidebar-container {
-  width: 260px !important;
-  /* Adjust width as needed */
-  min-height: 100vh;
-  /* Full height */
+  width: 260px !important; /* Adjust width as needed */
+  min-height: 100vh; /* Full height */
   padding: 19px;
-  background: #ffffff;
-  /* Optional background */
-  border-right: 1px solid #ffffff;
-  /* Light border for separation */
+  background: #ffffff; /* Optional background */
+  border-right: 1px solid #ffffff; /* Light border for separation */
 }
 
 /* For Webkit browsers (Chrome, Safari) */
@@ -488,14 +517,9 @@ body {
   margin-left: 0px !important;
   /* padding-left: 15px !important; */
   position: relative;
-  padding-right: 9px !important;
-  border-radius: 8px;
+  padding-right: 9px !important;border-radius: 8px;
 }
-
-.dash-active-link .dash-sidebar-link {
-  color: #333333 !important;
-}
-
+.dash-active-link .dash-sidebar-link {  color: #333333 !important;}
 .dash-active-link::before {
   height: 100%;
 }
@@ -503,8 +527,7 @@ body {
 .dash-sidebar-link img {
   transition: filter 0.1s ease;
 }
-
-.dash-sidebar-link .menuIconA {
+.dash-sidebar-link .menuIconA  {
   width: 18px;
   /* height: 20px; */
   margin-right: 10px;
@@ -513,24 +536,20 @@ body {
 
 /* Removes the border around the entire dropdown menu */
 .dash-drop-menu {
-  border: none !important;
-  /* box-shadow: none !important;  */
-  background-color: white !important;
-
-}
-
-.dropdown-menu.dash-drop-menu {
-  padding: 0;
-}
-
+    border: none !important;
+    /* box-shadow: none !important;  */
+    background-color: white !important;
+    
+  }
+  .dropdown-menu.dash-drop-menu {padding: 0;}
 /* Removes any borders from dropdown items */
 .dash-drop-menu .dash-drop-item {
-  border: none !important;
-  padding: 8px 12px !important;
-  background-color: transparent !important;
-  margin-left: 30px;
-  margin-bottom: 0px;
-}
+    border: none !important;
+    padding: 8px 12px !important;
+    background-color: transparent !important;
+    margin-left: 30px;
+    margin-bottom: 0px; font-size: 13px;
+  }
 
 /* Ensures no border appears when hovering */
 /* .dash-drop-menu .dash-drop-item:hover,
@@ -582,9 +601,7 @@ body {
 .event-form {
   background: white !important;
   border-radius: 10px !important;
-  /* padding: 2px !important; */
-  padding-left: 12px !important;
-  padding-right: 15px !important;
+  padding: 1px;
 }
 
 .event-form .submit-btn-container {
@@ -653,35 +670,29 @@ body {
 }
 
 .custom-select {
-  appearance: none;
-  /* Ensures custom styling without removing arrow */
+  appearance: none; /* Ensures custom styling without removing arrow */
   -webkit-appearance: none;
   -moz-appearance: none;
 
   background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='black'><path d='M5 7l5 5 5-5H5z'/></svg>");
   background-repeat: no-repeat;
-  background-position: right 0.5rem center;
-  /* Moves the arrow */
+  background-position: right 0.5rem center; /* Moves the arrow */
   background-size: 16px;
 
-  padding-right: 2rem;
-  /* Ensures text does not overlap with arrow */
+  padding-right: 2rem; /* Ensures text does not overlap with arrow */
 }
 
 .custom-date {
-  appearance: none;
-  /* Ensures custom styling without removing arrow */
+  appearance: none; /* Ensures custom styling without removing arrow */
   -webkit-appearance: none;
   -moz-appearance: none;
 
   /* background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20' fill='black'><path d='M5 7l5 5 5-5H5z'/></svg>"); */
   background-repeat: no-repeat;
-  background-position: right 0.2rem center;
-  /* Moves the arrow */
+  background-position: right 0.2rem center; /* Moves the arrow */
   background-size: 16px;
 
-  padding-right: 1rem;
-  /* Ensures text does not overlap with arrow */
+  padding-right: 1rem; /* Ensures text does not overlap with arrow */
 }
 
 .custom-user-modal {
@@ -709,130 +720,35 @@ body {
   border-radius: 2px;
   opacity: 1;
 }
-
 .mobileMenuToggler {
   display: none;
 }
 
+
+
+
+
 /* ---------- CSS Media Queries---------- */
 /* ##Device = Desktops, ##Screen = 1281px to higher resolution desktops */
-@media (min-width:1281px) {}
-
-/* ##Device = Laptops, Desktops, ##Screen = B/w 1025px to 1280px */
-@media (min-width:1025px) and (max-width:1280px) {}
-
-/* ##Device = Tablets, Ipads (portrait), ##Screen = B/w 768px to 1024px */
-@media (min-width:768px) and (max-width:1024px) {}
-
-/* ##Device = Tablets, Ipads (landscape), ##Screen = B/w 768px to 1024px */
-@media (min-width:768px) and (max-width:1024px) and (orientation:landscape) {}
-
-/* ##Device = Low Resolution Tablets, Mobiles (Landscape), ##Screen = B/w 481px to 767px */
-@media (min-width:481px) and (max-width:767px) {}
-
-/* ##Device = Most of the Smartphones Mobiles (Portrait), ##Screen = B/w 320px to 479px */
-@media (min-width:320px) and (max-width:480px) {
-  nav .logoMain {
-    height: 30px;
-  }
-
-  .mobileMenuToggler {
-    display: inline;
-    color: #000;
-    margin-right: 10px;
-  }
-
-  .dash-sidebar-container {
-    display: none;
-  }
-
-  .dash-sidebar-container.show {
-    display: inline;
-  }
-
-  .dash-sidebar-container.hide {
-    display: none;
-  }
-}
-
-
-
-
-
-.table {
-  width: 100%;
-  border-collapse: collapse;
-  font-size: .8rem;
-}
-
-.table thead {}
-
-.table thead th {
-  color: #525252;
-  font-weight: 600 !important;
-}
-
-.table tbody {}
-
-.table tbody tr {}
-
-.table tbody tr td {
-  vertical-align: middle;
-  padding: .3rem .5rem;
-}
-
-.table tbody tr td .badge {
-  font-weight: 500;
-}
-
-.table tbody tr td .btn-group {}
-
-.table tbody tr td .btn-group .btn-outline-primary {
-  background-color: #F8F8F8;
-  color: #333;
-  border-color: #D1D1D1;
-  padding: .3rem .5rem;
-  font-size: .7rem;
-}
-
-.table.dataTableUI {
-  font-size: .8rem;
-}
-
-.table.dataTableUI thead th,
-.table.dataTableUI td,
-table.dataTable.no-footer,
-table.dataTable.footer {
-  border-color: #e6dede;
-}
-
-.dataTables_wrapper .dataTables_length,
-.dataTables_wrapper .dataTables_filter,
-.dataTables_wrapper .dataTables_info,
-.dataTables_wrapper .dataTables_processing,
-.dataTables_wrapper .dataTables_paginate {
-  font-size: .8rem; 
-}
-
-.dataTables_filter input {
-  border-radius: 15px !important;
-  padding-block: 0;
-  padding-inline: 0;
-  border: 1px solid #ccc;
-  outline: 0;
-  padding: 4px 8px !important;
-}
-
-.dataTables_length select {
-  border-radius: 15px !important;
-  padding-block: 0;
-  padding-inline: 0;
-  border: 1px solid #ccc;
-  outline: 0;
-  padding: 3px 5px !important;
-}
-
-table.dataTable thead th,
-table.dataTable tfoot th {
-  font-weight: 600;
-}
+@media (min-width:1281px){ 
+ }
+ /* ##Device = Laptops, Desktops, ##Screen = B/w 1025px to 1280px */
+ @media (min-width:1025px) and (max-width:1280px){ 
+ }
+ /* ##Device = Tablets, Ipads (portrait), ##Screen = B/w 768px to 1024px */
+ @media (min-width:768px) and (max-width:1024px){ 
+ }
+ /* ##Device = Tablets, Ipads (landscape), ##Screen = B/w 768px to 1024px */
+ @media (min-width:768px) and (max-width:1024px) and (orientation:landscape){ 
+ }
+ /* ##Device = Low Resolution Tablets, Mobiles (Landscape), ##Screen = B/w 481px to 767px */
+ @media (min-width:481px) and (max-width:767px){ 
+ }
+ /* ##Device = Most of the Smartphones Mobiles (Portrait), ##Screen = B/w 320px to 479px */
+ @media (min-width:320px) and (max-width:480px){
+  nav .logoMain {height: 30px;}
+  .mobileMenuToggler {display: inline;color: #000;margin-right: 10px;}
+  .dash-sidebar-container {display: none;}
+  .dash-sidebar-container.show {display: inline;}
+  .dash-sidebar-container.hide {display: none;}
+ }

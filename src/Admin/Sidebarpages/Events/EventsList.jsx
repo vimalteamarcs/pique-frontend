@@ -9,7 +9,6 @@ import { DELETE_EVENT, GET_ALL_EVENTS } from "../../../../constants";
 import AdminSideBar from "../../../components/Venue/AdminSideBar";
 import { Tooltip } from "antd";
 
-
 const EventsList = () => {
   const navigate = useNavigate();
   const [events, setEvents] = useState([]);
@@ -222,64 +221,69 @@ const EventsList = () => {
             <AdminSideBar />
           </div>
           <div className="dash-profile-container mb-0">
-            <div className="d-flex justify-content-between">
-              <p className="fs-6 fw-semibold mb-0 mt-3">EVENTS</p>
-              {/* <button
-                onClick={() => navigate("/admin/createevent")}
-                className="btn btn-outline-dark icon-font float-end d-flex align-items-center m-2 btn-sm"
-              >
-                <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
-                Create Event
-              </button> */}
+            <p className="headingPG">EVENTS</p>
+            <div className="card">
+              <div className="card-body">
+                <div className="d-flex justify-content-between">
+                  {/* <button
+              onClick={() => navigate("/admin/createevent")}
+              className="btn btn-outline-dark icon-font float-end d-flex align-items-center m-2 btn-sm"
+            >
+              <i className="fa fa-add" style={{ marginRight: "8px" }}></i>
+              Create Event
+            </button> */}
+                </div>
+                {error ? (
+                  <div
+                    className="alert alert-danger"
+                    style={{ borderRadius: "10px" }}
+                  >
+                    {error}
+                  </div>
+                ) : (
+                  <CustomTable
+                    data={events}
+                    columns={columns}
+                    onView={handleView}
+                    onEdit={handleEdit}
+                    onDelete={handleDelete}
+                    loading={loading}
+                    // pagination={pagination}
+                    pagination={{
+                      current: pagination.current,
+                      pageSize: pagination.pageSize,
+                      total: pagination.total,
+                    }}
+                    // onTableChange={(pagination) => {
+                    //   fetchEvents(
+                    //     pagination.current,
+                    //     pagination.pageSize,
+                    //     search
+                    //   );
+                    // }}
+                    onTableChange={(newPagination) => {
+                      setPagination((prev) => ({
+                        ...prev,
+                        current: newPagination.current, // Update current page
+                        pageSize: newPagination.pageSize,
+                      }));
+                    }}
+                    search={search}
+                    // onSearchChange={(value) => {
+                    //   setSearch(value);
+                    //   fetchEvents(1, pagination.pageSize, value);
+                    // }}
+                    onSearchChange={(value) => {
+                      setSearch(value);
+                      setPagination((prev) => ({
+                        ...prev,
+                        current: 1, // Reset to first page on search
+                      }));
+                    }}
+                  />
+                )}
+              </div>
             </div>
-            {loading ? (
-  <div className="d-flex justify-content-center mt-4">
-    <div className="spinner-border" role="status">
-      <span className="sr-only">Loading...</span>
-    </div>
-  </div>
-) : (
-              <CustomTable
-                data={events}
-                columns={columns}
-                onView={handleView}
-                onEdit={handleEdit}
-                onDelete={handleDelete}
-                loading={loading}
-                // pagination={pagination}
-                pagination={{
-                  current: pagination.current,
-                  pageSize: pagination.pageSize,
-                  total: pagination.total,
-                }}
-                // onTableChange={(pagination) => {
-                //   fetchEvents(
-                //     pagination.current,
-                //     pagination.pageSize,
-                //     search
-                //   );
-                // }}
-                onTableChange={(newPagination) => {
-                  setPagination((prev) => ({
-                    ...prev,
-                    current: newPagination.current, // Update current page
-                    pageSize: newPagination.pageSize,
-                  }));
-                }}
-                search={search}
-                // onSearchChange={(value) => {
-                //   setSearch(value);
-                //   fetchEvents(1, pagination.pageSize, value);
-                // }}
-                onSearchChange={(value) => {
-                  setSearch(value);
-                  setPagination((prev) => ({
-                    ...prev,
-                    current: 1, // Reset to first page on search
-                  }));
-                }}
-              />
-            )}
           </div>
         </div>
       </div>

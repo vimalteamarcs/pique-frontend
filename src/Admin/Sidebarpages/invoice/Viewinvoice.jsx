@@ -206,27 +206,32 @@ export default function Viewinvoice() {
           </div>
           <div className="dash-profile-container">
             <div className="d-flex justify-content-between">
-              <p className="fw-semibold profile-font mt-2">INVOICE: {invoicedata.invoice_number}</p>
-              <button className="btn btn-outline-dark btn-sm" onClick={handleDownloadPDF}>
+              <p className="fw-semibold profile-font mt-2">
+                INVOICE: {invoicedata && invoicedata.invoice_number}
+              </p>
+              <button
+                className="btn btn-outline-dark btn-sm"
+                onClick={handleDownloadPDF}
+              >
                 Download <i className="bi bi-download"></i>
               </button>
-            </div><hr />
+            </div>
+            <hr />
 
             <div className="">
               <p
                 className="profile-font mb-3"
                 onClick={() => navigate(-1)}
-                style={{ cursor: 'pointer' }}
+                style={{ cursor: "pointer" }}
               >
                 &lt; Back to Invoice List
               </p>
             </div>
 
-
             <ToastContainer />
             <div
               className="card p-3"
-            // style={{ maxHeight: "400px", overflowY: "auto" }}
+              // style={{ maxHeight: "400px", overflowY: "auto" }}
             >
               {invoicedata ? (
                 <div className="invoice-container profile-font">
@@ -240,8 +245,8 @@ export default function Viewinvoice() {
                           {invoicedata.name}
                           <br />
                           <small>
-                            {invoicedata.addressLine1}, {invoicedata.addressLine2},{" "}
-                            {invoicedata.zipCode}
+                            {invoicedata.addressLine1},{" "}
+                            {invoicedata.addressLine2}, {invoicedata.zipCode}
                           </small>
                         </p>
                       </div>
@@ -254,8 +259,9 @@ export default function Viewinvoice() {
                       </div>
                       <div className="col-6 text-end">
                         <img
-                          src={`${import.meta.env.VITE_BASE
-                            }assets/images/piquelogo.png`}
+                          src={`${
+                            import.meta.env.VITE_BASE
+                          }assets/images/piquelogo.png`}
                           alt="logo"
                           className="img"
                         />
@@ -270,13 +276,15 @@ export default function Viewinvoice() {
                         </h5>
                         <h6 className="fw-bold">Bill to</h6>
                         <p>
-                          {invoicedata.entertainer_name} <br /> {invoicedata.name}
+                          {invoicedata.entertainer_name} <br />{" "}
+                          {invoicedata.name}
                         </p>
                       </div>
                       <div className="col text-end">
                         <h6 className="fw-bold">Ship to</h6>
                         <p>
-                          {invoicedata.entertainer_name} <br /> {invoicedata.name}
+                          {invoicedata.entertainer_name} <br />{" "}
+                          {invoicedata.name}
                         </p>
                       </div>
                     </div>
@@ -288,22 +296,23 @@ export default function Viewinvoice() {
                     <p>
                       Invoice date:{" "}
                       {/* {new Date(invoicedata.issue_date).toLocaleDateString()} */}
-                      {new Date(invoicedata.issue_date)
-                                  .toLocaleString("en-GB", {
-                                    day: "numeric",
-                                    month: "short", // "Mar" instead of "03"
-                                    year: "numeric",
-                                  })}
+                      {new Date(invoicedata.issue_date).toLocaleString(
+                        "en-GB",
+                        {
+                          day: "numeric",
+                          month: "short", // "Mar" instead of "03"
+                          year: "numeric",
+                        }
+                      )}
                     </p>
                     <p>
-                      Due date:{" "} 
+                      Due date:{" "}
                       {/* {new Date(invoicedata.due_date).toLocaleDateString()} */}
-                      {new Date(invoicedata.due_date)
-                                  .toLocaleString("en-GB", {
-                                    day: "numeric",
-                                    month: "short", // "Mar" instead of "03"
-                                    year: "numeric",
-                                  })}
+                      {new Date(invoicedata.due_date).toLocaleString("en-GB", {
+                        day: "numeric",
+                        month: "short", // "Mar" instead of "03"
+                        year: "numeric",
+                      })}
                     </p>
                   </div>
 
@@ -324,12 +333,14 @@ export default function Viewinvoice() {
                         <td>1</td>
                         <td>
                           {/* {new Date(invoicedata.issue_date).toLocaleDateString()} */}
-                          {new Date(invoicedata.issue_date)
-                                  .toLocaleString("en-GB", {
-                                    day: "numeric",
-                                    month: "short", // "Mar" instead of "03"
-                                    year: "numeric",
-                                  })}
+                          {new Date(invoicedata.issue_date).toLocaleString(
+                            "en-GB",
+                            {
+                              day: "numeric",
+                              month: "short", // "Mar" instead of "03"
+                              year: "numeric",
+                            }
+                          )}
                         </td>
                         <td>
                           <strong className="text-warp">
@@ -345,16 +356,21 @@ export default function Viewinvoice() {
                   </table>
 
                   <div className="text-end">
-                    <h5 className="fw-bold">Total: ${invoicedata.total_with_tax}</h5>
+                    <h5 className="fw-bold">
+                      Total: ${invoicedata.total_with_tax}
+                    </h5>
                   </div>
 
                   <p className="mt-3 text-muted">
-                    Thank you for your business. Checks can be mailed to my company
-                    address, or I am happy to set up direct deposit with ACH payments.
+                    Thank you for your business. Checks can be mailed to my
+                    company address, or I am happy to set up direct deposit with
+                    ACH payments.
                   </p>
                 </div>
               ) : (
-                <div className="alert alert-danger">No invoice data available</div>
+                <div className="alert alert-danger">
+                  No invoice data available
+                </div>
               )}
             </div>
           </div>

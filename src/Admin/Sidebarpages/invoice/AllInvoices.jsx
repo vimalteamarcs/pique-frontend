@@ -5,7 +5,11 @@ import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import DashLayout from "../../DashLayout";
 import CustomTable from "../../../components/CustomTable";
-import { DELETE_INVOICE, GENERATE_INVOICE, GET_ALL_INVOICES } from "../../../../constants";
+import {
+  DELETE_INVOICE,
+  GENERATE_INVOICE,
+  GET_ALL_INVOICES,
+} from "../../../../constants";
 import AdminSideBar from "../../../components/Venue/AdminSideBar";
 
 const AllInvoices = () => {
@@ -45,8 +49,8 @@ const AllInvoices = () => {
         },
         {
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
       );
 
@@ -85,17 +89,18 @@ const AllInvoices = () => {
     }
   };
 
-  const handleGenerateInvoice = async() => {
+  const handleGenerateInvoice = async () => {
     const token = localStorage.getItem("token");
     try {
-      const response = await axios.get(`${import.meta.env.VITE_API_URL}${GENERATE_INVOICE}`,
+      const response = await axios.get(
+        `${import.meta.env.VITE_API_URL}${GENERATE_INVOICE}`,
         {
           headers: {
-            'Authorization': `Bearer ${token}`
-          }
+            Authorization: `Bearer ${token}`,
+          },
         }
-      )
-      console.log(response.data)
+      );
+      console.log(response.data);
       if (response.status === 200) {
         toast.success("Invoice generated successfully", { autoClose: 1000 });
         setFlag(!flag);
@@ -105,10 +110,12 @@ const AllInvoices = () => {
         "Failed to generate invoice:",
         error.response?.data || error.message
       );
-      toast.error("Failed to generate invoice:", error.response?.data || error.message)
+      toast.error(
+        "Failed to generate invoice:",
+        error.response?.data || error.message
+      );
     }
-    }
-  
+  };
 
   const columns = [
     // {
@@ -154,6 +161,47 @@ const AllInvoices = () => {
   ];
 
   return (
+    //     <>
+    //       <DashLayout />
+    //       <div className="container-fluid w-100 p-0">
+    //         <div className="d-flex mt-0">
+    //           <div className="dash-sidebar-container">
+    //             <AdminSideBar />
+    //           </div>
+    //           <div className="dash-profile-container">
+    // <div className="d-flex justify-content-between">
+    // <h5 className="text-secondary text-start mb-3">All Invoices</h5>
+    // <button type="button" className="btn btn-dark btn-sm rounded-3" onClick={handleGenerateInvoice}>Generate Invoice</button>
+    // </div>
+    //             <ToastContainer />
+    //             {loading ? (
+    //               <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
+    //                 <div className="spinner-border text-primary" role="status">
+    //                   <span className="visually-hidden">Loading...</span>
+    //                 </div>
+    //               </div>
+    //             ) : (
+    //               <CustomTable
+    //                 data={invoices}
+    //                 columns={columns}
+    //                 onView={handleView}
+    //                 onDelete={handleDelete}
+    //                 loading={loading}
+    //                 pagination={pagination}
+    //                 onTableChange={(pagination) => {
+    //                   fetchInvoices(pagination.current, pagination.pageSize, search);
+    //                 }}
+    //                 search={search}
+    //                 onSearchChange={(value) => {
+    //                   setSearch(value);
+    //                   fetchInvoices(1, pagination.pageSize, value);
+    //                 }}
+    //               />
+    //             )}
+    //           </div>
+    //         </div>
+    //       </div>
+    //     </>
     <>
       <DashLayout />
       <div className="container-fluid w-100 p-0">
@@ -162,35 +210,36 @@ const AllInvoices = () => {
             <AdminSideBar />
           </div>
           <div className="dash-profile-container">
-<div className="d-flex justify-content-between">
-<h5 className="text-secondary text-start mb-3">All Invoices</h5>
-<button type="button" className="btn btn-dark btn-sm rounded-3" onClick={handleGenerateInvoice}>Generate Invoice</button>
-</div>
-            <ToastContainer />
-            {loading ? (
-              <div className="d-flex justify-content-center align-items-center" style={{ height: "100vh" }}>
-                <div className="spinner-border text-primary" role="status">
-                  <span className="visually-hidden">Loading...</span>
-                </div>
+            <h5 className="headingPG">All Invoices</h5>
+            <div className="card">
+              <div className="card-body">
+                <ToastContainer />
+                {error ? (
+                  <div className="alert alert-danger">{error}</div>
+                ) : (
+                  <CustomTable
+                    data={invoices}
+                    columns={columns}
+                    onView={handleView}
+                    onDelete={handleDelete}
+                    loading={loading}
+                    pagination={pagination}
+                    onTableChange={(pagination) => {
+                      fetchInvoices(
+                        pagination.current,
+                        pagination.pageSize,
+                        search
+                      );
+                    }}
+                    search={search}
+                    onSearchChange={(value) => {
+                      setSearch(value);
+                      fetchInvoices(1, pagination.pageSize, value);
+                    }}
+                  />
+                )}
               </div>
-            ) : (
-              <CustomTable
-                data={invoices}
-                columns={columns}
-                onView={handleView}
-                onDelete={handleDelete}
-                loading={loading}
-                pagination={pagination}
-                onTableChange={(pagination) => {
-                  fetchInvoices(pagination.current, pagination.pageSize, search);
-                }}
-                search={search}
-                onSearchChange={(value) => {
-                  setSearch(value);
-                  fetchInvoices(1, pagination.pageSize, value);
-                }}
-              />
-            )}
+            </div>
           </div>
         </div>
       </div>
