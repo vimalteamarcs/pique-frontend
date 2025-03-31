@@ -16,7 +16,7 @@ const EventsList = () => {
   const [error, setError] = useState(null);
   const [pagination, setPagination] = useState({
     current: 1,
-    pageSize: 6,
+    pageSize: 10,
     total: 0,
   });
   const [search, setSearch] = useState("");

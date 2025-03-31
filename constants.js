@@ -1,77 +1,68 @@
-
-
 const ALL_VENUE = "admin/venue/all";
-const UPDATE_VENUE="admin/venue/update";
-const DELETE_VENUE="admin/venue/";
-const CREATE_VENUE="admin/venue/create";
-const SEARCH_EVENT="admin/venue/search?query="
+const UPDATE_VENUE = "admin/venue/update";
+const DELETE_VENUE = "admin/venue/";
+const CREATE_VENUE = "admin/venue/create";
+const SEARCH_EVENT = "admin/venue/search?query=";
 
-const ALL_ENTERTAINERS= "admin/entertainer/all";
-const CREATE_ENTERTAINER="admin/entertainer/createent";
-const CHANGE_STATUS_ENT="admin/entertainer/updatestatusent"
-const DELETE_ENT_PROFILE = "admin/entertainer/"
-const GET_MAIN_CATEGORY="admin/entertainer/maincategory";
-const GET_SUB_CATEGORY="admin/entertainer/subcategory";
-const GET_CATEGORY_BYID="admin/entertainer/categorybyId?id=";
-const CREATE_CATEGORY="admin/entertainer/createcat";
-const DELETE_CATEGORY="admin/entertainer/deletecat";
-const UPDATE_CATEGORY="admin/entertainer/updatecat";
-const GET_ENTERTAINERS_BYID="admin/entertainer/entertainerbyId/"
-const UPDATE_ENTERTAINERS_BYID="admin/entertainer/update";
+const ALL_ENTERTAINERS = "admin/entertainer/all";
+const CREATE_ENTERTAINER = "admin/entertainer/createent";
+const CHANGE_STATUS_ENT = "admin/entertainer/updatestatusent";
+const DELETE_ENT_PROFILE = "admin/entertainer/";
+const GET_MAIN_CATEGORY = "admin/entertainer/maincategory";
+const GET_SUB_CATEGORY = "admin/entertainer/subcategory";
+const GET_CATEGORY_BYID = "admin/entertainer/categorybyId?id=";
+const CREATE_CATEGORY = "admin/entertainer/createcat";
+const DELETE_CATEGORY = "admin/entertainer/deletecat";
+const UPDATE_CATEGORY = "admin/entertainer/updatecat";
+const GET_ENTERTAINERS_BYID = "admin/entertainer/entertainerbyId/";
+const UPDATE_ENTERTAINERS_BYID = "admin/entertainer/update";
 
+const UPDATE_MEDIA = "admin/media/update/";
 
-const UPDATE_MEDIA="admin/media/update/"
+const ALL_USER = "admin/users/all";
+const UPDATE_USER_STATUS = "admin/users/updateuserstatus";
+const DELETE_USER = "admin/users/";
 
+const UPDATE_USER = "admin/users/updateuser";
+const CREATE_USER = "admin/users/create";
+const GET_VENUE_BY_USER = "admin/venue/venuebyId/";
 
-const ALL_USER="admin/users/all";
-const UPDATE_USER_STATUS="admin/users/updateuserstatus";
-const DELETE_USER="admin/users/";
+const ADMIN_LOGIN = "admin/auth/login";
+const CREATE_ADMIN_USER = "admin/adminuser/createadminuser";
 
-const UPDATE_USER="admin/users/updateuser";
-const CREATE_USER="admin/users/create";
-const GET_VENUE_BY_USER="admin/venue/venuebyId/";
+const CREATE_ROLE = "admin//createrole";
+const GET_CAPABILITIES = "admin/adminuser/capabilities";
+const GET_ROLES = "admin/adminuser/roles";
 
-const ADMIN_LOGIN="admin/auth/login";
-const CREATE_ADMIN_USER="admin/adminuser/createadminuser";
+const GET_COUNTRIES = "admin/location/countries";
+const GET_STATES = "admin/location/states?countryId=";
+const GET_CITIES = "admin/location/cities?stateId=";
+const SEARCH_COUNTRIES = "admin/location/countries/Search?search=";
+const CHANGE_ISALLOWED = "admin/location/allow/";
+const GETALLISALLOWED = "admin/location/allowed-countries";
 
-const CREATE_ROLE="admin//createrole";
-const GET_CAPABILITIES="admin/adminuser/capabilities";
-const GET_ROLES="admin/adminuser/roles";
+const UPLOAD_MEDIA = "admin/media/uploads";
+const GET_MEDIA_BYID = "admin/media/getmedia?Id=";
+const DELETE_MEDIA = "admin/media/deleteMedia?Id=";
+const UPLOAD_URL_BY_USERID = "admin/media/uploadurl";
 
+const CREATE_EVENT = "admin/events/create";
+const GET_ALL_EVENTS = "admin/events/getall?";
+const GET_EVENTBY_ID = "admin/events/eventbyid/";
+const UPDATE_EVENT = "admin/events/updatebyid/";
+const DELETE_EVENT = "admin/events/deletebyid/";
+const GETBOOKING_BYEVENT_ID = "admin/events/BookingsByEventId/";
 
+const GET_ALL_INVOICES = "admin/invoice/getallinvoice";
+const DELETE_INVOICE = "admin/invoice/deleteinvoice";
 
-const GET_COUNTRIES="admin/location/countries";
-const GET_STATES="admin/location/states?countryId="
-const GET_CITIES="admin/location/cities?stateId="
-const SEARCH_COUNTRIES="admin/location/countries/Search?search="
-const CHANGE_ISALLOWED="admin/location/allow/"
-const GETALLISALLOWED="admin/location/allowed-countries"
+const GET_REPORT = "admin/report/all";
+const DOWNLOAD_REPORT = "admin/report/download";
+const CURRENCY_SIGN = "$";
 
-
-
-const UPLOAD_MEDIA="admin/media/uploads";
-const GET_MEDIA_BYID="admin/media/getmedia?Id=";
-const DELETE_MEDIA="admin/media/deleteMedia?Id=";
-const UPLOAD_URL_BY_USERID="admin/media/uploadurl";
-
-
-const CREATE_EVENT="admin/events/create";
-const GET_ALL_EVENTS="admin/events/getall?"
-const GET_EVENTBY_ID="admin/events/eventbyid/"
-const UPDATE_EVENT="admin/events/updatebyid/"
-const DELETE_EVENT="admin/events/deletebyid/"
-const GETBOOKING_BYEVENT_ID='admin/events/BookingsByEventId/'
-
-
-const GET_ALL_INVOICES="admin/invoice/getallinvoice"
-const DELETE_INVOICE="admin/invoice/deleteinvoice"
-
-
-const GET_REPORT="admin/report/all"
-const CURRENCY_SIGN="$"
-
-const GENERATE_INVOICE = "admin/invoice/generateinvoices"
+const GENERATE_INVOICE = "admin/invoice/generateinvoices";
 export {
+  DOWNLOAD_REPORT,
   GENERATE_INVOICE,
   CURRENCY_SIGN,
   GET_REPORT,
@@ -121,5 +112,5 @@ export {
   CREATE_VENUE,
   GET_ENTERTAINERS_BYID,
   DELETE_ENT_PROFILE,
-  DELETE_USER
+  DELETE_USER,
 };
